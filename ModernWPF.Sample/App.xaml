@@ -6,10 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/ModernWPF;component/Themes/ModernStyles.xaml"></ResourceDictionary>
-                
-                <ResourceDictionary>
-                </ResourceDictionary>
+                <ResourceDictionary Source="/ModernWPF;component/Themes/Dark.xaml" />
+                <ResourceDictionary Source="/ModernWPF;component/Themes/ModernStyles.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

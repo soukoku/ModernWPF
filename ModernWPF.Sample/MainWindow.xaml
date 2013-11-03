@@ -5,9 +5,14 @@
         Title="ModernWPF - Test" Height="500" Width="700"
         Icon="Icon.ico"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
+        Background="{DynamicResource ModernBackground}" Foreground="{DynamicResource ModernForeground}"
         Style="{StaticResource ModernWindow}">
     <modern:Chrome.Chrome>
-        <modern:Chrome x:Name="chrome" ShowCaptionIcon="False" />
+        <modern:Chrome x:Name="chrome" ShowCaptionIcon="False" 
+                       ActiveBorderBrush="{DynamicResource ModernAccent}" 
+                       InactiveBorderBrush="{DynamicResource ModernForeground4}" 
+                       ActiveCaptionForeground="{DynamicResource ActiveCaptionBackground}" 
+                       InactiveCaptionBrush="{DynamicResource InactiveCaptionBackground}"/>
     </modern:Chrome.Chrome>
     <Border Margin="{Binding ElementName=chrome, Path=CaptionHeightThickness}">
         <Grid Margin="8">

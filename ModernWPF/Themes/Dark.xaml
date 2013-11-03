@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key="ModernAccent" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent2" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent3" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent4" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent5" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent6" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent7" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent8" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent9" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent10" Color="DodgerBlue"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="ModernBackground" Color="#232323"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernBackground2" Color="#333333"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernBackground3" Color="#434343"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernBackground4" Color="#535353"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="ModernForeground" Color="#fcfcfc"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernForeground2" Color="#cecece"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernForeground3" Color="#9e9e9e"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernForeground4" Color="#6e6e6e"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF"></SolidColorBrush>
+    <SolidColorBrush x:Key="AccentForeground2" Color="#eeeeee"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="OverlayBackground" Color="#80ffffff"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="ToolHoverBorder" Color="#E5C365"></SolidColorBrush>
+    <SolidColorBrush x:Key="ToolHoverBackground" Color="#FFFCF4"></SolidColorBrush>
+    <SolidColorBrush x:Key="ToolHoverForeground" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="ToolActiveBorder" Color="#E5C365"></SolidColorBrush>
+    <SolidColorBrush x:Key="ToolActiveBackground" Color="#FFE8A6"></SolidColorBrush>
+    <SolidColorBrush x:Key="ToolActiveForeground" Color="Black"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="ProgressBarForeground" Color="#FF15C23C"></SolidColorBrush>
+    <SolidColorBrush x:Key="ProgressBarBackground" Color="LightGray"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="ActiveCaptionForeground" Color="#fefefe"></SolidColorBrush>
+    <SolidColorBrush x:Key="ActiveCaptionBackground" Color="Transparent"></SolidColorBrush>
+    <SolidColorBrush x:Key="InactiveCaptionForeground" Color="#6e6e6e"></SolidColorBrush>
+    <SolidColorBrush x:Key="InactiveCaptionBackground" Color="Transparent"></SolidColorBrush>
+</ResourceDictionary>
