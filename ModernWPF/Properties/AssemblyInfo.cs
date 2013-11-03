@@ -40,10 +40,9 @@ using System.Windows.Markup;
 )]
 
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWPF")]
-[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Behaviors")]
-//[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Controls")]
-//[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Converters")]
-//[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Resources")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Controls")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Converters")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Resources")]
 
 
 [assembly: AssemblyVersion(_VersionString.Release)]
@@ -55,5 +54,5 @@ static class _VersionString
     // keep this same in majors releases
     public const string Release = "1.0.0.0";
     // change this for each nuget release
-    public const string Build = "1.0.0.0";
+    public const string Build = "1.0.1";
 }

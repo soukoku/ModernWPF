@@ -2,16 +2,15 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:ModernWPF"
+    xmlns:ctrl="clr-namespace:ModernWPF.Controls"
     xmlns:conv="clr-namespace:ModernWPF.Converters"
     xmlns:resx="clr-namespace:ModernWPF.Resources">
 
-    <FontFamily x:Key="ModernFontFamily">Segoe UI, Lucida Sans Unicode, Verdana</FontFamily>
-    
     <conv:IsSmallFontConverter x:Key="IsSmallFont"/>
     <conv:BoolVisibleConverter x:Key="BoolVisible"/>
 
-    <Style TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="{StaticResource ModernFontFamily}" />
+    <Style x:Key="ModernTextBlock" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI, Lucida Sans Unicode, Arial, Verdana"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=FontSize, Converter={StaticResource IsSmallFont}}"
 						 Value="True">
@@ -19,14 +18,72 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-    
-    <Style x:Key="MarlettGlyph" TargetType="{x:Type TextBlock}">
+
+    <Style TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}"/>
+
+    <Style x:Key="MarlettGlyph" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Marlett"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="14"/>
     </Style>
 
+    <Style x:Key="ModernButton" TargetType="ButtonBase">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="local:Chrome.IsHitTestVisible" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Padding" Value="8 4"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ButtonBase">
+                    <Grid>
+                        <Border x:Name="Chrome" Padding="{TemplateBinding Padding}"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									RecognizesAccessKey="True"
+									SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									RenderTransformOrigin="0.5,0.5">
+                            </ContentPresenter>
+                        </Border>
+                        <Rectangle x:Name="Focus" Margin="3" SnapsToDevicePixels="true" Opacity=".7"
+								Stroke="{TemplateBinding Foreground}" StrokeThickness="1"
+								StrokeDashArray="1 2" Visibility="Collapsed"></Rectangle>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFFCF4" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#FFE8A6" />
+                            <Setter Property="RenderTransform" TargetName="contentPresenter">
+                                <Setter.Value>
+                                    <TranslateTransform X="1" Y="1" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="Visibility" TargetName="Focus" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value=".6"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-    <Style x:Key="ModernCaptionButton" TargetType="{x:Type Button}">
+    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}"/>
+
+    <Style x:Key="ModernCaptionButton" TargetType="Button">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
@@ -34,14 +91,14 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="local:ModernChrome.IsHitTestVisible" Value="True" />
+        <Setter Property="local:Chrome.IsHitTestVisible" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Margin" Value="0 0 0 0" />
         <Setter Property="Padding" Value="9 6" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="Button">
                     <Border x:Name="ButtonBorder" 
 							Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -68,8 +125,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="ModernControlButton" TargetType="{x:Type Button}"
-			BasedOn="{StaticResource ModernCaptionButton}">
+    <Style x:Key="ModernControlButton" TargetType="Button"
+           BasedOn="{StaticResource ModernCaptionButton}">
         <Setter Property="IsTabStop" Value="False" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="false">
@@ -79,48 +136,50 @@
     </Style>
 
     <Style x:Key="ModernWindow" TargetType="Window">
-        <!--<Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
-        <Setter Property="Background" Value="{DynamicResource MetroBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MetroAccent}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Foreground" Value="{DynamicResource MetroForeground}" />
-        <Setter Property="CaptionButtonForeground" Value="{DynamicResource MetroForeground2}" />-->
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
                     <AdornerDecorator>
                         <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}">
-                            <Grid.Resources>
-                                <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
-                            </Grid.Resources>
 
                             <Rectangle x:Name="PART_Caption" 
                                        HorizontalAlignment="Stretch" VerticalAlignment="Top"
                                        Grid.ColumnSpan="2" 
-                                       Height="{Binding Path=(local:ModernChrome.Chrome).CaptionHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                       Height="{Binding Path=(local:Chrome.Chrome).CaptionHeight, RelativeSource={RelativeSource TemplatedParent}}"
                                        Fill="Red"></Rectangle>
 
+                            <ctrl:ModernContentControl Content="{TemplateBinding Content}"
+                                            ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:ModernContentControl>
+
                             <Grid x:Name="PART_Control" VerticalAlignment="Top">
+                                <Grid.Resources>
+                                    <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
+                                </Grid.Resources>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel>
                                     <Image Source="{TemplateBinding Icon}" Width="24" Height="24"
                                            Margin="8 4 0 4" VerticalAlignment="Center"
-                                           Visibility="{Binding Path=(local:ModernChrome.Chrome).ShowCaptionIcon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"
+                                           Visibility="{Binding Path=(local:Chrome.Chrome).ShowCaptionIcon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"
                                            DockPanel.Dock="Left"></Image>
-                                    
+
                                     <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
                                                VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
                                                HorizontalAlignment="Left"
-                                               FontSize="15" Margin="8 0"
-                                               Visibility="{Binding Path=(local:ModernChrome.Chrome).ShowCaptionText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"></TextBlock>
+                                               FontSize="15" Margin="8 4"
+                                               Style="{StaticResource ModernTextBlock}"
+                                               Visibility="{Binding Path=(local:Chrome.Chrome).ShowCaptionText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"></TextBlock>
                                 </DockPanel>
 
 
-                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="1"
+                                <!--<ContentControl Content="{TemplateBinding Content}" Grid.Column="1" />-->
+
+                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
                                             VerticalAlignment="Top"  
                                             DataContext="{Binding Source={StaticResource WindowCommands}}"
                                             Margin="0 -1 -1 0">
@@ -128,7 +187,7 @@
                                             Command="{Binding Path=MinimizeCommand}"
 										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
 										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdMinimize], Mode=OneWay}"
-                                            Foreground="{Binding Path=(local:ModernChrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Foreground="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"
                                             Style="{StaticResource ModernControlButton}">
                                         <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
@@ -137,7 +196,7 @@
 										    Command="{Binding Path=MaximizeCommand}"
 										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
 										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdMaximize], Mode=OneWay}"
-                                            Foreground="{Binding Path=(local:ModernChrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Foreground="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"
                                             Style="{StaticResource ModernControlButton}">
                                         <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
@@ -147,7 +206,7 @@
 										    Command="{Binding Path=RestoreCommand}"
 										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
 										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdRestore], Mode=OneWay}"
-                                            Foreground="{Binding Path=(local:ModernChrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Foreground="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"
                                             Style="{StaticResource ModernControlButton}">
                                         <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
@@ -157,33 +216,13 @@
 										    Command="{Binding Path=CloseCommand}"
 										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
 										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdClose], Mode=OneWay}"
-                                            Foreground="{Binding Path=(local:ModernChrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Foreground="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"
                                             Style="{StaticResource ModernControlButton}">
                                         <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
                                     </Button>
                                 </StackPanel>
                             </Grid>
-
-                            <!--<Rectangle x:Name="AccentBox" Width="12" Height="52"
-									HorizontalAlignment="Left" VerticalAlignment="Top"
-									Margin="0 20 0 0" Fill="{DynamicResource MetroAccent}">
-                            </Rectangle>
-
-                           
-                            <DockPanel>
-
-                                <ContentControl IsTabStop="False" DockPanel.Dock="Right">
-                                    <ContentPresenter Content="{TemplateBinding CaptionContent}"
-											VerticalAlignment="Top"></ContentPresenter>
-                                </ContentControl>
-
-                                <TextBlock x:Name="WindowTitle" Text="{TemplateBinding Title}"
-										Style="{DynamicResource MetroWindowTitle}"></TextBlock>
-                            </DockPanel>-->
-
-                            <ContentControl Content="{TemplateBinding Content}"
-									ContentTemplate="{TemplateBinding ContentTemplate}"></ContentControl>
 
                             <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
 									VerticalAlignment="Bottom" Visibility="Collapsed" />
@@ -192,19 +231,13 @@
                         </Grid>
                     </AdornerDecorator>
                     <ControlTemplate.Triggers>
-                        <!--<Trigger Property="ShowWindowTitle" Value="False">
-                            <Setter TargetName="WindowTitle" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                        <Trigger Property="ShowAccentBox" Value="False">
-                            <Setter TargetName="AccentBox" Property="Visibility" Value="Collapsed" />
-                        </Trigger>-->
                         <Trigger Property="IsActive" Value="True">
-                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:ModernChrome.Chrome).ActiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:ModernChrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                         </Trigger>
                         <Trigger Property="IsActive" Value="False">
-                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:ModernChrome.Chrome).InactiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:ModernChrome.Chrome).InactiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -219,5 +252,133 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="ModernScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="local:Chrome.HScrollOnWheel" Value="True"></Setter>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"></Setter>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollViewer">
+                    <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" 
+                                                CanContentScroll="{TemplateBinding CanContentScroll}" 
+                                                CanHorizontallyScroll="False" 
+                                                CanVerticallyScroll="False" 
+                                                ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                Content="{TemplateBinding Content}" 
+                                                Margin="{TemplateBinding Padding}" />
+                        <ScrollBar x:Name="PART_VerticalScrollBar" 
+                                   AutomationProperties.AutomationId="VerticalScrollBar" 
+                                   Grid.Column="1" 
+                                   Maximum="{TemplateBinding ScrollableHeight}" 
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
+                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                   ViewportSize="{TemplateBinding ViewportHeight}"/>
+                        <ScrollBar x:Name="PART_HorizontalScrollBar" 
+                                   AutomationProperties.AutomationId="HorizontalScrollBar" 
+                                   Maximum="{TemplateBinding ScrollableWidth}" 
+                                   Orientation="Horizontal" 
+                                   Grid.Row="1" 
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
+                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                   ViewportSize="{TemplateBinding ViewportWidth}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ScrollViewer" BasedOn="{StaticResource ModernScrollViewer}"/>
+
+    <Style x:Key="ModernProgressBar" TargetType="ProgressBar">
+        <Setter Property="Foreground" Value="Green" />
+        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="Height" Value="3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
+                        <Rectangle />
+                        <Rectangle x:Name="PART_Track" Fill="{TemplateBinding Background}" />
+                        <Decorator x:Name="PART_Indicator" HorizontalAlignment="Left">
+                            <Grid x:Name="Foreground">
+                                <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}" />
+                                <Grid x:Name="Animation" ClipToBounds="true">
+                                    <Rectangle x:Name="PART_GlowRect" HorizontalAlignment="Left"
+											Margin="-100,0,0,0" Width="100">
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                                <GradientStop Color="#00FFFFFF" Offset="0" />
+                                                <GradientStop Color="#60FFFFFF" Offset="0.4" />
+                                                <GradientStop Color="#60FFFFFF" Offset="0.6" />
+                                                <GradientStop Color="#00FFFFFF" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                </Grid>
+                            </Grid>
+                        </Decorator>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsIndeterminate" Value="true">
+                            <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ModernProgressBarNoGlow" TargetType="ProgressBar" BasedOn="{StaticResource ModernProgressBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ProgressBar">
+                    <Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
+                        <Rectangle />
+                        <Rectangle x:Name="PART_Track" Fill="{TemplateBinding Background}" />
+                        <Decorator x:Name="PART_Indicator" HorizontalAlignment="Left">
+                            <Grid x:Name="Foreground">
+                                <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}" />
+                                <Grid x:Name="Animation" ClipToBounds="true">
+                                    <Rectangle x:Name="PART_GlowRect" HorizontalAlignment="Left"
+											Margin="-100,0,0,0" Width="100" Fill="{TemplateBinding Foreground}">
+                                    </Rectangle>
+                                </Grid>
+                            </Grid>
+                        </Decorator>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsIndeterminate" Value="true">
+                            <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

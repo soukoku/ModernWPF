@@ -3,31 +3,102 @@ using CommonWin32.API;
 using CommonWin32.Monitor;
 using CommonWin32.Rectangle;
 using CommonWin32.Window;
-using ModernWPF.Behaviors;
 using ModernWPF.Controls;
 using ModernWPF.Native;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace ModernWPF
 {
-    // yes this is the same idea as the WindowChrome class in framework 4.5 but greatly simplified and improved for modern style.
+    // yes this is the same idea as the WindowChrome class in framework 4.5 but greatly improved for modern style.
 
     /// <summary>
     /// Attached property class for making a <see cref="Window"/> modern.
     /// </summary>
-    public class ModernChrome : Freezable
+    public sealed class Chrome : Freezable, INotifyPropertyChanged
     {
         #region DPs
+
+        #region HScroll attached dp
+
+        /// <summary>
+        /// Attached propert to allow horizontal scroll by mouse wheel if possible.
+        /// </summary>
+        public static readonly DependencyProperty HScrollOnWheelProperty =
+            DependencyProperty.RegisterAttached
+            (
+                "HScrollOnWheel",
+                typeof(bool),
+                typeof(Chrome),
+                new UIPropertyMetadata(false, OnHScrollOnWheelPropertyChanged)
+            );
+        /// <summary>
+        /// Gets the HScrollOnWheel property for this object.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns></returns>
+        public static bool GetHScrollOnWheel(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(HScrollOnWheelProperty);
+        }
+        /// <summary>
+        /// Sets the HScrollOnWheel property for this object.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">if set to <c>true</c> then h-scroll logic will be used if possible.</param>
+        public static void SetHScrollOnWheel(DependencyObject obj, bool value)
+        {
+            obj.SetValue(HScrollOnWheelProperty, value);
+        }
+
+        private static void OnHScrollOnWheelPropertyChanged(DependencyObject dpo, DependencyPropertyChangedEventArgs args)
+        {
+            var scroller = dpo as ScrollViewer;
+            if (dpo is ItemsControl)
+            {
+                scroller = ((ItemsControl)dpo).TryGetScrollerViewer();
+            }
+
+            if (scroller != null)
+            {
+                if ((bool)args.NewValue)
+                {
+                    scroller.PreviewMouseWheel += scroller_PreviewMouseWheel;
+                }
+                else
+                {
+                    scroller.PreviewMouseWheel -= scroller_PreviewMouseWheel;
+                }
+            }
+        }
+
+        static void scroller_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scroller = sender as ScrollViewer;
+            if (scroller != null && scroller.ComputedVerticalScrollBarVisibility != Visibility.Visible &&
+                scroller.ComputedHorizontalScrollBarVisibility == Visibility.Visible)
+            {
+                if (e.Delta < 0)
+                {
+                    scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + 48);
+                }
+                else
+                {
+                    scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset - 48);
+                }
+                e.Handled = true;
+            }
+        }
+
+        #endregion
 
         #region hit test attached dp
 
@@ -35,7 +106,7 @@ namespace ModernWPF
         /// Attached property to mark a UI element as hit-testable when in the window caption area.
         /// </summary>
         public static readonly DependencyProperty IsHitTestVisibleProperty =
-            DependencyProperty.RegisterAttached("IsHitTestVisible", typeof(bool), typeof(ModernChrome),
+            DependencyProperty.RegisterAttached("IsHitTestVisible", typeof(bool), typeof(Chrome),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
@@ -86,10 +157,10 @@ namespace ModernWPF
         /// <param name="window">The window.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">window</exception>
-        public static ModernChrome GetChrome(Window window)
+        public static Chrome GetChrome(Window window)
         {
             if (window == null) { throw new ArgumentNullException("window"); }
-            return (ModernChrome)window.GetValue(ModernChrome.ChromeProperty);
+            return (Chrome)window.GetValue(Chrome.ChromeProperty);
         }
 
         /// <summary>
@@ -98,16 +169,16 @@ namespace ModernWPF
         /// <param name="window">The window.</param>
         /// <param name="chrome">The chrome.</param>
         /// <exception cref="System.ArgumentNullException">window</exception>
-        public static void SetChrome(Window window, ModernChrome chrome)
+        public static void SetChrome(Window window, Chrome chrome)
         {
             if (window == null) { throw new ArgumentNullException("window"); }
-            window.SetValue(ModernChrome.ChromeProperty, chrome);
+            window.SetValue(Chrome.ChromeProperty, chrome);
         }
         /// <summary>
         /// The modern chrome attached property.
         /// </summary>
         public static readonly DependencyProperty ChromeProperty =
-            DependencyProperty.RegisterAttached("Chrome", typeof(ModernChrome), typeof(ModernChrome), new PropertyMetadata(null, new PropertyChangedCallback(ChromeChanged)));
+            DependencyProperty.RegisterAttached("Chrome", typeof(Chrome), typeof(Chrome), new PropertyMetadata(null, new PropertyChangedCallback(ChromeChanged)));
 
         private static void ChromeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -116,8 +187,8 @@ namespace ModernWPF
             var window = d as Window;
             if (d != null)
             {
-                var oldChrome = e.OldValue as ModernChrome;
-                var newChrome = e.NewValue as ModernChrome;
+                var oldChrome = e.OldValue as Chrome;
+                var newChrome = e.NewValue as Chrome;
 
                 if (oldChrome != null && oldChrome != newChrome)
                 {
@@ -150,7 +221,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="ResizeBorderThickness"/>.
         /// </summary>
         public static readonly DependencyProperty ResizeBorderThicknessProperty =
-            DependencyProperty.Register("ResizeBorderThickness", typeof(Thickness), typeof(ModernChrome), new PropertyMetadata(new Thickness(8)));
+            DependencyProperty.Register("ResizeBorderThickness", typeof(Thickness), typeof(Chrome), new PropertyMetadata(new Thickness(8)));
 
 
         /// <summary>
@@ -169,7 +240,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="ActiveBorderBrush"/>.
         /// </summary>
         public static readonly DependencyProperty ActiveBorderBrushProperty =
-            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(new BrushConverter().ConvertFromString("#293955")));
+            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.DimGray));
 
 
         /// <summary>
@@ -188,7 +259,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="InactiveBorderBrush"/>.
         /// </summary>
         public static readonly DependencyProperty InactiveBorderBrushProperty =
-            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(Brushes.Gray));
+            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.LightGray));
 
 
         /// <summary>
@@ -207,7 +278,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="ActiveCaptionBrush"/>.
         /// </summary>
         public static readonly DependencyProperty ActiveCaptionBrushProperty =
-            DependencyProperty.Register("ActiveCaptionBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(new BrushConverter().ConvertFromString("#D6DBE9")));
+            DependencyProperty.Register("ActiveCaptionBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.Transparent));
 
 
         /// <summary>
@@ -226,7 +297,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="InactiveCaptionBrush"/>.
         /// </summary>
         public static readonly DependencyProperty InactiveCaptionBrushProperty =
-            DependencyProperty.Register("InactiveCaptionBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(new BrushConverter().ConvertFromString("#D6DBE9")));
+            DependencyProperty.Register("InactiveCaptionBrush", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.Transparent));
 
 
         /// <summary>
@@ -245,7 +316,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="ActiveCaptionForeground"/>.
         /// </summary>
         public static readonly DependencyProperty ActiveCaptionForegroundProperty =
-            DependencyProperty.Register("ActiveCaptionForeground", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(Brushes.Black));
+            DependencyProperty.Register("ActiveCaptionForeground", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.Black));
 
 
         /// <summary>
@@ -264,7 +335,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="InactiveCaptionForeground"/>.
         /// </summary>
         public static readonly DependencyProperty InactiveCaptionForegroundProperty =
-            DependencyProperty.Register("InactiveCaptionForeground", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(Brushes.DimGray));
+            DependencyProperty.Register("InactiveCaptionForeground", typeof(Brush), typeof(Chrome), new PropertyMetadata(Brushes.DimGray));
 
 
 
@@ -277,14 +348,32 @@ namespace ModernWPF
         public double CaptionHeight
         {
             get { return (double)GetValue(CaptionHeightProperty); }
-            set { SetValue(CaptionHeightProperty, value); }
+            set
+            {
+                SetValue(CaptionHeightProperty, value);
+                RaisePropertyChanged("CaptionHeightThickness");
+            }
+        }
+
+        /// <summary>
+        /// Gets the caption height as a bindable thickness.
+        /// </summary>
+        /// <value>
+        /// The caption height thickness.
+        /// </value>
+        public Thickness CaptionHeightThickness
+        {
+            get
+            {
+                return new Thickness(0, CaptionHeight, 0, 0);
+            }
         }
 
         /// <summary>
         /// The dependency property for <see cref="CaptionHeight"/>.
         /// </summary>
         public static readonly DependencyProperty CaptionHeightProperty =
-            DependencyProperty.Register("CaptionHeight", typeof(double), typeof(ModernChrome), new PropertyMetadata(32d));
+            DependencyProperty.Register("CaptionHeight", typeof(double), typeof(Chrome), new PropertyMetadata(32d));
 
 
         /// <summary>
@@ -303,7 +392,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="ShowCaptionText"/>.
         /// </summary>
         public static readonly DependencyProperty ShowCaptionTextProperty =
-            DependencyProperty.Register("ShowCaptionText", typeof(bool), typeof(ModernChrome), new PropertyMetadata(true));
+            DependencyProperty.Register("ShowCaptionText", typeof(bool), typeof(Chrome), new PropertyMetadata(true));
 
 
         /// <summary>
@@ -322,7 +411,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="ShowCaptionIcon"/>.
         /// </summary>
         public static readonly DependencyProperty ShowCaptionIconProperty =
-            DependencyProperty.Register("ShowCaptionIcon", typeof(bool), typeof(ModernChrome), new PropertyMetadata(true));
+            DependencyProperty.Register("ShowCaptionIcon", typeof(bool), typeof(Chrome), new PropertyMetadata(true));
 
 
 
@@ -411,7 +500,7 @@ namespace ModernWPF
         /// <param name="handled">A value that indicates whether the message was handled. Set the value to
         /// true if the message was handled; otherwise, false.</param>
         /// <returns></returns>
-        protected virtual IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             IntPtr retVal = IntPtr.Zero;
             if (!handled)
@@ -672,7 +761,22 @@ namespace ModernWPF
         /// </returns>
         protected override Freezable CreateInstanceCore()
         {
-            return (Freezable)new ModernChrome();
+            return (Freezable)new Chrome();
         }
+
+        #region INotifyPropertyChanged Members
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void RaisePropertyChanged(string property)
+        {
+            var hand = PropertyChanged;
+            if (hand != null) { hand(this, new PropertyChangedEventArgs(property)); }
+        }
+
+        #endregion
     }
 }

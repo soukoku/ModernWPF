@@ -6,10 +6,30 @@
         Icon="Icon.ico"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindow}">
-    <modern:ModernChrome.Chrome>
-        <modern:ModernChrome />
-    </modern:ModernChrome.Chrome>
-    <Grid>
-        
-    </Grid>
+    <modern:Chrome.Chrome>
+        <modern:Chrome x:Name="chrome" ShowCaptionIcon="False" />
+    </modern:Chrome.Chrome>
+    <Border Margin="{Binding ElementName=chrome, Path=CaptionHeightThickness}">
+        <Grid Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer>
+                <StackPanel>
+                    <TextBlock TextWrapping="Wrap" 
+                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." Margin="8"></TextBlock>
+
+                    <TextBlock TextWrapping="Wrap" 
+                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." Margin="8"></TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+                <Button Content="some button" IsEnabled="False"></Button>
+
+                <Button Content="some button"></Button>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

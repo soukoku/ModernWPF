@@ -70,13 +70,13 @@ namespace ModernWPF.Controls
             }
         }
 
-        public BorderWindow(ModernChrome chrome, Window contentWindow)
+        public BorderWindow(Chrome chrome, Window contentWindow)
         {
             this.DataContext = chrome;
             _contentWindow = contentWindow;
 
             BindingTo("IsActive", contentWindow, IsContentActiveProperty);
-            BindingTo(ModernChrome.ResizeBorderThicknessProperty.Name, chrome, BorderThicknessProperty);
+            BindingTo(Chrome.ResizeBorderThicknessProperty.Name, chrome, BorderThicknessProperty);
 
             _showTimer = new DispatcherTimer();
             // magic # for windows animation duration
@@ -208,7 +208,7 @@ namespace ModernWPF.Controls
                 (_contentWindow.ResizeMode == System.Windows.ResizeMode.CanResize ||
                 _contentWindow.ResizeMode == System.Windows.ResizeMode.CanResizeWithGrip))
             {
-                var chrome = _contentWindow.GetValue(ModernChrome.ChromeProperty) as ModernChrome;
+                var chrome = _contentWindow.GetValue(Chrome.ChromeProperty) as Chrome;
                 hit = NcBorderHitTest(chrome.ResizeBorderThickness, windowPoint);
             }
             //Debug.WriteLine(hit);
