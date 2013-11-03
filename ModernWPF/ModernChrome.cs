@@ -20,8 +20,7 @@ using System.Windows.Media;
 
 namespace ModernWPF
 {
-    // yes this is the same idea as the WindowChrome class in framework 4.5 but simplified for modern windows
-
+    // yes this is the same idea as the WindowChrome class in framework 4.5 but greatly simplified and improved for modern style.
 
     /// <summary>
     /// Attached property class for making a <see cref="Window"/> modern.
@@ -36,7 +35,7 @@ namespace ModernWPF
         /// Attached property to mark a UI element as hit-testable when in the window caption area.
         /// </summary>
         public static readonly DependencyProperty IsHitTestVisibleProperty =
-            DependencyProperty.RegisterAttached("IsHitTestVisible", typeof(bool), typeof(ModernBehavior),
+            DependencyProperty.RegisterAttached("IsHitTestVisible", typeof(bool), typeof(ModernChrome),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
@@ -153,6 +152,7 @@ namespace ModernWPF
         public static readonly DependencyProperty ResizeBorderThicknessProperty =
             DependencyProperty.Register("ResizeBorderThickness", typeof(Thickness), typeof(ModernChrome), new PropertyMetadata(new Thickness(8)));
 
+
         /// <summary>
         /// Gets or sets the active border brush.
         /// </summary>
@@ -169,7 +169,7 @@ namespace ModernWPF
         /// The dependency property for <see cref="ActiveBorderBrush"/>.
         /// </summary>
         public static readonly DependencyProperty ActiveBorderBrushProperty =
-            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(SystemColors.ActiveBorderBrush));
+            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(new BrushConverter().ConvertFromString("#293955")));
 
 
         /// <summary>
@@ -188,7 +188,84 @@ namespace ModernWPF
         /// The dependency property for <see cref="InactiveBorderBrush"/>.
         /// </summary>
         public static readonly DependencyProperty InactiveBorderBrushProperty =
-            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(SystemColors.InactiveBorderBrush));
+            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(Brushes.Gray));
+
+
+        /// <summary>
+        /// Gets or sets the active caption brush.
+        /// </summary>
+        /// <value>
+        /// The active caption brush.
+        /// </value>
+        public Brush ActiveCaptionBrush
+        {
+            get { return (Brush)GetValue(ActiveCaptionBrushProperty); }
+            set { SetValue(ActiveCaptionBrushProperty, value); }
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="ActiveCaptionBrush"/>.
+        /// </summary>
+        public static readonly DependencyProperty ActiveCaptionBrushProperty =
+            DependencyProperty.Register("ActiveCaptionBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(new BrushConverter().ConvertFromString("#D6DBE9")));
+
+
+        /// <summary>
+        /// Gets or sets the inactive caption brush.
+        /// </summary>
+        /// <value>
+        /// The inactive caption brush.
+        /// </value>
+        public Brush InactiveCaptionBrush
+        {
+            get { return (Brush)GetValue(InactiveCaptionBrushProperty); }
+            set { SetValue(InactiveCaptionBrushProperty, value); }
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="InactiveCaptionBrush"/>.
+        /// </summary>
+        public static readonly DependencyProperty InactiveCaptionBrushProperty =
+            DependencyProperty.Register("InactiveCaptionBrush", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(new BrushConverter().ConvertFromString("#D6DBE9")));
+
+
+        /// <summary>
+        /// Gets or sets the active caption foreground.
+        /// </summary>
+        /// <value>
+        /// The active caption foreground.
+        /// </value>
+        public Brush ActiveCaptionForeground
+        {
+            get { return (Brush)GetValue(ActiveCaptionForegroundProperty); }
+            set { SetValue(ActiveCaptionForegroundProperty, value); }
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="ActiveCaptionForeground"/>.
+        /// </summary>
+        public static readonly DependencyProperty ActiveCaptionForegroundProperty =
+            DependencyProperty.Register("ActiveCaptionForeground", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(Brushes.Black));
+
+
+        /// <summary>
+        /// Gets or sets the inactive caption foreground.
+        /// </summary>
+        /// <value>
+        /// The inactive caption foreground.
+        /// </value>
+        public Brush InactiveCaptionForeground
+        {
+            get { return (Brush)GetValue(InactiveCaptionForegroundProperty); }
+            set { SetValue(InactiveCaptionForegroundProperty, value); }
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="InactiveCaptionForeground"/>.
+        /// </summary>
+        public static readonly DependencyProperty InactiveCaptionForegroundProperty =
+            DependencyProperty.Register("InactiveCaptionForeground", typeof(Brush), typeof(ModernChrome), new PropertyMetadata(Brushes.DimGray));
+
 
 
         /// <summary>
@@ -197,18 +274,57 @@ namespace ModernWPF
         /// <value>
         /// The height of the caption.
         /// </value>
-        public double WindowCaptionHeight
+        public double CaptionHeight
         {
-            get { return (double)GetValue(WindowCaptionHeightProperty); }
-            set { SetValue(WindowCaptionHeightProperty, value); }
+            get { return (double)GetValue(CaptionHeightProperty); }
+            set { SetValue(CaptionHeightProperty, value); }
         }
+
+        /// <summary>
+        /// The dependency property for <see cref="CaptionHeight"/>.
+        /// </summary>
+        public static readonly DependencyProperty CaptionHeightProperty =
+            DependencyProperty.Register("CaptionHeight", typeof(double), typeof(ModernChrome), new PropertyMetadata(32d));
 
 
         /// <summary>
-        /// The dependency property for <see cref="WindowCaptionHeight"/>.
+        /// Gets or sets a value indicating whether to show caption text.
         /// </summary>
-        public static readonly DependencyProperty WindowCaptionHeightProperty =
-            DependencyProperty.Register("WindowCaptionHeight", typeof(double), typeof(ModernChrome), new PropertyMetadata(SystemParameters.WindowCaptionHeight));
+        /// <value>
+        ///   <c>true</c> to show caption text; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowCaptionText
+        {
+            get { return (bool)GetValue(ShowCaptionTextProperty); }
+            set { SetValue(ShowCaptionTextProperty, value); }
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="ShowCaptionText"/>.
+        /// </summary>
+        public static readonly DependencyProperty ShowCaptionTextProperty =
+            DependencyProperty.Register("ShowCaptionText", typeof(bool), typeof(ModernChrome), new PropertyMetadata(true));
+
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to show caption icon.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> to show caption icon; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowCaptionIcon
+        {
+            get { return (bool)GetValue(ShowCaptionIconProperty); }
+            set { SetValue(ShowCaptionIconProperty, value); }
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="ShowCaptionIcon"/>.
+        /// </summary>
+        public static readonly DependencyProperty ShowCaptionIconProperty =
+            DependencyProperty.Register("ShowCaptionIcon", typeof(bool), typeof(ModernChrome), new PropertyMetadata(true));
+
+
 
         #endregion
 
@@ -507,7 +623,7 @@ namespace ModernWPF
         NcHitTest HandleNcHitTest(Point screenPoint)
         {
             var windowPoint = _contentWindow.PointFromScreen(screenPoint);
-            double capH = (WindowCaptionHeight > -1 ? WindowCaptionHeight : SystemParameters.WindowCaptionHeight);
+            double capH = (CaptionHeight > -1 ? CaptionHeight : (double)CaptionHeightProperty.DefaultMetadata.DefaultValue);
 
             NcHitTest location = NcHitTest.HTCLIENT;
 

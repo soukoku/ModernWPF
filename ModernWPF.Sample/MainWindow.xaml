@@ -2,8 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:modern="http://modernwpf"
-        Title="MainWindow" Height="500" Width="700"
-        ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" >
+        Title="ModernWPF - Test" Height="500" Width="700"
+        Icon="Icon.ico"
+        ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
+        Style="{StaticResource ModernWindow}">
     <modern:ModernChrome.Chrome>
         <modern:ModernChrome />
     </modern:ModernChrome.Chrome>
