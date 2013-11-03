@@ -12,7 +12,7 @@ using System.Windows.Markup;
 [assembly: AssemblyTitle("ModernWPF")]
 [assembly: AssemblyDescription("A UI lib for creating modern apps in WPF 4.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Yin-Chun Wang")]
 [assembly: AssemblyProduct("ModernWPF")]
 [assembly: AssemblyCopyright("Copyright © Yin-Chun Wang 2013")]
 [assembly: AssemblyTrademark("")]
@@ -39,14 +39,21 @@ using System.Windows.Markup;
                                       // app, or any theme specific resource dictionaries)
 )]
 
-// keep this same in majors releases
-[assembly: AssemblyVersion("1.0.0.0")]
-// change this for each release
-[assembly: AssemblyFileVersion("1.0.0.0")]
-
-
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWPF")]
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Behaviors")]
-[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Controls")]
-[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Converters")]
-[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Resources")]
+//[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Controls")]
+//[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Converters")]
+//[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Resources")]
+
+
+[assembly: AssemblyVersion(_VersionString.Release)]
+[assembly: AssemblyFileVersion(_VersionString.Build)]
+[assembly: AssemblyInformationalVersion(_VersionString.Build)]
+
+static class _VersionString
+{
+    // keep this same in majors releases
+    public const string Release = "1.0.0.0";
+    // change this for each nuget release
+    public const string Build = "1.0.0.0";
+}
