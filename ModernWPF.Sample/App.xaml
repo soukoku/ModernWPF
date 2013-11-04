@@ -8,7 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernBase.xaml" />
-                <ResourceDictionary Source="/ModernWPF;component/Themes/ModernLight.xaml" />
+                <ResourceDictionary Source="/ModernWPF;component/Themes/ModernDark.xaml" />
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
