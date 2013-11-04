@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\ModernWPF.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\ModernWPF.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonWin32">
@@ -55,6 +57,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accent.cs" />
     <Compile Include="Controls\BorderWindow.cs" />
     <Compile Include="Controls\ModernContentControl.cs" />
     <Compile Include="Converters\IsSmallFontConverter.cs" />
@@ -62,6 +65,7 @@
     <Compile Include="Converters\TextCaseConverter.cs" />
     <Compile Include="ModernExtensions.cs" />
     <Compile Include="Chrome.cs" />
+    <Compile Include="ModernTheme.cs" />
     <Compile Include="Native\User32Ex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

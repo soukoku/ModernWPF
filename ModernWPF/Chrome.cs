@@ -190,14 +190,17 @@ namespace ModernWPF
                 var oldChrome = e.OldValue as Chrome;
                 var newChrome = e.NewValue as Chrome;
 
-                if (oldChrome != null && oldChrome != newChrome)
+                if (oldChrome != newChrome)
                 {
-                    oldChrome.DetatchWindow();
-                }
+                    if (oldChrome != null)
+                    {
+                        oldChrome.DetatchWindow();
+                    }
 
-                if (newChrome != null)
-                {
-                    newChrome.AttachWindow(window);
+                    if (newChrome != null)
+                    {
+                        newChrome.AttachWindow(window);
+                    }
                 }
             }
         }
@@ -205,6 +208,15 @@ namespace ModernWPF
         #endregion
 
         #region normal dp
+
+        //private static void NotifyNormalDPChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //{
+        //    var chrome = d as Chrome;
+        //    if (chrome != null)
+        //    {
+        //        chrome.RaisePropertyChanged(e.Property.Name);
+        //    }
+        //}
 
         /// <summary>
         /// Gets the resize border thickness.
@@ -373,7 +385,10 @@ namespace ModernWPF
         /// The dependency property for <see cref="CaptionHeight"/>.
         /// </summary>
         public static readonly DependencyProperty CaptionHeightProperty =
-            DependencyProperty.Register("CaptionHeight", typeof(double), typeof(Chrome), new PropertyMetadata(32d));
+            DependencyProperty.Register("CaptionHeight", typeof(double), typeof(Chrome), new PropertyMetadata(32d, (d, e) =>
+            {
+                ((Chrome)d).RaisePropertyChanged("CaptionHeightThickness");
+            }));
 
 
         /// <summary>
@@ -432,6 +447,7 @@ namespace ModernWPF
             _contentWindow.Closed += _contentWindow_Closed;
             _contentWindow.ContentRendered += _contentWindow_ContentRendered;
 
+
             var hwnd = new WindowInteropHelper(_contentWindow).Handle;
             if (hwnd == IntPtr.Zero)
             {
@@ -447,12 +463,18 @@ namespace ModernWPF
         private void DetatchWindow()
         {
             _resizeGrip = null;
-            _contentWindow.Closed -= _contentWindow_Closed;
-            _contentWindow.ContentRendered -= _contentWindow_ContentRendered;
-            _contentWindow.SourceInitialized -= window_SourceInitialized;
-            _contentWindow = null;
-            _borderWindow.Close();
-            _borderWindow = null;
+            if (_contentWindow != null)
+            {
+                _contentWindow.Closed -= _contentWindow_Closed;
+                _contentWindow.ContentRendered -= _contentWindow_ContentRendered;
+                _contentWindow.SourceInitialized -= window_SourceInitialized;
+                _contentWindow = null;
+            }
+            if (_borderWindow != null)
+            {
+                _borderWindow.Close();
+                _borderWindow = null;
+            }
         }
 
         void _contentWindow_Closed(object sender, EventArgs e)
@@ -506,7 +528,7 @@ namespace ModernWPF
             if (!handled)
             {
                 var wmsg = (WindowMessage)msg;
-                Debug.WriteLine(wmsg);
+                //Debug.WriteLine(wmsg);
                 switch (wmsg)
                 {
                     case WindowMessage.WM_NCCALCSIZE:
@@ -682,7 +704,7 @@ namespace ModernWPF
                     switch (wpl.showCmd)
                     {
                         case ShowWindowOption.SW_SHOWNORMAL:
-                            Debug.WriteLine("Should reposn shadow");
+                            //Debug.WriteLine("Should reposn shadow");
                             // use GetWindowRect to work correctly with aero snap
                             var r = default(CommonWin32.Rectangle.RECT);
                             if (User32.GetWindowRect(hwnd, ref r))
@@ -692,17 +714,17 @@ namespace ModernWPF
                                 _borderWindow.Width = r.Width + thick.Left + thick.Right;
                                 _borderWindow.Height = r.Height + thick.Top + thick.Bottom;
                                 _borderWindow.ToggleVisible(true);
-                                Debug.WriteLine("reposned");
+                                //Debug.WriteLine("reposned");
                             }
                             break;
                         case ShowWindowOption.SW_MAXIMIZE:
                         case ShowWindowOption.SW_MINIMIZE:
                         case ShowWindowOption.SW_SHOWMINIMIZED:
                             _borderWindow.ToggleVisible(false);
-                            Debug.WriteLine("No shadow");
+                            //Debug.WriteLine("No shadow");
                             break;
                         default:
-                            Debug.WriteLine("Unknown showcmd " + wpl.showCmd);
+                            //Debug.WriteLine("Unknown showcmd " + wpl.showCmd);
                             break;
                     }
                 }

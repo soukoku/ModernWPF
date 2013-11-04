@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -22,6 +23,22 @@ namespace ModernWPF.Sample
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        bool dark = true;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (dark)
+            {
+                ModernTheme.ApplyTheme(ModernWPF.ModernTheme.ThemeType.Light, ModernTheme.GetPredefinedAccent(ModernTheme.RED));
+                dark = false;
+            }
+            else
+            {
+                ModernTheme.ApplyTheme(ModernWPF.ModernTheme.ThemeType.Dark, ModernTheme.GetPredefinedAccent(ModernTheme.GREEN));
+                dark = true;
+            }
         }
     }
 }

@@ -43,29 +43,35 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="ctrl:BorderWindow">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:BorderWindow">
                     <Border Padding="{TemplateBinding BorderThickness}" Background="#01000000">
-                        <Border x:Name="Sizer" Margin="-1"
-                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
-                            <Border.Effect>
-                                <DropShadowEffect ShadowDepth="1" BlurRadius="8" Color="{TemplateBinding BorderBrush}"></DropShadowEffect>
-                            </Border.Effect>
+                        <Border x:Name="lineBorder" Margin="-1" BorderThickness="1">
                         </Border>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsContentActive" Value="True">
+                            <Setter TargetName="lineBorder" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}"></Setter>
+                            <Setter TargetName="lineBorder" Property="Effect" >
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="1" BlurRadius="8" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush.Color}"></DropShadowEffect>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsContentActive" Value="False">
+                            <Setter TargetName="lineBorder" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveBorderBrush}"></Setter>
+                            <Setter TargetName="lineBorder" Property="Effect" >
+                                <Setter.Value>
+                                    <DropShadowEffect ShadowDepth="1" BlurRadius="8" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveBorderBrush.Color}"></DropShadowEffect>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsContentActive" Value="False">
-                <Setter Property="BorderBrush" Value="{Binding DataContext.InactiveBorderBrush,RelativeSource={RelativeSource Mode=Self}}" />
-            </Trigger>
-            <Trigger Property="IsContentActive" Value="True">
-                <Setter Property="BorderBrush" Value="{Binding DataContext.ActiveBorderBrush,RelativeSource={RelativeSource Mode=Self}}" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>

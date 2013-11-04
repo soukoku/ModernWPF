@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace ModernWPF.Controls
@@ -35,6 +36,22 @@ namespace ModernWPF.Controls
 
         public static readonly DependencyProperty IsContentActiveProperty =
             DependencyProperty.Register("IsContentActive", typeof(bool), typeof(BorderWindow), new PropertyMetadata(false));
+
+
+
+
+        public Brush InactiveBorderBrush
+        {
+            get { return (Brush)GetValue(InactiveBorderBrushProperty); }
+            set { SetValue(InactiveBorderBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for InactiveBorderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty InactiveBorderBrushProperty =
+            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(BorderWindow), new PropertyMetadata(null));
+
+
+
 
 
         Window _contentWindow;
@@ -72,11 +89,12 @@ namespace ModernWPF.Controls
 
         public BorderWindow(Chrome chrome, Window contentWindow)
         {
-            this.DataContext = chrome;
             _contentWindow = contentWindow;
 
             BindingTo("IsActive", contentWindow, IsContentActiveProperty);
             BindingTo(Chrome.ResizeBorderThicknessProperty.Name, chrome, BorderThicknessProperty);
+            BindingTo(Chrome.ActiveBorderBrushProperty.Name, chrome, BorderBrushProperty);
+            BindingTo(Chrome.InactiveBorderBrushProperty.Name, chrome, InactiveBorderBrushProperty);
 
             _showTimer = new DispatcherTimer();
             // magic # for windows animation duration
@@ -95,7 +113,7 @@ namespace ModernWPF.Controls
         {
             var abind = new Binding(sourcePath);
             abind.Source = source;
-            abind.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            //abind.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
             abind.NotifyOnSourceUpdated = true;
             BindingOperations.SetBinding(this, bindToProperty, abind);
         }
