@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+
+    <!--previous my own-->
+
+    <Thickness x:Key="ControlBorderThemeThickness">2</Thickness>
+    <Thickness x:Key="ContentThemePadding">8 4</Thickness>
+    <s:Double x:Key="ContentThemeFontSize">13</s:Double>
+
+
+    <!--from windows app-->
+
+    <FontFamily x:Key="SymbolThemeFontFamily">Segoe UI Symbol</FontFamily>
+    <FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>
+    <!--<s:Double x:Key="ControlContentThemeFontSize">14.667</s:Double>-->
+    <s:Double x:Key="ControlContentThemeFontSize">13</s:Double>
+    <SolidColorBrush x:Key="FocusVisualBlackStrokeThemeBrush" Color="Black" />
+    <SolidColorBrush x:Key="FocusVisualWhiteStrokeThemeBrush" Color="White" />
+
+
+    <s:Double x:Key="TextControlBackgroundThemeOpacity">0.8</s:Double>
+    <s:Double x:Key="TextControlBorderThemeOpacity">0.8</s:Double>
+    <s:Double x:Key="TextControlPointerOverBackgroundThemeOpacity">0.87</s:Double>
+    <s:Double x:Key="TextControlPointerOverBorderThemeOpacity">0.87</s:Double>
+    <s:Double x:Key="TextControlThemeMinHeight">32</s:Double>
+    <s:Double x:Key="TextControlThemeMinWidth">64</s:Double>
+    <Thickness x:Key="TextControlBorderThemeThickness">2</Thickness>
+    <Thickness x:Key="TextControlThemePadding">10,3,10,5</Thickness>
+
+    <s:Double x:Key="AppBarThemeMinHeight">68</s:Double>
+    <Thickness x:Key="AppBarBottomBorderThemeThickness">0,2,0,0</Thickness>
+    <Thickness x:Key="AppBarBottomThemePadding">0,0,0,2</Thickness>
+    <Thickness x:Key="AppBarTopBorderThemeThickness">0,0,0,2</Thickness>
+    <Thickness x:Key="AppBarTopThemePadding">0,2,0,0</Thickness>
+
+    <Thickness x:Key="ButtonBorderThemeThickness">2</Thickness>
+    <Thickness x:Key="HyperlinkButtonBorderThemeThickness">2</Thickness>
+    <Thickness x:Key="RepeatButtonBorderThemeThickness">2</Thickness>
+    <Thickness x:Key="ToggleButtonBorderThemeThickness">2</Thickness>
+
+    <s:Double x:Key="CheckBoxBorderThemeThickness">0</s:Double>
+
+    <s:Double x:Key="RadioButtonBorderThemeThickness">0</s:Double>
+
+    <s:Double x:Key="ComboBoxArrowThemeFontSize">21</s:Double>
+    <Thickness x:Key="ComboBoxBorderThemeThickness">2</Thickness>
+    <Thickness x:Key="ComboBoxPopupBorderThemeThickness">2</Thickness>
+
+    <Thickness x:Key="ListBoxBorderThemeThickness">2</Thickness>
+
+    <s:Double x:Key="SliderOutsideTickBarThemeHeight">6</s:Double>
+    <s:Double x:Key="SliderTrackThemeHeight">11</s:Double>
+    <Thickness x:Key="SliderBorderThemeThickness">0</Thickness>
+
+    <s:Double x:Key="ProgressBarThemeMinHeight">6</s:Double>
+    <Thickness x:Key="ProgressBarBorderThemeThickness">0</Thickness>
+
+    <s:Double x:Key="ToolTipContentThemeFontSize">12</s:Double>
+    <Thickness x:Key="ToolTipBorderThemeThickness">2</Thickness>
+
+    <s:Double x:Key="ScrollBarTrackBorderThemeThickness">0</s:Double>
+    <Thickness x:Key="ScrollBarPanningBorderThemeThickness">1</Thickness>
+
+</ResourceDictionary>

@@ -10,16 +10,9 @@
     <conv:IsSmallFontConverter x:Key="IsSmallFont"/>
     <conv:BoolVisibleConverter x:Key="BoolVisible"/>
 
-    <Thickness x:Key="ControlBorderThickness">2</Thickness>
-    <Thickness x:Key="ContentPadding">8 4</Thickness>
-
-    <sys:Double x:Key="ContentFontSize">13</sys:Double>
-
-    <FontFamily x:Key="ModernFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>
-
 
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{DynamicResource ModernFontFamily}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=FontSize, Converter={StaticResource IsSmallFont}}"
 						 Value="True">
@@ -35,56 +28,109 @@
         <Setter Property="FontSize" Value="14"/>
     </Style>
 
-    <Style x:Key="ModernButton" TargetType="{x:Type ButtonBase}">
-        <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground2}" />
-        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="{DynamicResource ContentPadding}" />
-        <Setter Property="Margin" Value="0" />
+    <Style x:Key="ModernButton" TargetType="ButtonBase">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundThemeBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundThemeBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderThemeBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ButtonBorderThemeThickness}" />
+        <Setter Property="Padding" Value="12,4,12,4" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+        <!--<Setter Property="FontWeight" Value="SemiBold" />-->
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                <ControlTemplate TargetType="ButtonBase">
                     <Grid>
-                        <Border x:Name="Chrome" Padding="{TemplateBinding Padding}"
-								BorderBrush="{TemplateBinding BorderBrush}"
-								BorderThickness="{TemplateBinding BorderThickness}"
-								Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <ContentPresenter x:Name="contentPresenter"
-									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-									RecognizesAccessKey="True"
-									SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									RenderTransformOrigin="0.5,0.5">
-                            </ContentPresenter>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonPointerOverBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="(Button.Foreground)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonPointerOverForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonPressedBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="(Button.Foreground)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonPressedForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonDisabledBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonDisabledBorderThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                                   Storyboard.TargetProperty="(Button.Foreground)">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource ButtonDisabledForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unfocused" />
+                                <VisualState x:Name="MouseFocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="Border"
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="3">
+                            <ContentPresenter x:Name="ContentPresenter" 
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
-                        <Rectangle x:Name="Focus" Margin="3" SnapsToDevicePixels="true" Opacity=".7"
-								Stroke="{TemplateBinding Foreground}" StrokeThickness="1"
-								StrokeDashArray="1 2" Visibility="Collapsed"></Rectangle>
+                        <Rectangle x:Name="FocusVisualWhite"
+                               IsHitTestVisible="False"
+                               Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="1.5" />
+                        <Rectangle x:Name="FocusVisualBlack"
+                               IsHitTestVisible="False"
+                               Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="0.5" />
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground}" />
-                            <Setter Property="RenderTransform" TargetName="contentPresenter">
-                                <Setter.Value>
-                                    <TranslateTransform X="1" Y="1" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="Visibility" TargetName="Focus" Value="Visible" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -102,6 +148,7 @@
             </MultiTrigger>
         </Style.Triggers>
     </Style>
+    
     <Style TargetType="ToggleButton" BasedOn="{StaticResource ModernButton}">
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="true">
@@ -167,7 +214,7 @@
     </Style>
 
     <Style x:Key="ModernWindow" TargetType="Window">
-        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ContentThemeFontSize}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
@@ -202,7 +249,7 @@
                                     <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
                                                VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
                                                HorizontalAlignment="Left"
-                                               FontSize="15" Margin="{StaticResource ContentPadding}"
+                                               FontSize="15" Margin="{DynamicResource ContentThemePadding}"
                                                Style="{StaticResource ModernTextBlock}"
                                                Visibility="{Binding Path=(local:Chrome.Chrome).ShowCaptionText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"></TextBlock>
                                 </DockPanel>
@@ -1067,8 +1114,8 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
-        <Setter Property="FontFamily" Value="{DynamicResource ModernFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource ContentThemeFontSize}" />
         <Setter Property="Template" Value="{DynamicResource ModernSubmenuItemTemplate}" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
@@ -1176,7 +1223,7 @@
 
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
         <Setter Property="Padding" Value="4 4" />
@@ -1187,10 +1234,10 @@
 
     <Style TargetType="PasswordBox">
         <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
-        <Setter Property="FontFamily" Value="{DynamicResource ModernFontFamily}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="Padding" Value="4 4" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="ContextMenu">
@@ -1344,7 +1391,7 @@
 
     <Style TargetType="ComboBox">
         <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
@@ -1544,7 +1591,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />-->
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -1620,7 +1667,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />-->
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThickness}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Template">
             <Setter.Value>

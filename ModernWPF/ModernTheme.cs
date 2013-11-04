@@ -12,8 +12,8 @@ namespace ModernWPF
     /// </summary>
     public static class ModernTheme
     {
-        static readonly ResourceDictionary LIGHT_THEME = GetResource(@"/ModernWPF;component/themes/Light.xaml");
-        static readonly ResourceDictionary DARK_THEME = GetResource(@"/ModernWPF;component/themes/Dark.xaml");
+        static readonly ResourceDictionary LIGHT_THEME = GetResource(@"/ModernWPF;component/themes/ModernLight.xaml");
+        static readonly ResourceDictionary DARK_THEME = GetResource(@"/ModernWPF;component/themes/ModernDark.xaml");
 
         internal static ResourceDictionary GetResource(string url)
         {
