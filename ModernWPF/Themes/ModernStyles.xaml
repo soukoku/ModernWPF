@@ -482,7 +482,7 @@
 
     <!--window-->
     <Style x:Key="ModernWindow" TargetType="Window">
-        <Setter Property="FontSize" Value="{DynamicResource ContentThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
         <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
         <Setter Property="local:Chrome.Chrome">
@@ -1736,7 +1736,7 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ContentThemeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Template" Value="{DynamicResource ModernSubmenuItemTemplate}" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
@@ -1898,7 +1898,7 @@
 
     <Style TargetType="ComboBox">
         <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ControlBorderThemeThickness}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ComboBoxBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />

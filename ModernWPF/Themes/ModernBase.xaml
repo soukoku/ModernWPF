@@ -2,11 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
 
-    <!--previous my own-->
+    <!--old metro wpf-->
 
-    <Thickness x:Key="ControlBorderThemeThickness">2</Thickness>
+    <s:Double x:Key="WindowTitleFontSize">28</s:Double>
+    <s:Double x:Key="TopTitleFontSize">22</s:Double>
+    <s:Double x:Key="SubTitleFontSize">18</s:Double>
+    <s:Double x:Key="SmallFontSize">12</s:Double>
+    <s:Double x:Key="TinyFontSize">10</s:Double>
     <Thickness x:Key="ContentThemePadding">8 4</Thickness>
-    <s:Double x:Key="ContentThemeFontSize">13</s:Double>
 
 
     <!--modified from windows app-->
