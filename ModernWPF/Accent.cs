@@ -11,6 +11,83 @@ namespace ModernWPF
     /// </summary>
     public sealed class Accent
     {
+        #region static stuff
+
+        /// <summary>
+        /// Gets the predefined accent with the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
+        public static Accent GetPredefinedAccent(string name)
+        {
+            return PredefinedAccents.Where(a => string.Equals(a.Name, name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+        }
+
+
+        #region known accent names
+
+        /// <summary>
+        /// Pre-defined name for the red accent.
+        /// </summary>
+        public const string RED = "Red";
+        /// <summary>
+        /// Pre-defined name for the orange accent.
+        /// </summary>
+        public const string ORANGE = "Orange";
+        /// <summary>
+        /// Pre-defined name for the green accent.
+        /// </summary>
+        public const string GREEN = "Green";
+        /// <summary>
+        /// Pre-defined name for the teal accent.
+        /// </summary>
+        public const string TEAL = "Teal";
+        /// <summary>
+        /// Pre-defined name for the olive accent.
+        /// </summary>
+        public const string OLIVE = "Olive";
+        /// <summary>
+        /// Pre-defined name for the gold accent.
+        /// </summary>
+        public const string GOLD = "Gold";
+
+        /// <summary>
+        /// Pre-defined name for the light blue accent.
+        /// </summary>
+        public const string LIGHTBLUE = "Light Blue";
+        /// <summary>
+        /// Pre-defined name for the dark blue accent.
+        /// </summary>
+        public const string DARKBLUE = "Dark Blue";
+        /// <summary>
+        /// Pre-defined name for the purple accent.
+        /// </summary>
+        public const string PURPLE = "Purple";
+
+        #endregion
+
+        /// <summary>
+        /// Gets the predefined accents colors.
+        /// </summary>
+        public static readonly IEnumerable<Accent> PredefinedAccents = CreateDefaultAccents();
+
+        private static IEnumerable<Accent> CreateDefaultAccents()
+        {
+            return new Accent[]{
+                new Accent(RED, (Color)ColorConverter.ConvertFromString("#CD3333")),
+                new Accent(ORANGE, Colors.Chocolate),
+                new Accent(GOLD,(Color)ColorConverter.ConvertFromString("#CDAD00")),
+                new Accent(OLIVE,(Color)ColorConverter.ConvertFromString("#6B8E23")),
+                new Accent(TEAL,(Color)ColorConverter.ConvertFromString("#00959D")),
+                new Accent(GREEN, Colors.ForestGreen),
+                new Accent(LIGHTBLUE, Colors.DodgerBlue),
+                new Accent(DARKBLUE,(Color)ColorConverter.ConvertFromString("#007ACC")),
+                new Accent(PURPLE, Colors.MediumOrchid),
+            };
+        }
+
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Accent"/> class.
         /// </summary>

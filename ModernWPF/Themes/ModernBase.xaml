@@ -57,7 +57,7 @@
     <s:Double x:Key="SliderTrackThemeHeight">11</s:Double>
     <Thickness x:Key="SliderBorderThemeThickness">0</Thickness>
 
-    <s:Double x:Key="ProgressBarThemeMinHeight">6</s:Double>
+    <s:Double x:Key="ProgressBarThemeMinHeight">4</s:Double>
     <Thickness x:Key="ProgressBarBorderThemeThickness">0</Thickness>
 
     <s:Double x:Key="ToolTipContentThemeFontSize">12</s:Double>

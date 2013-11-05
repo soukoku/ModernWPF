@@ -32,12 +32,12 @@ namespace ModernWPF.Sample
         {
             if (dark)
             {
-                ModernTheme.ApplyTheme(ModernWPF.ModernTheme.ThemeType.Light, ModernTheme.GetPredefinedAccent(ModernTheme.RED));
+                ModernTheme.ApplyTheme(ModernTheme.Theme.Light, Accent.RED);
                 dark = false;
             }
             else
             {
-                ModernTheme.ApplyTheme(ModernWPF.ModernTheme.ThemeType.Dark, ModernTheme.GetPredefinedAccent(ModernTheme.GREEN));
+                ModernTheme.ApplyTheme(ModernTheme.Theme.Dark, Accent.GREEN);
                 dark = true;
             }
         }
