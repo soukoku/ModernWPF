@@ -38,7 +38,7 @@ namespace ModernWPF
                 "HScrollOnWheel",
                 typeof(bool),
                 typeof(Chrome),
-                new UIPropertyMetadata(false, OnHScrollOnWheelPropertyChanged)
+                new PropertyMetadata(false, OnHScrollOnWheelPropertyChanged)
             );
         /// <summary>
         /// Gets the HScrollOnWheel property for this object.

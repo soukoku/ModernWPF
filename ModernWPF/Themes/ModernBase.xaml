@@ -9,7 +9,7 @@
     <s:Double x:Key="ContentThemeFontSize">13</s:Double>
 
 
-    <!--from windows app-->
+    <!--modified from windows app-->
 
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe UI Symbol</FontFamily>
     <FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>
@@ -26,7 +26,8 @@
     <s:Double x:Key="TextControlThemeMinHeight">32</s:Double>
     <s:Double x:Key="TextControlThemeMinWidth">64</s:Double>
     <Thickness x:Key="TextControlBorderThemeThickness">2</Thickness>
-    <Thickness x:Key="TextControlThemePadding">10,3,10,5</Thickness>
+    <!--<Thickness x:Key="TextControlThemePadding">10,3,10,5</Thickness>-->
+    <Thickness x:Key="TextControlThemePadding">4</Thickness>
 
     <s:Double x:Key="AppBarThemeMinHeight">68</s:Double>
     <Thickness x:Key="AppBarBottomBorderThemeThickness">0,2,0,0</Thickness>
@@ -39,9 +40,9 @@
     <Thickness x:Key="RepeatButtonBorderThemeThickness">2</Thickness>
     <Thickness x:Key="ToggleButtonBorderThemeThickness">2</Thickness>
 
-    <s:Double x:Key="CheckBoxBorderThemeThickness">0</s:Double>
+    <s:Double x:Key="CheckBoxBorderThemeThickness">2</s:Double>
 
-    <s:Double x:Key="RadioButtonBorderThemeThickness">0</s:Double>
+    <s:Double x:Key="RadioButtonBorderThemeThickness">2</s:Double>
 
     <s:Double x:Key="ComboBoxArrowThemeFontSize">21</s:Double>
     <Thickness x:Key="ComboBoxBorderThemeThickness">2</Thickness>

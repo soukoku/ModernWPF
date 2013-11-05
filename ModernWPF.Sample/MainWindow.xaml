@@ -6,47 +6,63 @@
         Title="ModernWPF - Test" Height="500" Width="700"
         Icon="Icon.ico"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
-        Background="{DynamicResource ModernBackground}" Foreground="{DynamicResource ModernForeground}"
         Style="{StaticResource ModernWindow}">
-    <modern:Chrome.Chrome>
-
-        <modern:Chrome x:Name="chrome" 
-                       ActiveBorderBrush="{DynamicResource ModernAccent}" 
-                       InactiveBorderBrush="{DynamicResource ModernForeground4}" 
-                       
-                       ActiveCaptionForeground="{DynamicResource ActiveCaptionForeground}" 
-                       InactiveCaptionForeground="{DynamicResource InactiveCaptionForeground}" 
-                       
-                       ActiveCaptionBrush="{DynamicResource ActiveCaptionBackground}"
-                       InactiveCaptionBrush="{DynamicResource InactiveCaptionBackground}"
-                       
-                       />
-
-    </modern:Chrome.Chrome>
-    <Border Margin="{Binding ElementName=chrome, Path=CaptionHeightThickness}">
-        <Grid Margin="8">
+    <Border Margin="0 32 0 0">
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <ScrollViewer>
-                <StackPanel>
-                    <TextBlock TextWrapping="Wrap" 
-                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." Margin="8"></TextBlock>
 
-                    <TextBlock TextWrapping="Wrap" 
-                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." Margin="8"></TextBlock>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <DockPanel>
+                    <StackPanel Width="300" DockPanel.Dock="Left" HorizontalAlignment="Left">
+                        <TextBlock TextWrapping="Wrap" 
+                                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." Margin="8"></TextBlock>
 
-                    <Border Background="{Binding ElementName=chrome, Path=ActiveBorderBrush}" Width="100" Height="50"/>
-                </StackPanel>
+                    </StackPanel>
+                    <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Orientation="Horizontal">
+
+                        <StackPanel Orientation="Vertical" Width="200">
+                            <TextBox Text="normal textbox" Margin="2"></TextBox>
+                            <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
+                            <TextBox Text="disabled textbox" Margin="2" IsEnabled="False"></TextBox>
+
+                            <PasswordBox Password="password" Margin="2"></PasswordBox>
+                            <ComboBox SelectedIndex="1" Margin="2">
+                                <ComboBoxItem Content="combo item 1"></ComboBoxItem>
+                                <ComboBoxItem Content="combo item 2"></ComboBoxItem>
+                                <ComboBoxItem Content="combo item 3"></ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <Label Content="a label"></Label>
+                            
+                            <CheckBox Content="a checkbox" IsChecked="True" IsThreeState="True"></CheckBox>
+                            <CheckBox Content="disabled checkbox" IsEnabled="False"></CheckBox>
+                            <CheckBox Content="disabled checkbox 2" IsChecked="True" IsEnabled="False"></CheckBox>
+
+                            <Slider Width="150" HorizontalAlignment="Left" Minimum="0" Maximum="100" Value="20" TickPlacement="Both" TickFrequency="10"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
             </ScrollViewer>
 
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
 
-                <Button Content="some button" IsEnabled="False"></Button>
+                <RadioButton Content="radio button"></RadioButton>
+                <Button Content="disabled button" IsEnabled="False"></Button>
 
-                <Button Content="some button" Click="Button_Click"></Button>
+                <ToggleButton Content="toggle button"></ToggleButton>
+                <Button Content="change theme button" Click="Button_Click"></Button>
             </StackPanel>
+
+            <StatusBar Grid.Row="2">
+                <StatusBarItem Content="status 1"></StatusBarItem>
+                <StatusBarItem Content="status 2"></StatusBarItem>
+            </StatusBar>
         </Grid>
     </Border>
 </Window>

@@ -106,6 +106,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Themes\aero2.normalcolor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </None>
     <Page Include="Themes\Animations.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
