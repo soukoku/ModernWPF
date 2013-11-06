@@ -20,7 +20,6 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}"/>
 
     <Style x:Key="MarlettGlyph" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Marlett"/>
@@ -30,7 +29,6 @@
     <Style x:Key="ModernLabel" TargetType="Label">
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}"></Setter>
     </Style>
-    <Style TargetType="Label" BasedOn="{StaticResource ModernLabel}"></Style>
 
     <!--buttons-->
     <Style x:Key="ModernButton" TargetType="ButtonBase">
@@ -110,18 +108,6 @@
                 <Setter Property="Foreground" Value="{DynamicResource ButtonDisabledForegroundThemeBrush}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ButtonDisabledBorderThemeBrush}" />
             </Trigger>
-        </Style.Triggers>
-    </Style>
-    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}">
-        <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsDefault" Value="True" />
-                    <Condition Property="IsEnabled" Value="True" />
-                </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="{DynamicResource ModernAccent}" />
-                <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
-            </MultiTrigger>
         </Style.Triggers>
     </Style>
 
@@ -222,7 +208,6 @@
             </MultiTrigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="ToggleButton" BasedOn="{StaticResource ModernToggleButton}"></Style>
 
     <Style x:Key="ModernRadioButton" TargetType="RadioButton">
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -342,7 +327,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="RadioButton" BasedOn="{StaticResource ModernRadioButton}"></Style>
 
     <Style x:Key="ModernRepeatButton" TargetType="RepeatButton">
         <Setter Property="Background" Value="{DynamicResource ButtonBackgroundThemeBrush}" />
@@ -423,7 +407,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="RepeatButton" BasedOn="{StaticResource ModernRepeatButton}"></Style>
 
 
     <Style x:Key="ModernCaptionButton" TargetType="Button">
@@ -614,7 +597,6 @@
         <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
     </Style>
-    <Style TargetType="StatusBar" BasedOn="{StaticResource ModernStatusBar}"/>
 
     <Style TargetType="StatusBarItem">
         <Setter Property="Margin" Value="0 0 20 0" />
@@ -658,7 +640,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="ToolTip" BasedOn="{StaticResource ModernToolTip}"></Style>
 
     <!--checkbox-->
     <Style x:Key="ModernCheckBox" TargetType="CheckBox">
@@ -786,7 +767,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="CheckBox" BasedOn="{StaticResource ModernCheckBox}"></Style>
 
     <!--textbox-->
     <!--re-implement contextmenu to override textbox contextmenu style not applied bug-->
@@ -814,6 +794,7 @@
     </ContextMenu>
 
     <Style x:Key="ModernTextBox" TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="ContextMenu" Value="{DynamicResource TextBoxContextMenu}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBoxForegroundThemeBrush}" />
         <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundThemeBrush}" />
@@ -837,12 +818,14 @@
                                 Background="{TemplateBinding Background}"
                                 Margin="{TemplateBinding BorderThickness}"
                                 Opacity="{DynamicResource TextControlBackgroundThemeOpacity}"
-                                Grid.ColumnSpan="2" SnapsToDevicePixels="False"/>
+                                Grid.ColumnSpan="2" SnapsToDevicePixels="True"
+                                />
                         <Border x:Name="BorderElement"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Opacity="{DynamicResource TextControlBorderThemeOpacity}"
-                                Grid.ColumnSpan="2" SnapsToDevicePixels="False"/>
+                                Grid.ColumnSpan="2" SnapsToDevicePixels="True"
+                                />
                         <ScrollViewer x:Name="PART_ContentHost"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
@@ -881,9 +864,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}"></Style>
 
     <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBoxForegroundThemeBrush}" />
         <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundThemeBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderThemeBrush}" />
@@ -917,10 +900,12 @@
                         <Border x:Name="BackgroundElement"
                                 Background="{TemplateBinding Background}"
                                 Margin="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True"
                                 Grid.ColumnSpan="2"/>
                         <Border x:Name="BorderElement"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True"
                                 Grid.ColumnSpan="2"/>
                         <ScrollViewer x:Name="PART_ContentHost"
                                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -956,7 +941,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="PasswordBox" BasedOn="{StaticResource ModernPasswordBox}"></Style>
 
     <!--progressbar-->
     <Style x:Key="ModernProgressBar" TargetType="ProgressBar">
@@ -1007,7 +991,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="ProgressBar" BasedOn="{StaticResource ModernProgressBar}"/>
 
     <!--unsorted-->
 
