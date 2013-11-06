@@ -531,6 +531,13 @@ namespace ModernWPF
                 //Debug.WriteLine(wmsg);
                 switch (wmsg)
                 {
+                    case WindowMessage.WM_SETTEXT:
+                    case WindowMessage.WM_SETICON:
+                        var changed = User32Ex.ModifyStyle(hwnd, WindowStyles.WS_VISIBLE, WindowStyles.WS_OVERLAPPED);
+                        retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, lParam);
+                        if (changed) { User32Ex.ModifyStyle(hwnd, WindowStyles.WS_OVERLAPPED, WindowStyles.WS_VISIBLE); }
+                        handled = true;
+                        break;
                     case WindowMessage.WM_NCCALCSIZE:
                         //remove non-client borders completely
                         HandleNcCalcSize(hwnd, wParam, lParam);
@@ -547,10 +554,6 @@ namespace ModernWPF
                         {
                             retVal = BasicValues.TRUE;
                         }
-                        handled = true;
-                        break;
-                    case WindowMessage.WM_SETTEXT:
-                        retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, lParam);
                         handled = true;
                         break;
                     case WindowMessage.WM_NCHITTEST:
@@ -694,40 +697,7 @@ namespace ModernWPF
             if (_borderWindow != null)
             {
                 _borderWindow.Owner = _contentWindow.Owner;
-
-                var thick = _borderWindow.BorderThickness;
-                var wpl = default(WINDOWPLACEMENT);
-                wpl.length = (uint)Marshal.SizeOf(typeof(WINDOWPLACEMENT));
-
-                if (User32.GetWindowPlacement(hwnd, ref wpl))
-                {
-                    switch (wpl.showCmd)
-                    {
-                        case ShowWindowOption.SW_SHOWNORMAL:
-                            //Debug.WriteLine("Should reposn shadow");
-                            // use GetWindowRect to work correctly with aero snap
-                            var r = default(CommonWin32.Rectangle.RECT);
-                            if (User32.GetWindowRect(hwnd, ref r))
-                            {
-                                _borderWindow.Left = r.left - thick.Left;
-                                _borderWindow.Top = r.top - thick.Top;
-                                _borderWindow.Width = r.Width + thick.Left + thick.Right;
-                                _borderWindow.Height = r.Height + thick.Top + thick.Bottom;
-                                _borderWindow.ToggleVisible(true);
-                                //Debug.WriteLine("reposned");
-                            }
-                            break;
-                        case ShowWindowOption.SW_MAXIMIZE:
-                        case ShowWindowOption.SW_MINIMIZE:
-                        case ShowWindowOption.SW_SHOWMINIMIZED:
-                            _borderWindow.ToggleVisible(false);
-                            //Debug.WriteLine("No shadow");
-                            break;
-                        default:
-                            //Debug.WriteLine("Unknown showcmd " + wpl.showCmd);
-                            break;
-                    }
-                }
+                _borderWindow.RepositionToContent(hwnd);
             }
         }
 
