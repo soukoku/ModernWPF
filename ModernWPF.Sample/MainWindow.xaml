@@ -114,8 +114,9 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="toggle theme" x:Name="btnTheme" Click="btnTheme_Click" HorizontalAlignment="Center"></Button>
-                    <Button Content="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click" HorizontalAlignment="Center"></Button>
+                    <Button Content="another window" x:Name="btnWindow" Click="btnWindow_Click"></Button>
+                    <Button Content="toggle theme" x:Name="btnTheme" Click="btnTheme_Click"></Button>
+                    <Button Content="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click"></Button>
                 </StackPanel>
             </StackPanel>
 

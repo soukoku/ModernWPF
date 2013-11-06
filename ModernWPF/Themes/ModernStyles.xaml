@@ -808,7 +808,28 @@
 
     <!--textbox-->
     <!--re-implement contextmenu to override textbox contextmenu style not applied bug-->
-
+    <ContextMenu x:Key="TextBoxContextMenu">
+        <MenuItem
+				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdUndo], Mode=OneWay}"
+				Command="ApplicationCommands.Undo" />
+        <MenuItem
+				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdRedo], Mode=OneWay}"
+				Command="ApplicationCommands.Redo" />
+        <Separator />
+        <MenuItem
+				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdCut], Mode=OneWay}"
+				Command="ApplicationCommands.Cut" />
+        <MenuItem
+				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdCopy], Mode=OneWay}"
+				Command="ApplicationCommands.Copy" />
+        <MenuItem
+				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdPaste], Mode=OneWay}"
+				Command="ApplicationCommands.Paste" />
+        <Separator />
+        <MenuItem
+				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdSelectAll], Mode=OneWay}"
+				Command="ApplicationCommands.SelectAll" />
+    </ContextMenu>
     <Style x:Key="ModernTextBox" TargetType="TextBox">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -822,32 +843,7 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
-        <Setter Property="ContextMenu">
-            <Setter.Value>
-                <ContextMenu>
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdUndo], Mode=OneWay}"
-				Command="ApplicationCommands.Undo" />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdRedo], Mode=OneWay}"
-				Command="ApplicationCommands.Redo" />
-                    <Separator />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdCut], Mode=OneWay}"
-				Command="ApplicationCommands.Cut" />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdCopy], Mode=OneWay}"
-				Command="ApplicationCommands.Copy" />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdPaste], Mode=OneWay}"
-				Command="ApplicationCommands.Paste" />
-                    <Separator />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdSelectAll], Mode=OneWay}"
-				Command="ApplicationCommands.SelectAll" />
-                </ContextMenu>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenu}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -924,32 +920,7 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
-        <Setter Property="ContextMenu">
-            <Setter.Value>
-                <ContextMenu>
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdUndo], Mode=OneWay}"
-				Command="ApplicationCommands.Undo" />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdRedo], Mode=OneWay}"
-				Command="ApplicationCommands.Redo" />
-                    <Separator />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdCut], Mode=OneWay}"
-				Command="ApplicationCommands.Cut" />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdCopy], Mode=OneWay}"
-				Command="ApplicationCommands.Copy" />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdPaste], Mode=OneWay}"
-				Command="ApplicationCommands.Paste" />
-                    <Separator />
-                    <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Current}, Path=[CmdSelectAll], Mode=OneWay}"
-				Command="ApplicationCommands.SelectAll" />
-                </ContextMenu>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenu}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RichTextBox">

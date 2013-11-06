@@ -10,11 +10,11 @@
             <Style TargetType="{x:Type Rectangle}" />
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ModernWPF;component/Themes/Animations.xaml" />
+                <!--animation is optional-->
+                <!--<ResourceDictionary Source="/ModernWPF;component/Themes/Animations.xaml" />-->
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernBase.xaml" />
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernLight.xaml" />
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernStyles.xaml" />
-                <!--<ResourceDictionary Source="/ModernWPF;component/Themes/ModernStylesImplicit.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>

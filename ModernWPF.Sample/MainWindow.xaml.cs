@@ -56,5 +56,10 @@ namespace ModernWPF.Sample
                 FlowDirection = System.Windows.FlowDirection.LeftToRight;
             }
         }
+
+        private void btnWindow_Click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow { Owner = this }.Show();
+        }
     }
 }

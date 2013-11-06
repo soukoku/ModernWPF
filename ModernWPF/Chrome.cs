@@ -88,10 +88,12 @@ namespace ModernWPF
             {
                 if (e.Delta < 0)
                 {
+                    //scroller.LineRight();
                     scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + 48);
                 }
                 else
                 {
+                    //scroller.LineLeft();
                     scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset - 48);
                 }
                 e.Handled = true;
@@ -242,6 +244,7 @@ namespace ModernWPF
         /// <value>
         /// The active border brush.
         /// </value>
+        [Category("Appearance")]
         public Brush ActiveBorderBrush
         {
             get { return (Brush)GetValue(ActiveBorderBrushProperty); }
@@ -261,6 +264,7 @@ namespace ModernWPF
         /// <value>
         /// The inactive border brush.
         /// </value>
+        [Category("Appearance")]
         public Brush InactiveBorderBrush
         {
             get { return (Brush)GetValue(InactiveBorderBrushProperty); }
@@ -280,6 +284,7 @@ namespace ModernWPF
         /// <value>
         /// The active caption brush.
         /// </value>
+        [Category("Appearance")]
         public Brush ActiveCaptionBrush
         {
             get { return (Brush)GetValue(ActiveCaptionBrushProperty); }
@@ -299,6 +304,7 @@ namespace ModernWPF
         /// <value>
         /// The inactive caption brush.
         /// </value>
+        [Category("Appearance")]
         public Brush InactiveCaptionBrush
         {
             get { return (Brush)GetValue(InactiveCaptionBrushProperty); }
@@ -318,6 +324,7 @@ namespace ModernWPF
         /// <value>
         /// The active caption foreground.
         /// </value>
+        [Category("Appearance")]
         public Brush ActiveCaptionForeground
         {
             get { return (Brush)GetValue(ActiveCaptionForegroundProperty); }
@@ -337,6 +344,7 @@ namespace ModernWPF
         /// <value>
         /// The inactive caption foreground.
         /// </value>
+        [Category("Appearance")]
         public Brush InactiveCaptionForeground
         {
             get { return (Brush)GetValue(InactiveCaptionForegroundProperty); }
@@ -397,6 +405,7 @@ namespace ModernWPF
         /// <value>
         ///   <c>true</c> to show caption text; otherwise, <c>false</c>.
         /// </value>
+        [Category("Appearance")]
         public bool ShowCaptionText
         {
             get { return (bool)GetValue(ShowCaptionTextProperty); }
@@ -416,6 +425,7 @@ namespace ModernWPF
         /// <value>
         ///   <c>true</c> to show caption icon; otherwise, <c>false</c>.
         /// </value>
+        [Category("Appearance")]
         public bool ShowCaptionIcon
         {
             get { return (bool)GetValue(ShowCaptionIconProperty); }
@@ -472,6 +482,7 @@ namespace ModernWPF
             }
             if (_borderWindow != null)
             {
+                _borderWindow.Owner = null;
                 _borderWindow.Close();
                 _borderWindow = null;
             }
