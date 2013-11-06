@@ -26,19 +26,34 @@ namespace ModernWPF.Sample
             InitializeComponent();
         }
 
-        bool dark = true;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnTheme_Click(object sender, RoutedEventArgs e)
         {
-            if (dark)
+            if (ModernTheme.CurrentTheme.GetValueOrDefault() == ModernTheme.Theme.Dark)
             {
-                ModernTheme.ApplyTheme(ModernTheme.Theme.Light, Accent.RED);
-                dark = false;
+                ModernTheme.ApplyTheme(ModernTheme.Theme.Light, ModernTheme.CurrentAccent);
             }
             else
             {
-                ModernTheme.ApplyTheme(ModernTheme.Theme.Dark, Accent.GREEN);
-                dark = true;
+                ModernTheme.ApplyTheme(ModernTheme.Theme.Dark, ModernTheme.CurrentAccent);
+            }
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            var selected = (sender as RadioButton).DataContext as Accent;
+            ModernTheme.ApplyTheme(ModernTheme.CurrentTheme.GetValueOrDefault(), selected);
+        }
+
+        private void btnRtl_Click(object sender, RoutedEventArgs e)
+        {
+            if (FlowDirection == System.Windows.FlowDirection.LeftToRight)
+            {
+                FlowDirection = System.Windows.FlowDirection.RightToLeft;
+            }
+            else
+            {
+                FlowDirection = System.Windows.FlowDirection.LeftToRight;
             }
         }
     }

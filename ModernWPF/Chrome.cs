@@ -498,6 +498,9 @@ namespace ModernWPF
 
         #region win32 handling
 
+        //private const int COLOR_WINDOW = 5;
+        //[DllImport("user32.dll")]
+        //static extern IntPtr GetSysColorBrush(int nIndex);
         void UpdateFrame(IntPtr handle)
         {
             SetRegion(handle, 0, 0, true);
@@ -510,6 +513,8 @@ namespace ModernWPF
                 SetWindowPosOptions.SWP_NOZORDER |
                 SetWindowPosOptions.SWP_NOMOVE |
                 SetWindowPosOptions.SWP_NOSIZE);
+        
+            //var result = User32.SetClassLong(handle, CommonWin32.WindowClasses.ClassLong.GCLP_HBRBACKGROUND, GetSysColorBrush(COLOR_WINDOW));
         }
 
         /// <summary>

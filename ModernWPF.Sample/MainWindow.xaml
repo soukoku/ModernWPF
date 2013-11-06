@@ -3,10 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:modern="http://modernwpf"
         xmlns:local="clr-namespace:ModernWPF.Sample"
-        Title="ModernWPF - Test" Height="500" Width="700"
+        Title="ModernWPF - Test" Height="600" Width="800"
         Icon="Icon.ico"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindow}">
+    <Window.Resources>
+
+    </Window.Resources>
     <Border Margin="0 32 0 0">
         <Grid >
             <Grid.RowDefinitions>
@@ -16,7 +19,7 @@
             </Grid.RowDefinitions>
 
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                <DockPanel>
+                <DockPanel Margin="8">
                     <StackPanel Width="300" DockPanel.Dock="Left" HorizontalAlignment="Left">
                         <TextBlock TextWrapping="Wrap" 
                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." Margin="8"></TextBlock>
@@ -30,16 +33,33 @@
                             <TextBox Text="disabled textbox" Margin="2" IsEnabled="False"></TextBox>
 
                             <PasswordBox Password="password" Margin="2"></PasswordBox>
+
+
                             <ComboBox SelectedIndex="1" Margin="2">
                                 <ComboBoxItem Content="combo item 1"></ComboBoxItem>
                                 <ComboBoxItem Content="combo item 2"></ComboBoxItem>
                                 <ComboBoxItem Content="combo item 3"></ComboBoxItem>
                             </ComboBox>
+
+                            <RichTextBox Height="200" HorizontalScrollBarVisibility="Disabled" Margin="2">
+                                <FlowDocument>
+                                    <Paragraph>Rich Text Box</Paragraph>
+                                    <Paragraph>
+                                        <Run>Paragraph 1</Run>
+                                    </Paragraph>
+                                    <Paragraph>
+                                        <Run>Paragraph 2</Run>
+                                    </Paragraph>
+                                    <Paragraph>
+                                        <Run>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat.</Run>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
                         </StackPanel>
 
-                        <StackPanel>
+                        <StackPanel Margin="2">
                             <Label Content="a label"></Label>
-                            
+
                             <CheckBox Content="a checkbox" IsChecked="True" IsThreeState="True"></CheckBox>
                             <CheckBox Content="disabled checkbox" IsEnabled="False"></CheckBox>
                             <CheckBox Content="disabled checkbox 2" IsChecked="True" IsEnabled="False"></CheckBox>
@@ -49,17 +69,54 @@
                             <ProgressBar Maximum="100" Value="50" Margin="0 10"></ProgressBar>
                             <ProgressBar IsIndeterminate="True" Margin="0 10"></ProgressBar>
                         </StackPanel>
+
+                        <StackPanel Margin="2">
+                            <RadioButton Content="radio button 1"></RadioButton>
+                            <RadioButton Content="radio button 2"></RadioButton>
+                            <RadioButton Content="radio button 3"></RadioButton>
+                            <RadioButton Content="radio button 4" IsEnabled="False"></RadioButton>
+                        </StackPanel>
+
+                        <StackPanel Margin="2">
+
+                            <Button Content="no chrome button" Style="{StaticResource ModernButtonNoChrome}"></Button>
+
+                            <Button Content="normal button"></Button>
+                            <Button Content="disabled button" IsEnabled="False"></Button>
+                            <Button Content="default button" IsDefault="True"></Button>
+
+                            <ToggleButton Content="toggle button"></ToggleButton>
+
+                            <RepeatButton Content="repeat button"></RepeatButton>
+                        </StackPanel>
                     </StackPanel>
                 </DockPanel>
             </ScrollViewer>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+            <StackPanel Orientation="Vertical" Grid.Row="1">
 
-                <RadioButton Content="radio button"></RadioButton>
-                <Button Content="disabled button" IsEnabled="False"></Button>
 
-                <ToggleButton Content="toggle button"></ToggleButton>
-                <Button Content="change theme button" Click="Button_Click"></Button>
+                <ItemsControl  DataContext="{Binding Source={x:Static modern:ModernTheme.PredefinedAccents}}" ItemsSource="{Binding}"
+                                HorizontalAlignment="Center">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton GroupName="GroupColor" Margin="4"
+                                             Checked="RadioButton_Checked">
+                                <Rectangle Width="32" Height="32"
+                                               Fill="{Binding Brush}" />
+                            </RadioButton>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="toggle theme" x:Name="btnTheme" Click="btnTheme_Click" HorizontalAlignment="Center"></Button>
+                    <Button Content="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click" HorizontalAlignment="Center"></Button>
+                </StackPanel>
             </StackPanel>
 
             <StatusBar Grid.Row="2">

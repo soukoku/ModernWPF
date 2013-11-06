@@ -22,6 +22,40 @@ namespace ModernWPF
             return style;
         }
 
+        #region predefined accents
+
+        /// <summary>
+        /// Gets the predefined accent with the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
+        public static Accent GetPredefinedAccent(string name)
+        {
+            return PredefinedAccents.Where(a => string.Equals(a.Name, name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+        }
+
+        static ModernTheme()
+        {
+            PredefinedAccents = new Accent[]{
+                new Accent(Accent.RED, (Color)ColorConverter.ConvertFromString("#CD3333")),
+                new Accent(Accent.ORANGE, Colors.Chocolate),
+                new Accent(Accent.GOLD,(Color)ColorConverter.ConvertFromString("#CDAD00")),
+                new Accent(Accent.OLIVE,(Color)ColorConverter.ConvertFromString("#6B8E23")),
+                new Accent(Accent.TEAL,(Color)ColorConverter.ConvertFromString("#00959D")),
+                new Accent(Accent.GREEN, Colors.ForestGreen),
+                new Accent(Accent.LIGHTBLUE, Colors.DodgerBlue),
+                new Accent(Accent.DARKBLUE,(Color)ColorConverter.ConvertFromString("#007ACC")),
+                new Accent(Accent.PURPLE, Colors.MediumOrchid),
+            };
+        }
+
+        /// <summary>
+        /// Gets the predefined accents colors.
+        /// </summary>
+        public static IEnumerable<Accent> PredefinedAccents { get; private set; }
+
+        #endregion
+
         /// <summary>
         /// Indicates the main theme style.
         /// </summary>
@@ -37,6 +71,31 @@ namespace ModernWPF
             Dark
         }
 
+        static Accent _curAccent;
+        /// <summary>
+        /// Gets the current accent.
+        /// </summary>
+        /// <value>
+        /// The current accent.
+        /// </value>
+        public static Accent CurrentAccent
+        {
+            get
+            {
+                if (_curAccent == null) { _curAccent = GetPredefinedAccent(Accent.LIGHTBLUE); }
+                return _curAccent;
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the current theme.
+        /// </summary>
+        /// <value>
+        /// The current theme.
+        /// </value>
+        public static Theme? CurrentTheme { get; private set; }
+
 
         /// <summary>
         /// Applies the theme with the name of the accent color theme.
@@ -45,7 +104,7 @@ namespace ModernWPF
         /// <param name="predefinedAccentName">Name of the predefined accent. These can be found in the <see cref="Accent"/> class.</param>
         public static void ApplyTheme(Theme theme, string predefinedAccentName)
         {
-            var accent = Accent.GetPredefinedAccent(predefinedAccentName);
+            var accent = GetPredefinedAccent(predefinedAccentName);
             if (accent != null)
             {
                 ApplyTheme(theme, accent);
@@ -60,6 +119,9 @@ namespace ModernWPF
         public static void ApplyTheme(Theme theme, Accent accent)
         {
             if (accent == null) { throw new ArgumentNullException("accent"); }
+
+            _curAccent = accent;
+            CurrentTheme = theme;
 
             ApplyResources(theme == Theme.Light ? LIGHT_THEME : DARK_THEME);
             Application.Current.Resources["ModernAccent"] = accent.Brush;

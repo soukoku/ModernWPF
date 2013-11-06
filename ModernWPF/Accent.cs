@@ -13,16 +13,6 @@ namespace ModernWPF
     {
         #region static stuff
 
-        /// <summary>
-        /// Gets the predefined accent with the specified name.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns></returns>
-        public static Accent GetPredefinedAccent(string name)
-        {
-            return PredefinedAccents.Where(a => string.Equals(a.Name, name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
-        }
-
 
         #region known accent names
 
@@ -66,25 +56,6 @@ namespace ModernWPF
 
         #endregion
 
-        /// <summary>
-        /// Gets the predefined accents colors.
-        /// </summary>
-        public static readonly IEnumerable<Accent> PredefinedAccents = CreateDefaultAccents();
-
-        private static IEnumerable<Accent> CreateDefaultAccents()
-        {
-            return new Accent[]{
-                new Accent(RED, (Color)ColorConverter.ConvertFromString("#CD3333")),
-                new Accent(ORANGE, Colors.Chocolate),
-                new Accent(GOLD,(Color)ColorConverter.ConvertFromString("#CDAD00")),
-                new Accent(OLIVE,(Color)ColorConverter.ConvertFromString("#6B8E23")),
-                new Accent(TEAL,(Color)ColorConverter.ConvertFromString("#00959D")),
-                new Accent(GREEN, Colors.ForestGreen),
-                new Accent(LIGHTBLUE, Colors.DodgerBlue),
-                new Accent(DARKBLUE,(Color)ColorConverter.ConvertFromString("#007ACC")),
-                new Accent(PURPLE, Colors.MediumOrchid),
-            };
-        }
 
         #endregion
 
