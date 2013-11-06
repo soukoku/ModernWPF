@@ -1,7 +1,7 @@
 ﻿using CommonWin32.API;
-using CommonWin32.Rectangle;
-using CommonWin32.Shell;
-using CommonWin32.Window;
+using CommonWin32.Rectangles;
+using CommonWin32.Shells;
+using CommonWin32.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,8 +1,8 @@
 ﻿using CommonWin32;
 using CommonWin32.API;
-using CommonWin32.Monitor;
-using CommonWin32.Rectangle;
-using CommonWin32.Window;
+using CommonWin32.Monitors;
+using CommonWin32.Rectangles;
+using CommonWin32.Windows;
 using ModernWPF.Controls;
 using ModernWPF.Native;
 using System;
@@ -524,7 +524,7 @@ namespace ModernWPF
                 SetWindowPosOptions.SWP_NOZORDER |
                 SetWindowPosOptions.SWP_NOMOVE |
                 SetWindowPosOptions.SWP_NOSIZE);
-        
+
             //var result = User32.SetClassLong(handle, CommonWin32.WindowClasses.ClassLong.GCLP_HBRBACKGROUND, GetSysColorBrush(COLOR_WINDOW));
         }
 
@@ -573,12 +573,7 @@ namespace ModernWPF
                         handled = true;
                         break;
                     case WindowMessage.WM_NCHITTEST:
-                        // new from http://stackoverflow.com/questions/7913325/win-api-in-c-get-hi-and-low-word-from-intptr
-                        // to handle possible negative values from multi-monitor setup
-                        int x = unchecked((short)lParam);
-                        int y = unchecked((short)((uint)lParam >> 16));
-
-                        retVal = new IntPtr((int)HandleNcHitTest(new Point(x, y)));
+                        retVal = new IntPtr((int)HandleNcHitTest(lParam.ToPoint()));
                         handled = true;
                         break;
                     case WindowMessage.WM_NCRBUTTONDOWN:

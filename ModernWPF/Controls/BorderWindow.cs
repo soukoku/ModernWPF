@@ -1,6 +1,7 @@
-﻿using CommonWin32.API;
+﻿using CommonWin32;
+using CommonWin32.API;
 using CommonWin32.MouseInput;
-using CommonWin32.Window;
+using CommonWin32.Windows;
 using CommonWin32.WindowClasses;
 using ModernWPF.Native;
 using System;
@@ -150,7 +151,7 @@ namespace ModernWPF.Controls
                     case ShowWindowOption.SW_SHOWNORMAL:
                         //Debug.WriteLine("Should reposn shadow");
                         // use GetWindowRect to work correctly with aero snap
-                        var r = default(CommonWin32.Rectangle.RECT);
+                        var r = default(CommonWin32.Rectangles.RECT);
                         if (User32.GetWindowRect(contentHwnd, ref r))
                         {
                             User32.SetWindowPos(_hwnd, contentHwnd,
@@ -218,12 +219,7 @@ namespace ModernWPF.Controls
                         handled = true;
                         break;
                     case WindowMessage.WM_NCHITTEST:
-                        // new from http://stackoverflow.com/questions/7913325/win-api-in-c-get-hi-and-low-word-from-intptr
-                        // to handle possible negative values from multi-monitor setup
-                        int x = unchecked((short)lParam);
-                        int y = unchecked((short)((uint)lParam >> 16));
-
-                        retVal = new IntPtr((int)HandleNcHitTest(new Point(x, y)));
+                        retVal = new IntPtr((int)HandleNcHitTest(lParam.ToPoint()));
                         handled = true;
                         break;
                     case WindowMessage.WM_NCRBUTTONDOWN:
