@@ -14,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace ModernWPF.Controls
 {
@@ -22,6 +23,8 @@ namespace ModernWPF.Controls
     /// </summary>
     sealed class BorderWindow : Window
     {
+        #region dps
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "Only way to override style key DP.")]
         static BorderWindow()
         {
@@ -54,42 +57,18 @@ namespace ModernWPF.Controls
             DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(BorderWindow), new PropertyMetadata(null));
 
 
+        #endregion
 
+        static int __seed;
+
+        internal int Id { get { return _id; } }
+        int _id;
         Window _contentWindow;
         DispatcherTimer _showTimer;
 
-        /// <summary>
-        /// Toggles the visibility of the border window while taking account into
-        /// Windows animation settings.
-        /// </summary>
-        /// <param name="visible">if set to <c>true</c> the border will become visible.</param>
-        void ToggleVisible(bool visible)
-        {
-            if (visible)
-            {
-                if (this.Visibility != System.Windows.Visibility.Visible)
-                {
-                    if (SystemParameters.MinimizeAnimation)
-                    {
-                        _showTimer.Start();
-                    }
-                    else
-                    {
-                        this.Show();
-                        if (_contentWindow != null)
-                            _contentWindow.Activate();
-                    }
-                }
-            }
-            else
-            {
-                _showTimer.Stop();
-                this.Hide();
-            }
-        }
-
         public BorderWindow(Chrome chrome, Window contentWindow)
         {
+            _id = ++__seed;
             _contentWindow = contentWindow;
 
             BindingTo("IsActive", contentWindow, IsContentActiveProperty);
@@ -138,47 +117,6 @@ namespace ModernWPF.Controls
             ApplyWin32Stuff(_hwnd);
         }
 
-        public void RepositionToContent(IntPtr contentHwnd)
-        {
-            var thick = BorderThickness;
-            var wpl = default(WINDOWPLACEMENT);
-            wpl.length = (uint)Marshal.SizeOf(typeof(WINDOWPLACEMENT));
-
-            if (User32.GetWindowPlacement(contentHwnd, ref wpl))
-            {
-                switch (wpl.showCmd)
-                {
-                    case ShowWindowOption.SW_SHOWNORMAL:
-                        //Debug.WriteLine("Should reposn shadow");
-                        // use GetWindowRect to work correctly with aero snap
-                        var r = default(CommonWin32.Rectangles.RECT);
-                        if (User32.GetWindowRect(contentHwnd, ref r))
-                        {
-                            User32.SetWindowPos(_hwnd, contentHwnd,
-                                (int)(r.left - thick.Left),
-                                (int)(r.top - thick.Top),
-                                (int)(r.Width + thick.Left + thick.Right),
-                                (int)(r.Height + thick.Top + thick.Bottom),
-                            SetWindowPosOptions.SWP_NOACTIVATE);
-                            ToggleVisible(true);
-                            //Debug.WriteLine("reposned");
-                        }
-                        break;
-                    case ShowWindowOption.SW_MAXIMIZE:
-                    case ShowWindowOption.SW_MINIMIZE:
-                    case ShowWindowOption.SW_SHOWMINIMIZED:
-                        ToggleVisible(false);
-                        //Debug.WriteLine("No shadow");
-                        break;
-                    default:
-                        //Debug.WriteLine("Unknown showcmd " + wpl.showCmd);
-                        break;
-                }
-            }
-
-
-        }
-
         private void ApplyWin32Stuff(IntPtr hwnd)
         {
             // hide from alt tab
@@ -202,6 +140,87 @@ namespace ModernWPF.Controls
             //User32.SetWindowLong(cwHwnd, WindowLong.GWL_HWNDPARENT, hwnd);
         }
 
+        /// <summary>
+        /// Toggles the visibility of the border window while taking account into
+        /// Windows animation settings.
+        /// </summary>
+        /// <param name="visible">if set to <c>true</c> the border will become visible.</param>
+        void ToggleVisible(bool visible)
+        {
+            if (visible)
+            {
+                if (this.Visibility != System.Windows.Visibility.Visible)
+                {
+                    if (SystemParameters.MinimizeAnimation)
+                    {
+                        _showTimer.Start();
+                    }
+                    else
+                    {
+                        this.Show();
+                        if (_contentWindow != null)
+                            _contentWindow.Activate();
+                    }
+                }
+            }
+            else
+            {
+                _showTimer.Stop();
+                this.Hide();
+            }
+        }
+
+        public void RepositionToContent(IntPtr contentHwnd, bool hideOverride)
+        {
+            if (hideOverride)
+            {
+                ToggleVisible(false);
+            }
+            else
+            {
+                var thick = BorderThickness;
+                var wpl = default(WINDOWPLACEMENT);
+                wpl.length = (uint)Marshal.SizeOf(typeof(WINDOWPLACEMENT));
+
+                if (User32.GetWindowPlacement(contentHwnd, ref wpl))
+                {
+                    //Debug.WriteLine("Chrome {0} placement cmd {1}, flag {2}.", _id, wpl.showCmd, wpl.flags);
+
+                    switch (wpl.showCmd)
+                    {
+                        case ShowWindowOption.SW_SHOWNORMAL:
+                            this.Owner = _contentWindow.Owner;
+                            //Debug.WriteLine("Should reposn shadow");
+                            // use GetWindowRect to work correctly with aero snap
+                            // since GetWindowPlacement doesn't change
+                            var r = default(CommonWin32.Rectangles.RECT);
+                            if (User32.GetWindowRect(contentHwnd, ref r))
+                            {
+                                User32.SetWindowPos(_hwnd, contentHwnd,
+                                    (int)(r.left - thick.Left),
+                                    (int)(r.top - thick.Top),
+                                    (int)(r.Width + thick.Left + thick.Right),
+                                    (int)(r.Height + thick.Top + thick.Bottom),
+                                    SetWindowPosOptions.SWP_NOACTIVATE);
+                                ToggleVisible(true);
+                                //Debug.WriteLine("reposned");
+                            }
+                            break;
+                        case ShowWindowOption.SW_MAXIMIZE:
+                        case ShowWindowOption.SW_MINIMIZE:
+                        case ShowWindowOption.SW_SHOWMINIMIZED:
+                            //this.Owner = null;
+                            ToggleVisible(false);
+                            //Debug.WriteLine("No shadow");
+                            break;
+                        default:
+                            //Debug.WriteLine("Unknown showcmd " + wpl.showCmd);
+                            break;
+                    }
+                }
+            }
+        }
+
         IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             IntPtr retVal = IntPtr.Zero;
@@ -211,13 +230,13 @@ namespace ModernWPF.Controls
                 //Debug.WriteLine(wmsg);
                 switch (wmsg)
                 {
-                    case WindowMessage.WM_SETTEXT:
-                    case WindowMessage.WM_SETICON:
-                        var changed = User32Ex.ModifyStyle(hwnd, WindowStyles.WS_VISIBLE, WindowStyles.WS_OVERLAPPED);
-                        retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, lParam);
-                        if (changed) { User32Ex.ModifyStyle(hwnd, WindowStyles.WS_OVERLAPPED, WindowStyles.WS_VISIBLE); }
-                        handled = true;
-                        break;
+                    //case WindowMessage.WM_SETTEXT:
+                    //case WindowMessage.WM_SETICON:
+                    //    var changed = User32Ex.ModifyStyle(hwnd, WindowStyles.WS_VISIBLE, WindowStyles.WS_OVERLAPPED);
+                    //    retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, lParam);
+                    //    if (changed) { User32Ex.ModifyStyle(hwnd, WindowStyles.WS_OVERLAPPED, WindowStyles.WS_VISIBLE); }
+                    //    handled = true;
+                    //    break;
                     case WindowMessage.WM_NCHITTEST:
                         retVal = new IntPtr((int)HandleNcHitTest(lParam.ToPoint()));
                         handled = true;

@@ -151,6 +151,38 @@ namespace ModernWPF
 
         #endregion
 
+        #region clear textbox btn flag dp
+
+        /// <summary>
+        /// Gets the show clear button flag.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static bool GetShowClearTextButton(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(ShowClearTextButtonProperty);
+        }
+
+        /// <summary>
+        /// Sets the show clear button flag.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        public static void SetShowClearTextButton(DependencyObject obj, bool value)
+        {
+            obj.SetValue(ShowClearTextButtonProperty, value);
+        }
+
+        /// <summary>
+        /// The DP flag on whether to show clear text button in a textbox in modern theme.
+        /// </summary>
+        public static readonly DependencyProperty ShowClearTextButtonProperty =
+            DependencyProperty.RegisterAttached("ShowClearTextButton", typeof(bool), typeof(Chrome), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.Inherits));
+
+
+
+        #endregion
+
         #region chrome attached dp
 
         /// <summary>
@@ -180,7 +212,7 @@ namespace ModernWPF
         /// The modern chrome attached property.
         /// </summary>
         public static readonly DependencyProperty ChromeProperty =
-            DependencyProperty.RegisterAttached("Chrome", typeof(Chrome), typeof(Chrome), new PropertyMetadata(null, new PropertyChangedCallback(ChromeChanged)));
+            DependencyProperty.RegisterAttached("Chrome", typeof(Chrome), typeof(Chrome), new PropertyMetadata(null, ChromeChanged));
 
         private static void ChromeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -447,6 +479,7 @@ namespace ModernWPF
         Window _contentWindow;
         BorderWindow _borderWindow;
         ResizeGrip _resizeGrip;
+        bool _hideOverride;
 
         #region init methods
 
@@ -465,8 +498,7 @@ namespace ModernWPF
             }
             else
             {
-                HwndSource.FromHwnd(hwnd).AddHook(WndProc);
-                UpdateFrame(hwnd);
+                InitReal(hwnd);
             }
         }
 
@@ -501,6 +533,11 @@ namespace ModernWPF
         void window_SourceInitialized(object sender, EventArgs e)
         {
             var hwnd = new WindowInteropHelper(_contentWindow).Handle;
+            InitReal(hwnd);
+        }
+
+        void InitReal(IntPtr hwnd)
+        {
             HwndSource.FromHwnd(hwnd).AddHook(WndProc);
             UpdateFrame(hwnd);
         }
@@ -565,10 +602,13 @@ namespace ModernWPF
                         break;
                     case WindowMessage.WM_NCACTIVATE:
                         // prevent default non-client border from showing in classic mode
-                        //User32.DefWindowProc(hwnd, (uint)msg, wParam, new IntPtr(-1));
                         if (wParam == BasicValues.FALSE)
                         {
                             retVal = BasicValues.TRUE;
+                        }
+                        else
+                        {
+                            retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, new IntPtr(-1));
                         }
                         handled = true;
                         break;
@@ -588,21 +628,51 @@ namespace ModernWPF
                         }
                         break;
                     case WindowMessage.WM_WINDOWPOSCHANGED:
-                        RepositionBorder(hwnd);
-
                         var windowpos = (WINDOWPOS)Marshal.PtrToStructure(lParam, typeof(WINDOWPOS));
+                        //Debug.WriteLine("Chrome {0} windowpos flags {1}.", _borderWindow.Id, ClearUndefined(windowpos.flags));
+
                         if ((windowpos.flags & SetWindowPosOptions.SWP_NOSIZE) != SetWindowPosOptions.SWP_NOSIZE)
                         {
                             SetRegion(hwnd, windowpos.cx, windowpos.cy, false);
+                        }
+
+                        if (_borderWindow != null)
+                        {
+                            // The override is for a window with owner and the owner window minimizes.
+                            // In this case the window is hidden with SWP_HIDEWINDOW but not actually minimized
+                            // so the code detects the show/hide flags here as the override
+                            if ((windowpos.flags & SetWindowPosOptions.SWP_HIDEWINDOW) == SetWindowPosOptions.SWP_HIDEWINDOW)
+                            {
+                                _hideOverride = true;
+                            }
+                            if ((windowpos.flags & SetWindowPosOptions.SWP_SHOWWINDOW) == SetWindowPosOptions.SWP_SHOWWINDOW)
+                            {
+                                _hideOverride = false;
+                            }
+                            _borderWindow.RepositionToContent(hwnd, _hideOverride);
                         }
                         break;
                     case WindowMessage.WM_DWMCOMPOSITIONCHANGED:
                         SetRegion(hwnd, 0, 0, true);
                         break;
                     case WindowMessage.WM_ERASEBKGND:
-                        // prevent more flickers
+                        // prevent more flickers?
                         handled = true;
                         break;
+                }
+            }
+            return retVal;
+        }
+
+
+        private SetWindowPosOptions ClearUndefined(SetWindowPosOptions input)
+        {
+            SetWindowPosOptions retVal = 0;
+            foreach (SetWindowPosOptions val in Enum.GetValues(typeof(SetWindowPosOptions)))
+            {
+                if ((input & val) == val)
+                {
+                    retVal |= val;
                 }
             }
             return retVal;
@@ -700,15 +770,6 @@ namespace ModernWPF
                         }
                     }
                 }
-            }
-        }
-
-        private void RepositionBorder(IntPtr hwnd)
-        {
-            if (_borderWindow != null)
-            {
-                _borderWindow.Owner = _contentWindow.Owner;
-                _borderWindow.RepositionToContent(hwnd);
             }
         }
 

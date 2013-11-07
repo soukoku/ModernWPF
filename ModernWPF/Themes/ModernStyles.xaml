@@ -9,6 +9,7 @@
 
     <conv:IsSmallFontConverter x:Key="IsSmallFont"/>
     <conv:BoolVisibleConverter x:Key="BoolVisible"/>
+    <conv:MultiBoolVisibleConverter x:Key="MultiBoolVisible"/>
 
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
@@ -107,7 +108,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style x:Key="ModernButtonNoChrome" TargetType="ButtonBase">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundThemeBrush}"/>
@@ -636,7 +637,7 @@
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
     </Style>
 
-    <Style TargetType="StatusBarItem">
+    <Style x:Key="ModernStatusBarItem" TargetType="StatusBarItem">
         <Setter Property="Margin" Value="0 0 20 0" />
     </Style>
 
@@ -848,6 +849,52 @@
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
                     <Grid>
+                        <Grid.Resources>
+                            <local:TextCommands x:Key="txtCmd"/>
+                            <Style x:Name="DeleteButtonStyle" TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Border x:Name="BorderElement"
+                                                        BorderBrush="{DynamicResource TextBoxButtonBorderThemeBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"/>
+                                                <Border x:Name="BackgroundElement"
+                                                        Background="{DynamicResource TextBoxButtonBackgroundThemeBrush}"
+                                                        Margin="{TemplateBinding BorderThickness}">
+                                                    <!--<TextBlock x:Name="GlyphElement"
+                                                               Margin="1 0"
+                                                               Foreground="{DynamicResource TextBoxButtonForegroundThemeBrush}"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Center"
+                                                               Text="&#xE0A4;"
+                                                               FontFamily="{DynamicResource SymbolThemeFontFamily}"/>-->
+                                                    <TextBlock x:Name="GlyphElement"
+                                                               Text="r" Style="{DynamicResource MarlettGlyph}"
+                                                               Margin="1 0"
+                                                               Foreground="{DynamicResource TextBoxButtonForegroundThemeBrush}"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Center"
+                                                               ></TextBlock>
+                                                </Border>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="BackgroundElement" Property="Background" Value="{DynamicResource TextBoxButtonPointerOverBackgroundThemeBrush}"/>
+                                                    <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextBoxButtonPointerOverBorderThemeBrush}"/>
+                                                    <Setter TargetName="GlyphElement" Property="Foreground" Value="{DynamicResource TextBoxButtonPointerOverForegroundThemeBrush}"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter TargetName="BackgroundElement" Property="Background" Value="{DynamicResource TextBoxButtonPressedBackgroundThemeBrush}"/>
+                                                    <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextBoxButtonPressedBorderThemeBrush}"/>
+                                                    <Setter TargetName="GlyphElement" Property="Foreground" Value="{DynamicResource TextBoxButtonPressedForegroundThemeBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Grid.Resources>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
@@ -873,14 +920,22 @@
                                       Margin="{TemplateBinding BorderThickness}"
                                       Padding="{TemplateBinding Padding}" 
                                       IsTabStop="False" />
-                        <!--<Button x:Name="DeleteButton"
-                            Style="{DynamicResource DeleteButtonStyle}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            IsTabStop="False"
-                            Grid.Column="1"
-                            Visibility="Collapsed"
-                            FontSize="{TemplateBinding FontSize}"
-                            VerticalAlignment="Stretch"/>-->
+                        <Button x:Name="DeleteButton"
+                                Style="{DynamicResource DeleteButtonStyle}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                IsTabStop="False"
+                                Grid.Column="1"
+                                DataContext="{StaticResource txtCmd}"
+                                Command="{Binding ClearTextCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                VerticalAlignment="Stretch">
+                            <Button.Visibility>
+                                <MultiBinding Converter="{StaticResource MultiBoolVisible}">
+                                    <Binding Path="(local:Chrome.ShowClearTextButton)" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                    <Binding Path="IsEnabled" RelativeSource="{RelativeSource Self}"/>
+                                </MultiBinding>
+                            </Button.Visibility>
+                        </Button>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -898,6 +953,56 @@
                             <Setter Property="Background" Value="{DynamicResource TextBoxDisabledBackgroundThemeBrush}" />
                             <Setter Property="Foreground" Value="{DynamicResource TextBoxDisabledForegroundThemeBrush}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource TextBoxDisabledBorderThemeBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ModernTextBoxNoChrome" TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBoxForegroundThemeBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenu}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <Border x:Name="BackgroundElement"
+                                Background="{TemplateBinding Background}"
+                                Margin="{TemplateBinding BorderThickness}"
+                                Opacity="{DynamicResource TextControlBackgroundThemeOpacity}"
+                                SnapsToDevicePixels="True"
+                                Grid.ColumnSpan="2" 
+                                />
+                        <Border x:Name="BorderElement"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Opacity="{DynamicResource TextControlBorderThemeOpacity}"
+                                SnapsToDevicePixels="True"
+                                Grid.ColumnSpan="2" 
+                                />
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                      Margin="{TemplateBinding BorderThickness}"
+                                      Padding="{TemplateBinding Padding}" 
+                                      IsTabStop="False" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource TextBoxDisabledForegroundThemeBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1364,9 +1469,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="ScrollBar" BasedOn="{StaticResource ModernScrollBar}"/>
-
-    <Style TargetType="ScrollViewer" BasedOn="{StaticResource ModernScrollViewer}"/>
 
 
     <Style x:Key="{x:Static StatusBar.SeparatorStyleKey}" TargetType="Separator">
@@ -1419,7 +1521,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="ContextMenu" BasedOn="{StaticResource ModernContextMenu}" />
 
     <Geometry x:Key="Checkmark">M 0,5.1 L 1.7,5.2 L 3.4,7.1 L 8,0.4 L 9.2,0 L 3.3,10.8 Z</Geometry>
     <Geometry x:Key="UpArrow">M 0,4 L 3.5,0 L 7,4 Z</Geometry>
@@ -1810,9 +1911,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="MenuItem" BasedOn="{StaticResource ModernMenuItem}"/>
 
-    <Style TargetType="Separator">
+    <Style x:Key="ModernSeparator" TargetType="Separator">
         <Setter Property="Background" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -1950,7 +2050,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="ComboBox">
+    <Style x:Key="ModernComboBox" TargetType="ComboBox">
         <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ComboBoxBorderThemeThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
@@ -2144,11 +2244,11 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="ListBox">
+    <Style x:Key="ModernListBox" TargetType="ListBox">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
     </Style>
-    <Style TargetType="ListView">
+    <Style x:Key="ModernListView" TargetType="ListView">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
     </Style>
@@ -2492,10 +2592,9 @@
         </Setter>
     </Style>
 
+
     
-    
-    <!--implicits. had to be in the same resource file or it won't work at design time :(-->
-    
+    <!--implicits have to be set in this resource file or design time won't work?-->
 
     <Style TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}"/>
 
@@ -2511,6 +2610,8 @@
 
     <Style TargetType="StatusBar" BasedOn="{StaticResource ModernStatusBar}"/>
 
+    <Style TargetType="StatusBarItem" BasedOn="{StaticResource ModernStatusBarItem}"/>
+
     <Style TargetType="ToolTip" BasedOn="{StaticResource ModernToolTip}"></Style>
 
     <Style TargetType="CheckBox" BasedOn="{StaticResource ModernCheckBox}"></Style>
@@ -2521,5 +2622,22 @@
 
     <Style TargetType="PasswordBox" BasedOn="{StaticResource ModernPasswordBox}"></Style>
 
+    <Style TargetType="ComboBox" BasedOn="{StaticResource ModernComboBox}"></Style>
+
     <Style TargetType="ProgressBar" BasedOn="{StaticResource ModernProgressBar}"/>
+
+    <Style TargetType="ScrollBar" BasedOn="{StaticResource ModernScrollBar}"/>
+
+    <Style TargetType="ScrollViewer" BasedOn="{StaticResource ModernScrollViewer}"/>
+
+    <Style TargetType="MenuItem" BasedOn="{StaticResource ModernMenuItem}"/>
+
+    <Style TargetType="Separator" BasedOn="{StaticResource ModernSeparator}"/>
+
+    <Style TargetType="ContextMenu" BasedOn="{StaticResource ModernContextMenu}" />
+
+    <Style TargetType="ListBox" BasedOn="{StaticResource ModernListBox}" />
+
+    <Style TargetType="ListView" BasedOn="{StaticResource ModernListView}" />
+
 </ResourceDictionary>
