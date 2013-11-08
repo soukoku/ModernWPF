@@ -26,13 +26,13 @@
                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." ></TextBlock>
 
                         <TextBlock Text="lower case:" Margin="0 10 0 0"></TextBlock>
-                        <TextBlock Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=lower}"></TextBlock>
+                        <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=lower, Mode=OneTime}"></TextBox>
 
                         <TextBlock Text="upper case:" Margin="0 10 0 0"></TextBlock>
-                        <TextBlock Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=upper}"></TextBlock>
+                        <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=upper, Mode=OneTime}"></TextBox>
 
                         <TextBlock Text="title case:" Margin="0 10 0 0"></TextBlock>
-                        <TextBlock Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=title}"></TextBlock>
+                        <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=title, Mode=OneTime}"></TextBox>
 
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Orientation="Horizontal">

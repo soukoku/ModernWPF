@@ -1000,6 +1000,7 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenu}"/>
         <Setter Property="Template">
             <Setter.Value>

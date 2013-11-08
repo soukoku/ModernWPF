@@ -34,9 +34,6 @@
     <SolidColorBrush x:Key="ToolActiveBackground" Color="#FFE8A6"></SolidColorBrush>
     <SolidColorBrush x:Key="ToolActiveForeground" Color="Black"></SolidColorBrush>
 
-    <SolidColorBrush x:Key="ProgressBarForeground" Color="#FF15C23C"></SolidColorBrush>
-    <SolidColorBrush x:Key="ProgressBarBackground" Color="LightGray"></SolidColorBrush>
-
     <SolidColorBrush x:Key="ActiveCaptionForeground" Color="#fefefe"></SolidColorBrush>
     <SolidColorBrush x:Key="ActiveCaptionBackground" Color="Transparent"></SolidColorBrush>
     <SolidColorBrush x:Key="InactiveCaptionForeground" Color="#6e6e6e"></SolidColorBrush>
@@ -270,8 +267,10 @@
     <!--progress bar-->
     <SolidColorBrush x:Key="ProgressBarBackgroundThemeBrush" Color="#59FFFFFF" />
     <SolidColorBrush x:Key="ProgressBarBorderThemeBrush" Color="Transparent" />
-    <SolidColorBrush x:Key="ProgressBarForegroundThemeBrush" Color="#FF5B2EC5" />
-    <SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush" Color="#FF8A57FF" />
+    <!--<SolidColorBrush x:Key="ProgressBarForegroundThemeBrush" Color="#FF5B2EC5" />-->
+    <SolidColorBrush x:Key="ProgressBarForegroundThemeBrush" Color="Green" />
+    <!--<SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush" Color="#FF8A57FF" />-->
+    <SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush" Color="Green" />
 
     <!--tooltip-->
     <SolidColorBrush x:Key="ToolTipBackgroundThemeBrush" Color="#FFFFFFFF" />
