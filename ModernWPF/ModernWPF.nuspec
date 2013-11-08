@@ -8,7 +8,7 @@
 		<owners>$author$</owners>
 		<projectUrl>https://bitbucket.org/soukoku/modernwpf</projectUrl>
 		<licenseUrl>https://bitbucket.org/soukoku/modernwpf/raw/225b7a43c3b161d145007fd8c7a619ef89fbd540/LICENSE.txt</licenseUrl>    
-		<!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+		<iconUrl>http://i.imgur.com/WAYKszr.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
