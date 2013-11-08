@@ -33,17 +33,20 @@ namespace ModernWPF.Converters
                 {
                     if (val is bool)
                     {
-                        if (retVal.HasValue) { retVal &= (bool)val; }
+                        if (retVal.HasValue) { retVal = retVal.Value && (bool)val; }
                         else { retVal = (bool)val; }
                     }
                     else if (val is Visibility)
                     {
-                        if (retVal.HasValue) { retVal &= ((Visibility)val) == Visibility.Visible; }
+                        if (retVal.HasValue) { retVal = retVal.Value && ((Visibility)val) == Visibility.Visible; }
                         else { retVal = ((Visibility)val) == Visibility.Visible; }
                     }
                 }
+                if (parameter != null && string.Equals("not", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
+                {
+                    retVal = !retVal.GetValueOrDefault();
+                }
             }
-
             return retVal.GetValueOrDefault() ? Visibility.Visible : Visibility.Collapsed;
         }
 

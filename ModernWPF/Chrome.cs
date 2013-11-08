@@ -144,41 +144,9 @@ namespace ModernWPF
             if (obj2 == null)
             {
                 throw new ArgumentException("The element must be a DependencyObject", "inputElement");
-            }
+            } 
             obj2.SetValue(IsHitTestVisibleProperty, hitTestVisible);
         }
-
-
-        #endregion
-
-        #region clear textbox btn flag dp
-
-        /// <summary>
-        /// Gets the show clear button flag.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        public static bool GetShowClearTextButton(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(ShowClearTextButtonProperty);
-        }
-
-        /// <summary>
-        /// Sets the show clear button flag.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <param name="value">if set to <c>true</c> [value].</param>
-        public static void SetShowClearTextButton(DependencyObject obj, bool value)
-        {
-            obj.SetValue(ShowClearTextButtonProperty, value);
-        }
-
-        /// <summary>
-        /// The DP flag on whether to show clear text button in a textbox in modern theme.
-        /// </summary>
-        public static readonly DependencyProperty ShowClearTextButtonProperty =
-            DependencyProperty.RegisterAttached("ShowClearTextButton", typeof(bool), typeof(Chrome), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.Inherits));
-
 
 
         #endregion

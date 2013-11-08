@@ -30,9 +30,21 @@
                         <StackPanel Orientation="Vertical" Width="200">
                             <TextBox Text="normal textbox" Margin="2"></TextBox>
                             <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
+                            <TextBox Text="with leading content" Margin="2">
+                                <modern:TextBoxUI.LeadingElement>
+                                    <TextBlock Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0 -4 0"/>
+                                </modern:TextBoxUI.LeadingElement>
+                            </TextBox>
+                            <TextBox Text="with trailing content" Margin="2">
+                                <modern:TextBoxUI.TrailingElement>
+                                    <TextBlock Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0 -4 0"/>
+                                </modern:TextBoxUI.TrailingElement>
+                            </TextBox>
+                            <TextBox Text="" modern:TextBoxUI.WatermarkText="with watermark" Margin="2"></TextBox>
                             <TextBox Text="disabled textbox" Margin="2" IsEnabled="False"></TextBox>
 
                             <PasswordBox Password="password" Margin="2"></PasswordBox>
+                            <PasswordBox modern:TextBoxUI.WatermarkText="password with watermark" Margin="2"></PasswordBox>
 
 
                             <ComboBox SelectedIndex="1" Margin="2">

@@ -65,6 +65,7 @@
     <Compile Include="Converters\IsSmallFontConverter.cs" />
     <Compile Include="Converters\BoolVisibleConverter.cs" />
     <Compile Include="Converters\MultiBoolVisibleConverter.cs" />
+    <Compile Include="Converters\NullEmptyNotVisibleConverter.cs" />
     <Compile Include="Converters\TextCaseConverter.cs" />
     <Compile Include="ModernExtensions.cs" />
     <Compile Include="Chrome.cs" />
@@ -90,6 +91,7 @@
       <DependentUpon>CommandText.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\CommandTextBinder.cs" />
+    <Compile Include="TextBoxUI.cs" />
     <Compile Include="TextCommands.cs" />
     <Compile Include="WindowCommands.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
