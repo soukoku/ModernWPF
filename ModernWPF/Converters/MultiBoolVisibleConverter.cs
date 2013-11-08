@@ -51,7 +51,7 @@ namespace ModernWPF.Converters
         }
 
         /// <summary>
-        /// Converts a binding target value to the source binding values.
+        /// Not supported.
         /// </summary>
         /// <param name="value">The value that the binding target produces.</param>
         /// <param name="targetTypes">The array of types to convert to. The array length indicates the number and types of values that are suggested for the method to return.</param>

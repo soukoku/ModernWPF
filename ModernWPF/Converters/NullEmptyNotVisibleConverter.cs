@@ -8,7 +8,7 @@ using System.Windows.Data;
 namespace ModernWPF.Converters
 {
     /// <summary>
-    /// Converts to <see cref="Visibility.Visible"/> if the value is null.
+    /// Converts to <see cref="Visibility.Visible"/> if the value is null or empty string.
     /// </summary>
     public class NullEmptyNotVisibleConverter : IValueConverter
     {
@@ -35,7 +35,7 @@ namespace ModernWPF.Converters
         }
 
         /// <summary>
-        /// Converts a value.
+        /// Not supported.
         /// </summary>
         /// <param name="value">The value that is produced by the binding target.</param>
         /// <param name="targetType">The type to convert to.</param>
