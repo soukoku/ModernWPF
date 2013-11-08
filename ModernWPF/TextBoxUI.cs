@@ -48,9 +48,9 @@ namespace ModernWPF
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns></returns>
-        public static Visual GetLeadingElement(DependencyObject obj)
+        public static UIElement GetLeadingElement(DependencyObject obj)
         {
-            return (Visual)obj.GetValue(LeadingElementProperty);
+            return (UIElement)obj.GetValue(LeadingElementProperty);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace ModernWPF
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetLeadingElement(DependencyObject obj, Visual value)
+        public static void SetLeadingElement(DependencyObject obj, UIElement value)
         {
             obj.SetValue(LeadingElementProperty, value);
         }
@@ -67,7 +67,7 @@ namespace ModernWPF
         /// The DP on a text box in modern theme that contains a leading element (e.g. a search icon).
         /// </summary>
         public static readonly DependencyProperty LeadingElementProperty =
-            DependencyProperty.RegisterAttached("LeadingElement", typeof(Visual), typeof(TextBoxUI), new PropertyMetadata(null));
+            DependencyProperty.RegisterAttached("LeadingElement", typeof(UIElement), typeof(TextBoxUI), new PropertyMetadata(null));
 
 
         /// <summary>
@@ -75,9 +75,9 @@ namespace ModernWPF
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns></returns>
-        public static Visual GetTrailingElement(DependencyObject obj)
+        public static UIElement GetTrailingElement(DependencyObject obj)
         {
-            return (Visual)obj.GetValue(TrailingElementProperty);
+            return (UIElement)obj.GetValue(TrailingElementProperty);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace ModernWPF
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetTrailingElement(DependencyObject obj, Visual value)
+        public static void SetTrailingElement(DependencyObject obj, UIElement value)
         {
             obj.SetValue(TrailingElementProperty, value);
         }
@@ -94,7 +94,7 @@ namespace ModernWPF
         /// The DP on a text box in modern theme that contains a trailing element (e.g. a search icon).
         /// </summary>
         public static readonly DependencyProperty TrailingElementProperty =
-            DependencyProperty.RegisterAttached("TrailingElement", typeof(Visual), typeof(TextBoxUI), new PropertyMetadata(null));
+            DependencyProperty.RegisterAttached("TrailingElement", typeof(UIElement), typeof(TextBoxUI), new PropertyMetadata(null));
 
         // password part modified from http://brentstewart.net/blog/post/2013/02/18/How-to-add-watermark-text-to-a-PasswordBox
 
@@ -128,6 +128,7 @@ namespace ModernWPF
         static void WatermarkChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             // extra handling for password
+            // leak if never got unset?
             var pb = d as PasswordBox;
             if (pb != null)
             {

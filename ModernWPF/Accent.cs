@@ -44,15 +44,19 @@ namespace ModernWPF
         /// <summary>
         /// Pre-defined name for the light blue accent.
         /// </summary>
-        public const string LIGHTBLUE = "Light Blue";
+        public const string LIGHT_BLUE = "Light Blue";
         /// <summary>
         /// Pre-defined name for the dark blue accent.
         /// </summary>
-        public const string DARKBLUE = "Dark Blue";
+        public const string DARK_BLUE = "Dark Blue";
         /// <summary>
-        /// Pre-defined name for the purple accent.
+        /// Pre-defined name for the light purple accent.
         /// </summary>
-        public const string PURPLE = "Purple";
+        public const string LIGHT_PURPLE = "Light Purple";
+        /// <summary>
+        /// Pre-defined name for the dark purple accent.
+        /// </summary>
+        public const string DARK_PURPLE = "Dark Purple";
 
         #endregion
 

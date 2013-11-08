@@ -11,6 +11,7 @@
     <conv:BoolVisibleConverter x:Key="BoolVisible"/>
     <conv:MultiBoolVisibleConverter x:Key="MultiBoolVisible"/>
     <conv:NullEmptyNotVisibleConverter x:Key="NullEmptyNotVisible"/>
+    <conv:TextCaseConverter x:Key="TextCase"/>
 
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
@@ -495,6 +496,7 @@
     </Style>
 
     <Style x:Key="ModernControlButton" TargetType="Button" BasedOn="{StaticResource ModernCaptionButton}">
+        <Setter Property="Focusable" Value="False"/>
         <Setter Property="IsTabStop" Value="False" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="false">

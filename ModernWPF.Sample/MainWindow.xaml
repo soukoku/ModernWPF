@@ -3,12 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:modern="http://modernwpf"
         xmlns:local="clr-namespace:ModernWPF.Sample"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="ModernWPF - Test" Height="600" Width="800"
         Icon="Icon.ico"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindow}">
     <Window.Resources>
-
+        <sys:String x:Key="shortString">Lorem ipsum dolor sit amet</sys:String>
     </Window.Resources>
     <Border Margin="0 32 0 0">
         <Grid >
@@ -20,9 +21,18 @@
 
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <DockPanel Margin="8">
-                    <StackPanel Width="300" DockPanel.Dock="Left" HorizontalAlignment="Left">
+                    <StackPanel Width="300" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8">
                         <TextBlock TextWrapping="Wrap" 
-                                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." Margin="8"></TextBlock>
+                                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." ></TextBlock>
+
+                        <TextBlock Text="lower case:" Margin="0 10 0 0"></TextBlock>
+                        <TextBlock Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=lower}"></TextBlock>
+
+                        <TextBlock Text="upper case:" Margin="0 10 0 0"></TextBlock>
+                        <TextBlock Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=upper}"></TextBlock>
+
+                        <TextBlock Text="title case:" Margin="0 10 0 0"></TextBlock>
+                        <TextBlock Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=title}"></TextBlock>
 
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Orientation="Horizontal">
@@ -118,6 +128,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <RadioButton GroupName="GroupColor" Margin="4"
+                                         ToolTip="{Binding Name}"
                                              Checked="RadioButton_Checked">
                                 <Rectangle Width="32" Height="32"
                                                Fill="{Binding Brush}" />
@@ -127,6 +138,7 @@
                 </ItemsControl>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="another window" x:Name="btnWindow" Click="btnWindow_Click"></Button>
+                    <Button Content="dialog window" x:Name="btnDialog" Click="btnDialog_Click"></Button>
                     <Button Content="toggle theme" x:Name="btnTheme" Click="btnTheme_Click"></Button>
                     <Button Content="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click"></Button>
                 </StackPanel>

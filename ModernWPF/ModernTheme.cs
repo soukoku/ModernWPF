@@ -43,9 +43,10 @@ namespace ModernWPF
                 new Accent(Accent.OLIVE,(Color)ColorConverter.ConvertFromString("#6B8E23")),
                 new Accent(Accent.TEAL,(Color)ColorConverter.ConvertFromString("#00959D")),
                 new Accent(Accent.GREEN, Colors.ForestGreen),
-                new Accent(Accent.LIGHTBLUE, Colors.DodgerBlue),
-                new Accent(Accent.DARKBLUE,(Color)ColorConverter.ConvertFromString("#007ACC")),
-                new Accent(Accent.PURPLE, Colors.MediumOrchid),
+                new Accent(Accent.LIGHT_BLUE, Colors.DodgerBlue),
+                new Accent(Accent.DARK_BLUE,(Color)ColorConverter.ConvertFromString("#007ACC")),
+                new Accent(Accent.LIGHT_PURPLE, Colors.MediumOrchid),
+                new Accent(Accent.DARK_PURPLE, Colors.BlueViolet),
             };
         }
 
@@ -82,7 +83,7 @@ namespace ModernWPF
         {
             get
             {
-                if (_curAccent == null) { _curAccent = GetPredefinedAccent(Accent.LIGHTBLUE); }
+                if (_curAccent == null) { _curAccent = GetPredefinedAccent(Accent.LIGHT_BLUE); }
                 return _curAccent;
             }
         }

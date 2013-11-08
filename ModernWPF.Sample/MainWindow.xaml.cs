@@ -61,5 +61,10 @@ namespace ModernWPF.Sample
         {
             new MainWindow { Owner = this }.Show();
         }
+
+        private void btnDialog_Click(object sender, RoutedEventArgs e)
+        {
+            new DialogWindow { Owner = this }.ShowDialog();
+        }
     }
 }

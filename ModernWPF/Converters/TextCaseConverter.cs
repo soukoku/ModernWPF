@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Data;
 
 namespace ModernWPF.Converters
 {
     /// <summary>
-    /// Provides conversion of text to upper or lower cases.
+    /// Provides conversion of text to upper (default), lower, or title cases.
     /// </summary>
     public class TextCaseConverter : IValueConverter
     {
@@ -25,13 +26,20 @@ namespace ModernWPF.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value != null && parameter != null)
+            if (value != null)
             {
-                if (string.Equals("lower", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
+                if (parameter != null)
                 {
-                    return value.ToString().ToLower(culture);
+                    if (string.Equals("lower", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        return culture.TextInfo.ToLower(value.ToString());
+                    }
+                    if (string.Equals("title", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        return culture.TextInfo.ToTitleCase(value.ToString());
+                    }
                 }
-                return value.ToString().ToUpper(culture);
+                return culture.TextInfo.ToUpper(value.ToString());
             }
             return value;
         }
