@@ -73,5 +73,11 @@ namespace ModernWPF.Sample
         {
             new DialogWindow { Owner = this }.ShowDialog();
         }
+
+        private void btnDialog2_Click(object sender, RoutedEventArgs e)
+        {
+            var diag = new InWindowDialog();
+            diag.ShowDialog(this);
+        }
     }
 }

@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="Accent.cs" />
     <Compile Include="Controls\BorderWindow.cs" />
+    <Compile Include="Controls\DialogControl.cs" />
+    <Compile Include="Controls\DialogControlContainer.cs" />
     <Compile Include="Controls\ModernContentControl.cs" />
     <Compile Include="Converters\IsSmallFontConverter.cs" />
     <Compile Include="Converters\BoolVisibleConverter.cs" />
@@ -91,6 +93,7 @@
       <DependentUpon>CommandText.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\CommandTextBinder.cs" />
+    <Compile Include="ScrollViewerUI.cs" />
     <Compile Include="TextBoxUI.cs" />
     <Compile Include="TextCommands.cs" />
     <Compile Include="WindowCommands.cs" />

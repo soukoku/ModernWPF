@@ -522,7 +522,8 @@
                                        ></Rectangle>
 
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
-                                            ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:ModernContentControl>
+                                                       x:Name="MainContent"
+                                                       ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:ModernContentControl>
 
                             <Grid x:Name="PART_Control" VerticalAlignment="Top">
                                 <Grid.Resources>
@@ -591,11 +592,11 @@
                                     </Button>
                                 </StackPanel>
                             </Grid>
+                            
+                            <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"></ctrl:DialogControlContainer>
 
                             <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
 									VerticalAlignment="Bottom" Visibility="Collapsed" IsTabStop="False" />
-
-
                         </Grid>
                     </AdornerDecorator>
                     <ControlTemplate.Triggers>
@@ -1859,7 +1860,7 @@
     </Style>
 
     <Style x:Key="ModernScrollViewer" TargetType="ScrollViewer">
-        <Setter Property="local:Chrome.HScrollOnWheel" Value="True"></Setter>
+        <Setter Property="local:ScrollViewerUI.HScrollOnWheel" Value="True"></Setter>
         <Setter Property="IsTabStop" Value="False"></Setter>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
@@ -1915,6 +1916,12 @@
                                     BorderBrush="{DynamicResource ScrollBarTrackBorderThemeBrush}" />
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="local:ScrollViewerUI.OverContent" Value="True">
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="2"/>
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

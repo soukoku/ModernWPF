@@ -86,4 +86,51 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="ctrl:DialogControl">
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctrl:DialogControl">
+                    <Border Background="{TemplateBinding Background}"
+                            Margin="{TemplateBinding Margin}"
+                            Padding="{TemplateBinding Padding}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ctrl:DialogControlContainer">
+        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Background" Value="{DynamicResource OverlayBackground}"></Setter>
+        <Setter Property="Visibility" Value="Collapsed"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctrl:DialogControlContainer">
+                    <Border Background="{TemplateBinding Background}"
+                            KeyboardNavigation.TabNavigation="Cycle"
+                            KeyboardNavigation.ControlTabNavigation="Cycle"
+                            KeyboardNavigation.DirectionalNavigation="Cycle">
+                        <ContentPresenter x:Name="PART_Content"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="HasDialogOpen" Value="True">
+                <Setter Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

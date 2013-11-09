@@ -59,5 +59,29 @@ namespace ModernWPF
             return null;
         }
 
+        internal static bool ProcessInVisualTree<T>(this DependencyObject control, Predicate<T> callback) where T : DependencyObject
+        {
+            if (control != null)
+            {
+                var count = VisualTreeHelper.GetChildrenCount(control);
+
+                for (int i = 0; i < count; i++)
+                {
+                    var c = VisualTreeHelper.GetChild(control, i);
+                    if (c is T)
+                    {
+                        var result = callback(c as T);
+                        if (result) { return true; }
+                    }
+                    if (c != null)
+                    {
+                        var subResult = ProcessInVisualTree<T>(c, callback);
+                        if (subResult) { return true; }
+                    }
+                }
+            }
+            return false;
+        }
+
     }
 }

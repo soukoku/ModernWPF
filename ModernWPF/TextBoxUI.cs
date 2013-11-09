@@ -9,7 +9,7 @@ using System.Windows.Media;
 namespace ModernWPF
 {
     /// <summary>
-    /// Contains various attachment properties for <see cref="TextBox"/> and <see cref="PasswordBox"/> using the modern theme.
+    /// Contains various attached properties for <see cref="TextBox"/> and <see cref="PasswordBox"/> using the modern theme.
     /// </summary>
     public class TextBoxUI : DependencyObject
     {
@@ -132,8 +132,15 @@ namespace ModernWPF
             var pb = d as PasswordBox;
             if (pb != null)
             {
-                pb.PasswordChanged -= pb_PasswordChanged;
-                pb.PasswordChanged += pb_PasswordChanged;
+                if (e.NewValue == null)
+                {
+                    pb.PasswordChanged -= pb_PasswordChanged;
+                }
+                else
+                {
+                    pb.PasswordChanged -= pb_PasswordChanged;
+                    pb.PasswordChanged += pb_PasswordChanged;
+                }
             }
         }
 
@@ -148,13 +155,19 @@ namespace ModernWPF
 
 
         #region HasPassword
+        /// <summary>
+        /// Gets a value indicating whether a password box has password for watermark purposes.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if it has password; otherwise, <c>false</c>.
+        /// </value>
         public bool HasPassword
         {
             get { return (bool)GetValue(HasPasswordProperty); }
             //set { SetValue(HasPasswordProperty, value); }
         }
 
-        private static readonly DependencyProperty HasPasswordProperty = 
+        private static readonly DependencyProperty HasPasswordProperty =
             DependencyProperty.RegisterAttached("HasPassword", typeof(bool), typeof(TextBoxUI), new PropertyMetadata(false));
 
         #endregion
