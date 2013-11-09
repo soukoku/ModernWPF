@@ -32,7 +32,22 @@ namespace ModernWPF.Controls
         public bool HasDialogOpen
         {
             get { return (bool)GetValue(HasDialogOpenProperty); }
-            private set { SetValue(HasDialogOpenProperty, value); }
+            private set
+            {
+                var changed = value != HasDialogOpen;
+                SetValue(HasDialogOpenProperty, value);
+                if (changed)
+                {
+                    if (value)
+                    {
+                        VisualStateManager.GoToState(this, "IsOpen", !SystemParameters.IsRemoteSession);
+                    }
+                    else
+                    {
+                        VisualStateManager.GoToState(this, "IsClosed", !SystemParameters.IsRemoteSession);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -40,8 +55,6 @@ namespace ModernWPF.Controls
         /// </summary>
         static readonly DependencyProperty HasDialogOpenProperty =
             DependencyProperty.Register("HasDialogOpen", typeof(bool), typeof(DialogControlContainer), new PropertyMetadata(false));
-
-
 
 
         /// <summary>
@@ -87,14 +100,16 @@ namespace ModernWPF.Controls
         private void ShowMostRecentDialogIfNecessary()
         {
             var next = _openDialogs.LastOrDefault();
-            this.Content = next;
             if (next == null)
             {
                 HasDialogOpen = false;
+                this.Content = null;
                 if (DisableTarget != null) { DisableTarget.IsEnabled = true; }
             }
             else
             {
+                if (DisableTarget != null) { DisableTarget.IsEnabled = false; }
+                this.Content = next;
                 HasDialogOpen = true;
 
                 var dt = new DispatcherTimer(DispatcherPriority.Send);
@@ -106,7 +121,6 @@ namespace ModernWPF.Controls
                 dt.Interval = TimeSpan.FromMilliseconds(300);
                 dt.Start();
 
-                if (DisableTarget != null) { DisableTarget.IsEnabled = false; }
             }
         }
 

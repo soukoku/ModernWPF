@@ -49,9 +49,10 @@ namespace ModernWPF
         private static void OnHScrollOnWheelPropertyChanged(DependencyObject dpo, DependencyPropertyChangedEventArgs args)
         {
             var scroller = dpo as ScrollViewer;
-            if (dpo is ItemsControl)
+            if (scroller == null)// dpo is ItemsControl)
             {
-                scroller = ((ItemsControl)dpo).TryGetScrollerViewer();
+                //scroller = ((ItemsControl)dpo).TryGetScrollerViewer();
+                scroller = dpo.FindInVisualTree<ScrollViewer>();
             }
 
             if (scroller != null)
@@ -71,21 +72,48 @@ namespace ModernWPF
         static void scroller_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             ScrollViewer scroller = sender as ScrollViewer;
-            if (scroller != null && scroller.ComputedVerticalScrollBarVisibility != Visibility.Visible &&
-                scroller.ComputedHorizontalScrollBarVisibility == Visibility.Visible)
+
+            // only allow h-scroll if not doing v-scroll
+
+            if (scroller != null)
             {
                 if (e.Delta < 0)
                 {
-                    //scroller.LineRight();
-                    scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + 48);
+                    if (!CanVScrollDown(scroller) && CanHScrollRight(scroller))
+                    {
+                        //scroller.LineRight();
+                        scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + 48);
+                        e.Handled = true;
+                    }
                 }
                 else
                 {
-                    //scroller.LineLeft();
-                    scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset - 48);
+                    if (!CanVScrollUp(scroller) && CanHScrollLeft(scroller))
+                    {
+                        //scroller.LineLeft();
+                        scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset - 48);
+                        e.Handled = true;
+                    }
                 }
-                e.Handled = true;
             }
+        }
+
+        static bool CanVScrollDown(ScrollViewer scroller)
+        {
+            return scroller.ScrollableHeight > 0 && scroller.VerticalOffset < scroller.ScrollableHeight;
+        }
+        static bool CanHScrollRight(ScrollViewer scroller)
+        {
+            return scroller.ScrollableWidth > 0 && scroller.HorizontalOffset < scroller.ScrollableWidth;
+        }
+
+        static bool CanVScrollUp(ScrollViewer scroller)
+        {
+            return scroller.ScrollableHeight > 0 && scroller.VerticalOffset > 0;
+        }
+        static bool CanHScrollLeft(ScrollViewer scroller)
+        {
+            return scroller.ScrollableWidth > 0 && scroller.HorizontalOffset > 0;
         }
 
         #endregion

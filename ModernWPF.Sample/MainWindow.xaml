@@ -4,7 +4,7 @@
         xmlns:modern="http://modernwpf"
         xmlns:local="clr-namespace:ModernWPF.Sample"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Title="ModernWPF - Test" Height="610" Width="1000"
+        Title="ModernWPF - Test" Height="610" Width="1020"
         Icon="Icon.ico"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindow}">
@@ -19,7 +19,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <!--<ScrollViewer HorizontalScrollBarVisibility="Auto">-->
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
             <DockPanel Margin="8">
                 <StackPanel Width="250" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8">
                     <TextBlock TextWrapping="Wrap" 
@@ -132,16 +132,19 @@
                         <ListBoxItem Content="disabled item" IsSelected="True" IsEnabled="False"></ListBoxItem>
                         <ListBoxItem Content="listbox item 3"></ListBoxItem>
                     </ListBox>
-                    <ListBox Margin="2" DockPanel.Dock="Top" x:Name="virtualListBox">
+                    <ListBox Margin="2" DockPanel.Dock="Top" x:Name="virtualListBox" Height="200" VerticalAlignment="Top">
                     </ListBox>
                 </DockPanel>
 
-                <ScrollViewer HorizontalAlignment="Left" Width="100"
-                              VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                    <Border Background="#FFF58383"></Border>
+                <ScrollViewer HorizontalAlignment="Left" Width="120"
+                              VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"
+                              modern:ScrollViewerUI.OverContent="True">
+                    <Border Background="#FFF58383">
+                        <TextBlock Text="Scrollbar can also be over content"></TextBlock>
+                    </Border>
                 </ScrollViewer>
             </DockPanel>
-            <!--</ScrollViewer>-->
+            </ScrollViewer>
 
             <StackPanel Orientation="Vertical" Grid.Row="1">
 

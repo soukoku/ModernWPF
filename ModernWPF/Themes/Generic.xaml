@@ -112,24 +112,57 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
         <Setter Property="Background" Value="{DynamicResource OverlayBackground}"></Setter>
-        <Setter Property="Visibility" Value="Collapsed"></Setter>
+        <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:DialogControlContainer">
                     <Border Background="{TemplateBinding Background}"
                             KeyboardNavigation.TabNavigation="Cycle"
                             KeyboardNavigation.ControlTabNavigation="Cycle"
-                            KeyboardNavigation.DirectionalNavigation="Cycle">
+                            KeyboardNavigation.DirectionalNavigation="Cycle"
+                            Opacity="0">
                         <ContentPresenter x:Name="PART_Content"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"></ContentPresenter>
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <ContentPresenter.RenderTransform>
+                                <TranslateTransform Y="-200"/>
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="WhateverStates">
+                                <VisualState x:Name="IsClosed">
+                                    <Storyboard>
+                                        <DoubleAnimation To="0" Storyboard.TargetProperty="Opacity" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="IsOpen">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="PART_Content"
+                                                         Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                         To="0">
+                                        </DoubleAnimation>
+                                        <DoubleAnimation To="1" Storyboard.TargetProperty="Opacity" Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.25" To="IsOpen">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <QuadraticEase EasingMode="EaseOut"/>
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                    <VisualTransition GeneratedDuration="0:0:0.25" To="IsClosed">
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
             <Trigger Property="HasDialogOpen" Value="True">
-                <Setter Property="Visibility" Value="Visible"/>
+                <Setter Property="IsHitTestVisible" Value="True"/>
             </Trigger>
         </Style.Triggers>
     </Style>
