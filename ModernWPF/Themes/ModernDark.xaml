@@ -197,7 +197,8 @@
     <SolidColorBrush x:Key="ListBoxForegroundThemeBrush" Color="#FF000000" />
 
     <!--listbox item-->
-    <SolidColorBrush x:Key="ListBoxItemDisabledForegroundThemeBrush" Color="#66FFFFFF" />
+    <!--<SolidColorBrush x:Key="ListBoxItemDisabledForegroundThemeBrush" Color="#66FFFFFF" />-->
+    <SolidColorBrush x:Key="ListBoxItemDisabledForegroundThemeBrush" Color="#66000000" />
     <SolidColorBrush x:Key="ListBoxItemPointerOverBackgroundThemeBrush" Color="#21000000" />
     <SolidColorBrush x:Key="ListBoxItemPointerOverForegroundThemeBrush" Color="#FF000000" />
     <SolidColorBrush x:Key="ListBoxItemPressedBackgroundThemeBrush" Color="#FFD3D3D3" />

@@ -24,6 +24,13 @@ namespace ModernWPF.Sample
         public MainWindow()
         {
             InitializeComponent();
+
+            List<string> list = new List<string>();
+            for (int i = 1; i <= 1000; i++)
+            {
+                list.Add(string.Format("should virtual {0}", i)); 
+            }
+            virtualListBox.ItemsSource = list;
         }
 
 
