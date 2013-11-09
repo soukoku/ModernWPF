@@ -4,7 +4,7 @@
         xmlns:modern="http://modernwpf"
         xmlns:local="clr-namespace:ModernWPF.Sample"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Title="ModernWPF - Test" Height="600" Width="800"
+        Title="ModernWPF - Test" Height="600" Width="1000"
         Icon="Icon.ico"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindow}">
@@ -57,13 +57,8 @@
                             <PasswordBox modern:TextBoxUI.WatermarkText="password with watermark" Margin="2"></PasswordBox>
 
 
-                            <ComboBox SelectedIndex="1" Margin="2">
-                                <ComboBoxItem Content="combo item 1"></ComboBoxItem>
-                                <ComboBoxItem Content="combo item 2"></ComboBoxItem>
-                                <ComboBoxItem Content="combo item 3"></ComboBoxItem>
-                            </ComboBox>
 
-                            <RichTextBox Height="200" HorizontalScrollBarVisibility="Disabled" Margin="2">
+                            <RichTextBox Height="140" HorizontalScrollBarVisibility="Disabled" Margin="2">
                                 <FlowDocument>
                                     <Paragraph>Rich Text Box</Paragraph>
                                     <Paragraph>
@@ -78,11 +73,27 @@
                                 </FlowDocument>
                             </RichTextBox>
                         </StackPanel>
+                        <StackPanel>
+                            <ComboBox SelectedIndex="0" Margin="2">
+                                <ComboBoxItem Content="normal combo 1"></ComboBoxItem>
+                                <ComboBoxItem Content="normal combo 2" IsEnabled="False"></ComboBoxItem>
+                                <ComboBoxItem Content="normal combo 3"></ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox SelectedIndex="1" Margin="2" IsEditable="True">
+                                <ComboBoxItem Content="edit combo 1"></ComboBoxItem>
+                                <ComboBoxItem Content="edit combo 2" IsEnabled="False"></ComboBoxItem>
+                                <ComboBoxItem Content="edit combo 3"></ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox SelectedIndex="0" Margin="2" IsEnabled="False">
+                                <ComboBoxItem Content="disabled combo"></ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
 
                         <StackPanel Margin="2">
                             <Label Content="a label"></Label>
 
-                            <CheckBox Content="a checkbox" IsChecked="True" IsThreeState="True"></CheckBox>
+                            <CheckBox Content="a checkbox"></CheckBox>
+                            <CheckBox Content="three-state checkbox" IsThreeState="True"></CheckBox>
                             <CheckBox Content="disabled checkbox" IsEnabled="False"></CheckBox>
                             <CheckBox Content="disabled checkbox 2" IsChecked="True" IsEnabled="False"></CheckBox>
 
@@ -90,9 +101,9 @@
 
                             <ProgressBar Maximum="100" Value="50" Margin="0 10"></ProgressBar>
                             <ProgressBar IsIndeterminate="True" Margin="0 10"></ProgressBar>
-                        </StackPanel>
+                        <!--</StackPanel>
 
-                        <StackPanel Margin="2">
+                        <StackPanel Margin="2">-->
                             <RadioButton Content="radio button 1"></RadioButton>
                             <RadioButton Content="radio button 2"></RadioButton>
                             <RadioButton Content="radio button 3"></RadioButton>

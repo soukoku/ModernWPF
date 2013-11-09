@@ -15,7 +15,8 @@
     <!--modified from windows app-->
 
     <FontFamily x:Key="SymbolThemeFontFamily">Segoe UI Symbol</FontFamily>
-    <FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>
+    <!--<FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>-->
+    <FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Arial, Verdana</FontFamily>
     <!--<s:Double x:Key="ControlContentThemeFontSize">14.667</s:Double>-->
     <s:Double x:Key="ControlContentThemeFontSize">13</s:Double>
     <SolidColorBrush x:Key="FocusVisualBlackStrokeThemeBrush" Color="Black" />
