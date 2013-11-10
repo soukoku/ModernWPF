@@ -89,7 +89,7 @@ namespace ModernWPF.Controls
                         TargetVerticalOffset = Math.Min(ScrollableHeight, VerticalOffset + largeStep);
                         e.Handled = true;
                     }
-                    else if (this.CanHScrollRight())
+                    else if (this.CanHScrollRight() && ScrollViewerUI.GetHScrollOnWheel(this))
                     {
                         TargetHorizontalOffset = Math.Min(ScrollableWidth, HorizontalOffset + largeStep);
                         e.Handled = true;
@@ -102,7 +102,7 @@ namespace ModernWPF.Controls
                         TargetVerticalOffset = Math.Max(0, VerticalOffset - largeStep);
                         e.Handled = true;
                     }
-                    else if (this.CanHScrollLeft())
+                    else if (this.CanHScrollLeft() && ScrollViewerUI.GetHScrollOnWheel(this))
                     {
                         TargetHorizontalOffset = Math.Max(0, HorizontalOffset - largeStep);
                         e.Handled = true;
