@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:local="clr-namespace:ModernWPF"
     xmlns:ctrl="clr-namespace:ModernWPF.Controls"
@@ -13,6 +14,9 @@
     <conv:NullEmptyNotVisibleConverter x:Key="NullEmptyNotVisible"/>
     <conv:TextCaseConverter x:Key="TextCase"/>
 
+    <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"-->
+    
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -592,7 +596,7 @@
                                     </Button>
                                 </StackPanel>
                             </Grid>
-                            
+
                             <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"></ctrl:DialogControlContainer>
 
                             <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
@@ -883,7 +887,7 @@
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
                                         Grid.Column="0" VerticalAlignment="Center"></ContentPresenter>
 
-                        <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
+                        <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                       IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -990,7 +994,7 @@
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
                                         Grid.Column="0" VerticalAlignment="Center"></ContentPresenter>
 
-                        <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
+                        <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                       IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -1041,7 +1045,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                                 SnapsToDevicePixels="True"
                             Grid.ColumnSpan="2"/>
-                        <ScrollViewer x:Name="PART_ContentHost"
+                        <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost"
                                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                   VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                   IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -1120,7 +1124,7 @@
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
                                         Grid.Column="0" VerticalAlignment="Center"></ContentPresenter>
 
-                        <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
+                        <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                   VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                   Margin="{TemplateBinding BorderThickness}"
@@ -1341,7 +1345,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="TextBox">
-                                            <ScrollViewer x:Name="PART_ContentHost" Background="Transparent"
+                                            <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Background="Transparent"
                                                           Focusable="false" HorizontalScrollBarVisibility="Hidden"
                                                           VerticalScrollBarVisibility="Hidden" />
                                         </ControlTemplate>
@@ -1433,7 +1437,7 @@
                                     BorderBrush="{DynamicResource ComboBoxPopupBorderThemeBrush}"
                                     BorderThickness="{DynamicResource ComboBoxPopupBorderThemeThickness}"
                                     HorizontalAlignment="Stretch">
-                                <ScrollViewer x:Name="ScrollViewer" Foreground="{DynamicResource ComboBoxPopupForegroundThemeBrush}"
+                                <ctrl:AnimatedScrollViewer x:Name="ScrollViewer" Foreground="{DynamicResource ComboBoxPopupForegroundThemeBrush}"
                                               HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                               IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -1442,7 +1446,7 @@
 												KeyboardNavigation.DirectionalNavigation="Contained"
 												SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                     </ItemsPresenter>
-                                </ScrollViewer>
+                                </ctrl:AnimatedScrollViewer>
                             </Border>
                         </Popup>
                     </Grid>
@@ -1513,13 +1517,13 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer x:Name="ScrollViewer"
+                        <ctrl:AnimatedScrollViewer x:Name="ScrollViewer"
                                   Padding="{TemplateBinding Padding}"
                                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                   VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                   IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}">
                             <ItemsPresenter />
-                        </ScrollViewer>
+                        </ctrl:AnimatedScrollViewer>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -2816,7 +2820,8 @@
     <Style TargetType="ScrollBar" BasedOn="{StaticResource ModernScrollBar}"/>
 
     <Style TargetType="ScrollViewer" BasedOn="{StaticResource ModernScrollViewer}"/>
-    
+    <Style TargetType="ctrl:AnimatedScrollViewer" BasedOn="{StaticResource ModernScrollViewer}"/>
+
     <Style TargetType="Thumb" BasedOn="{StaticResource ModernThumb}"/>
     <Style TargetType="Slider" BasedOn="{StaticResource ModernSlider}"/>
 

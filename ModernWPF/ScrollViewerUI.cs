@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernWPF.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,7 +56,8 @@ namespace ModernWPF
                 scroller = dpo.FindInVisualTree<ScrollViewer>();
             }
 
-            if (scroller != null)
+            // animated scroll viewer handles this already so do nothing
+            if (scroller != null && !(scroller is AnimatedScrollViewer))
             {
                 if ((bool)args.NewValue)
                 {
@@ -79,7 +81,7 @@ namespace ModernWPF
             {
                 if (e.Delta < 0)
                 {
-                    if (!CanVScrollDown(scroller) && CanHScrollRight(scroller))
+                    if (!scroller.CanVScrollDown() && scroller.CanHScrollRight())
                     {
                         //scroller.LineRight();
                         scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset + 48);
@@ -88,7 +90,7 @@ namespace ModernWPF
                 }
                 else
                 {
-                    if (!CanVScrollUp(scroller) && CanHScrollLeft(scroller))
+                    if (!scroller.CanVScrollUp() && scroller.CanHScrollLeft())
                     {
                         //scroller.LineLeft();
                         scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset - 48);
@@ -96,24 +98,6 @@ namespace ModernWPF
                     }
                 }
             }
-        }
-
-        static bool CanVScrollDown(ScrollViewer scroller)
-        {
-            return scroller.ScrollableHeight > 0 && scroller.VerticalOffset < scroller.ScrollableHeight;
-        }
-        static bool CanHScrollRight(ScrollViewer scroller)
-        {
-            return scroller.ScrollableWidth > 0 && scroller.HorizontalOffset < scroller.ScrollableWidth;
-        }
-
-        static bool CanVScrollUp(ScrollViewer scroller)
-        {
-            return scroller.ScrollableHeight > 0 && scroller.VerticalOffset > 0;
-        }
-        static bool CanHScrollLeft(ScrollViewer scroller)
-        {
-            return scroller.ScrollableWidth > 0 && scroller.HorizontalOffset > 0;
         }
 
         #endregion
