@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CmdClose" xml:space="preserve">
-    <value>關閉</value>
+    <value>关闭</value>
   </data>
   <data name="CmdCopy" xml:space="preserve">
-    <value>複製</value>
+    <value>复制</value>
   </data>
   <data name="CmdCut" xml:space="preserve">
-    <value>剪下</value>
+    <value>剪切</value>
   </data>
   <data name="CmdDelete" xml:space="preserve">
-    <value>刪除</value>
+    <value>删除</value>
   </data>
   <data name="CmdMaximize" xml:space="preserve">
     <value>最大化</value>
@@ -136,18 +136,18 @@
     <value>最小化</value>
   </data>
   <data name="CmdPaste" xml:space="preserve">
-    <value>貼上</value>
+    <value>粘贴</value>
   </data>
   <data name="CmdRedo" xml:space="preserve">
     <value>重做</value>
   </data>
   <data name="CmdRestore" xml:space="preserve">
-    <value>往下還原</value>
+    <value>向下还原</value>
   </data>
   <data name="CmdSelectAll" xml:space="preserve">
-    <value>全選</value>
+    <value>全选</value>
   </data>
   <data name="CmdUndo" xml:space="preserve">
-    <value>復原</value>
+    <value>撤销</value>
   </data>
 </root>
