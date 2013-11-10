@@ -522,7 +522,7 @@
                             <Rectangle x:Name="PART_Caption" 
                                        HorizontalAlignment="Stretch" VerticalAlignment="Top"
                                        Grid.ColumnSpan="2" 
-                                       Height="{Binding Path=(local:Chrome.Chrome).CaptionHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                       Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}"
                                        ></Rectangle>
 
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
@@ -542,7 +542,7 @@
                                 <DockPanel>
                                     <Image Source="{TemplateBinding Icon}" Width="24" Height="24"
                                            Margin="8 4 0 4" VerticalAlignment="Center"
-                                           Visibility="{Binding Path=(local:Chrome.Chrome).ShowCaptionIcon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"
+                                           Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"
                                            DockPanel.Dock="Left"></Image>
 
                                     <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
@@ -550,7 +550,7 @@
                                                HorizontalAlignment="Left"
                                                FontSize="15" Margin="{DynamicResource ContentThemePadding}"
                                                Style="{StaticResource ModernTextBlock}"
-                                               Visibility="{Binding Path=(local:Chrome.Chrome).ShowCaptionText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"></TextBlock>
+                                               Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"></TextBlock>
                                 </DockPanel>
 
 

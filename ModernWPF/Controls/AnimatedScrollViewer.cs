@@ -267,7 +267,7 @@ namespace ModernWPF.Controls
             set { SetValue(TargetVerticalOffsetProperty, value); }
         }
         /// <summary>
-        /// DP for <see cref="TargetVerticalOffset"/>.
+        /// The dependency property for <see cref="TargetVerticalOffset"/>.
         /// </summary>
         public static readonly DependencyProperty TargetVerticalOffsetProperty =
             DependencyProperty.Register("TargetVerticalOffset", typeof(double), typeof(AnimatedScrollViewer),
@@ -298,7 +298,7 @@ namespace ModernWPF.Controls
             set { SetValue(TargetHorizontalOffsetProperty, value); }
         }
         /// <summary>
-        /// DP for <see cref="TargetHorizontalOffset"/>.
+        /// The dependency property for <see cref="TargetHorizontalOffset"/>.
         /// </summary>
         public static readonly DependencyProperty TargetHorizontalOffsetProperty =
             DependencyProperty.Register("TargetHorizontalOffset", typeof(double), typeof(AnimatedScrollViewer),
@@ -329,7 +329,7 @@ namespace ModernWPF.Controls
             set { SetValue(HorizontalScrollOffsetProperty, value); }
         }
         /// <summary>
-        /// DP for <see cref="HorizontalScrollOffset"/>.
+        /// The dependency property for <see cref="HorizontalScrollOffset"/>.
         /// </summary>
         public static readonly DependencyProperty HorizontalScrollOffsetProperty =
             DependencyProperty.Register("HorizontalScrollOffset", typeof(double), typeof(AnimatedScrollViewer),
@@ -354,7 +354,7 @@ namespace ModernWPF.Controls
             set { SetValue(VerticalScrollOffsetProperty, value); }
         }
         /// <summary>
-        /// DP for <see cref="VerticalScrollOffset"/>.
+        /// The dependency property for <see cref="VerticalScrollOffset"/>.
         /// </summary>
         public static readonly DependencyProperty VerticalScrollOffsetProperty =
             DependencyProperty.Register("VerticalScrollOffset", typeof(double), typeof(AnimatedScrollViewer),
@@ -384,7 +384,7 @@ namespace ModernWPF.Controls
         }
 
         /// <summary>
-        /// DP for <see cref="AnimateScroll"/>.
+        /// The dependency property for <see cref="AnimateScroll"/>.
         /// </summary>
         public static readonly DependencyProperty AnimateScrollProperty =
             DependencyProperty.Register("AnimateScroll", typeof(bool), typeof(AnimatedScrollViewer), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.Inherits));
@@ -405,7 +405,7 @@ namespace ModernWPF.Controls
         }
 
         /// <summary>
-        /// DP for <see cref="AnimateDuration"/>.
+        /// The dependency property for <see cref="AnimateDuration"/>.
         /// </summary>
         public static readonly DependencyProperty AnimateDurationProperty =
             DependencyProperty.Register("AnimateDuration", typeof(TimeSpan), typeof(AnimatedScrollViewer), new PropertyMetadata(new TimeSpan(0, 0, 0, 0, 250)));

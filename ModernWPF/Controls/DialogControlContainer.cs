@@ -51,7 +51,7 @@ namespace ModernWPF.Controls
         }
 
         /// <summary>
-        /// DP for <see cref="HasDialogOpen"/>.
+        /// The dependency property for <see cref="HasDialogOpen"/>.
         /// </summary>
         static readonly DependencyProperty HasDialogOpenProperty =
             DependencyProperty.Register("HasDialogOpen", typeof(bool), typeof(DialogControlContainer), new PropertyMetadata(false));
@@ -70,7 +70,7 @@ namespace ModernWPF.Controls
         }
 
         /// <summary>
-        /// DP for <see cref="DisableTarget"/>.
+        /// The dependency property for <see cref="DisableTarget"/>.
         /// </summary>
         public static readonly DependencyProperty DisableTargetProperty =
             DependencyProperty.Register("DisableTarget", typeof(FrameworkElement), typeof(DialogControlContainer), new PropertyMetadata(null));

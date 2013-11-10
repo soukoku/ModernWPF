@@ -66,15 +66,15 @@ namespace ModernWPF.Controls
         Window _contentWindow;
         DispatcherTimer _showTimer;
 
-        public BorderWindow(Chrome chrome, Window contentWindow)
+        public BorderWindow(Window contentWindow)
         {
             _id = ++__seed;
             _contentWindow = contentWindow;
 
+            var chrome = Chrome.GetChrome(_contentWindow);
             BindingTo("IsActive", contentWindow, IsContentActiveProperty);
-            BindingTo(Chrome.ResizeBorderThicknessProperty.Name, chrome, BorderThicknessProperty);
-            BindingTo(Chrome.ActiveBorderBrushProperty.Name, chrome, BorderBrushProperty);
-            BindingTo(Chrome.InactiveBorderBrushProperty.Name, chrome, InactiveBorderBrushProperty);
+
+            UpdateChromeBindings(chrome);
 
             _showTimer = new DispatcherTimer();
             // magic # for windows animation duration
@@ -86,6 +86,13 @@ namespace ModernWPF.Controls
                 if (_contentWindow != null)
                     _contentWindow.Activate();
             };
+        }
+
+        internal void UpdateChromeBindings(Chrome chrome)
+        {
+            BindingTo(Chrome.ResizeBorderThicknessProperty.Name, chrome, BorderThicknessProperty);
+            BindingTo(Chrome.ActiveBorderBrushProperty.Name, chrome, BorderBrushProperty);
+            BindingTo(Chrome.InactiveBorderBrushProperty.Name, chrome, InactiveBorderBrushProperty);
         }
 
         private void BindingTo(string sourcePath, object source, DependencyProperty bindToProperty)
@@ -101,7 +108,6 @@ namespace ModernWPF.Controls
             _contentWindow = null;
             BindingOperations.ClearBinding(this, IsContentActiveProperty);
             BindingOperations.ClearBinding(this, BorderThicknessProperty);
-            this.DataContext = null;
             base.OnClosed(e);
         }
 

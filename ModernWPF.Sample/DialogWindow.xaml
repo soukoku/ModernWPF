@@ -4,10 +4,11 @@
         xmlns:modern="http://modernwpf"
         Title="Dialog Window" Height="300" Width="300"
         ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        modern:Chrome.ShowCaptionIcon="False"
+        modern:Chrome.CaptionHeight="60"
         Style="{StaticResource ModernWindow}">
     <modern:Chrome.Chrome>
-        <modern:Chrome ShowCaptionIcon="False" CaptionHeight="60"
-                       ActiveBorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
+        <modern:Chrome ActiveBorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
                        ActiveCaptionBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" 
                        ActiveCaptionForeground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" 
                        InactiveBorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}" 

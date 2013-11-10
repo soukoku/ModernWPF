@@ -64,7 +64,7 @@ namespace ModernWPF.Controls
         }
 
         /// <summary>
-        /// DP for <see cref="CloseOnEscapeKey"/>.
+        /// The dependency property for <see cref="CloseOnEscapeKey"/>.
         /// </summary>
         public static readonly DependencyProperty CloseOnEscapeKeyProperty =
             DependencyProperty.Register("CloseOnEscapeKey", typeof(bool), typeof(DialogControl), new PropertyMetadata(true));

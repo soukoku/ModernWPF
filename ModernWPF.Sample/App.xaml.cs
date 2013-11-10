@@ -14,7 +14,7 @@ namespace ModernWPF.Sample
     /// </summary>
     public partial class App : Application
     {
-        bool testCulture = false;
+        bool testCulture = true;
 
         protected override void OnStartup(StartupEventArgs e)
         {
