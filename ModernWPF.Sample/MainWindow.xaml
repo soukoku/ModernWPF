@@ -42,12 +42,18 @@
                             <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
                             <TextBox Text="with leading content" Margin="2">
                                 <modern:TextBoxUI.LeadingElement>
-                                    <TextBlock Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0 -4 0"/>
+                                    <Border Background="{DynamicResource ModernAccent}" Margin="2 2 0 2" VerticalAlignment="Stretch">
+                                        <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
+                                                   VerticalAlignment="Center"/>
+                                    </Border>
                                 </modern:TextBoxUI.LeadingElement>
                             </TextBox>
                             <TextBox Text="with trailing content" Margin="2">
                                 <modern:TextBoxUI.TrailingElement>
-                                    <TextBlock Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0 -4 0"/>
+                                    <Border Background="{DynamicResource ModernAccent}" Margin="0 2 2 2" VerticalAlignment="Stretch">
+                                        <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
+                                                   VerticalAlignment="Center"/>
+                                    </Border>
                                 </modern:TextBoxUI.TrailingElement>
                             </TextBox>
                             <TextBox Text="" modern:TextBoxUI.WatermarkText="with watermark" Margin="2"></TextBox>
@@ -118,7 +124,7 @@
                             <ToggleButton Content="toggle button"></ToggleButton>
 
                             <RepeatButton Content="repeat button"></RepeatButton>
-                            
+
                             <Button Content="hyperlink button" Style="{StaticResource ModernHyperlinkButton}"></Button>
                         </StackPanel>
                     </StackPanel>

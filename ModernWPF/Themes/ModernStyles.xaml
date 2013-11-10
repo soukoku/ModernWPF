@@ -949,7 +949,7 @@
                                 />
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                        Grid.Column="0" VerticalAlignment="Center"></ContentPresenter>
+                                        Grid.Column="0" VerticalAlignment="Stretch"></ContentPresenter>
 
                         <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -973,13 +973,13 @@
                         </Border>
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="2" VerticalAlignment="Center"></ContentPresenter>
+                                          Grid.Column="3" VerticalAlignment="Stretch"></ContentPresenter>
 
                         <Button x:Name="DeleteButton"
                                 Style="{DynamicResource DeleteButtonStyle}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 IsTabStop="False"
-                                Grid.Column="3"
+                                Grid.Column="2"
                                 DataContext="{StaticResource txtCmd}"
                                 Command="{Binding ClearTextCommand}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
@@ -1056,7 +1056,7 @@
                                 />
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                        Grid.Column="0" VerticalAlignment="Center"></ContentPresenter>
+                                        Grid.Column="0" VerticalAlignment="Stretch"></ContentPresenter>
 
                         <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -1067,7 +1067,7 @@
                                       IsTabStop="False" />
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="2" VerticalAlignment="Center"></ContentPresenter>
+                                          Grid.Column="2" VerticalAlignment="Stretch"></ContentPresenter>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
@@ -1186,7 +1186,7 @@
                                 Grid.ColumnSpan="3"/>
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                        Grid.Column="0" VerticalAlignment="Center"></ContentPresenter>
+                                        Grid.Column="0" VerticalAlignment="Stretch"></ContentPresenter>
 
                         <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -1209,7 +1209,7 @@
                         </Border>
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="2" VerticalAlignment="Center"></ContentPresenter>
+                                          Grid.Column="2" VerticalAlignment="Stretch"></ContentPresenter>
 
                     </Grid>
                     <ControlTemplate.Triggers>
