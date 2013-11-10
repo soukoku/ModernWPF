@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,7 @@ namespace ModernWPF.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            if (DesignerProperties.GetIsInDesignMode(this)) { return; }
 
             ScrollBar aniVScroll = base.GetTemplateChild("PART_AniVerticalScrollBar") as ScrollBar;
             if (aniVScroll != null)

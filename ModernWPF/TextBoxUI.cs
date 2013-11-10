@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -127,6 +128,8 @@ namespace ModernWPF
 
         static void WatermarkChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            if (DesignerProperties.GetIsInDesignMode(d)) { return; }
+
             // extra handling for password
             // leak if never got unset?
             var pb = d as PasswordBox;

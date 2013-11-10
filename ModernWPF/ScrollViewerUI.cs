@@ -1,6 +1,7 @@
 ﻿using ModernWPF.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -47,19 +48,21 @@ namespace ModernWPF
             obj.SetValue(HScrollOnWheelProperty, value);
         }
 
-        private static void OnHScrollOnWheelPropertyChanged(DependencyObject dpo, DependencyPropertyChangedEventArgs args)
+        private static void OnHScrollOnWheelPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var scroller = dpo as ScrollViewer;
+            if (DesignerProperties.GetIsInDesignMode(d)) { return; }
+
+            var scroller = d as ScrollViewer;
             if (scroller == null)// dpo is ItemsControl)
             {
                 //scroller = ((ItemsControl)dpo).TryGetScrollerViewer();
-                scroller = dpo.FindInVisualTree<ScrollViewer>();
+                scroller = d.FindInVisualTree<ScrollViewer>();
             }
 
             // animated scroll viewer handles this already so do nothing
             if (scroller != null && !(scroller is AnimatedScrollViewer))
             {
-                if ((bool)args.NewValue)
+                if ((bool)e.NewValue)
                 {
                     scroller.PreviewMouseWheel -= scroller_PreviewMouseWheel;
                     scroller.PreviewMouseWheel += scroller_PreviewMouseWheel;
