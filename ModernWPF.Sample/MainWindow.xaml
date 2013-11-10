@@ -118,6 +118,8 @@
                             <ToggleButton Content="toggle button"></ToggleButton>
 
                             <RepeatButton Content="repeat button"></RepeatButton>
+                            
+                            <Button Content="hyperlink button" Style="{StaticResource ModernHyperlinkButton}"></Button>
                         </StackPanel>
                     </StackPanel>
 

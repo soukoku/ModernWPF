@@ -70,10 +70,9 @@ namespace ModernWPF.Controls
         {
             _id = ++__seed;
             _contentWindow = contentWindow;
-
             var chrome = Chrome.GetChrome(_contentWindow);
-            BindingTo("IsActive", contentWindow, IsContentActiveProperty);
 
+            BindingTo("IsActive", contentWindow, IsContentActiveProperty);
             UpdateChromeBindings(chrome);
 
             _showTimer = new DispatcherTimer();
@@ -108,6 +107,8 @@ namespace ModernWPF.Controls
             _contentWindow = null;
             BindingOperations.ClearBinding(this, IsContentActiveProperty);
             BindingOperations.ClearBinding(this, BorderThicknessProperty);
+            BindingOperations.ClearBinding(this, BorderBrushProperty);
+            BindingOperations.ClearBinding(this, InactiveBorderBrushProperty);
             base.OnClosed(e);
         }
 
@@ -139,11 +140,6 @@ namespace ModernWPF.Controls
                 SetWindowPosOptions.SWP_NOZORDER |
                 SetWindowPosOptions.SWP_NOMOVE |
                 SetWindowPosOptions.SWP_NOSIZE);
-
-            // make the border window behind the content window.
-            // commented out to test another method
-            //var cwHwnd = new WindowInteropHelper(_contentWindow).Handle;
-            //User32.SetWindowLong(cwHwnd, WindowLong.GWL_HWNDPARENT, hwnd);
         }
 
         /// <summary>

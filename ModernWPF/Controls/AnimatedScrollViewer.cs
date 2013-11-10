@@ -24,10 +24,19 @@ namespace ModernWPF.Controls
         static AnimatedScrollViewer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AnimatedScrollViewer), new FrameworkPropertyMetadata(typeof(AnimatedScrollViewer)));
-        }   
-        
+        }
+
+        const int smallStep = 16;
+        const int largeStep = 48;
         ScrollBar _aniVerticalScrollBar;
         ScrollBar _aniHorizontalScrollBar;
+        ScrollBar _realVerticalScrollBar;
+        ScrollBar _realHorizontalScrollBar;
+        bool _isHAnimating;
+        bool _isVAnimating;
+        bool _isHOverride;
+        bool _isVOverride;
+
 
         #region ScrollViewer Override Methods
 
@@ -39,24 +48,32 @@ namespace ModernWPF.Controls
             base.OnApplyTemplate();
             if (DesignerProperties.GetIsInDesignMode(this)) { return; }
 
-            ScrollBar aniVScroll = base.GetTemplateChild("PART_AniVerticalScrollBar") as ScrollBar;
-            if (aniVScroll != null)
+            _realVerticalScrollBar = GetTemplateChild("PART_VerticalScrollBar") as ScrollBar;
+            if (_realVerticalScrollBar != null)
             {
-                _aniVerticalScrollBar = aniVScroll;
+                _realVerticalScrollBar.ValueChanged += _realVerticalScrollBar_ValueChanged;
             }
-            _aniVerticalScrollBar.ValueChanged += new RoutedPropertyChangedEventHandler<double>(VScrollBar_ValueChanged);
 
-            ScrollBar aniHScroll = base.GetTemplateChild("PART_AniHorizontalScrollBar") as ScrollBar;
-            if (aniHScroll != null)
+            _realHorizontalScrollBar = GetTemplateChild("PART_HorizontalScrollBar") as ScrollBar;
+            if (_realHorizontalScrollBar != null)
             {
-                _aniHorizontalScrollBar = aniHScroll;
+                _realHorizontalScrollBar.ValueChanged += _realHorizontalScrollBar_ValueChanged;
             }
-            _aniHorizontalScrollBar.ValueChanged += new RoutedPropertyChangedEventHandler<double>(HScrollBar_ValueChanged);
+
+            _aniVerticalScrollBar = GetTemplateChild("PART_AniVerticalScrollBar") as ScrollBar;
+            if (_aniVerticalScrollBar != null)
+            {
+                _aniVerticalScrollBar.ValueChanged += new RoutedPropertyChangedEventHandler<double>(AniVScrollBar_ValueChanged);
+            }
+
+            _aniHorizontalScrollBar = GetTemplateChild("PART_AniHorizontalScrollBar") as ScrollBar;
+            if (_aniHorizontalScrollBar != null)
+            {
+                _aniHorizontalScrollBar.ValueChanged += new RoutedPropertyChangedEventHandler<double>(AniHScrollBar_ValueChanged);
+            }
         }
 
 
-        const int smallStep = 16;
-        const int largeStep = 48;
         /// <summary>
         /// Invoked when an unhandled <see cref="E:System.Windows.Input.Mouse.PreviewMouseWheel" /> attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
         /// </summary>
@@ -185,7 +202,29 @@ namespace ModernWPF.Controls
 
         #region Custom Event Handlers
 
-        void VScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        // if the real scroll bar changed outside of animation then also update the fake scrollbars
+
+        void _realHorizontalScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!_isHAnimating)
+            {
+                _isHOverride = true;
+                TargetHorizontalOffset = e.NewValue;
+                _isHOverride = false;
+            }
+        }
+
+        void _realVerticalScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!_isVAnimating)
+            {
+                _isVOverride = true;
+                TargetVerticalOffset = e.NewValue;
+                _isVOverride = false;
+            }
+        }
+
+        void AniVScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double oldTargetVOffset = (double)e.OldValue;
             double newTargetVOffset = (double)e.NewValue;
@@ -218,7 +257,7 @@ namespace ModernWPF.Controls
             }
         }
 
-        void HScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        void AniHScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double oldTargetHOffset = (double)e.OldValue;
             double newTargetHOffset = (double)e.NewValue;
@@ -281,8 +320,10 @@ namespace ModernWPF.Controls
             {
                 thisScroller._aniVerticalScrollBar.Value = (double)e.NewValue;
             }
-
-            thisScroller.AnimateNow();
+            if (!thisScroller._isVOverride)
+            {
+                thisScroller.AnimateNow();
+            }
         }
 
         #endregion
@@ -313,7 +354,10 @@ namespace ModernWPF.Controls
                 thisScroller._aniHorizontalScrollBar.Value = (double)e.NewValue;
             }
 
-            thisScroller.AnimateNow();
+            if (!thisScroller._isHOverride)
+            {
+                thisScroller.AnimateNow();
+            }
         }
 
         #endregion
@@ -452,14 +496,19 @@ namespace ModernWPF.Controls
                 KeySpline targetKeySpline = AnimateSpline;
 
                 DoubleAnimationUsingKeyFrames animateHScrollKeyFramed = new DoubleAnimationUsingKeyFrames();
+                animateHScrollKeyFramed.Completed += (s, e) => { _isHAnimating = false; };
                 DoubleAnimationUsingKeyFrames animateVScrollKeyFramed = new DoubleAnimationUsingKeyFrames();
+                animateVScrollKeyFramed.Completed += (s, e) => { _isVAnimating = false; };
 
                 SplineDoubleKeyFrame HScrollKey1 = new SplineDoubleKeyFrame(TargetHorizontalOffset, targetKeyTime, targetKeySpline);
                 SplineDoubleKeyFrame VScrollKey1 = new SplineDoubleKeyFrame(TargetVerticalOffset, targetKeyTime, targetKeySpline);
                 animateHScrollKeyFramed.KeyFrames.Add(HScrollKey1);
                 animateVScrollKeyFramed.KeyFrames.Add(VScrollKey1);
 
+                _isHAnimating = true;
                 BeginAnimation(HorizontalScrollOffsetProperty, animateHScrollKeyFramed);
+
+                _isVAnimating = true;
                 BeginAnimation(VerticalScrollOffsetProperty, animateVScrollKeyFramed);
 
                 //CommandBindingCollection testCollection = CommandBindings;
@@ -467,8 +516,13 @@ namespace ModernWPF.Controls
             }
             else
             {
+                _isHAnimating = true;
                 HorizontalScrollOffset = TargetHorizontalOffset;
+                _isHAnimating = false;
+
+                _isVAnimating = true;
                 VerticalScrollOffset = TargetVerticalOffset;
+                _isVAnimating = false;
             }
 
         }

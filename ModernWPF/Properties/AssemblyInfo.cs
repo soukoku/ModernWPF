@@ -54,5 +54,5 @@ static class _VersionString
     // keep this same in majors releases
     public const string Release = "1.0.0.0";
     // change this for each nuget release
-    public const string Build = "1.1.12";
+    public const string Build = "1.1.13";
 }

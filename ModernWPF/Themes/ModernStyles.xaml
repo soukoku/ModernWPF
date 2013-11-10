@@ -16,10 +16,10 @@
 
     <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"-->
-    
+
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=FontSize, Converter={StaticResource IsSmallFont}}"
@@ -35,7 +35,7 @@
     </Style>
 
     <Style x:Key="ModernLabel" TargetType="Label">
-        <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}"/>
     </Style>
 
     <!--buttons-->
@@ -126,7 +126,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
-        <Setter Property="Opacity" Value=".8"></Setter>
+        <Setter Property="Opacity" Value=".8"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ButtonBase">
@@ -442,6 +442,70 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="ModernHyperlinkButton" TargetType="ButtonBase">
+        <Setter Property="Foreground" Value="{DynamicResource HyperlinkForegroundThemeBrush}" />
+        <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundThemeBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource HyperlinkButtonBorderThemeBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource HyperlinkButtonBorderThemeThickness}" />
+        <Setter Property="Padding" Value="12,4,12,4" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ButtonBase">
+                    <Grid>
+                        <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="3">
+                            <TextBlock x:Name="MainContent"
+                                       Margin="{TemplateBinding Padding}" 
+                                       Text="{TemplateBinding Content}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                       TextDecorations="Underline"/>
+                        </Border>
+                        <Rectangle x:Name="FocusVisualWhite"
+                               IsHitTestVisible="False"
+                               Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="1.5" />
+                        <Rectangle x:Name="FocusVisualBlack"
+                               IsHitTestVisible="False"
+                               Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="0.5" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="Opacity" TargetName="FocusVisualWhite" Value="1" />
+                            <Setter Property="Opacity" TargetName="FocusVisualBlack" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource HyperlinkPointerOverForegroundThemeBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource HyperlinkPressedForegroundThemeBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource HyperlinkDisabledThemeBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <Style x:Key="ModernCaptionButton" TargetType="Button">
         <Setter Property="BorderThickness" Value="1"/>
@@ -605,12 +669,12 @@
                     </AdornerDecorator>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="True">
-                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsActive" Value="False">
-                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
-                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -628,7 +692,7 @@
 
     <!--status-->
     <Style x:Key="ModernStatusBar" TargetType="StatusBar">
-        <Setter Property="Padding" Value="4 1"></Setter>
+        <Setter Property="Padding" Value="4 1"/>
         <Setter Property="Background" Value="{DynamicResource ModernAccent}" />
         <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
@@ -1864,12 +1928,12 @@
     </Style>
 
     <Style x:Key="ModernScrollViewer" TargetType="ScrollViewer">
-        <Setter Property="local:ScrollViewerUI.HScrollOnWheel" Value="True"></Setter>
-        <Setter Property="IsTabStop" Value="False"></Setter>
+        <Setter Property="local:ScrollViewerUI.HScrollOnWheel" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto"></Setter>
-        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"></Setter>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -1932,11 +1996,11 @@
     </Style>
 
     <Style x:Key="ModernAnimatedScrollViewer" TargetType="ScrollViewer">
-        <Setter Property="IsTabStop" Value="False"></Setter>
+        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto"></Setter>
-        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"></Setter>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -1979,7 +2043,7 @@
                                        Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
                                        Value="0" 
                                        ViewportSize="{TemplateBinding ViewportHeight}"/>
-                            
+
                             <ScrollBar x:Name="PART_HorizontalScrollBar" 
                                        AutomationProperties.AutomationId="HorizontalScrollBar" 
                                        Maximum="{TemplateBinding ScrollableWidth}" 
@@ -2872,32 +2936,32 @@
 
     <Style TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}"/>
 
-    <Style TargetType="Label" BasedOn="{StaticResource ModernLabel}"></Style>
+    <Style TargetType="Label" BasedOn="{StaticResource ModernLabel}"/>
 
-    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}"></Style>
+    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}"/>
 
-    <Style TargetType="ToggleButton" BasedOn="{StaticResource ModernToggleButton}"></Style>
+    <Style TargetType="ToggleButton" BasedOn="{StaticResource ModernToggleButton}"/>
 
-    <Style TargetType="RadioButton" BasedOn="{StaticResource ModernRadioButton}"></Style>
+    <Style TargetType="RadioButton" BasedOn="{StaticResource ModernRadioButton}"/>
 
-    <Style TargetType="RepeatButton" BasedOn="{StaticResource ModernRepeatButton}"></Style>
+    <Style TargetType="RepeatButton" BasedOn="{StaticResource ModernRepeatButton}"/>
 
     <Style TargetType="StatusBar" BasedOn="{StaticResource ModernStatusBar}"/>
 
     <Style TargetType="StatusBarItem" BasedOn="{StaticResource ModernStatusBarItem}"/>
 
-    <Style TargetType="ToolTip" BasedOn="{StaticResource ModernToolTip}"></Style>
+    <Style TargetType="ToolTip" BasedOn="{StaticResource ModernToolTip}"/>
 
-    <Style TargetType="CheckBox" BasedOn="{StaticResource ModernCheckBox}"></Style>
+    <Style TargetType="CheckBox" BasedOn="{StaticResource ModernCheckBox}"/>
 
-    <Style TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}"></Style>
+    <Style TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}"/>
 
-    <Style TargetType="RichTextBox" BasedOn="{StaticResource ModernRichTextBox}"></Style>
+    <Style TargetType="RichTextBox" BasedOn="{StaticResource ModernRichTextBox}"/>
 
-    <Style TargetType="PasswordBox" BasedOn="{StaticResource ModernPasswordBox}"></Style>
+    <Style TargetType="PasswordBox" BasedOn="{StaticResource ModernPasswordBox}"/>
 
-    <Style TargetType="ComboBox" BasedOn="{StaticResource ModernComboBox}"></Style>
-    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ModernComboBoxItem}"></Style>
+    <Style TargetType="ComboBox" BasedOn="{StaticResource ModernComboBox}"/>
+    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ModernComboBoxItem}"/>
 
     <Style TargetType="ProgressBar" BasedOn="{StaticResource ModernProgressBar}"/>
 

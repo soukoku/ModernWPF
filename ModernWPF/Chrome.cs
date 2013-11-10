@@ -382,7 +382,7 @@ namespace ModernWPF
         /// <summary>
         /// Use this for actual processing since Chrome is freezable and don't want to keep states there.
         /// </summary>
-        class ChromeWorker : DependencyObject
+        sealed class ChromeWorker : DependencyObject
         {
             public static ChromeWorker GetWorker(DependencyObject obj)
             {
