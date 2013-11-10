@@ -20,6 +20,12 @@ namespace ModernWPF.Controls
 
         #region properties
 
+        /// <summary>
+        /// Gets or sets the current container reference. This should only be set by <see cref="DialogControlContainer"/>.
+        /// </summary>
+        /// <value>
+        /// The container.
+        /// </value>
         internal DialogControlContainer Container { get; set; }
 
         private bool? _diaglogResult;
@@ -128,9 +134,6 @@ namespace ModernWPF.Controls
         public void ShowDialog(DialogControlContainer container)
         {
             if (container == null) { throw new ArgumentNullException("container"); }
-            if (this.Container != null && this.Container != container) { throw new ArgumentException("This dialog already has a container."); }
-
-            this.Container = container;
 
             container.Show(this);
         }

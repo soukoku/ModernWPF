@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ModernWPF.Resources;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 
 namespace ModernWPF.Sample
@@ -12,5 +14,17 @@ namespace ModernWPF.Sample
     /// </summary>
     public partial class App : Application
     {
+        bool testCulture = false;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            if (testCulture)
+            {
+                var zhTW = new System.Globalization.CultureInfo("zh-TW");
+                Thread.CurrentThread.CurrentUICulture = zhTW;
+                //CommandTextBinder.Current.UpdateCulture(zhTW);
+            }
+            base.OnStartup(e);
+        }
     }
 }

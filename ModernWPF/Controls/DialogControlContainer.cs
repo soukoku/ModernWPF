@@ -83,8 +83,22 @@ namespace ModernWPF.Controls
         object _openLock = new object();
         List<DialogControl> _openDialogs = new List<DialogControl>();
 
+        internal void Close(DialogControl dialog)
+        {
+            lock (_openLock)
+            {
+                dialog.Container = null;
+                _openDialogs.Remove(dialog);
+                ShowMostRecentDialogIfNecessary();
+            }
+        }
+
         internal void Show(DialogControl dialog)
         {
+            if (dialog.Container != null && dialog.Container != this) { throw new ArgumentException("This dialog already has a container.", "dialog"); }
+
+            if (Content == dialog) { return; }
+
             lock (_openLock)
             {
                 if (dialog.Container != null)
@@ -108,6 +122,7 @@ namespace ModernWPF.Controls
             }
             else
             {
+                next.Container = this;
                 if (DisableTarget != null) { DisableTarget.IsEnabled = false; }
                 this.Content = next;
                 HasDialogOpen = true;
@@ -121,16 +136,6 @@ namespace ModernWPF.Controls
                 dt.Interval = TimeSpan.FromMilliseconds(300);
                 dt.Start();
 
-            }
-        }
-
-        internal void Close(DialogControl dialog)
-        {
-            lock (_openLock)
-            {
-                dialog.Container = null;
-                _openDialogs.Remove(dialog);
-                ShowMostRecentDialogIfNecessary();
             }
         }
     }
