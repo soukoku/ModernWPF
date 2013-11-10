@@ -1931,6 +1931,90 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ModernAnimatedScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="IsTabStop" Value="False"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"></Setter>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"></Setter>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollViewer">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
+                        <Grid x:Name="Grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" 
+                                                    CanContentScroll="{TemplateBinding CanContentScroll}" 
+                                                    CanHorizontallyScroll="False" 
+                                                    CanVerticallyScroll="False" 
+                                                    ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                    Content="{TemplateBinding Content}" 
+                                                    Margin="{TemplateBinding Padding}" />
+                            <ScrollBar x:Name="PART_VerticalScrollBar" 
+                                       AutomationProperties.AutomationId="VerticalScrollBar" 
+                                       Grid.Column="1" 
+                                       Maximum="{TemplateBinding ScrollableHeight}" 
+                                       Orientation="Vertical"
+                                       Visibility="Collapsed" 
+                                       Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       ViewportSize="{TemplateBinding ViewportHeight}"/>
+                            <ScrollBar x:Name="PART_AniVerticalScrollBar" 
+                                       AutomationProperties.AutomationId="VerticalScrollBar" 
+                                       Grid.Column="1" 
+                                       Maximum="{TemplateBinding ScrollableHeight}" 
+                                       Orientation="Vertical"
+                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
+                                       Value="0" 
+                                       ViewportSize="{TemplateBinding ViewportHeight}"/>
+                            
+                            <ScrollBar x:Name="PART_HorizontalScrollBar" 
+                                       AutomationProperties.AutomationId="HorizontalScrollBar" 
+                                       Maximum="{TemplateBinding ScrollableWidth}" 
+                                       Orientation="Horizontal" 
+                                       Grid.Row="1" 
+                                       Visibility="Collapsed" 
+                                       Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       ViewportSize="{TemplateBinding ViewportWidth}"/>
+                            <ScrollBar x:Name="PART_AniHorizontalScrollBar" 
+                                       AutomationProperties.AutomationId="HorizontalScrollBar" 
+                                       Maximum="{TemplateBinding ScrollableWidth}" 
+                                       Orientation="Horizontal" 
+                                       Grid.Row="1" 
+                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
+                                       Value="0" 
+                                       ViewportSize="{TemplateBinding ViewportWidth}"/>
+                            <Border x:Name="ScrollBarSeparator"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    BorderThickness="0,0,1,1"
+                                    Background="{DynamicResource ScrollBarTrackBackgroundThemeBrush}"
+                                    BorderBrush="{DynamicResource ScrollBarTrackBorderThemeBrush}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="local:ScrollViewerUI.OverContent" Value="True">
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="2"/>
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--thumb & slider-->
     <Style x:Key="ModernThumb" TargetType="Thumb">
         <Setter Property="Background" Value="{DynamicResource ThumbBackgroundThemeBrush}"/>
@@ -2820,7 +2904,7 @@
     <Style TargetType="ScrollBar" BasedOn="{StaticResource ModernScrollBar}"/>
 
     <Style TargetType="ScrollViewer" BasedOn="{StaticResource ModernScrollViewer}"/>
-    <Style TargetType="ctrl:AnimatedScrollViewer" BasedOn="{StaticResource ModernScrollViewer}"/>
+    <Style TargetType="ctrl:AnimatedScrollViewer" BasedOn="{StaticResource ModernAnimatedScrollViewer}"/>
 
     <Style TargetType="Thumb" BasedOn="{StaticResource ModernThumb}"/>
     <Style TargetType="Slider" BasedOn="{StaticResource ModernSlider}"/>
