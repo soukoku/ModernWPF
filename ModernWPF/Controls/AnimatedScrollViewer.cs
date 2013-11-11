@@ -117,85 +117,84 @@ namespace ModernWPF.Controls
             base.OnPreviewMouseWheel(e);
         }
 
-        //protected override void OnKeyDown(KeyEventArgs e)
-        //{
-        //    if (CanKeyboardScroll)
-        //    {
-        //        Key keyPressed = e.Key;
-        //        double newVerticalPos = TargetVerticalOffset;
-        //        double newHorizontalPos = TargetHorizontalOffset;
-        //        bool isKeyHandled = false;
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            Debug.WriteLine("Got keydown override");
+            if (Keyboard.Modifiers == ModifierKeys.None && CanKeyboardScroll)
+            {
+                switch (e.Key)
+                {
+                    case Key.Down:
+                        if (this.CanVScrollDown())
+                        {
+                            TargetVerticalOffset = NormalizeScrollPos((VerticalOffset + smallStep), Orientation.Vertical);
+                            e.Handled = true;
+                        }
+                        break;
+                    case Key.PageDown:
+                        if (this.CanVScrollDown())
+                        {
+                            TargetVerticalOffset = NormalizeScrollPos((VerticalOffset + ViewportHeight), Orientation.Vertical);
+                            e.Handled = true;
+                        }
+                        break;
+                    case Key.Up:
+                        if (this.CanVScrollUp())
+                        {
+                            TargetVerticalOffset = NormalizeScrollPos((VerticalOffset - smallStep), Orientation.Vertical);
+                            e.Handled = true;
+                        }
+                        break;
+                    case Key.PageUp:
+                        if (this.CanVScrollUp())
+                        {
+                            TargetVerticalOffset = NormalizeScrollPos((VerticalOffset - ViewportHeight), Orientation.Vertical);
+                            e.Handled = true;
+                        }
+                        break;
+                    case Key.Left:
+                        if (this.CanHScrollLeft())
+                        {
+                            TargetHorizontalOffset = NormalizeScrollPos((HorizontalOffset - smallStep), Orientation.Horizontal);
+                            e.Handled = true;
+                        }
+                        break;
+                    case Key.Right:
+                        if (this.CanHScrollRight())
+                        {
+                            TargetHorizontalOffset = NormalizeScrollPos((HorizontalOffset + smallStep), Orientation.Horizontal);
+                            e.Handled = true;
+                        }
+                        break;
+                }
+                if (e.Handled)
+                {
+                    AnimateNow();
+                }
+            }
+            base.OnKeyDown(e);
+        }
 
-        //        //Vertical Key Strokes code
-        //        if (keyPressed == Key.Down)
-        //        {
-        //            newVerticalPos = NormalizeScrollPos((newVerticalPos + 16.0), Orientation.Vertical);
-        //            isKeyHandled = true;
-        //        }
-        //        else if (keyPressed == Key.PageDown)
-        //        {
-        //            newVerticalPos = NormalizeScrollPos((newVerticalPos + ViewportHeight), Orientation.Vertical);
-        //            isKeyHandled = true;
-        //        }
-        //        else if (keyPressed == Key.Up)
-        //        {
-        //            newVerticalPos = NormalizeScrollPos((newVerticalPos - 16.0), Orientation.Vertical);
-        //            isKeyHandled = true;
-        //        }
-        //        else if (keyPressed == Key.PageUp)
-        //        {
-        //            newVerticalPos = NormalizeScrollPos((newVerticalPos - ViewportHeight), Orientation.Vertical);
-        //            isKeyHandled = true;
-        //        }
+        private double NormalizeScrollPos(double scrollChange, Orientation o)
+        {
+            double returnValue = scrollChange;
 
-        //        if (newVerticalPos != TargetVerticalOffset)
-        //        {
-        //            TargetVerticalOffset = newVerticalPos;
-        //        }
+            if (scrollChange < 0)
+            {
+                returnValue = 0;
+            }
 
-        //        //Horizontal Key Strokes Code
+            if (o == Orientation.Vertical && scrollChange > ScrollableHeight)
+            {
+                returnValue = ScrollableHeight;
+            }
+            else if (o == Orientation.Horizontal && scrollChange > ScrollableWidth)
+            {
+                returnValue = ScrollableWidth;
+            }
 
-        //        if (keyPressed == Key.Right)
-        //        {
-        //            newHorizontalPos = NormalizeScrollPos((newHorizontalPos + 16), Orientation.Horizontal);
-        //            isKeyHandled = true;
-        //        }
-        //        else if (keyPressed == Key.Left)
-        //        {
-        //            newHorizontalPos = NormalizeScrollPos((newHorizontalPos - 16), Orientation.Horizontal);
-        //            isKeyHandled = true;
-        //        }
-
-        //        if (newHorizontalPos != TargetHorizontalOffset)
-        //        {
-        //            TargetHorizontalOffset = newHorizontalPos;
-        //        }
-
-        //        e.Handled = isKeyHandled;
-        //    }
-        //    base.OnKeyDown(e);
-        //}
-
-        //private double NormalizeScrollPos(AnimatedScrollViewer thisScroll, double scrollChange, Orientation o)
-        //{
-        //    double returnValue = scrollChange;
-
-        //    if (scrollChange < 0)
-        //    {
-        //        returnValue = 0;
-        //    }
-
-        //    if (o == Orientation.Vertical && scrollChange > thisScroll.ScrollableHeight)
-        //    {
-        //        returnValue = thisScroll.ScrollableHeight;
-        //    }
-        //    else if (o == Orientation.Horizontal && scrollChange > thisScroll.ScrollableWidth)
-        //    {
-        //        returnValue = thisScroll.ScrollableWidth;
-        //    }
-
-        //    return returnValue;
-        //}
+            return returnValue;
+        }
 
 
         #endregion
@@ -471,15 +470,23 @@ namespace ModernWPF.Controls
 
         #region CanKeyboardScroll (Dependency Property)
 
-        //public static readonly DependencyProperty CanKeyboardScrollProperty =
-        //    DependencyProperty.Register("CanKeyboardScroll", typeof(bool), typeof(AnimatedScrollViewer),
-        //        new FrameworkPropertyMetadata((bool)true));
+        /// <summary>
+        /// The dependency property for <see cref="CanKeyboardScroll"/>.
+        /// </summary>
+        public static readonly DependencyProperty CanKeyboardScrollProperty =
+            DependencyProperty.Register("CanKeyboardScroll", typeof(bool), typeof(AnimatedScrollViewer), new FrameworkPropertyMetadata(false));
 
-        //public bool CanKeyboardScroll
-        //{
-        //    get { return (bool)GetValue(CanKeyboardScrollProperty); }
-        //    set { SetValue(CanKeyboardScrollProperty, value); }
-        //}
+        /// <summary>
+        /// Gets or sets a value indicating whether common keyboard navigation keys are used to animate the scroll.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if to detect keyboard keys; otherwise, <c>false</c>.
+        /// </value>
+        public bool CanKeyboardScroll
+        {
+            get { return (bool)GetValue(CanKeyboardScrollProperty); }
+            set { SetValue(CanKeyboardScrollProperty, value); }
+        }
 
         #endregion
 
