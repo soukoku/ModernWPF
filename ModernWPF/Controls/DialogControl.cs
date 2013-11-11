@@ -71,6 +71,28 @@ namespace ModernWPF.Controls
 
 
 
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the disable target specified in the <see cref="DialogControlContainer"/> is disabled when this is shown.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> to disable target; otherwise, <c>false</c>.
+        /// </value>
+        public bool DisableTarget
+        {
+            get { return (bool)GetValue(DisableTargetProperty); }
+            set { SetValue(DisableTargetProperty, value); }
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="CloseOnEscapeKey"/>.
+        /// </summary>
+        public static readonly DependencyProperty DisableTargetProperty =
+            DependencyProperty.Register("DisableTarget", typeof(bool), typeof(DialogControl), new PropertyMetadata(true));
+
+
+
+
         #endregion
 
         #region methods
