@@ -41,6 +41,7 @@
 
     <!--buttons-->
     <Style x:Key="ModernButton" TargetType="Button">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="{DynamicResource ButtonBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderThemeBrush}" />
@@ -117,6 +118,7 @@
     </Style>
 
     <Style x:Key="ModernButtonNoChrome" TargetType="ButtonBase">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -182,6 +184,7 @@
     </Style>
 
     <Style x:Key="ModernToggleButton" TargetType="ToggleButton">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ToggleButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderThemeBrush}" />
@@ -280,6 +283,7 @@
     </Style>
 
     <Style x:Key="ModernRadioButton" TargetType="RadioButton">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource RadioButtonContentForegroundThemeBrush}"/>
@@ -376,6 +380,7 @@
     </Style>
 
     <Style x:Key="ModernRepeatButton" TargetType="RepeatButton">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="{DynamicResource ButtonBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource RepeatButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource RepeatButtonBorderThemeBrush}" />
@@ -444,6 +449,7 @@
     </Style>
 
     <Style x:Key="ModernHyperlinkButton" TargetType="ButtonBase">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Foreground" Value="{DynamicResource HyperlinkForegroundThemeBrush}" />
         <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundThemeBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource HyperlinkButtonBorderThemeBrush}" />
@@ -730,6 +736,7 @@
 
     <!--checkbox-->
     <Style x:Key="ModernCheckBox" TargetType="CheckBox">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource CheckBoxContentForegroundThemeBrush}"/>
@@ -1302,6 +1309,7 @@
     <!--combobox-->
 
     <Style x:Key="ModernComboBoxItem" TargetType="ComboBoxItem">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Foreground" Value="{DynamicResource ComboBoxForegroundThemeBrush}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="8 6" />
@@ -1390,6 +1398,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="ModernComboBox" TargetType="ComboBox">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -1626,6 +1635,7 @@
     </Style>
 
     <Style x:Key="ModernListBoxItem" TargetType="ListBoxItem">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ListBoxForegroundThemeBrush}" />
         <Setter Property="Padding" Value="8 4" />

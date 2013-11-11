@@ -35,7 +35,7 @@ Theme Styles For Windows Presentation Foundation Version
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Calendar">
@@ -960,9 +960,9 @@ Theme Styles For Windows Presentation Foundation Version
     </Style>
 
     <Style x:Key="{x:Static DataGridColumnHeader.ColumnFloatingHeaderStyleKey}" TargetType="{x:Type Control}">
-        <Setter Property="Opacity" Value="0.6"></Setter>
-        <Setter Property="BorderBrush" Value="#FF688CAF"></Setter>
-        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Opacity" Value="0.6"/>
+        <Setter Property="BorderBrush" Value="#FF688CAF"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Control}">
