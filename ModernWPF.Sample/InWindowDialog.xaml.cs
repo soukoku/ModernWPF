@@ -39,5 +39,25 @@ namespace ModernWPF.Sample
         {
             this.DialogResult = false;
         }
+
+        private void btnTop_Click(object sender, RoutedEventArgs e)
+        {
+            VerticalAlignment = System.Windows.VerticalAlignment.Top;
+        }
+
+        private void btnCenter_Click(object sender, RoutedEventArgs e)
+        {
+            VerticalAlignment = System.Windows.VerticalAlignment.Center;
+        }
+
+        private void btnBottom_Click(object sender, RoutedEventArgs e)
+        {
+            VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+        }
+
+        private void btnStretch_Click(object sender, RoutedEventArgs e)
+        {
+            VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+        }
     }
 }

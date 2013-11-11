@@ -26,6 +26,11 @@ namespace ModernWPF.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AnimatedScrollViewer), new FrameworkPropertyMetadata(typeof(AnimatedScrollViewer)));
         }
 
+        const string PART_RealVBar = "PART_VerticalScrollBar";
+        const string PART_RealHBar = "PART_HorizontalScrollBar";
+        const string PART_FakeVBar = "PART_AniVerticalScrollBar";
+        const string PART_FakeHBar = "PART_AniHorizontalScrollBar";
+
         const int smallStep = 16;
         const int largeStep = 48;
         ScrollBar _aniVerticalScrollBar;
@@ -48,25 +53,25 @@ namespace ModernWPF.Controls
             base.OnApplyTemplate();
             if (DesignerProperties.GetIsInDesignMode(this)) { return; }
 
-            _realVerticalScrollBar = GetTemplateChild("PART_VerticalScrollBar") as ScrollBar;
+            _realVerticalScrollBar = GetTemplateChild(PART_RealVBar) as ScrollBar;
             if (_realVerticalScrollBar != null)
             {
                 _realVerticalScrollBar.ValueChanged += _realVerticalScrollBar_ValueChanged;
             }
 
-            _realHorizontalScrollBar = GetTemplateChild("PART_HorizontalScrollBar") as ScrollBar;
+            _realHorizontalScrollBar = GetTemplateChild(PART_RealHBar) as ScrollBar;
             if (_realHorizontalScrollBar != null)
             {
                 _realHorizontalScrollBar.ValueChanged += _realHorizontalScrollBar_ValueChanged;
             }
 
-            _aniVerticalScrollBar = GetTemplateChild("PART_AniVerticalScrollBar") as ScrollBar;
+            _aniVerticalScrollBar = GetTemplateChild(PART_FakeVBar) as ScrollBar;
             if (_aniVerticalScrollBar != null)
             {
                 _aniVerticalScrollBar.ValueChanged += new RoutedPropertyChangedEventHandler<double>(AniVScrollBar_ValueChanged);
             }
 
-            _aniHorizontalScrollBar = GetTemplateChild("PART_AniHorizontalScrollBar") as ScrollBar;
+            _aniHorizontalScrollBar = GetTemplateChild(PART_FakeHBar) as ScrollBar;
             if (_aniHorizontalScrollBar != null)
             {
                 _aniHorizontalScrollBar.ValueChanged += new RoutedPropertyChangedEventHandler<double>(AniHScrollBar_ValueChanged);

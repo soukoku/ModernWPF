@@ -21,7 +21,7 @@ namespace ModernWPF.Controls
     /// <summary>
     /// Provides sizing border and drop shadow for a window.
     /// </summary>
-    sealed class BorderWindow : Window
+    class BorderWindow : Window
     {
         #region dps
 

@@ -121,9 +121,7 @@
                             KeyboardNavigation.ControlTabNavigation="Cycle"
                             KeyboardNavigation.DirectionalNavigation="Cycle"
                             Opacity="0">
-                        <ContentPresenter x:Name="PART_Content"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        <ContentPresenter x:Name="PART_Content">
                             <ContentPresenter.RenderTransform>
                                 <TranslateTransform Y="-200"/>
                             </ContentPresenter.RenderTransform>

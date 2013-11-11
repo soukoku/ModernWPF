@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -12,15 +13,17 @@ namespace ModernWPF.Controls
     /// <summary>
     /// A container element for hosting <see cref="DialogControl"/>.
     /// </summary>
+    [TemplatePart(Name = PARTContent, Type = typeof(ContentPresenter))]
     public class DialogControlContainer : ContentControl
     {
         static DialogControlContainer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogControlContainer), new FrameworkPropertyMetadata(typeof(DialogControlContainer)));
+
         }
+        const string PARTContent = "PART_Content";
 
         #region properties
-
 
 
         /// <summary>
@@ -80,6 +83,14 @@ namespace ModernWPF.Controls
 
         #endregion
 
+        ContentPresenter _presenter;
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            _presenter = GetTemplateChild(PARTContent) as ContentPresenter;
+        }
+
+
         object _openLock = new object();
         List<DialogControl> _openDialogs = new List<DialogControl>();
 
@@ -118,12 +129,17 @@ namespace ModernWPF.Controls
             {
                 HasDialogOpen = false;
                 this.Content = null;
+                if (_presenter != null) { BindingOperations.ClearAllBindings(_presenter); }
                 if (DisableTarget != null) { DisableTarget.IsEnabled = true; }
             }
             else
             {
                 next.Container = this;
                 if (DisableTarget != null) { DisableTarget.IsEnabled = false; }
+                if (_presenter != null)
+                {
+                    BindContentAlignment(next);
+                }
                 this.Content = next;
                 HasDialogOpen = true;
 
@@ -137,6 +153,29 @@ namespace ModernWPF.Controls
                 dt.Start();
 
             }
+        }
+
+        private void BindContentAlignment(DialogControl content)
+        {
+            var hbind = new Binding(HorizontalAlignmentProperty.Name);
+            hbind.Source = content;
+            hbind.NotifyOnSourceUpdated = true;
+            BindingOperations.SetBinding(_presenter, HorizontalAlignmentProperty, hbind);
+
+
+            var vbind = new Binding(VerticalAlignmentProperty.Name);
+            vbind.Source = content;
+            vbind.NotifyOnSourceUpdated = true;
+            BindingOperations.SetBinding(_presenter, VerticalAlignmentProperty, vbind);
+        }
+
+
+        enum AniFromDirection
+        {
+            Left,
+            Top,
+            Right,
+            Bottom
         }
     }
 }
