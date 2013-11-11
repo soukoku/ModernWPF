@@ -42,7 +42,7 @@
                             <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
                             <TextBox Text="with leading content" Margin="2">
                                 <modern:TextBoxUI.LeadingElement>
-                                    <Border Background="{DynamicResource ModernAccent}" Margin="2 2 0 2" VerticalAlignment="Stretch">
+                                    <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
                                         <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
                                                    VerticalAlignment="Center"/>
                                     </Border>
@@ -50,7 +50,7 @@
                             </TextBox>
                             <TextBox Text="with trailing content" Margin="2">
                                 <modern:TextBoxUI.TrailingElement>
-                                    <Border Background="{DynamicResource ModernAccent}" Margin="0 2 2 2" VerticalAlignment="Stretch">
+                                    <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
                                         <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
                                                    VerticalAlignment="Center"/>
                                     </Border>

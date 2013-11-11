@@ -13,6 +13,7 @@
     <conv:MultiBoolVisibleConverter x:Key="MultiBoolVisible"/>
     <conv:NullEmptyNotVisibleConverter x:Key="NullEmptyNotVisible"/>
     <conv:TextCaseConverter x:Key="TextCase"/>
+    <conv:ThicknessZeroSideConverter x:Key="ZeroSider"/>
 
     <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"-->
@@ -893,7 +894,8 @@
                                                         BorderThickness="{TemplateBinding BorderThickness}"/>
                                                 <Border x:Name="BackgroundElement"
                                                         Background="{DynamicResource TextBoxButtonBackgroundThemeBrush}"
-                                                        Margin="{TemplateBinding BorderThickness}">
+                                                        Margin="{TemplateBinding BorderThickness}"
+                                                        Padding="{TemplateBinding Padding}">
                                                     <!--<TextBlock x:Name="GlyphElement"
                                                                Margin="1 0"
                                                                Foreground="{DynamicResource TextBoxButtonForegroundThemeBrush}"
@@ -903,7 +905,7 @@
                                                                FontFamily="{DynamicResource SymbolThemeFontFamily}"/>-->
                                                     <TextBlock x:Name="GlyphElement"
                                                                Text="r" Style="{DynamicResource MarlettGlyph}"
-                                                               Margin="1 0"
+                                                               Margin="0"
                                                                Foreground="{DynamicResource TextBoxButtonForegroundThemeBrush}"
                                                                VerticalAlignment="Center"
                                                                HorizontalAlignment="Center"
@@ -927,70 +929,77 @@
                                 </Setter>
                             </Style>
                         </Grid.Resources>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
                         <Border x:Name="BackgroundElement"
                                 Background="{TemplateBinding Background}"
                                 Margin="{TemplateBinding BorderThickness}"
                                 Opacity="{DynamicResource TextControlBackgroundThemeOpacity}"
                                 SnapsToDevicePixels="True"
-                                Grid.ColumnSpan="4" 
                                 />
                         <Border x:Name="BorderElement"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Opacity="{DynamicResource TextControlBorderThemeOpacity}"
                                 SnapsToDevicePixels="True"
-                                Grid.ColumnSpan="4" 
                                 />
 
-                        <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                        Grid.Column="0" VerticalAlignment="Stretch"></ContentPresenter>
+                        <Grid x:Name="Spacer" Margin="{TemplateBinding BorderThickness}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
+                                              Grid.Column="0" VerticalAlignment="Stretch" Margin="0"
+                                              SnapsToDevicePixels="True"
+                                              Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={StaticResource NullEmptyNotVisible}}"></ContentPresenter>
 
-                        <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
+                            <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                       IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                      Margin="{TemplateBinding BorderThickness}"
+                                      Margin="0"
                                       Padding="{TemplateBinding Padding}" 
                                       IsTabStop="False" />
 
-                        <Border Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" IsHitTestVisible="False"
-                                Grid.Column="1" 
-                                x:Name="Watermark"
-                                Visibility="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource NullEmptyNotVisible}, ConverterParameter=not}">
-                            <TextBlock Text="{Binding Path=(local:TextBoxUI.WatermarkText), RelativeSource={RelativeSource TemplatedParent}}"
-                                       Foreground="{DynamicResource TextBoxDisabledForegroundThemeBrush}"
-                                       FontSize="{TemplateBinding FontSize}"
-                                       FontFamily="{TemplateBinding FontFamily}"
-                                       VerticalAlignment="Center"
-                                       Margin="3 0"
-                                       ></TextBlock>
-                        </Border>
+                            <Border Margin="0" Padding="{TemplateBinding Padding}" IsHitTestVisible="False"
+                                    Grid.Column="1" 
+                                    x:Name="Watermark"
+                                    Visibility="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource NullEmptyNotVisible}, ConverterParameter=not}">
+                                    <TextBlock Text="{Binding Path=(local:TextBoxUI.WatermarkText), RelativeSource={RelativeSource TemplatedParent}}"
+                                               Foreground="{DynamicResource TextBoxDisabledForegroundThemeBrush}"
+                                               FontSize="{TemplateBinding FontSize}"
+                                               FontFamily="{TemplateBinding FontFamily}"
+                                               VerticalAlignment="Center"
+                                               Margin="1 0"
+                                               ></TextBlock>
+                            </Border>
 
-                        <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="3" VerticalAlignment="Stretch"></ContentPresenter>
+                            <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
+                                              Grid.Column="3" VerticalAlignment="Stretch" Margin="0"
+                                              SnapsToDevicePixels="True"
+                                              Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={StaticResource NullEmptyNotVisible}}"></ContentPresenter>
 
-                        <Button x:Name="DeleteButton"
+                            <Button x:Name="DeleteButton"
                                 Style="{DynamicResource DeleteButtonStyle}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderThickness="0"
                                 IsTabStop="False"
                                 Grid.Column="2"
                                 DataContext="{StaticResource txtCmd}"
                                 Command="{Binding ClearTextCommand}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                VerticalAlignment="Stretch">
-                            <Button.Visibility>
-                                <MultiBinding Converter="{StaticResource MultiBoolVisible}">
-                                    <Binding Path="(local:TextBoxUI.ShowClearButton)" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                    <Binding Path="IsEnabled" RelativeSource="{RelativeSource Self}"/>
-                                </MultiBinding>
-                            </Button.Visibility>
-                        </Button>
+                                VerticalAlignment="Stretch"
+                                Padding="1 0"
+                                Margin="0"
+                                SnapsToDevicePixels="True">
+                                <Button.Visibility>
+                                    <MultiBinding Converter="{StaticResource MultiBoolVisible}">
+                                        <Binding Path="(local:TextBoxUI.ShowClearButton)" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        <Binding Path="IsEnabled" RelativeSource="{RelativeSource Self}"/>
+                                    </MultiBinding>
+                                </Button.Visibility>
+                            </Button>
+                        </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -1056,7 +1065,9 @@
                                 />
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                        Grid.Column="0" VerticalAlignment="Stretch"></ContentPresenter>
+                                          SnapsToDevicePixels="True"
+                                          Grid.Column="0" VerticalAlignment="Stretch" Margin="{TemplateBinding BorderThickness, Converter={StaticResource ZeroSider}, ConverterParameter=right}"
+                                          Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={StaticResource NullEmptyNotVisible}}"></ContentPresenter>
 
                         <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -1067,7 +1078,9 @@
                                       IsTabStop="False" />
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="2" VerticalAlignment="Stretch"></ContentPresenter>
+                                          SnapsToDevicePixels="True"
+                                          Grid.Column="2" VerticalAlignment="Stretch" Margin="{TemplateBinding BorderThickness, Converter={StaticResource ZeroSider}, ConverterParameter=left}"
+                                          Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={StaticResource NullEmptyNotVisible}}"></ContentPresenter>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
@@ -1186,7 +1199,9 @@
                                 Grid.ColumnSpan="3"/>
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                        Grid.Column="0" VerticalAlignment="Stretch"></ContentPresenter>
+                                          SnapsToDevicePixels="True"
+                                          Grid.Column="0" VerticalAlignment="Stretch" Margin="{TemplateBinding BorderThickness, Converter={StaticResource ZeroSider}, ConverterParameter=right}"
+                                          Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={StaticResource NullEmptyNotVisible}}"></ContentPresenter>
 
                         <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -1209,7 +1224,9 @@
                         </Border>
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="2" VerticalAlignment="Stretch"></ContentPresenter>
+                                          SnapsToDevicePixels="True"
+                                          Grid.Column="2" VerticalAlignment="Stretch" Margin="{TemplateBinding BorderThickness, Converter={StaticResource ZeroSider}, ConverterParameter=left}"
+                                          Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={StaticResource NullEmptyNotVisible}}"></ContentPresenter>
 
                     </Grid>
                     <ControlTemplate.Triggers>

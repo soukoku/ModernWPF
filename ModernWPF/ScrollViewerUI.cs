@@ -27,7 +27,7 @@ namespace ModernWPF
                 "HScrollOnWheel",
                 typeof(bool),
                 typeof(ScrollViewerUI),
-                new PropertyMetadata(false, OnHScrollOnWheelPropertyChanged)
+                new PropertyMetadata(true, OnHScrollOnWheelPropertyChanged)
             );
         /// <summary>
         /// Gets the HScrollOnWheel property for this object.
