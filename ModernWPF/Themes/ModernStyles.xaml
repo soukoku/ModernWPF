@@ -1376,7 +1376,7 @@
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <!--<Setter Property="Background" Value="{DynamicResource ComboBoxItemSelectedBackgroundThemeBrush}"/>-->
-                <Setter Property="Background" Value="{DynamicResource ModernAccent2}"/>
+                <Setter Property="Background" Value="{DynamicResource ModernAccentLight1}"/>
                 <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemSelectedForegroundThemeBrush}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -1712,7 +1712,7 @@
                     <Condition Property="IsMouseOver" Value="True"></Condition>
                 </MultiTrigger.Conditions>
                 <!--<Setter Property="Background" Value="{DynamicResource ListBoxItemSelectedPointerOverBackgroundThemeBrush}"/>-->
-                <Setter Property="Background" Value="{DynamicResource ModernAccent2}"/>
+                <Setter Property="Background" Value="{DynamicResource ModernAccentLight1}"/>
             </MultiTrigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -2748,7 +2748,7 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="HeaderBorder" Property="Background"
-									Value="{DynamicResource ModernAccent5}" />
+									Value="{DynamicResource ModernAccentLight4}" />
                             <Setter TargetName="PART_HeaderGripper" Property="Visibility"
 									Value="Hidden" />
                             <Setter TargetName="HeaderContent" Property="Margin" Value="1,1,0,0" />

@@ -85,36 +85,34 @@ namespace ModernWPF
             //    satStep = (hsl.Saturation - 0.3) / 5;
             //}
 
-            Brush = GetBrush(0xff, color);
+            MainBrush = GetBrush(0xff, color);
 
             hsl.Luminosity += lumiStep;
             //hsl.Saturation -= satStep;
-            Brush2 = GetBrush(0xff, hsl);
+            LightBrush1 = GetBrush(0xff, hsl);
 
             hsl.Luminosity += lumiStep;
             //hsl.Saturation -= satStep;
-            Brush3 = GetBrush(0xff, hsl);
+            LightBrush2 = GetBrush(0xff, hsl);
 
             hsl.Luminosity += lumiStep;
             //hsl.Saturation -= satStep;
-            Brush4 = GetBrush(0xff, hsl);
+            LightBrush3 = GetBrush(0xff, hsl);
 
             hsl.Luminosity += lumiStep;
             //hsl.Saturation -= satStep;
-            Brush5 = GetBrush(0xff, hsl);
+            LightBrush4 = GetBrush(0xff, hsl);
 
-            // old opacity scale
-
-            //Brush = GetBrush(0xff, color);
-            //Brush2 = GetBrush(0x90, color);
-            //Brush3 = GetBrush(0x80, color);
-            //Brush4 = GetBrush(0x70, color);
-            //Brush5 = GetBrush(0x60, color);
-            //Brush6 = GetBrush(0x50, color);
-            //Brush7 = GetBrush(0x40, color);
-            //Brush8 = GetBrush(0x30, color);
-            //Brush9 = GetBrush(0x20, color);
-            //Brush10 = GetBrush(0x10, color);
+            // opacity scale
+            AlphaBrush1 = GetBrush(0xe5, color);
+            AlphaBrush2 = GetBrush(0xcc, color);
+            AlphaBrush3 = GetBrush(0xb2, color);
+            AlphaBrush4 = GetBrush(0x99, color);
+            AlphaBrush5 = GetBrush(0x7f, color);
+            AlphaBrush6 = GetBrush(0x66, color);
+            AlphaBrush7 = GetBrush(0x4c, color);
+            AlphaBrush8 = GetBrush(0x33, color);
+            AlphaBrush9 = GetBrush(0x19, color);
         }
 
         private SolidColorBrush GetBrush(byte alpha, Color color)
@@ -131,6 +129,7 @@ namespace ModernWPF
         /// The name.
         /// </value>
         public string Name { get; private set; }
+
         /// <summary>
         /// Gets the base color.
         /// </summary>
@@ -138,75 +137,106 @@ namespace ModernWPF
         /// The color.
         /// </value>
         public Color Color { get; private set; }
+
         /// <summary>
-        /// Gets the accent brush.
+        /// Gets the main accent brush.
         /// </summary>
         /// <value>
-        /// The brush.
+        /// The main brush.
         /// </value>
-        public Brush Brush { get; private set; }
+        public Brush MainBrush { get; private set; }
+
         /// <summary>
-        /// Gets the accent brush 2.
+        /// Gets the brush lighter than <see cref="MainBrush" />.
         /// </summary>
         /// <value>
-        /// The brush2.
+        /// The light brush.
         /// </value>
-        public Brush Brush2 { get; private set; }
+        public Brush LightBrush1 { get; private set; }
         /// <summary>
-        /// Gets the accent brush 3.
+        /// Gets the brush lighter than <see cref="LightBrush1" />.
         /// </summary>
         /// <value>
-        /// The brush3.
+        /// The light brush2.
         /// </value>
-        public Brush Brush3 { get; private set; }
+        public Brush LightBrush2 { get; private set; }
         /// <summary>
-        /// Gets the accent brush 4.
+        /// Gets the brush lighter than <see cref="LightBrush2" />.
         /// </summary>
         /// <value>
-        /// The brush4.
+        /// The light brush3.
         /// </value>
-        public Brush Brush4 { get; private set; }
+        public Brush LightBrush3 { get; private set; }
         /// <summary>
-        /// Gets the accent brush 5.
+        /// Gets the brush lighter than <see cref="LightBrush3" />.
         /// </summary>
         /// <value>
-        /// The brush5.
+        /// The light brush4.
         /// </value>
-        public Brush Brush5 { get; private set; }
-        ///// <summary>
-        ///// Gets the accent brush 6.
-        ///// </summary>
-        ///// <value>
-        ///// The brush6.
-        ///// </value>
-        //public Brush Brush6 { get; private set; }
-        ///// <summary>
-        ///// Gets the accent brush 7.
-        ///// </summary>
-        ///// <value>
-        ///// The brush7.
-        ///// </value>
-        //public Brush Brush7 { get; private set; }
-        ///// <summary>
-        ///// Gets the accent brush 8.
-        ///// </summary>
-        ///// <value>
-        ///// The brush8.
-        ///// </value>
-        //public Brush Brush8 { get; private set; }
-        ///// <summary>
-        ///// Gets the accent brush 9.
-        ///// </summary>
-        ///// <value>
-        ///// The brush9.
-        ///// </value>
-        //public Brush Brush9 { get; private set; }
-        ///// <summary>
-        ///// Gets the accent brush 10.
-        ///// </summary>
-        ///// <value>
-        ///// The brush10.
-        ///// </value>
-        //public Brush Brush10 { get; private set; }
+        public Brush LightBrush4 { get; private set; }
+
+        /// <summary>
+        /// Gets the accent brush that's 10% transparent.
+        /// </summary>
+        /// <value>
+        /// The alpha brush.
+        /// </value>
+        public Brush AlphaBrush1 { get; private set; }
+        /// <summary>
+        /// Gets the accent brush that's 20% transparent.
+        /// </summary>
+        /// <value>
+        /// The alpha brush2.
+        /// </value>
+        public Brush AlphaBrush2 { get; private set; }
+        /// <summary>
+        /// Gets the accent brush that's 30% transparent.
+        /// </summary>
+        /// <value>
+        /// The alpha brush3.
+        /// </value>
+        public Brush AlphaBrush3 { get; private set; }
+        /// <summary>
+        /// Gets the accent brush that's 40% transparent.
+        /// </summary>
+        /// <value>
+        /// The alpha brush4.
+        /// </value>
+        public Brush AlphaBrush4 { get; private set; }
+        /// <summary>
+        /// Gets the accent brush that's 50% transparent.
+        /// </summary>
+        /// <value>
+        /// The alpha brush5.
+        /// </value>
+        public Brush AlphaBrush5 { get; private set; }
+        /// <summary>
+        /// Gets the accent brush that's 60% transparent.
+        /// </summary>
+        /// <value>
+        /// The alpha brush6.
+        /// </value>
+        public Brush AlphaBrush6 { get; private set; }
+        /// <summary>
+        /// Gets the accent brush that's 70% transparent.
+        /// </summary>
+        /// <value>
+        /// The alpha brush7.
+        /// </value>
+        public Brush AlphaBrush7 { get; private set; }
+        /// <summary>
+        /// Gets the accent brush that's 80% transparent.
+        /// </summary>
+        /// <value>
+        /// The alpha brush8.
+        /// </value>
+        public Brush AlphaBrush8 { get; private set; }
+        /// <summary>
+        /// Gets the accent brush that's 90% transparent.
+        /// </summary>
+        /// <value>
+        /// The alpha brush9.
+        /// </value>
+        public Brush AlphaBrush9 { get; private set; }
     }
 }

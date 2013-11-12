@@ -34,11 +34,25 @@
                         <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={StaticResource TextCase}, ConverterParameter=title, Mode=OneTime}"></TextBox>
 
                         <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Light scale "></TextBlock>
                             <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccent}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccent2}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccent3}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccent4}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccent5}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight1}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight2}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight3}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight4}"></Rectangle>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Alpha scale "></TextBlock>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha1}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha2}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha3}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha4}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha5}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha6}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha7}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha8}"></Rectangle>
+                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha9}"></Rectangle>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Orientation="Horizontal">
@@ -186,7 +200,7 @@
                                          ToolTip="{Binding Name}"
                                              Checked="RadioButton_Checked">
                                 <Rectangle Width="32" Height="32"
-                                               Fill="{Binding Brush}" />
+                                               Fill="{Binding MainBrush}" />
                             </RadioButton>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

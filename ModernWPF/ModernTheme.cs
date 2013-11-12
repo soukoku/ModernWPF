@@ -126,16 +126,21 @@ namespace ModernWPF
             CurrentTheme = theme;
 
             ApplyResources(theme == Theme.Light ? LIGHT_THEME : DARK_THEME);
-            Application.Current.Resources["ModernAccent"] = accent.Brush;
-            Application.Current.Resources["ModernAccent2"] = accent.Brush2;
-            Application.Current.Resources["ModernAccent3"] = accent.Brush3;
-            Application.Current.Resources["ModernAccent4"] = accent.Brush4;
-            Application.Current.Resources["ModernAccent5"] = accent.Brush5;
-            //Application.Current.Resources["ModernAccent6"] = accent.Brush6;
-            //Application.Current.Resources["ModernAccent7"] = accent.Brush7;
-            //Application.Current.Resources["ModernAccent8"] = accent.Brush8;
-            //Application.Current.Resources["ModernAccent9"] = accent.Brush9;
-            //Application.Current.Resources["ModernAccent10"] = accent.Brush10;
+            Application.Current.Resources["ModernAccent"] = accent.MainBrush;
+            Application.Current.Resources["ModernAccentLight1"] = accent.LightBrush1;
+            Application.Current.Resources["ModernAccentLight2"] = accent.LightBrush2;
+            Application.Current.Resources["ModernAccentLight3"] = accent.LightBrush3;
+            Application.Current.Resources["ModernAccentLight4"] = accent.LightBrush4;
+
+            Application.Current.Resources["ModernAccentAlpha1"] = accent.AlphaBrush1;
+            Application.Current.Resources["ModernAccentAlpha2"] = accent.AlphaBrush2;
+            Application.Current.Resources["ModernAccentAlpha3"] = accent.AlphaBrush3;
+            Application.Current.Resources["ModernAccentAlpha4"] = accent.AlphaBrush4;
+            Application.Current.Resources["ModernAccentAlpha5"] = accent.AlphaBrush5;
+            Application.Current.Resources["ModernAccentAlpha6"] = accent.AlphaBrush6;
+            Application.Current.Resources["ModernAccentAlpha7"] = accent.AlphaBrush7;
+            Application.Current.Resources["ModernAccentAlpha8"] = accent.AlphaBrush8;
+            Application.Current.Resources["ModernAccentAlpha9"] = accent.AlphaBrush9;
         }
 
         private static void ApplyResources(ResourceDictionary resources)

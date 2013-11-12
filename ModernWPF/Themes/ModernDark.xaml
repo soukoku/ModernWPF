@@ -2,15 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="ModernAccent" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent2" Color="#4ca7ff"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent3" Color="#7bbeff"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent4" Color="#aad5fe"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent5" Color="#d9ecff"></SolidColorBrush>
-    <!--<SolidColorBrush x:Key="ModernAccent6" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent7" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent8" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent9" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent10" Color="DodgerBlue"></SolidColorBrush>-->
+    
+    <SolidColorBrush x:Key="ModernAccentLight1" Color="#4ca7ff"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentLight2" Color="#7bbeff"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentLight3" Color="#aad5fe"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentLight4" Color="#d9ecff"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="ModernAccentAlpha1" Color="#e51E90FF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentAlpha2" Color="#cc1E90FF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentAlpha3" Color="#b21E90FF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentAlpha4" Color="#991E90FF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentAlpha5" Color="#7f1E90FF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentAlpha6" Color="#661E90FF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentAlpha7" Color="#4c1E90FF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentAlpha8" Color="#331E90FF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentAlpha9" Color="#191E90FF"></SolidColorBrush>
 
     <SolidColorBrush x:Key="ModernBackground" Color="#232323"></SolidColorBrush>
     <SolidColorBrush x:Key="ModernBackground2" Color="#333333"></SolidColorBrush>
