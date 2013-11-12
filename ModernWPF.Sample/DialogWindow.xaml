@@ -4,7 +4,6 @@
         xmlns:modern="http://modernwpf"
         Title="Dialog Window" Height="300" Width="300"
         ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
-        modern:Chrome.ShowCaptionIcon="False"
         modern:Chrome.CaptionHeight="60"
         Style="{StaticResource ModernWindow}">
     <modern:Chrome.Chrome>

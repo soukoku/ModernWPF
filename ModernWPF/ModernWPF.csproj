@@ -67,6 +67,7 @@
     <Compile Include="Controls\DialogControl.cs" />
     <Compile Include="Controls\DialogControlContainer.cs" />
     <Compile Include="Controls\ModernContentControl.cs" />
+    <Compile Include="Converters\AppIconImageConverter.cs" />
     <Compile Include="Converters\IsSmallFontConverter.cs" />
     <Compile Include="Converters\BoolVisibleConverter.cs" />
     <Compile Include="Converters\MultiBoolVisibleConverter.cs" />

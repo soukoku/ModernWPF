@@ -5,7 +5,6 @@
         xmlns:local="clr-namespace:ModernWPF.Sample"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="ModernWPF - Test" Height="610" Width="1020"
-        Icon="Icon.ico"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindow}">
     <Window.Resources>

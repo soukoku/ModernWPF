@@ -14,6 +14,7 @@
     <conv:NullEmptyNotVisibleConverter x:Key="NullEmptyNotVisible"/>
     <conv:TextCaseConverter x:Key="TextCase"/>
     <conv:ThicknessZeroSideConverter x:Key="ZeroSider"/>
+    <conv:AppIconImageConverter x:Key="AppIconImage"/>
 
     <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"-->
@@ -615,8 +616,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel>
-                                    <Image Source="{TemplateBinding Icon}" Width="24" Height="24"
-                                           Margin="8 4 0 4" VerticalAlignment="Center"
+                                    <Image Source="{TemplateBinding Icon, Converter={StaticResource AppIconImage}}" Width="24" Height="24"
+                                           Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                            Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolVisible}}"
                                            DockPanel.Dock="Left"></Image>
 

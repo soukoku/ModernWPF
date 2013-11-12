@@ -122,6 +122,10 @@ namespace ModernWPF.Controls
             base.OnPreviewMouseWheel(e);
         }
 
+        /// <summary>
+        /// Responds to specific keyboard input and invokes associated scrolling behavior.
+        /// </summary>
+        /// <param name="e">Required arguments for this event.</param>
         protected override void OnKeyDown(KeyEventArgs e)
         {
             Debug.WriteLine("Got keydown override");
