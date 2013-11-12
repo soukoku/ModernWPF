@@ -25,6 +25,8 @@ namespace ModernWPF.Sample
             InitializeComponent();
         }
 
+        public string Message { get { return infolabel.Text; } set { infolabel.Text = value; } }
+
         protected override void OnFocus()
         {
             mybox.Focus();

@@ -7,23 +7,26 @@
                       mc:Ignorable="d" 
                       d:DesignHeight="300" d:DesignWidth="300"
                       VerticalAlignment="Center">
-    <Grid Margin="8 68 8 8" MaxWidth="400" HorizontalAlignment="Center">
+    <Grid Margin="8" MaxWidth="400" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        
+        <TextBlock Text="Dialog Title" FontSize="28" FontWeight="Thin" Margin="0 0 0 8"></TextBlock>
 
-        <StackPanel>
-            <TextBlock TextWrapping="Wrap" VerticalAlignment="Top">Just a dialog that should be shown in the window</TextBlock>
+        <StackPanel Grid.Row="1">
+            <TextBlock x:Name="infolabel" TextWrapping="Wrap" VerticalAlignment="Top" Margin="8">TBD</TextBlock>
             <TextBox x:Name="mybox" modern:TextBoxUI.WatermarkText="a textbox!"></TextBox>
-            <StackPanel>
+            <StackPanel Margin="8">
                 <RadioButton x:Name="btnTop" Content="Top" Click="btnTop_Click"></RadioButton>
                 <RadioButton x:Name="btnCenter" Content="Center" Click="btnCenter_Click" IsChecked="True"></RadioButton>
                 <RadioButton x:Name="btnBottom" Content="Bottom" Click="btnBottom_Click"></RadioButton>
                 <RadioButton x:Name="btnStretch" Content="Stretch" Click="btnStretch_Click"></RadioButton>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="OK" x:Name="btnOk" IsDefault="True" MinWidth="75" Click="btnOk_Click" ></Button>
             <Button Content="Cancel" x:Name="btnCancel" MinWidth="75" Click="btnCancel_Click" ></Button>
         </StackPanel>

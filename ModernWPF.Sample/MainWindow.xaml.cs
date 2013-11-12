@@ -28,7 +28,7 @@ namespace ModernWPF.Sample
             List<string> list = new List<string>();
             for (int i = 1; i <= 1000; i++)
             {
-                list.Add(string.Format("should virtual {0}", i)); 
+                list.Add(string.Format("should virtual {0}", i));
             }
             virtualListBox.ItemsSource = list;
         }
@@ -76,8 +76,13 @@ namespace ModernWPF.Sample
 
         private void btnDialog2_Click(object sender, RoutedEventArgs e)
         {
-            var diag = new InWindowDialog();
-            diag.ShowDialog(this);
+            for (int i = 0; i < 3; )
+            {
+                var diag = new InWindowDialog();
+                diag.Message = string.Format("This is dialog {0}/3, close it until the stack goes away!", ++i);
+                diag.ShowDialog(this);
+
+            }
         }
     }
 }
