@@ -2,15 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <SolidColorBrush x:Key="ModernAccent" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent2" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent3" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent4" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent5" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent6" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent2" Color="#4ca7ff"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent3" Color="#7bbeff"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent4" Color="#aad5fe"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent5" Color="#d9ecff"></SolidColorBrush>
+    <!--<SolidColorBrush x:Key="ModernAccent6" Color="DodgerBlue"></SolidColorBrush>
     <SolidColorBrush x:Key="ModernAccent7" Color="DodgerBlue"></SolidColorBrush>
     <SolidColorBrush x:Key="ModernAccent8" Color="DodgerBlue"></SolidColorBrush>
     <SolidColorBrush x:Key="ModernAccent9" Color="DodgerBlue"></SolidColorBrush>
-    <SolidColorBrush x:Key="ModernAccent10" Color="DodgerBlue"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccent10" Color="DodgerBlue"></SolidColorBrush>-->
 
     <SolidColorBrush x:Key="ModernBackground" Color="#FEFEFE"></SolidColorBrush>
     <SolidColorBrush x:Key="ModernBackground2" Color="#eeeeee"></SolidColorBrush>

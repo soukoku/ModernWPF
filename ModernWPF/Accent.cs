@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Media;
@@ -73,18 +74,47 @@ namespace ModernWPF
             Name = name;
             Color = color;
 
-            // todo: instead of alpha modify in intensity
+            // instead of alpha modify in intensity
+
+            var hsl = (HSLColor)color;
+            var lumiStep = (hsl.Luminosity - 0.1) / 5;
+            Debug.WriteLine("{0}\t{1} at {2:n2}", name, hsl, lumiStep);
+            //var satStep = 0d;
+            //if (hsl.Saturation > 0.3)
+            //{
+            //    satStep = (hsl.Saturation - 0.3) / 5;
+            //}
 
             Brush = GetBrush(0xff, color);
-            Brush2 = GetBrush(0x90, color);
-            Brush3 = GetBrush(0x80, color);
-            Brush4 = GetBrush(0x70, color);
-            Brush5 = GetBrush(0x60, color);
-            Brush6 = GetBrush(0x50, color);
-            Brush7 = GetBrush(0x40, color);
-            Brush8 = GetBrush(0x30, color);
-            Brush9 = GetBrush(0x20, color);
-            Brush10 = GetBrush(0x10, color);
+
+            hsl.Luminosity += lumiStep;
+            //hsl.Saturation -= satStep;
+            Brush2 = GetBrush(0xff, hsl);
+
+            hsl.Luminosity += lumiStep;
+            //hsl.Saturation -= satStep;
+            Brush3 = GetBrush(0xff, hsl);
+
+            hsl.Luminosity += lumiStep;
+            //hsl.Saturation -= satStep;
+            Brush4 = GetBrush(0xff, hsl);
+
+            hsl.Luminosity += lumiStep;
+            //hsl.Saturation -= satStep;
+            Brush5 = GetBrush(0xff, hsl);
+
+            // old opacity scale
+
+            //Brush = GetBrush(0xff, color);
+            //Brush2 = GetBrush(0x90, color);
+            //Brush3 = GetBrush(0x80, color);
+            //Brush4 = GetBrush(0x70, color);
+            //Brush5 = GetBrush(0x60, color);
+            //Brush6 = GetBrush(0x50, color);
+            //Brush7 = GetBrush(0x40, color);
+            //Brush8 = GetBrush(0x30, color);
+            //Brush9 = GetBrush(0x20, color);
+            //Brush10 = GetBrush(0x10, color);
         }
 
         private SolidColorBrush GetBrush(byte alpha, Color color)
@@ -143,40 +173,40 @@ namespace ModernWPF
         /// The brush5.
         /// </value>
         public Brush Brush5 { get; private set; }
-        /// <summary>
-        /// Gets the accent brush 6.
-        /// </summary>
-        /// <value>
-        /// The brush6.
-        /// </value>
-        public Brush Brush6 { get; private set; }
-        /// <summary>
-        /// Gets the accent brush 7.
-        /// </summary>
-        /// <value>
-        /// The brush7.
-        /// </value>
-        public Brush Brush7 { get; private set; }
-        /// <summary>
-        /// Gets the accent brush 8.
-        /// </summary>
-        /// <value>
-        /// The brush8.
-        /// </value>
-        public Brush Brush8 { get; private set; }
-        /// <summary>
-        /// Gets the accent brush 9.
-        /// </summary>
-        /// <value>
-        /// The brush9.
-        /// </value>
-        public Brush Brush9 { get; private set; }
-        /// <summary>
-        /// Gets the accent brush 10.
-        /// </summary>
-        /// <value>
-        /// The brush10.
-        /// </value>
-        public Brush Brush10 { get; private set; }
+        ///// <summary>
+        ///// Gets the accent brush 6.
+        ///// </summary>
+        ///// <value>
+        ///// The brush6.
+        ///// </value>
+        //public Brush Brush6 { get; private set; }
+        ///// <summary>
+        ///// Gets the accent brush 7.
+        ///// </summary>
+        ///// <value>
+        ///// The brush7.
+        ///// </value>
+        //public Brush Brush7 { get; private set; }
+        ///// <summary>
+        ///// Gets the accent brush 8.
+        ///// </summary>
+        ///// <value>
+        ///// The brush8.
+        ///// </value>
+        //public Brush Brush8 { get; private set; }
+        ///// <summary>
+        ///// Gets the accent brush 9.
+        ///// </summary>
+        ///// <value>
+        ///// The brush9.
+        ///// </value>
+        //public Brush Brush9 { get; private set; }
+        ///// <summary>
+        ///// Gets the accent brush 10.
+        ///// </summary>
+        ///// <value>
+        ///// The brush10.
+        ///// </value>
+        //public Brush Brush10 { get; private set; }
     }
 }

@@ -1745,12 +1745,12 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
+            <!--<Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource ModernAccent9}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource ModernAccent8}" />
-            </Trigger>
+            </Trigger>-->
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource ListBoxItemDisabledForegroundThemeBrush}"/>
             </Trigger>
@@ -2675,10 +2675,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ModernAccent9}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ModernAccent9}" />-->
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ModernAccent8}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ModernAccent8}" />-->
                 <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
             </Trigger>
         </Style.Triggers>
@@ -2741,8 +2741,8 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="HeaderBorder" Property="Background"
-									Value="{DynamicResource ModernAccent9}" />
+                            <!--<Setter TargetName="HeaderBorder" Property="Background"
+									Value="{DynamicResource ModernAccent9}" />-->
                             <Setter TargetName="PART_HeaderGripper" Property="Background"
 									Value="Transparent" />
                         </Trigger>

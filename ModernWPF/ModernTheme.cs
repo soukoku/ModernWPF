@@ -131,11 +131,11 @@ namespace ModernWPF
             Application.Current.Resources["ModernAccent3"] = accent.Brush3;
             Application.Current.Resources["ModernAccent4"] = accent.Brush4;
             Application.Current.Resources["ModernAccent5"] = accent.Brush5;
-            Application.Current.Resources["ModernAccent6"] = accent.Brush6;
-            Application.Current.Resources["ModernAccent7"] = accent.Brush7;
-            Application.Current.Resources["ModernAccent8"] = accent.Brush8;
-            Application.Current.Resources["ModernAccent9"] = accent.Brush9;
-            Application.Current.Resources["ModernAccent10"] = accent.Brush10;
+            //Application.Current.Resources["ModernAccent6"] = accent.Brush6;
+            //Application.Current.Resources["ModernAccent7"] = accent.Brush7;
+            //Application.Current.Resources["ModernAccent8"] = accent.Brush8;
+            //Application.Current.Resources["ModernAccent9"] = accent.Brush9;
+            //Application.Current.Resources["ModernAccent10"] = accent.Brush10;
         }
 
         private static void ApplyResources(ResourceDictionary resources)

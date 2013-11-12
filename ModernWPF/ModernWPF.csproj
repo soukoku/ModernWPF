@@ -74,6 +74,7 @@
     <Compile Include="Converters\NullEmptyNotVisibleConverter.cs" />
     <Compile Include="Converters\TextCaseConverter.cs" />
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
+    <Compile Include="HSLColor.cs" />
     <Compile Include="ModernExtensions.cs" />
     <Compile Include="Chrome.cs" />
     <Compile Include="ModernTheme.cs" />
