@@ -84,11 +84,17 @@
                                 <ComboBoxItem Content="normal combo 1"></ComboBoxItem>
                                 <ComboBoxItem Content="normal combo 2" IsEnabled="False"></ComboBoxItem>
                                 <ComboBoxItem Content="normal combo 3"></ComboBoxItem>
+                                <ComboBoxItem Content="normal combo 4"></ComboBoxItem>
+                                <ComboBoxItem Content="normal combo 5"></ComboBoxItem>
+                                <ComboBoxItem Content="normal combo 6"></ComboBoxItem>
                             </ComboBox>
                             <ComboBox SelectedIndex="1" Margin="2" IsEditable="True">
                                 <ComboBoxItem Content="edit combo 1"></ComboBoxItem>
                                 <ComboBoxItem Content="edit combo 2" IsEnabled="False"></ComboBoxItem>
                                 <ComboBoxItem Content="edit combo 3"></ComboBoxItem>
+                                <ComboBoxItem Content="edit combo 4"></ComboBoxItem>
+                                <ComboBoxItem Content="edit combo 5"></ComboBoxItem>
+                                <ComboBoxItem Content="edit combo 6"></ComboBoxItem>
                             </ComboBox>
                             <ComboBox SelectedIndex="0" Margin="2" IsEnabled="False">
                                 <ComboBoxItem Content="disabled combo"></ComboBoxItem>
@@ -140,7 +146,11 @@
                             <ListBoxItem Content="disabled item" IsSelected="True" IsEnabled="False"></ListBoxItem>
                             <ListBoxItem Content="listbox item 3"></ListBoxItem>
                         </ListBox>
-                        <ListBox Margin="2" DockPanel.Dock="Top" x:Name="virtualListBox" Height="200" VerticalAlignment="Top">
+                        <ListBox Margin="2" DockPanel.Dock="Top" IsEnabled="False">
+                            <ListBoxItem Content="disabled list 1"></ListBoxItem>
+                            <ListBoxItem Content="disabled list 2"></ListBoxItem>
+                        </ListBox>
+                        <ListBox Margin="2" DockPanel.Dock="Top" x:Name="virtualListBox" Height="100" VerticalAlignment="Top">
                         </ListBox>
                     </DockPanel>
 

@@ -222,6 +222,34 @@ namespace ModernWPF
 
 
 
+        /// <summary>
+        /// Gets whether to show control boxes in ModernWindow style.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static bool GetShowControlBoxes(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(ShowControlBoxesProperty);
+        }
+
+        /// <summary>
+        /// Sets whether to show control boxes.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <param name="value">if set to <c>true</c> then show the control boxes.</param>
+        public static void SetShowControlBoxes(DependencyObject obj, bool value)
+        {
+            obj.SetValue(ShowControlBoxesProperty, value);
+        }
+
+        /// <summary>
+        /// The dependency property for ShowControlBoxes.
+        /// </summary>
+        public static readonly DependencyProperty ShowControlBoxesProperty =
+            DependencyProperty.RegisterAttached("ShowControlBoxes", typeof(bool), typeof(Chrome), new PropertyMetadata(true));
+
+
+
         #endregion
 
         #region chrome border dp

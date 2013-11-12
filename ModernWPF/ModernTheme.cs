@@ -39,7 +39,8 @@ namespace ModernWPF
             PredefinedAccents = new Accent[]{
                 new Accent(Accent.RED, (Color)ColorConverter.ConvertFromString("#CD3333")),
                 new Accent(Accent.ORANGE, Colors.Chocolate),
-                new Accent(Accent.GOLD,(Color)ColorConverter.ConvertFromString("#CDAD00")),
+                //new Accent(Accent.GOLD,(Color)ColorConverter.ConvertFromString("#CDAD00")),
+                new Accent(Accent.GOLD,Colors.Goldenrod),
                 new Accent(Accent.OLIVE,(Color)ColorConverter.ConvertFromString("#6B8E23")),
                 new Accent(Accent.TEAL,(Color)ColorConverter.ConvertFromString("#00959D")),
                 new Accent(Accent.GREEN, Colors.ForestGreen),
