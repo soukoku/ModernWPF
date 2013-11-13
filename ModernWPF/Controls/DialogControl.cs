@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace ModernWPF.Controls
 {
@@ -46,6 +50,8 @@ namespace ModernWPF.Controls
                 if (Container != null)
                 {
                     Container.Close(this);
+                    _isOpen = false;
+                    OnClosed();
                 }
             }
         }
@@ -95,6 +101,8 @@ namespace ModernWPF.Controls
 
         #endregion
 
+        private bool _isOpen;
+
         #region methods
 
         /// <summary>
@@ -139,7 +147,13 @@ namespace ModernWPF.Controls
         protected virtual void OnFocus() { }
 
         /// <summary>
-        /// Shows the dialog.
+        /// Called when dialog has been closed.
+        /// </summary>
+        protected virtual void OnClosed() { }
+
+        /// <summary>
+        /// Shows the dialog on a window. The window must have a <see cref="DialogControlContainer"/>
+        /// in its visual tree.
         /// </summary>
         /// <param name="window">The window.</param>
         public void ShowDialog(Window window)
@@ -148,16 +162,57 @@ namespace ModernWPF.Controls
         }
 
         /// <summary>
-        /// Shows the dialog.
+        /// Shows the dialog on a <see cref="DialogControlContainer"/>.
         /// </summary>
         /// <param name="container">The container.</param>
         /// <exception cref="System.ArgumentNullException">container</exception>
-        /// <exception cref="System.ArgumentException">This dialog already has a container.</exception>
         public void ShowDialog(DialogControlContainer container)
         {
             if (container == null) { throw new ArgumentNullException("container"); }
 
             container.Show(this);
+            _isOpen = true;
+            _diaglogResult = null;
+        }
+
+
+        /// <summary>
+        /// Shows the dialog on a window. The window must have a <see cref="DialogControlContainer"/>
+        /// in its visual tree.
+        /// </summary>
+        /// <param name="window">The window.</param>
+        public bool? ShowDialogModal(Window window)
+        {
+            return ShowDialogModal(window.FindInVisualTree<DialogControlContainer>());
+        }
+
+
+        /// <summary>
+        /// Shows the dialog on a <see cref="DialogControlContainer"/>.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        /// <exception cref="System.ArgumentNullException">container</exception>
+        public bool? ShowDialogModal(DialogControlContainer container)
+        {
+            ShowDialog(container);
+
+            while (_isOpen)
+            {
+                // from http://www.codeproject.com/Articles/36516/WPF-Modal-Dialog
+                // HACK: Stop the thread if the application is about to close
+                if (this.Dispatcher.HasShutdownStarted ||
+                    this.Dispatcher.HasShutdownFinished)
+                {
+                    break;
+                }
+
+                // HACK: Simulate "DoEvents"
+                //this.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate { }));
+                this.Dispatcher.DoEvents();
+                Thread.Sleep(20);
+            }
+
+            return DialogResult;
         }
 
         #endregion

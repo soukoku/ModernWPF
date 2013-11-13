@@ -3,6 +3,8 @@ using System.Windows.Input;
 using System;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Security.Permissions;
+using System.Windows.Threading;
 
 namespace ModernWPF
 {
@@ -103,5 +105,38 @@ namespace ModernWPF
             return scroller.ScrollableWidth > 0 && scroller.HorizontalOffset > 0;
         }
 
+
+
+
+
+        // from msdn http://msdn.microsoft.com/library/system.windows.threading.dispatcher.pushframe.aspx
+
+        /// <summary>
+        /// Simulate the famous DoEvents() method from winform days.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        public static void DoEvents(this Application application)
+        {
+            application.Dispatcher.DoEvents();
+        }
+
+        /// <summary>
+        /// Simulate the famous DoEvents() method from winform days.
+        /// </summary>
+        /// <param name="dispatcher">The dispatcher.</param>
+        [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        public static void DoEvents(this Dispatcher dispatcher)
+        {
+            DispatcherFrame frame = new DispatcherFrame();
+            dispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(ExitFrame), frame);
+            Dispatcher.PushFrame(frame);
+        }
+
+        static object ExitFrame(object f)
+        {
+            ((DispatcherFrame)f).Continue = false;
+            return null;
+        }
     }
 }

@@ -79,9 +79,9 @@ namespace ModernWPF.Sample
             for (int i = 0; i < 3; )
             {
                 var diag = new InWindowDialog();
-                diag.Message = string.Format("This is dialog {0}/3, close it until the stack goes away!", ++i);
-                diag.ShowDialog(this);
-
+                diag.Message = string.Format("This is modal dialog {0}/3, close it until the stack goes away!", ++i);
+                var res = diag.ShowDialogModal(this);
+                Debug.WriteLine("Dialog result = {0}", res);
             }
         }
     }
