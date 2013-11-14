@@ -871,6 +871,49 @@
 				Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdSelectAll], Mode=OneWay}"
 				Command="ApplicationCommands.SelectAll" />
     </ContextMenu>
+
+
+    <Style x:Key="TextBoxButtonStyle" TargetType="Button">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBoxButtonForegroundThemeBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxButtonBorderThemeBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource TextBoxButtonBackgroundThemeBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="BorderElement" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Margin="{TemplateBinding Margin}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource TextBoxButtonPointerOverBackgroundThemeBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxButtonPointerOverBorderThemeBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxButtonPointerOverForegroundThemeBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource TextBoxButtonPressedBackgroundThemeBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxButtonPressedBorderThemeBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxButtonPressedForegroundThemeBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="ModernTextBox" TargetType="TextBox">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -891,51 +934,6 @@
                     <Grid>
                         <Grid.Resources>
                             <local:TextCommands x:Key="txtCmd"/>
-                            <Style x:Name="DeleteButtonStyle" TargetType="Button">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Grid>
-                                                <Border x:Name="BorderElement"
-                                                        BorderBrush="{DynamicResource TextBoxButtonBorderThemeBrush}"
-                                                        BorderThickness="{TemplateBinding BorderThickness}"/>
-                                                <Border x:Name="BackgroundElement"
-                                                        Background="{DynamicResource TextBoxButtonBackgroundThemeBrush}"
-                                                        Margin="{TemplateBinding BorderThickness}"
-                                                        Padding="{TemplateBinding Padding}">
-                                                    <!--<TextBlock x:Name="GlyphElement"
-                                                               Margin="1 0"
-                                                               Foreground="{DynamicResource TextBoxButtonForegroundThemeBrush}"
-                                                               VerticalAlignment="Center"
-                                                               HorizontalAlignment="Center"
-                                                               Text="&#xE0A4;"
-                                                               FontFamily="{DynamicResource SymbolThemeFontFamily}"/>-->
-                                                    <TextBlock x:Name="GlyphElement"
-                                                               Text="r" Style="{DynamicResource MarlettGlyph}"
-                                                               Margin="1 0"
-                                                               FontSize="{TemplateBinding FontSize}"
-                                                               Foreground="{DynamicResource TextBoxButtonForegroundThemeBrush}"
-                                                               VerticalAlignment="Center"
-                                                               HorizontalAlignment="Center"
-                                                               ></TextBlock>
-                                                </Border>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="BackgroundElement" Property="Background" Value="{DynamicResource TextBoxButtonPointerOverBackgroundThemeBrush}"/>
-                                                    <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextBoxButtonPointerOverBorderThemeBrush}"/>
-                                                    <Setter TargetName="GlyphElement" Property="Foreground" Value="{DynamicResource TextBoxButtonPointerOverForegroundThemeBrush}"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter TargetName="BackgroundElement" Property="Background" Value="{DynamicResource TextBoxButtonPressedBackgroundThemeBrush}"/>
-                                                    <Setter TargetName="BorderElement" Property="BorderBrush" Value="{DynamicResource TextBoxButtonPressedBorderThemeBrush}"/>
-                                                    <Setter TargetName="GlyphElement" Property="Foreground" Value="{DynamicResource TextBoxButtonPressedForegroundThemeBrush}"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
                         </Grid.Resources>
                         <Border x:Name="BackgroundElement"
                                 Background="{TemplateBinding Background}"
@@ -989,22 +987,22 @@
                                               Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={x:Static conv:NullEmptyNotVisibleConverter.Instance}}"></ContentPresenter>
 
                             <Button x:Name="DeleteButton"
-                                    Style="{DynamicResource DeleteButtonStyle}"
+                                    Style="{DynamicResource TextBoxButtonStyle}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                    IsTabStop="False"
                                     Grid.Column="2"
                                     DataContext="{StaticResource txtCmd}"
                                     Command="{Binding ClearTextBoxCommand}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                    VerticalAlignment="Stretch"
-                                    FontSize="{TemplateBinding FontSize}"
-                                    SnapsToDevicePixels="True">
+                                    >
                                 <Button.Visibility>
                                     <MultiBinding Converter="{x:Static conv:MultiBoolVisibleConverter.Instance}">
                                         <Binding Path="(local:TextBoxUI.ShowClearButton)" RelativeSource="{RelativeSource TemplatedParent}"/>
                                         <Binding Path="IsEnabled" RelativeSource="{RelativeSource Self}"/>
                                     </MultiBinding>
                                 </Button.Visibility>
+
+                                <!--<TextBlock Margin="1 0" Text="&#xE0A4;" FontFamily="{DynamicResource SymbolThemeFontFamily}"/>-->
+                                <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}" Margin="1 0" FontSize="{TemplateBinding FontSize}" />
                             </Button>
                         </Grid>
                     </Grid>
@@ -1392,7 +1390,7 @@
             </MultiTrigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style x:Key="ModernComboBox" TargetType="ComboBox">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
