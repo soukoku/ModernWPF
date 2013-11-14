@@ -8,8 +8,7 @@ namespace ModernWPF.Converters
     /// A converter that tests if a double value considered a small font size to allow changing TextOptions.
     /// This can be removed from the fonts style if using high dpi displays.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Used in xaml.")]
-    class IsSmallFontConverter : IValueConverter
+    public class IsSmallFontConverter : IValueConverter
     {
         static IsSmallFontConverter()
         {
