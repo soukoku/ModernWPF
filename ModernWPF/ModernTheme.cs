@@ -37,17 +37,17 @@ namespace ModernWPF
         static ModernTheme()
         {
             PredefinedAccents = new Accent[]{
-                new Accent(Accent.RED, (Color)ColorConverter.ConvertFromString("#CD3333")),
-                new Accent(Accent.ORANGE, Colors.Chocolate),
+                new Accent(Accent.Red, (Color)ColorConverter.ConvertFromString("#CD3333")),
+                new Accent(Accent.Orange, Colors.Chocolate),
                 //new Accent(Accent.GOLD,(Color)ColorConverter.ConvertFromString("#CDAD00")),
-                new Accent(Accent.GOLD,Colors.Goldenrod),
-                new Accent(Accent.OLIVE,(Color)ColorConverter.ConvertFromString("#6B8E23")),
-                new Accent(Accent.TEAL,(Color)ColorConverter.ConvertFromString("#00959D")),
-                new Accent(Accent.GREEN, Colors.ForestGreen),
-                new Accent(Accent.LIGHT_BLUE, Colors.DodgerBlue),
-                new Accent(Accent.DARK_BLUE,(Color)ColorConverter.ConvertFromString("#007ACC")),
-                new Accent(Accent.LIGHT_PURPLE, Colors.MediumOrchid),
-                new Accent(Accent.DARK_PURPLE, Colors.BlueViolet),
+                new Accent(Accent.Gold,Colors.Goldenrod),
+                new Accent(Accent.Olive,(Color)ColorConverter.ConvertFromString("#6B8E23")),
+                new Accent(Accent.Teal,(Color)ColorConverter.ConvertFromString("#00959D")),
+                new Accent(Accent.Green, Colors.ForestGreen),
+                new Accent(Accent.LightBlue, Colors.DodgerBlue),
+                new Accent(Accent.DarkBlue,(Color)ColorConverter.ConvertFromString("#007ACC")),
+                new Accent(Accent.LightPurple, Colors.MediumOrchid),
+                new Accent(Accent.DarkPurple, Colors.BlueViolet),
             };
         }
 
@@ -84,7 +84,7 @@ namespace ModernWPF
         {
             get
             {
-                if (_curAccent == null) { _curAccent = GetPredefinedAccent(Accent.LIGHT_BLUE); }
+                if (_curAccent == null) { _curAccent = GetPredefinedAccent(Accent.LightBlue); }
                 return _curAccent;
             }
         }

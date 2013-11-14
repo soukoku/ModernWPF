@@ -20,44 +20,44 @@ namespace ModernWPF
         /// <summary>
         /// Pre-defined name for the red accent.
         /// </summary>
-        public const string RED = "Red";
+        public const string Red = "Red";
         /// <summary>
         /// Pre-defined name for the orange accent.
         /// </summary>
-        public const string ORANGE = "Orange";
+        public const string Orange = "Orange";
         /// <summary>
         /// Pre-defined name for the green accent.
         /// </summary>
-        public const string GREEN = "Green";
+        public const string Green = "Green";
         /// <summary>
         /// Pre-defined name for the teal accent.
         /// </summary>
-        public const string TEAL = "Teal";
+        public const string Teal = "Teal";
         /// <summary>
         /// Pre-defined name for the olive accent.
         /// </summary>
-        public const string OLIVE = "Olive";
+        public const string Olive = "Olive";
         /// <summary>
         /// Pre-defined name for the gold accent.
         /// </summary>
-        public const string GOLD = "Gold";
+        public const string Gold = "Gold";
 
         /// <summary>
         /// Pre-defined name for the light blue accent.
         /// </summary>
-        public const string LIGHT_BLUE = "Light Blue";
+        public const string LightBlue = "Light Blue";
         /// <summary>
         /// Pre-defined name for the dark blue accent.
         /// </summary>
-        public const string DARK_BLUE = "Dark Blue";
+        public const string DarkBlue = "Dark Blue";
         /// <summary>
         /// Pre-defined name for the light purple accent.
         /// </summary>
-        public const string LIGHT_PURPLE = "Light Purple";
+        public const string LightPurple = "Light Purple";
         /// <summary>
         /// Pre-defined name for the dark purple accent.
         /// </summary>
-        public const string DARK_PURPLE = "Dark Purple";
+        public const string DarkPurple = "Dark Purple";
 
         #endregion
 
@@ -115,7 +115,7 @@ namespace ModernWPF
             AlphaBrush9 = GetBrush(0x19, color);
         }
 
-        private SolidColorBrush GetBrush(byte alpha, Color color)
+        static SolidColorBrush GetBrush(byte alpha, Color color)
         {
             var brush = new SolidColorBrush(Color.FromArgb(alpha, color.R, color.G, color.B));
             brush.Freeze();

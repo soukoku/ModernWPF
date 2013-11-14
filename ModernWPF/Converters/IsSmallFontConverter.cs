@@ -10,11 +10,7 @@ namespace ModernWPF.Converters
     /// </summary>
     public class IsSmallFontConverter : IValueConverter
     {
-        static IsSmallFontConverter()
-        {
-            Threshold = 14;
-            Instance = new IsSmallFontConverter();
-        }
+        static readonly IsSmallFontConverter _instance = new IsSmallFontConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -22,8 +18,9 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static IsSmallFontConverter Instance { get; private set; }
+        public static IsSmallFontConverter Instance { get { return _instance; } }
 
+        static double _threshold = 14;
 
         /// <summary>
         /// Gets or sets the threshold size for small.
@@ -31,7 +28,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The threshold.
         /// </value>
-        public static double Threshold { get; set; }
+        public static double Threshold { get { return _threshold; } set { _threshold = value; } }
 
         /// <summary>
         /// Converts a double value to boolean true if too small.

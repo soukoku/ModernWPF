@@ -10,9 +10,9 @@ namespace ModernWPF.Resources
     public class CommandTextBinder : INotifyPropertyChanged
     {
         /// <summary>
-        /// Gets the global <see cref="CommandTextBinder"/> object.
+        /// Gets the singleton <see cref="CommandTextBinder"/> object.
         /// </summary>
-        public static readonly CommandTextBinder Current = new CommandTextBinder();
+        public static readonly CommandTextBinder Instance = new CommandTextBinder();
 
         private CommandTextBinder() { }
 

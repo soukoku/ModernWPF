@@ -10,7 +10,7 @@ using System.Text;
 
 namespace ModernWPF.Native
 {
-    class User32Ex
+    static class User32Ex
     {
         public static bool ModifyStyle(IntPtr hwnd, WindowStyles removeStyle, WindowStyles addStyle)
         {

@@ -14,10 +14,7 @@ namespace ModernWPF.Converters
     [ValueConversion(typeof(object), typeof(string))]
     public class TextCaseConverter : IValueConverter
     {
-        static TextCaseConverter()
-        {
-            Instance = new TextCaseConverter();
-        }
+        static readonly TextCaseConverter _instance = new TextCaseConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -25,7 +22,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static TextCaseConverter Instance { get; private set; }
+        public static TextCaseConverter Instance { get { return _instance; } }
 
         #region IValueConverter Members
 

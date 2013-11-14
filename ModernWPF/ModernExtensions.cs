@@ -18,7 +18,7 @@ namespace ModernWPF
         /// </summary>
         /// <param name="control">The control.</param>
         /// <returns></returns>
-        public static ScrollViewer TryGetScrollerViewer(this ItemsControl control)
+        public static ScrollViewer TryGetScrollViewer(this ItemsControl control)
         {
             if (control != null && VisualTreeHelper.GetChildrenCount(control) > 0)
             {
@@ -47,9 +47,10 @@ namespace ModernWPF
                 for (int i = 0; i < count; i++)
                 {
                     var c = VisualTreeHelper.GetChild(control, i);
-                    if (c is T)
+                    var casted = c as T;
+                    if (casted != null)
                     {
-                        return c as T;
+                        return casted;
                     }
                     else if (c != null)
                     {
@@ -70,9 +71,10 @@ namespace ModernWPF
                 for (int i = 0; i < count; i++)
                 {
                     var c = VisualTreeHelper.GetChild(control, i);
-                    if (c is T)
+                    var casted = c as T;
+                    if (casted != null)
                     {
-                        var result = callback(c as T);
+                        var result = callback(casted);
                         if (result) { return true; }
                     }
                     if (c != null)

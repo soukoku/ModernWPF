@@ -13,10 +13,7 @@ namespace ModernWPF.Converters
     [ValueConversion(typeof(object), typeof(Visibility))]
     public class NullEmptyNotVisibleConverter : IValueConverter
     {
-        static NullEmptyNotVisibleConverter()
-        {
-            Instance = new NullEmptyNotVisibleConverter();
-        }
+        static readonly NullEmptyNotVisibleConverter _instance = new NullEmptyNotVisibleConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -24,7 +21,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static NullEmptyNotVisibleConverter Instance { get; private set; }
+        public static NullEmptyNotVisibleConverter Instance { get { return _instance; } }
 
         #region IValueConverter Members
 

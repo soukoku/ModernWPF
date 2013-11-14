@@ -12,10 +12,7 @@ namespace ModernWPF.Converters
     /// </summary>
     public class MultiBoolVisibleConverter : IMultiValueConverter
     {
-        static MultiBoolVisibleConverter()
-        {
-            Instance = new MultiBoolVisibleConverter();
-        }
+        static readonly MultiBoolVisibleConverter _instance = new MultiBoolVisibleConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -23,7 +20,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static MultiBoolVisibleConverter Instance { get; private set; }
+        public static MultiBoolVisibleConverter Instance { get { return _instance; } }
 
         #region IMultiValueConverter Members
 

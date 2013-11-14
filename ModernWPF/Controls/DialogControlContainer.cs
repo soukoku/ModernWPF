@@ -184,7 +184,7 @@ namespace ModernWPF.Controls
 
         }
 
-        Animation.SlideFromDirection DetermineAniDirection(DialogControl content)
+        static Animation.SlideFromDirection DetermineAniDirection(DialogControl content)
         {
             if (content != null)
             {

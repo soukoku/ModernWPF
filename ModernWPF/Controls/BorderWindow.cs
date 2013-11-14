@@ -124,7 +124,7 @@ namespace ModernWPF.Controls
             ApplyWin32Stuff(_hwnd);
         }
 
-        private void ApplyWin32Stuff(IntPtr hwnd)
+        static void ApplyWin32Stuff(IntPtr hwnd)
         {
             // hide from alt tab
             var w = User32.GetWindowLong(hwnd, WindowLong.GWL_EXSTYLE).ToInt32();
@@ -330,17 +330,17 @@ namespace ModernWPF.Controls
             {
                 col = 2; // right side
             }
-            return NC_BORDER_MATRIX[row, col];
+            return NC_BORDER_MATRIX[row][col];
         }
 
         /// <summary>
         /// Matrix of the HT values to return for sizing border.
         /// </summary>
-        static readonly NcHitTest[,] NC_BORDER_MATRIX = new NcHitTest[,]
+        static readonly NcHitTest[][] NC_BORDER_MATRIX = 
         {
-            { NcHitTest.HTTOPLEFT,    NcHitTest.HTTOP,     NcHitTest.HTTOPRIGHT},
-            { NcHitTest.HTLEFT,       NcHitTest.HTCLIENT, NcHitTest.HTRIGHT       },
-            { NcHitTest.HTBOTTOMLEFT, NcHitTest.HTBOTTOM, NcHitTest.HTBOTTOMRIGHT },
+            new []{ NcHitTest.HTTOPLEFT,    NcHitTest.HTTOP,     NcHitTest.HTTOPRIGHT },
+            new []{ NcHitTest.HTLEFT,       NcHitTest.HTCLIENT, NcHitTest.HTRIGHT     },
+            new []{ NcHitTest.HTBOTTOMLEFT, NcHitTest.HTBOTTOM, NcHitTest.HTBOTTOMRIGHT },
         };
     }
 }

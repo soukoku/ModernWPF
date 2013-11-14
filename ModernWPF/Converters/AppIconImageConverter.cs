@@ -18,10 +18,7 @@ namespace ModernWPF.Converters
     /// </summary>
     public class AppIconImageConverter : IValueConverter
     {
-        static AppIconImageConverter()
-        {
-            Instance = new AppIconImageConverter();
-        }
+        static readonly AppIconImageConverter _instance = new AppIconImageConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -29,7 +26,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static AppIconImageConverter Instance { get; private set; }
+        public static AppIconImageConverter Instance { get { return _instance; } }
 
         static readonly ImageSource __appIcon = TryGetAppIcon();
 

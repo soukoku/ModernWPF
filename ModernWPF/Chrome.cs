@@ -530,7 +530,7 @@ namespace ModernWPF
             //private const int COLOR_WINDOW = 5;
             //[DllImport("user32.dll")]
             //static extern IntPtr GetSysColorBrush(int nIndex);
-            void UpdateFrame(IntPtr handle)
+            static void UpdateFrame(IntPtr handle)
             {
                 SetRegion(handle, 0, 0, true);
 
@@ -646,7 +646,7 @@ namespace ModernWPF
             }
 
 
-            private SetWindowPosOptions ClearUndefined(SetWindowPosOptions input)
+            static SetWindowPosOptions ClearUndefined(SetWindowPosOptions input)
             {
                 SetWindowPosOptions retVal = 0;
                 foreach (SetWindowPosOptions val in Enum.GetValues(typeof(SetWindowPosOptions)))
@@ -659,7 +659,7 @@ namespace ModernWPF
                 return retVal;
             }
 
-            private void SetRegion(IntPtr hwnd, int width, int height, bool force)
+            static void SetRegion(IntPtr hwnd, int width, int height, bool force)
             {
                 if (Dwmapi.IsCompositionEnabled)
                 {
@@ -710,7 +710,7 @@ namespace ModernWPF
                 }
             }
 
-            private void HandleNcCalcSize(IntPtr hwnd, IntPtr wParam, IntPtr lParam)
+            static void HandleNcCalcSize(IntPtr hwnd, IntPtr wParam, IntPtr lParam)
             {
                 if (wParam == BasicValues.TRUE)
                 {

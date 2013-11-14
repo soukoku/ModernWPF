@@ -507,7 +507,6 @@ namespace ModernWPF.Controls
         {
             if (AnimateScroll && !SystemParameters.IsRemoteSession)
             {
-                Duration targetTime = new Duration(AnimateDuration);
                 KeyTime targetKeyTime = AnimateDuration;
                 KeySpline targetKeySpline = AnimateSpline;
 

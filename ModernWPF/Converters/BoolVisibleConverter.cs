@@ -14,10 +14,7 @@ namespace ModernWPF.Converters
     [ValueConversion(typeof(bool), typeof(Visibility))]
     public class BoolVisibleConverter : IValueConverter
     {
-        static BoolVisibleConverter()
-        {
-            Instance = new BoolVisibleConverter();
-        }
+        static readonly BoolVisibleConverter _instance = new BoolVisibleConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -25,7 +22,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static BoolVisibleConverter Instance { get; private set; }
+        public static BoolVisibleConverter Instance { get { return _instance; } }
         
         #region IValueConverter Members
 

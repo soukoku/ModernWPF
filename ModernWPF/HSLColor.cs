@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Windows.Media;
 
@@ -34,7 +35,7 @@ namespace ModernWPF
             set { luminosity = CheckRange(value / scale); }
         }
 
-        private double CheckRange(double value)
+        static double CheckRange(double value)
         {
             if (value < 0.0)
                 value = 0.0;
@@ -45,13 +46,13 @@ namespace ModernWPF
 
         public override string ToString()
         {
-            return String.Format("H: {0:#0.##}\tS: {1:#0.##}\tL: {2:#0.##}", Hue, Saturation, Luminosity);
+            return string.Format(CultureInfo.CurrentCulture, "H: {0:#0.##}\tS: {1:#0.##}\tL: {2:#0.##}", Hue, Saturation, Luminosity);
         }
 
         public string ToRGBString()
         {
             Color color = (Color)this;
-            return String.Format("R: {0:#0.##}\tG: {1:#0.##}\tB: {2:#0.##}", color.R, color.G, color.B);
+            return string.Format(CultureInfo.CurrentCulture, "R: {0:#0.##}\tG: {1:#0.##}\tB: {2:#0.##}", color.R, color.G, color.B);
         }
 
         #region Casts to/from System.Drawing.Color

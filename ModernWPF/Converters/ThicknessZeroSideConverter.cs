@@ -17,10 +17,7 @@ namespace ModernWPF.Converters
     {
         static readonly char[] __splitChars = new char[] { ',', ' ' };
 
-        static ThicknessZeroSideConverter()
-        {
-            Instance = new ThicknessZeroSideConverter();
-        }
+        static readonly ThicknessZeroSideConverter _instance = new ThicknessZeroSideConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -28,7 +25,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static ThicknessZeroSideConverter Instance { get; private set; }
+        public static ThicknessZeroSideConverter Instance { get { return _instance; } }
 
         #region IValueConverter Members
 
@@ -48,9 +45,10 @@ namespace ModernWPF.Converters
             {
                 Thickness target = default(Thickness);
 
-                if (value is Thickness)
+                var thickTest = value as Thickness?;
+                if (thickTest != null)
                 {
-                    target = (Thickness)value;
+                    target = thickTest.Value;
                 }
                 else
                 {

@@ -13,7 +13,7 @@ namespace ModernWPF
     /// <summary>
     /// Contains various attached properties for <see cref="ScrollViewer"/> using the modern theme..
     /// </summary>
-    public class ScrollViewerUI
+    public static class ScrollViewerUI
     {
 
         #region HScroll attached dp
