@@ -487,9 +487,13 @@ namespace ModernWPF
                 }
                 if (_borderWindow != null)
                 {
+                    var toFoxus = _borderWindow.Owner;
                     _borderWindow.Owner = null;
                     _borderWindow.Close();
                     _borderWindow = null;
+
+                    // hack to not let owner window move to background for some reason
+                    if (toFoxus != null) { toFoxus.Activate(); }
                 }
             }
 

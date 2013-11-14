@@ -76,12 +76,13 @@ namespace ModernWPF.Sample
 
         private void btnDialog2_Click(object sender, RoutedEventArgs e)
         {
+            bool? lastResult = null;
             for (int i = 0; i < 3; )
             {
                 var diag = new InWindowDialog();
-                diag.Message = string.Format("This is modal dialog {0}/3, close it until the stack goes away!", ++i);
-                var res = diag.ShowDialogModal(this);
-                Debug.WriteLine("Dialog result = {0}", res);
+                diag.Message = string.Format("This is modal dialog {0}/3 with last result = {1}, close it until the stack goes away!", ++i, lastResult);
+                lastResult = diag.ShowDialogModal(this);
+                if (Dispatcher.HasShutdownStarted || Dispatcher.HasShutdownStarted) { break; }
             }
         }
     }
