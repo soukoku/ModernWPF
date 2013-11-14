@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accent.cs" />
+    <Compile Include="Animation.cs" />
     <Compile Include="Controls\AnimatedScrollViewer.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -179,37 +179,13 @@ namespace ModernWPF.Controls
 
         void DoShowContentAnimation(DialogControl content)
         {
-            var da = new DoubleAnimation();
-            da.Duration = TimeSpan.FromMilliseconds(250);
-            da.EasingFunction = new QuarticEase() { EasingMode = EasingMode.EaseOut };
-            da.To = 0;
-
             var dir = DetermineAniDirection(content);
-            TranslateTransform transform = new TranslateTransform();
-            _presenter.RenderTransform = transform;
-            switch (dir)
-            {
-                case AniFromDirection.Top:
-                    da.From = -200;
-                    transform.BeginAnimation(TranslateTransform.YProperty, da);
-                    break;
-                case AniFromDirection.Left:
-                    da.From = -200;
-                    transform.BeginAnimation(TranslateTransform.XProperty, da);
-                    break;
-                case AniFromDirection.Right:
-                    da.From = 200;
-                    transform.BeginAnimation(TranslateTransform.XProperty, da);
-                    break;
-                case AniFromDirection.Bottom:
-                    da.From = 200;
-                    transform.BeginAnimation(TranslateTransform.YProperty, da);
-                    break;
-            }
+            Animation.SlideIn(_presenter, Animation.TypicalDuration, 200, Animation.TypicalEasing, dir);
+
         }
 
-        AniFromDirection DetermineAniDirection(DialogControl content)
-        { 
+        Animation.SlideFromDirection DetermineAniDirection(DialogControl content)
+        {
             if (content != null)
             {
                 if (content.VerticalAlignment == System.Windows.VerticalAlignment.Stretch)
@@ -217,26 +193,19 @@ namespace ModernWPF.Controls
                     switch (content.HorizontalAlignment)
                     {
                         case System.Windows.HorizontalAlignment.Left:
-                            return AniFromDirection.Left;
+                            return Animation.SlideFromDirection.Left;
                         case System.Windows.HorizontalAlignment.Right:
-                            return AniFromDirection.Right;
+                            return Animation.SlideFromDirection.Right;
                     }
                 }
                 else if (content.HorizontalAlignment == System.Windows.HorizontalAlignment.Stretch &&
                     content.VerticalAlignment == System.Windows.VerticalAlignment.Bottom)
                 {
-                    return AniFromDirection.Bottom;
+                    return Animation.SlideFromDirection.Bottom;
                 }
             }
-            return AniFromDirection.Top;
+            return Animation.SlideFromDirection.Top;
         }
 
-        enum AniFromDirection
-        {
-            Left,
-            Top,
-            Right,
-            Bottom
-        }
     }
 }

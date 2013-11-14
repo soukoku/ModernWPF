@@ -6,16 +6,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Dummy Style, anything you won't use goes -->
-            <Style TargetType="{x:Type Rectangle}" />
+            <!--<Style TargetType="{x:Type Rectangle}" />-->
 
             <ResourceDictionary.MergedDictionaries>
-                <!--animation is optional-->
-                <!--<ResourceDictionary Source="/ModernWPF;component/Themes/Animations.xaml" />-->
-                
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernBase.xaml" />
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernLight.xaml" />
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernStyles.xaml" />
-                
             </ResourceDictionary.MergedDictionaries>
             
 

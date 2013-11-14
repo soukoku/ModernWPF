@@ -5,10 +5,6 @@
 	xmlns:ctrl="clr-namespace:ModernWPF.Controls"
     >
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ModernWPF;component/Themes/Animations.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <Style TargetType="ctrl:ModernContentControl">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -16,26 +12,25 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:ModernContentControl">
-                    <Border x:Name="root" RenderTransformOrigin="0.5,0.5">
-                        <Border.RenderTransform>
-                            <TranslateTransform />
-                        </Border.RenderTransform>
-                        <ContentPresenter Cursor="{TemplateBinding Cursor}"
-								ContentTemplate="{TemplateBinding ContentTemplate}"
-								Content="{TemplateBinding Content}"
-								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-								Margin="{TemplateBinding Padding}"
-								VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    <Border x:Name="root">
+                        <ContentPresenter x:Name="PART_Content" 
+                                          Cursor="{TemplateBinding Cursor}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="LayoutStates">
-                                <VisualState x:Name="AfterLoaded"
-										Storyboard="{StaticResource FadeSlideInFromLeft}">
+                                <VisualState x:Name="AfterLoaded">
+                                    <Storyboard>
+                                        <DoubleAnimation To="1" Storyboard.TargetProperty="Opacity" Duration="0"/>
+                                    </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="AfterUnloaded"
-										Storyboard="{StaticResource FadeSlideOutToLeft}">
-                                </VisualState>
-                                <VisualState x:Name="BeforeLoaded" />
-                                <VisualState x:Name="BeforeUnloaded" />
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.100" To="AfterLoaded">
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Border>

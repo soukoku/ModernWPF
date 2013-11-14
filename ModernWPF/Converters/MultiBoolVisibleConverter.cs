@@ -73,7 +73,6 @@ namespace ModernWPF.Converters
         /// <returns>
         /// An array of values that have been converted from the target value back to the source values.
         /// </returns>
-        /// <exception cref="System.NotSupportedException"></exception>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
         {
             return null;
