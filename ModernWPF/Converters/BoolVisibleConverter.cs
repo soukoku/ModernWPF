@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -10,8 +11,22 @@ namespace ModernWPF.Converters
     /// <summary>
     /// Provides conversion of bool values to visibility.
     /// </summary>
+    [ValueConversion(typeof(bool), typeof(Visibility))]
     public class BoolVisibleConverter : IValueConverter
     {
+        static BoolVisibleConverter()
+        {
+            Instance = new BoolVisibleConverter();
+        }
+
+        /// <summary>
+        /// Gets the singleton instance for this converter.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static BoolVisibleConverter Instance { get; private set; }
+        
         #region IValueConverter Members
 
         /// <summary>
@@ -51,7 +66,7 @@ namespace ModernWPF.Converters
         /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotSupportedException();
+            return DependencyProperty.UnsetValue;
         }
 
         #endregion

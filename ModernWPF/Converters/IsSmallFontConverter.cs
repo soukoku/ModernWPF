@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Data;
 
 namespace ModernWPF.Converters
@@ -10,7 +11,20 @@ namespace ModernWPF.Converters
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Used in xaml.")]
     class IsSmallFontConverter : IValueConverter
     {
-        static IsSmallFontConverter() { Threshold = 14; }
+        static IsSmallFontConverter()
+        {
+            Threshold = 14;
+            Instance = new IsSmallFontConverter();
+        }
+
+        /// <summary>
+        /// Gets the singleton instance for this converter.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static IsSmallFontConverter Instance { get; private set; }
+
 
         /// <summary>
         /// Gets or sets the threshold size for small.
@@ -52,7 +66,7 @@ namespace ModernWPF.Converters
         /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotSupportedException();
+            return DependencyProperty.UnsetValue;
         }
     }
 }

@@ -12,6 +12,19 @@ namespace ModernWPF.Converters
     /// </summary>
     public class MultiBoolVisibleConverter : IMultiValueConverter
     {
+        static MultiBoolVisibleConverter()
+        {
+            Instance = new MultiBoolVisibleConverter();
+        }
+
+        /// <summary>
+        /// Gets the singleton instance for this converter.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static MultiBoolVisibleConverter Instance { get; private set; }
+
         #region IMultiValueConverter Members
 
         /// <summary>
@@ -63,7 +76,7 @@ namespace ModernWPF.Converters
         /// <exception cref="System.NotSupportedException"></exception>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotSupportedException();
+            return null;
         }
 
         #endregion

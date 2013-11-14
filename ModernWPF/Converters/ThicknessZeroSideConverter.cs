@@ -11,9 +11,24 @@ namespace ModernWPF.Converters
     /// Converts a <see cref="Thickness"/> or number to another <see cref="Thickness"/> with the specified sides to 0. 
     /// Side parameters can be top, left, right, or bottom.
     /// </summary>
+    [ValueConversion(typeof(Thickness), typeof(Thickness))]
+    [ValueConversion(typeof(double), typeof(Thickness))]
     public class ThicknessZeroSideConverter : IValueConverter
     {
         static readonly char[] __splitChars = new char[] { ',', ' ' };
+
+        static ThicknessZeroSideConverter()
+        {
+            Instance = new ThicknessZeroSideConverter();
+        }
+
+        /// <summary>
+        /// Gets the singleton instance for this converter.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static ThicknessZeroSideConverter Instance { get; private set; }
 
         #region IValueConverter Members
 
@@ -83,7 +98,7 @@ namespace ModernWPF.Converters
         /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotSupportedException();
+            return DependencyProperty.UnsetValue;
         }
 
         #endregion

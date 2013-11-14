@@ -10,8 +10,22 @@ namespace ModernWPF.Converters
     /// <summary>
     /// Converts to <see cref="Visibility.Visible"/> if the value is null or empty string.
     /// </summary>
+    [ValueConversion(typeof(object), typeof(Visibility))]
     public class NullEmptyNotVisibleConverter : IValueConverter
     {
+        static NullEmptyNotVisibleConverter()
+        {
+            Instance = new NullEmptyNotVisibleConverter();
+        }
+
+        /// <summary>
+        /// Gets the singleton instance for this converter.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static NullEmptyNotVisibleConverter Instance { get; private set; }
+
         #region IValueConverter Members
 
         /// <summary>
@@ -47,7 +61,7 @@ namespace ModernWPF.Converters
         /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotSupportedException();
+            return DependencyProperty.UnsetValue;
         }
 
         #endregion

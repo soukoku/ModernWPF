@@ -18,6 +18,19 @@ namespace ModernWPF.Converters
     /// </summary>
     public class AppIconImageConverter : IValueConverter
     {
+        static AppIconImageConverter()
+        {
+            Instance = new AppIconImageConverter();
+        }
+
+        /// <summary>
+        /// Gets the singleton instance for this converter.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static AppIconImageConverter Instance { get; private set; }
+
         static readonly ImageSource __appIcon = TryGetAppIcon();
 
         private static ImageSource TryGetAppIcon()
@@ -76,7 +89,7 @@ namespace ModernWPF.Converters
         /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotSupportedException();
+            return DependencyProperty.UnsetValue;
         }
 
         #endregion
