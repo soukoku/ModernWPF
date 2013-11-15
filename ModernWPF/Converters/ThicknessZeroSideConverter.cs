@@ -41,23 +41,23 @@ namespace ModernWPF.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value != null && value is Thickness && parameter != null)
-            {
-                Thickness target = default(Thickness);
+            Thickness target = default(Thickness);
 
-                var thickTest = value as Thickness?;
-                if (thickTest != null)
+            var thickTest = value as Thickness?;
+            if (thickTest != null)
+            {
+                target = thickTest.Value;
+            }
+            else
+            {
+                double test = 0;
+                if (double.TryParse(value.ToString(), out test))
                 {
-                    target = thickTest.Value;
+                    target = new Thickness(test);
                 }
-                else
-                {
-                    double test = 0;
-                    if (double.TryParse(value.ToString(), out test))
-                    {
-                        target = new Thickness(test);
-                    }
-                }
+            }
+            if (parameter != null)
+            {
                 foreach (var para in parameter.ToString().Split(__splitChars, StringSplitOptions.RemoveEmptyEntries))
                 {
                     if (string.Equals(para, "top", StringComparison.OrdinalIgnoreCase))
@@ -77,10 +77,8 @@ namespace ModernWPF.Converters
                         target.Bottom = 0;
                     }
                 }
-                return target;
             }
-
-            return value;
+            return target;
         }
 
         /// <summary>

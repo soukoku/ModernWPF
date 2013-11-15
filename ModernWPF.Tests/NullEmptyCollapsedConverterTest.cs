@@ -25,7 +25,7 @@ namespace ModernWPF.Tests
         {
             var conv = new NullEmptyCollapsedConverter();
 
-            var result = conv.ConvertBack(Visibility.Collapsed, typeof(bool), null, CultureInfo.CurrentCulture);
+            var result = conv.ConvertBack(Visibility.Collapsed, typeof(object), null, CultureInfo.CurrentCulture);
 
             Assert.AreEqual(DependencyProperty.UnsetValue, result, "No longer an unsupported operation?");
         }
