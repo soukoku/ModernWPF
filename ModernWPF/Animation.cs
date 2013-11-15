@@ -21,6 +21,21 @@ namespace ModernWPF
         }
 
         /// <summary>
+        /// Gets a flag indicating whether animation should be used.
+        /// This does not stop controls from using animations in this class.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the app should animate; otherwise, <c>false</c>.
+        /// </value>
+        public static bool ShouldAnimate
+        {
+            get
+            {
+                return !SystemParameters.IsRemoteSession || (RenderCapability.Tier >> 16) > 0;
+            }
+        }
+
+        /// <summary>
         /// Gets the a typical animation duration.
         /// </summary>
         public static TimeSpan TypicalDuration { get; private set; }
@@ -45,6 +60,18 @@ namespace ModernWPF
         }
 
         /// <summary>
+        /// Slides the element in with translate transform.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="duration">The duration.</param>
+        /// <param name="startOffset">The start offset.</param>
+        /// <param name="easing">The easing.</param>
+        public static void SlideIn(UIElement element, TimeSpan duration, double startOffset, IEasingFunction easing)
+        {
+            SlideIn(element, duration, startOffset, TypicalEasing, SlideFromDirection.Left);
+        }
+
+        /// <summary>
         /// Slides the element in with translate transform
         /// </summary>
         /// <param name="element">The element.</param>
@@ -52,7 +79,7 @@ namespace ModernWPF
         /// <param name="startOffset">The start offset.</param>
         /// <param name="easing">The easing.</param>
         /// <param name="direction">The direction.</param>
-        public static void SlideIn(UIElement element, TimeSpan duration, double startOffset, IEasingFunction easing, SlideFromDirection direction = SlideFromDirection.Left)
+        public static void SlideIn(UIElement element, TimeSpan duration, double startOffset, IEasingFunction easing, SlideFromDirection direction)
         {
             if (element == null) { return; }
 

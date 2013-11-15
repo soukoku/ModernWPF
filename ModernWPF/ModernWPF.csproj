@@ -60,6 +60,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Accent.cs" />
     <Compile Include="Animation.cs" />
     <Compile Include="Controls\AnimatedScrollViewer.cs">

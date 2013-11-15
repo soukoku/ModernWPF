@@ -33,15 +33,15 @@ namespace ModernWPF.Controls
             {
                 this.Loaded += (s, e) =>
                 {
-                    VisualStateManager.GoToState(this, "AfterLoaded", !SystemParameters.IsRemoteSession);
-                    if (!SystemParameters.IsRemoteSession)
+                    VisualStateManager.GoToState(this, "AfterLoaded", Animation.ShouldAnimate);
+                    if (Animation.ShouldAnimate)
                     {
                         Animation.SlideIn(_presenter, TimeSpan.FromMilliseconds(500), 15);
                     }
                 };
                 //this.DataContextChanged += (s, e) =>
                 //{
-                //    VisualStateManager.GoToState(this, "AfterLoaded", !SystemParameters.IsRemoteSession);
+                //    VisualStateManager.GoToState(this, "AfterLoaded", Animation.ShouldAnimate);
                 //};
                 this.Unloaded += (s, e) =>
                 {

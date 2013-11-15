@@ -17,6 +17,7 @@ namespace ModernWPF.Controls
     [TemplatePart(Name = PARTContent, Type = typeof(ContentPresenter))]
     public class DialogControlContainer : ContentControl
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static DialogControlContainer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogControlContainer), new FrameworkPropertyMetadata(typeof(DialogControlContainer)));
@@ -44,11 +45,11 @@ namespace ModernWPF.Controls
                 {
                     if (value)
                     {
-                        VisualStateManager.GoToState(this, "IsOpen", !SystemParameters.IsRemoteSession);
+                        VisualStateManager.GoToState(this, "IsOpen", Animation.ShouldAnimate);
                     }
                     else
                     {
-                        VisualStateManager.GoToState(this, "IsClosed", !SystemParameters.IsRemoteSession);
+                        VisualStateManager.GoToState(this, "IsClosed", Animation.ShouldAnimate);
                     }
                 }
             }
@@ -145,7 +146,7 @@ namespace ModernWPF.Controls
                     BindContentAlignment(next);
                 }
                 this.Content = next;
-                if (!SystemParameters.IsRemoteSession)
+                if (Animation.ShouldAnimate)
                 {
                     DoShowContentAnimation(next);
                 }

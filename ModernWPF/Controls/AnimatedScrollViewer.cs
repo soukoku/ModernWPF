@@ -21,6 +21,7 @@ namespace ModernWPF.Controls
     [TemplatePart(Name = "PART_AniHorizontalScrollBar", Type = typeof(ScrollBar))]
     public class AnimatedScrollViewer : ScrollViewer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static AnimatedScrollViewer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AnimatedScrollViewer), new FrameworkPropertyMetadata(typeof(AnimatedScrollViewer)));
@@ -505,7 +506,7 @@ namespace ModernWPF.Controls
 
         private void AnimateNow()
         {
-            if (AnimateScroll && !SystemParameters.IsRemoteSession)
+            if (AnimateScroll && Animation.ShouldAnimate)
             {
                 KeyTime targetKeyTime = AnimateDuration;
                 KeySpline targetKeySpline = AnimateSpline;

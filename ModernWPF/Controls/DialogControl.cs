@@ -17,6 +17,7 @@ namespace ModernWPF.Controls
     /// </summary>
     public class DialogControl : UserControl
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static DialogControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogControl), new FrameworkPropertyMetadata(typeof(DialogControl)));

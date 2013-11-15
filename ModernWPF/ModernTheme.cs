@@ -34,27 +34,24 @@ namespace ModernWPF
             return PredefinedAccents.Where(a => string.Equals(a.Name, name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
         }
 
-        static ModernTheme()
-        {
-            PredefinedAccents = new Accent[]{
-                new Accent(Accent.Red, (Color)ColorConverter.ConvertFromString("#CD3333")),
-                new Accent(Accent.Orange, Colors.Chocolate),
-                //new Accent(Accent.GOLD,(Color)ColorConverter.ConvertFromString("#CDAD00")),
-                new Accent(Accent.Gold,Colors.Goldenrod),
-                new Accent(Accent.Olive,(Color)ColorConverter.ConvertFromString("#6B8E23")),
-                new Accent(Accent.Teal,(Color)ColorConverter.ConvertFromString("#00959D")),
-                new Accent(Accent.Green, Colors.ForestGreen),
-                new Accent(Accent.LightBlue, Colors.DodgerBlue),
-                new Accent(Accent.DarkBlue,(Color)ColorConverter.ConvertFromString("#007ACC")),
-                new Accent(Accent.LightPurple, Colors.MediumOrchid),
-                new Accent(Accent.DarkPurple, Colors.BlueViolet),
-            };
-        }
+        static readonly Accent[] _accents = new Accent[]{
+            new Accent(Accent.Red, (Color)ColorConverter.ConvertFromString("#CD3333")),
+            new Accent(Accent.Orange, Colors.Chocolate),
+            //new Accent(Accent.GOLD,(Color)ColorConverter.ConvertFromString("#CDAD00")),
+            new Accent(Accent.Gold,Colors.Goldenrod),
+            new Accent(Accent.Olive,(Color)ColorConverter.ConvertFromString("#6B8E23")),
+            new Accent(Accent.Teal,(Color)ColorConverter.ConvertFromString("#00959D")),
+            new Accent(Accent.Green, Colors.ForestGreen),
+            new Accent(Accent.LightBlue, Colors.DodgerBlue),
+            new Accent(Accent.DarkBlue,(Color)ColorConverter.ConvertFromString("#007ACC")),
+            new Accent(Accent.LightPurple, Colors.MediumOrchid),
+            new Accent(Accent.DarkPurple, Colors.BlueViolet),
+        };
 
         /// <summary>
         /// Gets the predefined accents colors.
         /// </summary>
-        public static IEnumerable<Accent> PredefinedAccents { get; private set; }
+        public static IEnumerable<Accent> PredefinedAccents { get { return _accents; } }
 
         #endregion
 
