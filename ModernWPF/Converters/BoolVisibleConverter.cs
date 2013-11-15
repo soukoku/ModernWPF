@@ -38,16 +38,13 @@ namespace ModernWPF.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            bool visible = false;
-            if (value != null)
+            var visible = value as bool?;
+
+            if (parameter != null && string.Equals("not", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
             {
-                if (value is bool) { visible = (bool)value; }
-                if (parameter != null && string.Equals("not", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
-                {
-                    visible = !visible;
-                }
+                visible = !visible.GetValueOrDefault();
             }
-            return visible ? Visibility.Visible : Visibility.Collapsed;
+            return visible.GetValueOrDefault() ? Visibility.Visible : Visibility.Collapsed;
         }
 
         /// <summary>
