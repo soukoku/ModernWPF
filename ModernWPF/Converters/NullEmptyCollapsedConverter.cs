@@ -11,9 +11,9 @@ namespace ModernWPF.Converters
     /// Converts to <see cref="Visibility.Visible"/> if the value is null or empty string.
     /// </summary>
     [ValueConversion(typeof(object), typeof(Visibility))]
-    public class NullEmptyNotVisibleConverter : IValueConverter
+    public class NullEmptyCollapsedConverter : IValueConverter
     {
-        static readonly NullEmptyNotVisibleConverter _instance = new NullEmptyNotVisibleConverter();
+        static readonly NullEmptyCollapsedConverter _instance = new NullEmptyCollapsedConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -21,7 +21,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static NullEmptyNotVisibleConverter Instance { get { return _instance; } }
+        public static NullEmptyCollapsedConverter Instance { get { return _instance; } }
 
         #region IValueConverter Members
 

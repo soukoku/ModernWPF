@@ -10,6 +10,17 @@ namespace ModernWPF.Tests
     public class BoolVisibleConverterTest
     {
         [TestMethod]
+        public void Singleton_Is_Not_Null()
+        {
+            Assert.IsNotNull(BoolVisibleConverter.Instance);
+        }
+        [TestMethod]
+        public void Singleton_Returns_The_Same_Instance()
+        {
+            Assert.AreSame(BoolVisibleConverter.Instance, BoolVisibleConverter.Instance);
+        }
+
+        [TestMethod]
         public void ConvertBack_Converts_To_Unset()
         {
             var conv = new BoolVisibleConverter();
@@ -26,7 +37,7 @@ namespace ModernWPF.Tests
 
             var result = conv.Convert(null, typeof(Visibility), null, CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(Visibility.Collapsed, result, "Failed to convert null.");
+            Assert.AreEqual(Visibility.Collapsed, result);
         }
         [TestMethod]
         public void Null_With_Not_Param_Converts_To_Visible()
@@ -35,7 +46,7 @@ namespace ModernWPF.Tests
 
             var result = conv.Convert(null, typeof(Visibility), "not", CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(Visibility.Visible, result, "Failed to convert not null.");
+            Assert.AreEqual(Visibility.Visible, result);
         }
 
         [TestMethod]
@@ -45,7 +56,7 @@ namespace ModernWPF.Tests
 
             var result = conv.Convert(new { blah = "blah" }, typeof(Visibility), null, CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(Visibility.Collapsed, result, "Failed to convert null.");
+            Assert.AreEqual(Visibility.Collapsed, result);
         }
         [TestMethod]
         public void Unsupported_Obj_With_Not_Param_Converts_To_Visible()
@@ -54,7 +65,7 @@ namespace ModernWPF.Tests
 
             var result = conv.Convert(new { blah = "blah" }, typeof(Visibility), "not", CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(Visibility.Visible, result, "Failed to convert not null.");
+            Assert.AreEqual(Visibility.Visible, result);
         }
 
         [TestMethod]
@@ -64,7 +75,7 @@ namespace ModernWPF.Tests
 
             var result = conv.Convert(false, typeof(Visibility), null, CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(Visibility.Collapsed, result, "Failed to convert false.");
+            Assert.AreEqual(Visibility.Collapsed, result);
         }
         [TestMethod]
         public void False_With_Not_Param_Converts_To_Visible()
@@ -73,7 +84,7 @@ namespace ModernWPF.Tests
 
             var result = conv.Convert(false, typeof(Visibility), "not", CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(Visibility.Visible, result, "Failed to convert not false.");
+            Assert.AreEqual(Visibility.Visible, result);
         }
 
         [TestMethod]
@@ -83,7 +94,7 @@ namespace ModernWPF.Tests
 
             var result = conv.Convert(true, typeof(Visibility), null, CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(Visibility.Visible, result, "Failed to convert true.");
+            Assert.AreEqual(Visibility.Visible, result);
         }
         [TestMethod]
         public void True_With_Not_Param_Converts_To_Collapsed()
@@ -92,7 +103,7 @@ namespace ModernWPF.Tests
 
             var result = conv.Convert(true, typeof(Visibility), "not", CultureInfo.CurrentCulture);
 
-            Assert.AreEqual(Visibility.Collapsed, result, "Failed to convert not true.");
+            Assert.AreEqual(Visibility.Collapsed, result);
         }
     }
 }
