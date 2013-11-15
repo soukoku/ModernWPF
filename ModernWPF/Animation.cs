@@ -68,7 +68,7 @@ namespace ModernWPF
         /// <param name="easing">The easing.</param>
         public static void SlideIn(UIElement element, TimeSpan duration, double startOffset, IEasingFunction easing)
         {
-            SlideIn(element, duration, startOffset, TypicalEasing, SlideFromDirection.Left);
+            SlideIn(element, duration, startOffset, easing, SlideFromDirection.Left);
         }
 
         /// <summary>
