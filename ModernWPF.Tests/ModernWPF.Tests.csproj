@@ -60,6 +60,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="MultiBoolVisibleConverterTest.cs" />
     <Compile Include="ThicknessZeroSideConverterTest.cs" />
     <Compile Include="NullEmptyCollapsedConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

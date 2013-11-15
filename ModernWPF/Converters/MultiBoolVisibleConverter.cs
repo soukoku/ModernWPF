@@ -41,21 +41,26 @@ namespace ModernWPF.Converters
             {
                 foreach (var val in values)
                 {
-                    if (val is bool)
+                    var asBool = val as bool?;
+                    if (asBool != null)
                     {
-                        if (retVal.HasValue) { retVal = retVal.Value && (bool)val; }
-                        else { retVal = (bool)val; }
+                        if (retVal.HasValue) { retVal = retVal.Value && asBool.Value; }
+                        else { retVal = asBool.Value; }
                     }
-                    else if (val is Visibility)
+                    else
                     {
-                        if (retVal.HasValue) { retVal = retVal.Value && ((Visibility)val) == Visibility.Visible; }
-                        else { retVal = ((Visibility)val) == Visibility.Visible; }
+                        var asVis = val as Visibility?;
+                        if (asVis != null)
+                        {
+                            if (retVal.HasValue) { retVal = retVal.Value && (asVis.Value == Visibility.Visible); }
+                            else { retVal = asVis.Value == Visibility.Visible; }
+                        }
                     }
                 }
-                if (parameter != null && string.Equals("not", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
-                {
-                    retVal = !retVal.GetValueOrDefault();
-                }
+            }
+            if (parameter != null && string.Equals("not", parameter.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                retVal = !retVal.GetValueOrDefault();
             }
             return retVal.GetValueOrDefault() ? Visibility.Visible : Visibility.Collapsed;
         }
