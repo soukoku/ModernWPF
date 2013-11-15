@@ -3,11 +3,11 @@
 [assembly: AssemblyCompany("Yin-Chun Wang")]
 [assembly: AssemblyCopyright("Copyright © Yin-Chun Wang 2013")]
 
-[assembly: AssemblyVersion(_VersionString.Release)]
-[assembly: AssemblyFileVersion(_VersionString.Build)]
-[assembly: AssemblyInformationalVersion(_VersionString.Build)]
+[assembly: AssemblyVersion(_ModernWPFVersionString.Release)]
+[assembly: AssemblyFileVersion(_ModernWPFVersionString.Build)]
+[assembly: AssemblyInformationalVersion(_ModernWPFVersionString.Build)]
 
-static class _VersionString
+static class _ModernWPFVersionString
 {
     // keep this same in majors releases
     public const string Release = "1.0.0.0";

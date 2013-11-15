@@ -18,7 +18,7 @@ using System.Windows.Markup;
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
 
-[assembly: InternalsVisibleTo("ModernWPF.Tests")]
+//[assembly: InternalsVisibleTo("ModernWPF.Tests")]
 
 //In order to begin building localizable applications, set 
 //<UICulture>CultureYouAreCodingWith</UICulture> in your .csproj file

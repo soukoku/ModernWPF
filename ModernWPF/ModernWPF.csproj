@@ -39,10 +39,16 @@
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Sign.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonWin32, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CommonWin32, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a0a4edcfe233918d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CommonWin32.2.0.0.0\lib\net35-Client\CommonWin32.dll</HintPath>
+      <HintPath>..\packages\CommonWin32.2.0.1\lib\net35-Client\CommonWin32.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -112,11 +118,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\CommandText.zh-Hant.resx" />
     <None Include="ModernWPF.nuspec" />
-    <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Sign.snk" />
     <None Include="Themes\aero2.normalcolor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
