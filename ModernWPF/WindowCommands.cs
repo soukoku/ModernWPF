@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -15,7 +16,8 @@ namespace ModernWPF
 
         void TryHook(Window window)
         {
-            if (_hooked || window == null) { return; }
+            if (_hooked || window == null || DesignerProperties.GetIsInDesignMode(window)) { return; }
+
             window.StateChanged += (s, e) => { CommandManager.InvalidateRequerySuggested(); };
             _hooked = true;
         }
