@@ -60,6 +60,9 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="TextCaseConverterTest.cs" />
+    <Compile Include="IsSmallFontConverterTest.cs" />
+    <Compile Include="AppIconImageConverterTest.cs" />
     <Compile Include="MultiBoolVisibleConverterTest.cs" />
     <Compile Include="ThicknessZeroSideConverterTest.cs" />
     <Compile Include="NullEmptyCollapsedConverterTest.cs" />

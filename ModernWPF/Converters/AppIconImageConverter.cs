@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CommonWin32.API;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -16,6 +18,7 @@ namespace ModernWPF.Converters
     /// <summary>
     /// A converter for the <see cref="Window.Icon"/> property that if not set, will return the application's icon (i.e. from the exe file).
     /// </summary>
+    [ValueConversion(typeof(ImageSource), typeof(ImageSource))]
     public class AppIconImageConverter : IValueConverter
     {
         static readonly AppIconImageConverter _instance = new AppIconImageConverter();
@@ -29,25 +32,41 @@ namespace ModernWPF.Converters
         public static AppIconImageConverter Instance { get { return _instance; } }
 
         static readonly ImageSource __appIcon = TryGetAppIcon();
+        /// <summary>
+        /// Gets the extracted large application icon image.
+        /// </summary>
+        /// <value>
+        /// The application icon.
+        /// </value>
+        public static ImageSource AppIcon { get { return __appIcon; } }
 
         private static ImageSource TryGetAppIcon()
         {
+            IntPtr iconPtr = IntPtr.Zero;
             try
             {
                 var exe = Assembly.GetEntryAssembly().Location;
-                using (var icon = Icon.ExtractAssociatedIcon(exe))
+                StringBuilder sb = new StringBuilder(exe);
+                int r = 0;
+                // use direct pinvoke to work with unc paths
+                iconPtr = Shell32.ExtractAssociatedIcon(IntPtr.Zero, sb, ref r);
+                var img = Imaging.CreateBitmapSourceFromHIcon(iconPtr, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                if (img.CanFreeze)
                 {
-                    var img = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                    if (img.CanFreeze)
-                    {
-                        img.Freeze();
-                    }
-                    return img;
+                    img.Freeze();
                 }
+                return img;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Failed to extract icon: {0}", ex);
+            }
+            finally
+            {
+                if (iconPtr != IntPtr.Zero)
+                {
+                    User32.DestroyIcon(iconPtr);
+                }
             }
             return null;
         }
