@@ -84,6 +84,7 @@ namespace ModernWPF
         /// <param name="window">The window.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">window</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public static Chrome GetChrome(Window window)
         {
             if (window == null) { throw new ArgumentNullException("window"); }
@@ -96,6 +97,7 @@ namespace ModernWPF
         /// <param name="window">The window.</param>
         /// <param name="chrome">The chrome.</param>
         /// <exception cref="System.ArgumentNullException">window</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public static void SetChrome(Window window, Chrome chrome)
         {
             if (window == null) { throw new ArgumentNullException("window"); }
@@ -147,6 +149,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static double GetCaptionHeight(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (double)obj.GetValue(CaptionHeightProperty);
         }
 
@@ -157,6 +160,7 @@ namespace ModernWPF
         /// <param name="value">The value.</param>
         public static void SetCaptionHeight(DependencyObject obj, double value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(CaptionHeightProperty, value);
         }
 
@@ -174,6 +178,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static bool GetShowCaptionText(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (bool)obj.GetValue(ShowCaptionTextProperty);
         }
 
@@ -184,6 +189,7 @@ namespace ModernWPF
         /// <param name="value">if set to <c>true</c> then show window title.</param>
         public static void SetShowCaptionText(DependencyObject obj, bool value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(ShowCaptionTextProperty, value);
         }
 
@@ -201,6 +207,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static bool GetShowCaptionIcon(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (bool)obj.GetValue(ShowCaptionIconProperty);
         }
 
@@ -211,6 +218,7 @@ namespace ModernWPF
         /// <param name="value">if set to <c>true</c> [value].</param>
         public static void SetShowCaptionIcon(DependencyObject obj, bool value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(ShowCaptionIconProperty, value);
         }
 
@@ -229,6 +237,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static bool GetShowControlBoxes(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (bool)obj.GetValue(ShowControlBoxesProperty);
         }
 
@@ -239,6 +248,7 @@ namespace ModernWPF
         /// <param name="value">if set to <c>true</c> then show the control boxes.</param>
         public static void SetShowControlBoxes(DependencyObject obj, bool value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(ShowControlBoxesProperty, value);
         }
 

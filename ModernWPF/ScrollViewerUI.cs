@@ -36,6 +36,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static bool GetHScrollOnWheel(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (bool)obj.GetValue(HScrollOnWheelProperty);
         }
         /// <summary>
@@ -45,6 +46,7 @@ namespace ModernWPF
         /// <param name="value">if set to <c>true</c> then h-scroll logic will be used if possible.</param>
         public static void SetHScrollOnWheel(DependencyObject obj, bool value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(HScrollOnWheelProperty, value);
         }
 
@@ -114,6 +116,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static bool GetOverContent(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (bool)obj.GetValue(OverContentProperty);
         }
 
@@ -124,6 +127,7 @@ namespace ModernWPF
         /// <param name="value">The value flag.</param>
         public static void SetOverContent(DependencyObject obj, bool value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(OverContentProperty, value);
         }
 

@@ -22,6 +22,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static bool GetShowClearButton(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (bool)obj.GetValue(ShowClearButtonProperty);
         }
 
@@ -32,6 +33,7 @@ namespace ModernWPF
         /// <param name="value">the flag value.</param>
         public static void SetShowClearButton(DependencyObject obj, bool value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(ShowClearButtonProperty, value);
         }
 
@@ -51,6 +53,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static UIElement GetLeadingElement(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (UIElement)obj.GetValue(LeadingElementProperty);
         }
 
@@ -61,6 +64,7 @@ namespace ModernWPF
         /// <param name="value">The value.</param>
         public static void SetLeadingElement(DependencyObject obj, UIElement value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(LeadingElementProperty, value);
         }
 
@@ -78,6 +82,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static UIElement GetTrailingElement(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (UIElement)obj.GetValue(TrailingElementProperty);
         }
 
@@ -88,6 +93,7 @@ namespace ModernWPF
         /// <param name="value">The value.</param>
         public static void SetTrailingElement(DependencyObject obj, UIElement value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(TrailingElementProperty, value);
         }
 
@@ -107,6 +113,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static string GetWatermarkText(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             return (string)obj.GetValue(WatermarkTextProperty);
         }
 
@@ -117,6 +124,7 @@ namespace ModernWPF
         /// <param name="value">The value.</param>
         public static void SetWatermarkText(DependencyObject obj, string value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             obj.SetValue(WatermarkTextProperty, value);
         }
 

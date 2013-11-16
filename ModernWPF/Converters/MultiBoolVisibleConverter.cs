@@ -10,6 +10,7 @@ namespace ModernWPF.Converters
     /// <summary>
     /// Converts multiple <see cref="Boolean"/> or <see cref="Visibility"/> values into a single <see cref="Visibility"/>.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
     public class MultiBoolVisibleConverter : IMultiValueConverter
     {
         static readonly MultiBoolVisibleConverter _instance = new MultiBoolVisibleConverter();

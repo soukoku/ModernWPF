@@ -12,7 +12,8 @@ namespace ModernWPF.Resources
         /// <summary>
         /// Gets the singleton <see cref="CommandTextBinder"/> object.
         /// </summary>
-        public static readonly CommandTextBinder Instance = new CommandTextBinder();
+        public static CommandTextBinder Instance { get { return _instance; } }
+        static readonly CommandTextBinder _instance = new CommandTextBinder();
 
         private CommandTextBinder() { }
 
@@ -20,6 +21,7 @@ namespace ModernWPF.Resources
         /// Gets the <see cref="System.String"/> with the specified key.
         /// </summary>
         /// <value></value>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public string this[string key]
         {
             get

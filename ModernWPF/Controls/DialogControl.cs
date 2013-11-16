@@ -112,7 +112,7 @@ namespace ModernWPF.Controls
         /// <param name="e">The <see cref="T:System.Windows.Input.KeyEventArgs" /> that contains the event data.</param>
         protected override void OnPreviewKeyDown(System.Windows.Input.KeyEventArgs e)
         {
-            if (CloseOnEscapeKey && e.Key == System.Windows.Input.Key.Escape)
+            if (e != null && CloseOnEscapeKey && e.Key == System.Windows.Input.Key.Escape)
             {
                 e.Handled = true;
                 DialogResult = false;
@@ -157,6 +157,7 @@ namespace ModernWPF.Controls
         /// in its visual tree.
         /// </summary>
         /// <param name="window">The window.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void ShowDialog(Window window)
         {
             ShowDialog(window.FindInVisualTree<DialogControlContainer>());
@@ -182,6 +183,7 @@ namespace ModernWPF.Controls
         /// in its visual tree.
         /// </summary>
         /// <param name="window">The window.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public bool? ShowDialogModal(Window window)
         {
             return ShowDialogModal(window.FindInVisualTree<DialogControlContainer>());

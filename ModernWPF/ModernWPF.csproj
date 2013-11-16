@@ -117,7 +117,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\CommandText.zh-Hant.resx" />
-    <None Include="ModernWPF.nuspec" />
+    <None Include="ModernWPF.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup />

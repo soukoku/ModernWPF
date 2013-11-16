@@ -86,7 +86,7 @@ namespace ModernWPF.Controls
         /// <param name="e">The <see cref="T:System.Windows.Input.MouseWheelEventArgs" /> that contains the event data.</param>
         protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
         {
-            if (!e.Handled)
+            if (e != null && !e.Handled)
             {
                 if (e.Delta < 0)
                 {
@@ -129,9 +129,9 @@ namespace ModernWPF.Controls
         /// <param name="e">Required arguments for this event.</param>
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            Debug.WriteLine("Got keydown override");
-            if (Keyboard.Modifiers == ModifierKeys.None && CanKeyboardScroll)
+            if (e !=null && Keyboard.Modifiers == ModifierKeys.None && CanKeyboardScroll)
             {
+                //Debug.WriteLine("Got keydown override");
                 switch (e.Key)
                 {
                     case Key.Down:

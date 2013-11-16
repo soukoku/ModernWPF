@@ -40,6 +40,7 @@ namespace ModernWPF.Converters
         /// </value>
         public static ImageSource AppIcon { get { return __appIcon; } }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private static ImageSource TryGetAppIcon()
         {
             IntPtr iconPtr = IntPtr.Zero;
@@ -59,7 +60,7 @@ namespace ModernWPF.Converters
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Failed to extract icon: {0}", ex);
+                Trace.TraceError("AppIconImageConverter failed to extract icon: {0}", ex);
             }
             finally
             {

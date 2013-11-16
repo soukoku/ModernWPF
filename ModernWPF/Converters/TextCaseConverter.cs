@@ -40,6 +40,7 @@ namespace ModernWPF.Converters
         {
             if (value != null)
             {
+                if (culture == null) { culture = System.Globalization.CultureInfo.CurrentCulture; }
                 if (parameter != null)
                 {
                     if (string.Equals("lower", parameter.ToString(), StringComparison.OrdinalIgnoreCase))

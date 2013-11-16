@@ -13,23 +13,24 @@ namespace ModernWPF
     /// </summary>
     public static class ModernExtensions
     {
-        /// <summary>
-        /// Try to the get <see cref="ScrollViewer" /> from an <see cref="ItemsControl" />.
-        /// </summary>
-        /// <param name="control">The control.</param>
-        /// <returns></returns>
-        public static ScrollViewer TryGetScrollViewer(this ItemsControl control)
-        {
-            if (control != null && VisualTreeHelper.GetChildrenCount(control) > 0)
-            {
-                Decorator border = VisualTreeHelper.GetChild(control, 0) as Decorator;
-                if (border != null)
-                {
-                    return border.Child as ScrollViewer;
-                }
-            }
-            return null;
-        }
+        ///// <summary>
+        ///// Try to the get <see cref="ScrollViewer" /> from an <see cref="ItemsControl" />.
+        ///// </summary>
+        ///// <param name="control">The control.</param>
+        ///// <returns></returns>
+        //[Obsolete("Use FindInVisualTree instead.")]
+        //public static ScrollViewer TryGetScrollViewer(this ItemsControl control)
+        //{
+        //    if (control != null && VisualTreeHelper.GetChildrenCount(control) > 0)
+        //    {
+        //        Decorator border = VisualTreeHelper.GetChild(control, 0) as Decorator;
+        //        if (border != null)
+        //        {
+        //            return border.Child as ScrollViewer;
+        //        }
+        //    }
+        //    return null;
+        //}
 
 
         /// <summary>
@@ -117,9 +118,10 @@ namespace ModernWPF
         /// Simulate the famous DoEvents() method from winform days.
         /// </summary>
         /// <param name="application">The application.</param>
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters"), SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public static void DoEvents(this Application application)
         {
+            if (application == null) { throw new ArgumentNullException("application"); }
             application.Dispatcher.DoEvents();
         }
 
@@ -130,6 +132,7 @@ namespace ModernWPF
         [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public static void DoEvents(this Dispatcher dispatcher)
         {
+            if (dispatcher == null) { throw new ArgumentNullException("dispatcher"); }
             DispatcherFrame frame = new DispatcherFrame();
             dispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(ExitFrame), frame);
             Dispatcher.PushFrame(frame);

@@ -22,12 +22,12 @@ namespace ModernWPF
         public double Hue
         {
             get { return hue * scale; }
-            set { hue = CheckRange(value / scale); }
+            //set { hue = CheckRange(value / scale); }
         }
         public double Saturation
         {
             get { return saturation * scale; }
-            set { saturation = CheckRange(value / scale); }
+            //set { saturation = CheckRange(value / scale); }
         }
         public double Luminosity
         {
@@ -49,11 +49,11 @@ namespace ModernWPF
             return string.Format(CultureInfo.CurrentCulture, "H: {0:#0.##}\tS: {1:#0.##}\tL: {2:#0.##}", Hue, Saturation, Luminosity);
         }
 
-        public string ToRGBString()
-        {
-            Color color = (Color)this;
-            return string.Format(CultureInfo.CurrentCulture, "R: {0:#0.##}\tG: {1:#0.##}\tB: {2:#0.##}", color.R, color.G, color.B);
-        }
+        //public string ToRGBString()
+        //{
+        //    Color color = (Color)this;
+        //    return string.Format(CultureInfo.CurrentCulture, "R: {0:#0.##}\tG: {1:#0.##}\tB: {2:#0.##}", color.R, color.G, color.B);
+        //}
 
         #region Casts to/from System.Drawing.Color
         public static implicit operator Color(HSLColor hslColor)
@@ -118,29 +118,29 @@ namespace ModernWPF
         }
         #endregion
 
-        public void SetRGB(byte red, byte green, byte blue)
-        {
-            HSLColor hslColor = Color.FromRgb(red, green, blue);
-            this.hue = hslColor.hue;
-            this.saturation = hslColor.saturation;
-            this.luminosity = hslColor.luminosity;
-        }
+        //public void SetRGB(byte red, byte green, byte blue)
+        //{
+        //    HSLColor hslColor = Color.FromRgb(red, green, blue);
+        //    this.hue = hslColor.hue;
+        //    this.saturation = hslColor.saturation;
+        //    this.luminosity = hslColor.luminosity;
+        //}
 
         public HSLColor() { }
-        public HSLColor(Color color)
-        {
-            SetRGB(color.R, color.G, color.B);
-        }
-        public HSLColor(byte red, byte green, byte blue)
-        {
-            SetRGB(red, green, blue);
-        }
-        public HSLColor(double hue, double saturation, double luminosity)
-        {
-            this.Hue = hue;
-            this.Saturation = saturation;
-            this.Luminosity = luminosity;
-        }
+        //public HSLColor(Color color)
+        //{
+        //    SetRGB(color.R, color.G, color.B);
+        //}
+        //public HSLColor(byte red, byte green, byte blue)
+        //{
+        //    SetRGB(red, green, blue);
+        //}
+        //public HSLColor(double hue, double saturation, double luminosity)
+        //{
+        //    this.Hue = hue;
+        //    this.Saturation = saturation;
+        //    this.Luminosity = luminosity;
+        //}
 
     }
 
