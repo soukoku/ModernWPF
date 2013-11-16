@@ -128,7 +128,7 @@ namespace ModernWPF.Controls
             {
                 this.ProcessInVisualTree<FrameworkElement>(fe =>
                 {
-                    var matches = fe.Visibility == System.Windows.Visibility.Visible && fe.Focusable;
+                    var matches = fe.Visibility == System.Windows.Visibility.Visible && fe.IsEnabled && fe.Focusable;
                     if (matches)
                     {
                         fe.Focus();

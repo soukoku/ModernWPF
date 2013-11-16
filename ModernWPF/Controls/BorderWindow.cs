@@ -338,7 +338,7 @@ namespace ModernWPF.Controls
         /// </summary>
         static readonly NcHitTest[][] NC_BORDER_MATRIX = 
         {
-            new []{ NcHitTest.HTTOPLEFT,    NcHitTest.HTTOP,     NcHitTest.HTTOPRIGHT },
+            new []{ NcHitTest.HTTOPLEFT,    NcHitTest.HTTOP,    NcHitTest.HTTOPRIGHT },
             new []{ NcHitTest.HTLEFT,       NcHitTest.HTCLIENT, NcHitTest.HTRIGHT     },
             new []{ NcHitTest.HTBOTTOMLEFT, NcHitTest.HTBOTTOM, NcHitTest.HTBOTTOMRIGHT },
         };

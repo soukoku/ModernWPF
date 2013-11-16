@@ -4,13 +4,14 @@
         xmlns:modern="http://modernwpf"
         xmlns:local="clr-namespace:ModernWPF.Sample"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        x:Name="theWindow"
         Title="ModernWPF - Test" Height="610" Width="1020"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindow}">
     <Window.Resources>
         <sys:String x:Key="shortString">Lorem ipsum dolor sit amet</sys:String>
     </Window.Resources>
-    <Border Margin="0 32 0 0">
+    <Border Margin="{Binding ElementName=theWindow, Path=(modern:Chrome.CaptionHeight), Converter={x:Static modern:ThicknessZeroSideConverter.Instance}, ConverterParameter='left right bottom'}">
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
