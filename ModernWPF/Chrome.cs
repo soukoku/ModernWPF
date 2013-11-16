@@ -576,6 +576,11 @@ namespace ModernWPF
                             if (changed) { User32Ex.ModifyStyle(hwnd, WindowStyles.WS_OVERLAPPED, WindowStyles.WS_VISIBLE); }
                             handled = true;
                             break;
+                        case WindowMessage.WM_NCUAHDRAWCAPTION:
+                        case WindowMessage.WM_NCUAHDRAWFRAME:
+                            // undocumented stuff for non-dwm themes that will sometimes draw old control buttons
+                            handled = true;
+                            break;
                         case WindowMessage.WM_NCCALCSIZE:
                             //remove non-client borders completely
                             HandleNcCalcSize(hwnd, wParam, lParam);

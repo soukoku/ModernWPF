@@ -239,6 +239,11 @@ namespace ModernWPF.Controls
                     //    if (changed) { User32Ex.ModifyStyle(hwnd, WindowStyles.WS_OVERLAPPED, WindowStyles.WS_VISIBLE); }
                     //    handled = true;
                     //    break;
+                    case WindowMessage.WM_NCUAHDRAWCAPTION:
+                    case WindowMessage.WM_NCUAHDRAWFRAME:
+                        // undocumented stuff for lame non-dwm themes that will sometimes draw old control buttons
+                        handled = true;
+                        break;
                     case WindowMessage.WM_NCHITTEST:
                         retVal = new IntPtr((int)HandleNcHitTest(lParam.ToPoint()));
                         handled = true;
