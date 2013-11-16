@@ -31,6 +31,16 @@ namespace ModernWPF.Tests
         }
 
         [TestMethod]
+        public void Null_Converts_To_Empty_Thickness()
+        {
+            var conv = new ThicknessZeroSideConverter();
+
+            var result = conv.Convert(null, typeof(Thickness), null, CultureInfo.CurrentCulture);
+            
+            Assert.AreEqual(new Thickness(), result);
+        }
+
+        [TestMethod]
         public void Single_Number_Converts_To_Regular_Thickness()
         {
             var conv = new ThicknessZeroSideConverter();

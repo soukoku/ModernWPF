@@ -48,7 +48,7 @@ namespace ModernWPF.Converters
             {
                 target = thickTest.Value;
             }
-            else
+            else if (value != null)
             {
                 double test = 0;
                 if (double.TryParse(value.ToString(), out test))

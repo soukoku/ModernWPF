@@ -33,6 +33,16 @@ namespace ModernWPF.Tests
         }
 
         [TestMethod]
+        public void Null_Converts_To_False()
+        {
+            var conv = new IsSmallFontConverter();
+            
+            var result = (bool)conv.Convert(null, typeof(bool), null, CultureInfo.CurrentCulture);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
         public void Greater_Than_Threshold_Converts_To_False()
         {
             var conv = new IsSmallFontConverter();
