@@ -17,7 +17,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=FontSize, Converter={x:Static conv:IsSmallFontConverter.Instance}}"
-						 Value="True">
+                         Value="True">
                 <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
             </DataTrigger>
         </Style.Triggers>
@@ -528,14 +528,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="ButtonBorder" 
-							Background="{TemplateBinding Background}"
+                            Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-							Padding="{TemplateBinding Padding}">
+                            Padding="{TemplateBinding Padding}">
                         <ContentPresenter x:Name="ButtonContent" RecognizesAccessKey="False"
-								VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-								SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         </ContentPresenter>
                     </Border>
                 </ControlTemplate>
@@ -585,91 +585,97 @@
                 <ControlTemplate TargetType="Window">
                     <AdornerDecorator>
                         <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}">
-
-                            <Rectangle x:Name="PART_Caption" 
-                                       HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                       Grid.ColumnSpan="2" 
-                                       Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}"
-                                       ></Rectangle>
-
-                            <ctrl:ModernContentControl Content="{TemplateBinding Content}"
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
+                                <ctrl:ModernContentControl Content="{TemplateBinding Content}"
                                                        x:Name="MainContent"
                                                        ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:ModernContentControl>
 
-                            <Grid x:Name="PART_Control" VerticalAlignment="Top">
-                                <Grid.Resources>
-                                    <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
-                                </Grid.Resources>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>
+                                <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"></ctrl:DialogControlContainer>
 
-                                <DockPanel>
-                                    <Image Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="24" Height="24"
-                                           Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
-                                           Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
-                                           DockPanel.Dock="Left"></Image>
-
-                                    <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
-                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
-                                               HorizontalAlignment="Left"
-                                               FontSize="15" Margin="{DynamicResource ContentThemePadding}"
-                                               Style="{StaticResource ModernTextBlock}"
-                                               Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
-                                </DockPanel>
-
-
-                                <!--<ContentControl Content="{TemplateBinding Content}" Grid.Column="1" />-->
-
-                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
-                                            VerticalAlignment="Top"  
-                                            DataContext="{Binding Source={StaticResource WindowCommands}}"
-                                            Margin="0 -1 -1 0"
-                                            Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
-                                            >
-                                    <Button x:Name="ButtonMin"
-                                            Command="{Binding Path=MinimizeCommand}"
-										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
-                                            Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-                                    <Button x:Name="ButtonMax"
-										    Command="{Binding Path=MaximizeCommand}"
-										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
-                                            Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-
-                                    <Button x:Name="ButtonRestore"
-										    Command="{Binding Path=RestoreCommand}"
-										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
-                                            Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-
-                                    <Button x:Name="ButtonClose"
-										    Command="{Binding Path=CloseCommand}"
-										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
-                                            Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-
-                            <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"></ctrl:DialogControlContainer>
-
-                            <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
+                                <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
                                         VerticalAlignment="Bottom" Visibility="Collapsed" IsTabStop="False" />
+                            </Grid>
+                            <Grid Grid.Row="0">
+                                <Rectangle x:Name="PART_Caption" 
+                                           HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                           Grid.ColumnSpan="2" 
+                                           Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}"
+                                           ></Rectangle>
+    
+                                <Grid x:Name="PART_Control" VerticalAlignment="Top">
+                                    <Grid.Resources>
+                                        <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
+                                    </Grid.Resources>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+    
+                                    <DockPanel>
+                                        <Image Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="24" Height="24"
+                                               Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
+                                               Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
+                                               DockPanel.Dock="Left"></Image>
+    
+                                        <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
+                                                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                                   HorizontalAlignment="Left"
+                                                   FontSize="15" Margin="{DynamicResource ContentThemePadding}"
+                                                   Style="{StaticResource ModernTextBlock}"
+                                                   Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
+                                    </DockPanel>
+    
+    
+                                    <!--<ContentControl Content="{TemplateBinding Content}" Grid.Column="1" />-->
+    
+                                    <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
+                                                VerticalAlignment="Top"  
+                                                DataContext="{Binding Source={StaticResource WindowCommands}}"
+                                                Margin="0 -1 -1 0"
+                                                Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
+                                                >
+                                        <Button x:Name="ButtonMin"
+                                                Command="{Binding Path=MinimizeCommand}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
+                                                Style="{StaticResource ModernControlButton}">
+                                            <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+    
+                                        </Button>
+                                        <Button x:Name="ButtonMax"
+                                                Command="{Binding Path=MaximizeCommand}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
+                                                Style="{StaticResource ModernControlButton}">
+                                            <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+    
+                                        </Button>
+    
+                                        <Button x:Name="ButtonRestore"
+                                                Command="{Binding Path=RestoreCommand}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
+                                                Style="{StaticResource ModernControlButton}">
+                                            <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+    
+                                        </Button>
+    
+                                        <Button x:Name="ButtonClose"
+                                                Command="{Binding Path=CloseCommand}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
+                                                Style="{StaticResource ModernControlButton}">
+                                            <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+    
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </AdornerDecorator>
                     <ControlTemplate.Triggers>
@@ -851,25 +857,25 @@
     <!--re-implement contextmenu to override textbox contextmenu style not applied bug-->
     <ContextMenu x:Key="TextBoxContextMenu">
         <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdUndo], Mode=OneWay}"
-				Command="ApplicationCommands.Undo" />
+                Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdUndo], Mode=OneWay}"
+                Command="ApplicationCommands.Undo" />
         <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRedo], Mode=OneWay}"
-				Command="ApplicationCommands.Redo" />
+                Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRedo], Mode=OneWay}"
+                Command="ApplicationCommands.Redo" />
         <Separator />
         <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdCut], Mode=OneWay}"
-				Command="ApplicationCommands.Cut" />
+                Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdCut], Mode=OneWay}"
+                Command="ApplicationCommands.Cut" />
         <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdCopy], Mode=OneWay}"
-				Command="ApplicationCommands.Copy" />
+                Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdCopy], Mode=OneWay}"
+                Command="ApplicationCommands.Copy" />
         <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdPaste], Mode=OneWay}"
-				Command="ApplicationCommands.Paste" />
+                Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdPaste], Mode=OneWay}"
+                Command="ApplicationCommands.Paste" />
         <Separator />
         <MenuItem
-				Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdSelectAll], Mode=OneWay}"
-				Command="ApplicationCommands.SelectAll" />
+                Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdSelectAll], Mode=OneWay}"
+                Command="ApplicationCommands.SelectAll" />
     </ContextMenu>
 
 
@@ -1178,12 +1184,12 @@
             <Setter.Value>
                 <ContextMenu>
                     <MenuItem
-							Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdPaste], Mode=OneWay}"
-							Command="ApplicationCommands.Paste" />
+                            Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdPaste], Mode=OneWay}"
+                            Command="ApplicationCommands.Paste" />
                     <Separator />
                     <MenuItem
-							Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdSelectAll], Mode=OneWay}"
-							Command="ApplicationCommands.SelectAll" />
+                            Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdSelectAll], Mode=OneWay}"
+                            Command="ApplicationCommands.SelectAll" />
                 </ContextMenu>
             </Setter.Value>
         </Setter>
@@ -1285,7 +1291,7 @@
                                     <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}" />
                                     <Grid x:Name="Animation" ClipToBounds="true" Visibility="Collapsed">
                                         <Rectangle x:Name="PART_GlowRect" HorizontalAlignment="Left"
-											Margin="-100,0,0,0" Width="100" Fill="{DynamicResource ProgressBarIndeterminateForegroundThemeBrush}">
+                                            Margin="-100,0,0,0" Width="100" Fill="{DynamicResource ProgressBarIndeterminateForegroundThemeBrush}">
                                         </Rectangle>
                                     </Grid>
                                 </Grid>
@@ -1519,8 +1525,8 @@
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}"
                                Placement="Bottom">
                             <Border x:Name="PopupBorder"
-									MaxHeight="{TemplateBinding MaxDropDownHeight}"
-									MinWidth="{Binding ActualWidth, ElementName=MainGrid}"
+                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                    MinWidth="{Binding ActualWidth, ElementName=MainGrid}"
                                     Background="{DynamicResource ComboBoxPopupBackgroundThemeBrush}"
                                     BorderBrush="{DynamicResource ComboBoxPopupBorderThemeBrush}"
                                     BorderThickness="{DynamicResource ComboBoxPopupBorderThemeThickness}"
@@ -1723,11 +1729,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
                     <Border x:Name="Border" Margin="{TemplateBinding Margin}"
-							Padding="{TemplateBinding Padding}"
-							Background="{TemplateBinding Background}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							BorderBrush="{TemplateBinding BorderBrush}" UseLayoutRounding="True"
-							SnapsToDevicePixels="True">
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}" UseLayoutRounding="True"
+                            SnapsToDevicePixels="True">
                         <ContentPresenter />
                     </Border>
                 </ControlTemplate>
@@ -1870,7 +1876,7 @@
                                       Template="{DynamicResource ScrollbarVerticalDecrementTemplate}" HorizontalAlignment="Center"/>
 
                         <Track x:Name="PART_Track" IsDirectionReversed="true"
-								IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
+                                IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
                             <Track.DecreaseRepeatButton>
                                 <RepeatButton x:Name="VerticalLargeDecrease" Command="{x:Static ScrollBar.PageUpCommand}"
                                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
@@ -1918,7 +1924,7 @@
                                           Width="33" VerticalAlignment="Center"/>
 
                                 <Track x:Name="PART_Track" Grid.Column="1"
-										IsEnabled="{TemplateBinding IsMouseOver}">
+                                        IsEnabled="{TemplateBinding IsMouseOver}">
                                     <Track.DecreaseRepeatButton>
                                         <RepeatButton x:Name="HorizontalLargeDecrease" Command="{x:Static ScrollBar.PageLeftCommand}"
                                                       Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
@@ -2172,9 +2178,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Separator">
                     <Border Background="{TemplateBinding Background}"
-							BorderBrush="{TemplateBinding BorderBrush}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							SnapsToDevicePixels="true" />
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="true" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -2200,13 +2206,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							Background="{TemplateBinding Background}">
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
                         <ScrollViewer CanContentScroll="True"
-								Style="{DynamicResource ModernMenuScrollViewer}">
+                                Style="{DynamicResource ModernMenuScrollViewer}">
                             <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"
-									Margin="{TemplateBinding Padding}"
-									SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    Margin="{TemplateBinding Padding}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </ScrollViewer>
                     </Border>
                 </ControlTemplate>
@@ -2232,18 +2238,18 @@
                         <Rectangle x:Name="L1" DockPanel.Dock="Left" Fill="Transparent" Width="1" />
                         <Rectangle x:Name="T1" DockPanel.Dock="Top" Fill="Transparent" Height="1" />
                         <ContentPresenter x:Name="ContentContainer" HorizontalAlignment="Center"
-								Margin="2,2,2,2" VerticalAlignment="Center" />
+                                Margin="2,2,2,2" VerticalAlignment="Center" />
                     </DockPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Fill" TargetName="R1"
-									Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+                                    Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
                             <Setter Property="Fill" TargetName="B1"
-									Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
+                                    Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
                             <Setter Property="Fill" TargetName="L1"
-									Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                                    Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
                             <Setter Property="Fill" TargetName="T1"
-									Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
+                                    Value="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" />
                             <Setter Property="Margin" TargetName="ContentContainer" Value="3,3,1,1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -2271,46 +2277,46 @@
                             <ScrollContentPresenter Margin="{TemplateBinding Padding}" />
                         </Border>
                         <RepeatButton Grid.Column="0"
-								CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-								Command="{x:Static ScrollBar.LineUpCommand}" Focusable="false"
-								Grid.Row="0" Style="{StaticResource ModernMenuScrollButton}">
+                                CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                Command="{x:Static ScrollBar.LineUpCommand}" Focusable="false"
+                                Grid.Row="0" Style="{StaticResource ModernMenuScrollButton}">
                             <RepeatButton.Visibility>
                                 <MultiBinding ConverterParameter="0"
-										Converter="{StaticResource MenuScrollingVisibilityConverter}"
-										FallbackValue="Visibility.Collapsed">
+                                        Converter="{StaticResource MenuScrollingVisibilityConverter}"
+                                        FallbackValue="Visibility.Collapsed">
                                     <Binding Path="ComputedVerticalScrollBarVisibility"
-											RelativeSource="{RelativeSource TemplatedParent}" />
+                                            RelativeSource="{RelativeSource TemplatedParent}" />
                                     <Binding Path="VerticalOffset"
-											RelativeSource="{RelativeSource TemplatedParent}" />
+                                            RelativeSource="{RelativeSource TemplatedParent}" />
                                     <Binding Path="ExtentHeight"
-											RelativeSource="{RelativeSource TemplatedParent}" />
+                                            RelativeSource="{RelativeSource TemplatedParent}" />
                                     <Binding Path="ViewportHeight"
-											RelativeSource="{RelativeSource TemplatedParent}" />
+                                            RelativeSource="{RelativeSource TemplatedParent}" />
                                 </MultiBinding>
                             </RepeatButton.Visibility>
                             <Path Data="{StaticResource UpArrow}"
-									Fill="{DynamicResource ModernForeground}" />
+                                    Fill="{DynamicResource ModernForeground}" />
                         </RepeatButton>
                         <RepeatButton Grid.Column="0"
-								CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-								Command="{x:Static ScrollBar.LineDownCommand}" Focusable="false"
-								Grid.Row="2" Style="{StaticResource ModernMenuScrollButton}">
+                                CommandTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                Command="{x:Static ScrollBar.LineDownCommand}" Focusable="false"
+                                Grid.Row="2" Style="{StaticResource ModernMenuScrollButton}">
                             <RepeatButton.Visibility>
                                 <MultiBinding ConverterParameter="100"
-										Converter="{StaticResource MenuScrollingVisibilityConverter}"
-										FallbackValue="Visibility.Collapsed">
+                                        Converter="{StaticResource MenuScrollingVisibilityConverter}"
+                                        FallbackValue="Visibility.Collapsed">
                                     <Binding Path="ComputedVerticalScrollBarVisibility"
-											RelativeSource="{RelativeSource TemplatedParent}" />
+                                            RelativeSource="{RelativeSource TemplatedParent}" />
                                     <Binding Path="VerticalOffset"
-											RelativeSource="{RelativeSource TemplatedParent}" />
+                                            RelativeSource="{RelativeSource TemplatedParent}" />
                                     <Binding Path="ExtentHeight"
-											RelativeSource="{RelativeSource TemplatedParent}" />
+                                            RelativeSource="{RelativeSource TemplatedParent}" />
                                     <Binding Path="ViewportHeight"
-											RelativeSource="{RelativeSource TemplatedParent}" />
+                                            RelativeSource="{RelativeSource TemplatedParent}" />
                                 </MultiBinding>
                             </RepeatButton.Visibility>
                             <Path Data="{StaticResource DownArrow}"
-									Fill="{DynamicResource ModernForeground}" />
+                                    Fill="{DynamicResource ModernForeground}" />
                         </RepeatButton>
                     </Grid>
                 </ControlTemplate>
@@ -2319,51 +2325,51 @@
     </Style>
     <ControlTemplate x:Key="ModernSubmenuContentTemplate" TargetType="ContentControl">
         <Border BorderBrush="{DynamicResource ModernForeground3}" BorderThickness="2" Padding="0 4"
-				Background="{DynamicResource ModernBackground}">
+                Background="{DynamicResource ModernBackground}">
             <ContentPresenter />
             <!--<Grid>
-					<ContentPresenter Grid.ColumnSpan="2" />
-				</Grid>-->
+                    <ContentPresenter Grid.ColumnSpan="2" />
+                </Grid>-->
         </Border>
     </ControlTemplate>
     <ControlTemplate x:Key="ModernTopLevelHeaderTemplate" TargetType="MenuItem">
         <Grid SnapsToDevicePixels="true">
             <Rectangle x:Name="OuterBorder" RadiusY="2" RadiusX="2" />
             <Rectangle x:Name="Bg" Fill="{TemplateBinding Background}" Margin="1" RadiusY="1"
-					RadiusX="1" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
+                    RadiusX="1" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
             <Rectangle x:Name="InnerBorder" Margin="2" />
             <DockPanel>
                 <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="4,0,6,0"
-						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-						VerticalAlignment="Center" />
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        VerticalAlignment="Center" />
                 <Path x:Name="GlyphPanel" Data="{StaticResource Checkmark}"
-						Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
-						Margin="7,0,0,0" Visibility="Collapsed" VerticalAlignment="Center" />
+                        Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
+                        Margin="7,0,0,0" Visibility="Collapsed" VerticalAlignment="Center" />
                 <ContentPresenter ContentSource="Header" Margin="{TemplateBinding Padding}"
-						RecognizesAccessKey="True"
-						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        RecognizesAccessKey="True"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
             </DockPanel>
             <Popup x:Name="PART_Popup" AllowsTransparency="true" Focusable="false"
-					HorizontalOffset="1"
-					IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-					PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
-					Placement="Bottom" VerticalOffset="-1">
+                    HorizontalOffset="1"
+                    IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+                    Placement="Bottom" VerticalOffset="-1">
                 <ContentControl x:Name="SubMenuBorder" IsTabStop="false"
-						Template="{DynamicResource ModernSubmenuContentTemplate}">
+                        Template="{DynamicResource ModernSubmenuContentTemplate}">
                     <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
-							Style="{DynamicResource ModernMenuScrollViewer}">
+                            Style="{DynamicResource ModernMenuScrollViewer}">
                         <Grid>
                             <Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top"
-									Width="0">
+                                    Width="0">
                                 <Rectangle
-										Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
-										Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
+                                        Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
+                                        Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
                             </Canvas>
                             <ItemsPresenter x:Name="ItemsPresenter"
-									KeyboardNavigation.DirectionalNavigation="Cycle"
-									Grid.IsSharedSizeScope="true" Margin="2"
-									SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-									KeyboardNavigation.TabNavigation="Cycle" />
+                                    KeyboardNavigation.DirectionalNavigation="Cycle"
+                                    Grid.IsSharedSizeScope="true" Margin="2"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    KeyboardNavigation.TabNavigation="Cycle" />
                         </Grid>
                     </ScrollViewer>
                 </ContentControl>
@@ -2381,9 +2387,9 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <!--<Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
-				<Setter Property="Margin" TargetName="Shdw" Value="0,0,5,5" />
-				<Setter Property="Color" TargetName="Shdw" Value="#71000000" />
-			</Trigger>-->
+                <Setter Property="Margin" TargetName="Shdw" Value="0,0,5,5" />
+                <Setter Property="Color" TargetName="Shdw" Value="#71000000" />
+            </Trigger>-->
             <Trigger Property="IsHighlighted" Value="true">
                 <Setter Property="Stroke" TargetName="Bg" Value="#90717070" />
                 <Setter Property="Stroke" TargetName="OuterBorder" Value="#50FFFFFF" />
@@ -2408,18 +2414,18 @@
         <Grid SnapsToDevicePixels="true">
             <Rectangle x:Name="OuterBorder" />
             <Rectangle x:Name="Bg" Fill="{TemplateBinding Background}" Margin="1"
-					Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
+                    Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
             <Rectangle x:Name="InnerBorder" Margin="2" />
             <DockPanel>
                 <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="4,0,6,0"
-						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-						VerticalAlignment="Center" />
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        VerticalAlignment="Center" />
                 <Path x:Name="GlyphPanel" Data="{StaticResource Checkmark}"
-						Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
-						Margin="7,0,0,0" Visibility="Collapsed" VerticalAlignment="Center" />
+                        Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
+                        Margin="7,0,0,0" Visibility="Collapsed" VerticalAlignment="Center" />
                 <ContentPresenter ContentSource="Header" Margin="{TemplateBinding Padding}"
-						RecognizesAccessKey="True"
-						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        RecognizesAccessKey="True"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
             </DockPanel>
         </Grid>
         <ControlTemplate.Triggers>
@@ -2451,7 +2457,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="24" SharedSizeGroup="MenuItemIconColumnGroup"
-							Width="Auto" />
+                            Width="Auto" />
                     <ColumnDefinition Width="4" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="37" />
@@ -2459,43 +2465,43 @@
                     <ColumnDefinition Width="17" />
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="1"
-						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-						VerticalAlignment="Center" />
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        VerticalAlignment="Center" />
                 <Border x:Name="GlyphPanel" Height="22" Margin="1" Visibility="Hidden" Width="22">
                     <Path x:Name="Glyph" Data="{StaticResource Checkmark}"
-							Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
-							Height="11" Width="9" />
+                            Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
+                            Height="11" Width="9" />
                 </Border>
                 <ContentPresenter Grid.Column="2" ContentSource="Header"
-						Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}"
-						Text="{TemplateBinding InputGestureText}" Visibility="Collapsed" />
+                        Text="{TemplateBinding InputGestureText}" Visibility="Collapsed" />
                 <Path Grid.Column="5" Data="{StaticResource RightArrow}"
-						Fill="{TemplateBinding Foreground}" Margin="4,0,0,0"
-						VerticalAlignment="Center" />
+                        Fill="{TemplateBinding Foreground}" Margin="4,0,0,0"
+                        VerticalAlignment="Center" />
             </Grid>
             <Popup x:Name="PART_Popup" AllowsTransparency="true" Focusable="false"
-					HorizontalOffset="-2"
-					IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-					PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
-					Placement="Right" VerticalOffset="-3">
+                    HorizontalOffset="-2"
+                    IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+                    Placement="Right" VerticalOffset="-3">
                 <ContentControl x:Name="SubMenuBorder" IsTabStop="false"
-						Template="{DynamicResource ModernSubmenuContentTemplate}">
+                        Template="{DynamicResource ModernSubmenuContentTemplate}">
                     <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
-							Style="{DynamicResource ModernMenuScrollViewer}">
+                            Style="{DynamicResource ModernMenuScrollViewer}">
                         <Grid>
                             <!--<Canvas HorizontalAlignment="Left" Height="0"
-										VerticalAlignment="Top" Width="0">
-									<Rectangle
-											Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
-											Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
-								</Canvas>-->
+                                        VerticalAlignment="Top" Width="0">
+                                    <Rectangle
+                                            Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
+                                            Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
+                                </Canvas>-->
                             <ItemsPresenter x:Name="ItemsPresenter"
-									KeyboardNavigation.DirectionalNavigation="Cycle"
-									Grid.IsSharedSizeScope="true"
-									SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-									KeyboardNavigation.TabNavigation="Cycle" />
+                                    KeyboardNavigation.DirectionalNavigation="Cycle"
+                                    Grid.IsSharedSizeScope="true"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    KeyboardNavigation.TabNavigation="Cycle" />
                         </Grid>
                     </ScrollViewer>
                 </ContentControl>
@@ -2525,12 +2531,12 @@
     <ControlTemplate x:Key="ModernSubmenuItemTemplate" TargetType="MenuItem">
         <Grid SnapsToDevicePixels="true">
             <Rectangle x:Name="Bg" Fill="{TemplateBinding Background}"
-					Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
+                    Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
             <!--<Rectangle x:Name="InnerBorder" Margin="1" RadiusY="2" RadiusX="2" />-->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="24" SharedSizeGroup="MenuItemIconColumnGroup"
-							Width="Auto" />
+                            Width="Auto" />
                     <ColumnDefinition Width="4" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="37" />
@@ -2538,18 +2544,18 @@
                     <ColumnDefinition Width="17" />
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="1"
-						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-						VerticalAlignment="Center" />
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        VerticalAlignment="Center" />
                 <Border x:Name="GlyphPanel" Height="22" Margin="1" Visibility="Hidden" Width="22">
                     <Path x:Name="Glyph" Data="{StaticResource Checkmark}"
-							Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
-							Height="11" Width="9" />
+                            Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
+                            Height="11" Width="9" />
                 </Border>
                 <ContentPresenter Grid.Column="2" ContentSource="Header"
-						Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-						SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}"
-						Text="{TemplateBinding InputGestureText}" />
+                        Text="{TemplateBinding InputGestureText}" />
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>
@@ -2563,21 +2569,21 @@
             <Trigger Property="IsHighlighted" Value="true">
                 <Setter Property="Fill" TargetName="Bg" Value="{DynamicResource ModernBackground3}" />
                 <!--<Setter Property="Stroke" TargetName="Bg" Value="#8071CBF1"/>
-					<Setter Property="Stroke" TargetName="InnerBorder" Value="#40FFFFFF"/>-->
+                    <Setter Property="Stroke" TargetName="InnerBorder" Value="#40FFFFFF"/>-->
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
                 <!--<Setter Property="Background" TargetName="GlyphPanel" Value="#EEE9E9"/>
-					<Setter Property="BorderBrush" TargetName="GlyphPanel" Value="#DBD6D6"/>-->
+                    <Setter Property="BorderBrush" TargetName="GlyphPanel" Value="#DBD6D6"/>-->
                 <Setter Property="Fill" TargetName="Glyph" Value="#848589" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <Style x:Key="ModernMenuItem" TargetType="MenuItem">
         <Setter Property="HorizontalContentAlignment"
-				Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="VerticalContentAlignment"
-				Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
@@ -2614,9 +2620,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Separator">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							Background="{TemplateBinding Background}" Height="1"
-							SnapsToDevicePixels="true" />
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}" Height="1"
+                            SnapsToDevicePixels="true" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -2627,7 +2633,7 @@
                 <ControlTemplate TargetType="Separator">
                     <Grid SnapsToDevicePixels="true" Margin="0,6,0,4">
                         <Rectangle Height="1" Margin="30,0,1,1"
-								Fill="{DynamicResource ModernForeground4}" />
+                                Fill="{DynamicResource ModernForeground4}" />
                         <!--<Rectangle Height="1" Margin="30,1,1,0" Fill="White" />-->
                     </Grid>
                 </ControlTemplate>
@@ -2651,13 +2657,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
                     <Border x:Name="Border" Margin="{TemplateBinding Margin}"
-							Padding="{TemplateBinding Padding}"
-							Background="{TemplateBinding Background}"
-							BorderThickness="{TemplateBinding BorderThickness}"
-							BorderBrush="{TemplateBinding BorderBrush}" UseLayoutRounding="True"
-							SnapsToDevicePixels="True">
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}" UseLayoutRounding="True"
+                            SnapsToDevicePixels="True">
                         <GridViewRowPresenter
-								VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -2677,7 +2683,7 @@
         <Setter Property="Canvas.Right" Value="-9" />
         <Setter Property="Width" Value="18" />
         <Setter Property="Height"
-				Value="{Binding Path=ActualHeight,RelativeSource={RelativeSource TemplatedParent}}" />
+                Value="{Binding Path=ActualHeight,RelativeSource={RelativeSource TemplatedParent}}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Background" Value="{DynamicResource ModernForeground4}" />
         <Setter Property="Template">
@@ -2685,7 +2691,7 @@
                 <ControlTemplate TargetType="Thumb">
                     <Border Padding="{TemplateBinding Padding}" Background="Transparent">
                         <Rectangle HorizontalAlignment="Center" Width="1"
-								Fill="{TemplateBinding Background}" />
+                                Fill="{TemplateBinding Background}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -2705,8 +2711,8 @@
                 <ControlTemplate TargetType="GridViewColumnHeader">
                     <Grid SnapsToDevicePixels="true">
                         <Border Name="HeaderBorder" BorderThickness="0,1,0,1"
-								BorderBrush="{TemplateBinding BorderBrush}"
-								Background="{TemplateBinding Background}">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition MaxHeight="7" />
@@ -2714,10 +2720,10 @@
                                 </Grid.RowDefinitions>
                                 <Border Grid.RowSpan="2" Padding="{TemplateBinding Padding}">
                                     <ContentPresenter Name="HeaderContent" Margin="0,0,0,1"
-											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-											HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-											RecognizesAccessKey="True"
-											SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            RecognizesAccessKey="True"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                 </Border>
                             </Grid>
                         </Border>
@@ -2725,21 +2731,21 @@
                         <Border Name="HeaderPressBorder" BorderThickness="1,1,1,0" Margin="1,0,0,1" />
                         <Canvas>
                             <Thumb x:Name="PART_HeaderGripper"
-									Style="{StaticResource ModernGridViewColumnHeaderGripper}" />
+                                    Style="{StaticResource ModernGridViewColumnHeaderGripper}" />
                         </Canvas>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <!--<Setter TargetName="HeaderBorder" Property="Background"
-									Value="{DynamicResource ModernAccent9}" />-->
+                                    Value="{DynamicResource ModernAccent9}" />-->
                             <Setter TargetName="PART_HeaderGripper" Property="Background"
-									Value="Transparent" />
+                                    Value="Transparent" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="HeaderBorder" Property="Background"
-									Value="{DynamicResource ModernAccentLight4}" />
+                                    Value="{DynamicResource ModernAccentLight4}" />
                             <Setter TargetName="PART_HeaderGripper" Property="Visibility"
-									Value="Hidden" />
+                                    Value="Hidden" />
                             <Setter TargetName="HeaderContent" Property="Margin" Value="1,1,0,0" />
                         </Trigger>
                         <Trigger Property="Height" Value="Auto">
@@ -2760,8 +2766,8 @@
                         <ControlTemplate TargetType="GridViewColumnHeader">
                             <Canvas Name="PART_FloatingHeaderCanvas">
                                 <Rectangle Opacity="0.4697" Fill="#FF000000"
-										Width="{TemplateBinding ActualWidth}"
-										Height="{TemplateBinding ActualHeight}" />
+                                        Width="{TemplateBinding ActualWidth}"
+                                        Height="{TemplateBinding ActualHeight}" />
                             </Canvas>
                         </ControlTemplate>
                     </Setter.Value>
@@ -2772,8 +2778,8 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="GridViewColumnHeader">
                             <Border Name="HeaderBorder" BorderThickness="0,1,0,1"
-									BorderBrush="{TemplateBinding BorderBrush}"
-									Background="{TemplateBinding Background}" />
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{TemplateBinding Background}" />
                             <ControlTemplate.Triggers>
                                 <Trigger Property="Height" Value="Auto">
                                     <Setter Property="MinHeight" Value="20" />
@@ -2800,12 +2806,12 @@
                 <ControlTemplate TargetType="TabItem">
                     <Grid SnapsToDevicePixels="true">
                         <Border x:Name="Bd" Background="{TemplateBinding Background}"
-								Padding="{TemplateBinding Padding}">
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="Content" ContentSource="Header"
-									HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-									RecognizesAccessKey="True"
-									SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-									VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                                    HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                    RecognizesAccessKey="True"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -2817,53 +2823,53 @@
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
                         </Trigger>
                         <!--<MultiTrigger>
-							<MultiTrigger.Conditions>
-								<Condition Property="IsSelected" Value="false"/>
-								<Condition Property="IsMouseOver" Value="true"/>
-							</MultiTrigger.Conditions>
-							<Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TabItemHotBorderBrush}"/>
-						</MultiTrigger>-->
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="false"/>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TabItemHotBorderBrush}"/>
+                        </MultiTrigger>-->
                         <!--<Trigger Property="TabStripPlacement" Value="Bottom">
-							<Setter Property="BorderThickness" TargetName="Bd" Value="1,0,1,1"/>
-						</Trigger>
-						<Trigger Property="TabStripPlacement" Value="Left">
-							<Setter Property="BorderThickness" TargetName="Bd" Value="1,1,0,1"/>
-						</Trigger>
-						<Trigger Property="TabStripPlacement" Value="Right">
-							<Setter Property="BorderThickness" TargetName="Bd" Value="0,1,1,1"/>
-						</Trigger>-->
+                            <Setter Property="BorderThickness" TargetName="Bd" Value="1,0,1,1"/>
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Left">
+                            <Setter Property="BorderThickness" TargetName="Bd" Value="1,1,0,1"/>
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter Property="BorderThickness" TargetName="Bd" Value="0,1,1,1"/>
+                        </Trigger>-->
                         <!--<MultiTrigger>
-							<MultiTrigger.Conditions>
-								<Condition Property="IsSelected" Value="true"/>
-								<Condition Property="TabStripPlacement" Value="Top"/>
-							</MultiTrigger.Conditions>
-							<Setter Property="Margin" Value="-2,-2,-2,-1"/>
-							<Setter Property="Margin" TargetName="Content" Value="0,0,0,1"/>
-						</MultiTrigger>
-						<MultiTrigger>
-							<MultiTrigger.Conditions>
-								<Condition Property="IsSelected" Value="true"/>
-								<Condition Property="TabStripPlacement" Value="Bottom"/>
-							</MultiTrigger.Conditions>
-							<Setter Property="Margin" Value="-2,-1,-2,-2"/>
-							<Setter Property="Margin" TargetName="Content" Value="0,1,0,0"/>
-						</MultiTrigger>
-						<MultiTrigger>
-							<MultiTrigger.Conditions>
-								<Condition Property="IsSelected" Value="true"/>
-								<Condition Property="TabStripPlacement" Value="Left"/>
-							</MultiTrigger.Conditions>
-							<Setter Property="Margin" Value="-2,-2,-1,-2"/>
-							<Setter Property="Margin" TargetName="Content" Value="0,0,1,0"/>
-						</MultiTrigger>
-						<MultiTrigger>
-							<MultiTrigger.Conditions>
-								<Condition Property="IsSelected" Value="true"/>
-								<Condition Property="TabStripPlacement" Value="Right"/>
-							</MultiTrigger.Conditions>
-							<Setter Property="Margin" Value="-1,-2,-2,-2"/>
-							<Setter Property="Margin" TargetName="Content" Value="1,0,0,0"/>
-						</MultiTrigger>-->
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="TabStripPlacement" Value="Top"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Margin" Value="-2,-2,-2,-1"/>
+                            <Setter Property="Margin" TargetName="Content" Value="0,0,0,1"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="TabStripPlacement" Value="Bottom"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Margin" Value="-2,-1,-2,-2"/>
+                            <Setter Property="Margin" TargetName="Content" Value="0,1,0,0"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="TabStripPlacement" Value="Left"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Margin" Value="-2,-2,-1,-2"/>
+                            <Setter Property="Margin" TargetName="Content" Value="0,0,1,0"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="TabStripPlacement" Value="Right"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Margin" Value="-1,-2,-2,-2"/>
+                            <Setter Property="Margin" TargetName="Content" Value="1,0,0,0"/>
+                        </MultiTrigger>-->
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
                         </Trigger>
@@ -2883,7 +2889,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="TabControl">
                     <Grid ClipToBounds="true" SnapsToDevicePixels="true"
-							KeyboardNavigation.TabNavigation="Local">
+                            KeyboardNavigation.TabNavigation="Local">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition x:Name="ColumnDefinition0" />
                             <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
@@ -2893,54 +2899,54 @@
                             <RowDefinition x:Name="RowDefinition1" Height="*" />
                         </Grid.RowDefinitions>
                         <Border x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0"
-								IsHitTestVisible="True" Background="Transparent" Margin="30 0 0 0"
-								HorizontalAlignment="Left">
+                                IsHitTestVisible="True" Background="Transparent" Margin="30 0 0 0"
+                                HorizontalAlignment="Left">
                             <TabPanel IsItemsHost="true" KeyboardNavigation.TabIndex="1"
-									Panel.ZIndex="1">
+                                    Panel.ZIndex="1">
                             </TabPanel>
                         </Border>
                         <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}"
-								Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained"
-								Grid.Row="1" Background="{TemplateBinding Background}"
-								KeyboardNavigation.TabIndex="2"
-								KeyboardNavigation.TabNavigation="Local">
+                                Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained"
+                                Grid.Row="1" Background="{TemplateBinding Background}"
+                                KeyboardNavigation.TabIndex="2"
+                                KeyboardNavigation.TabNavigation="Local">
 
                             <ContentPresenter x:Name="PART_SelectedContentHost"
-									ContentSource="SelectedContent"
-									Margin="{TemplateBinding Padding}"
-									SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    ContentSource="SelectedContent"
+                                    Margin="{TemplateBinding Padding}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <!--<Trigger Property="TabStripPlacement" Value="Bottom">
-							<Setter Property="Grid.Row" TargetName="HeaderPanel" Value="1"/>
-							<Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
-							<Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-							<Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
-							<Setter Property="Margin" TargetName="HeaderPanel" Value="2,0,2,2"/>
-						</Trigger>
-						<Trigger Property="TabStripPlacement" Value="Left">
-							<Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
-							<Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
-							<Setter Property="Grid.Column" TargetName="HeaderPanel" Value="0"/>
-							<Setter Property="Grid.Column" TargetName="ContentPanel" Value="1"/>
-							<Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto"/>
-							<Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
-							<Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-							<Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-							<Setter Property="Margin" TargetName="HeaderPanel" Value="2,2,0,2"/>
-						</Trigger>
-						<Trigger Property="TabStripPlacement" Value="Right">
-							<Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
-							<Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
-							<Setter Property="Grid.Column" TargetName="HeaderPanel" Value="1"/>
-							<Setter Property="Grid.Column" TargetName="ContentPanel" Value="0"/>
-							<Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
-							<Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
-							<Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-							<Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-							<Setter Property="Margin" TargetName="HeaderPanel" Value="0,2,2,2"/>
-						</Trigger>-->
+                            <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="1"/>
+                            <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                            <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                            <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
+                            <Setter Property="Margin" TargetName="HeaderPanel" Value="2,0,2,2"/>
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Left">
+                            <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
+                            <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                            <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="0"/>
+                            <Setter Property="Grid.Column" TargetName="ContentPanel" Value="1"/>
+                            <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto"/>
+                            <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
+                            <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                            <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                            <Setter Property="Margin" TargetName="HeaderPanel" Value="2,2,0,2"/>
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
+                            <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                            <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="1"/>
+                            <Setter Property="Grid.Column" TargetName="ContentPanel" Value="0"/>
+                            <Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
+                            <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
+                            <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                            <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                            <Setter Property="Margin" TargetName="HeaderPanel" Value="0,2,2,2"/>
+                        </Trigger>-->
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
                         </Trigger>

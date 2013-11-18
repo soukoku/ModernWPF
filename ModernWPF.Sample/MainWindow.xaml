@@ -4,221 +4,218 @@
         xmlns:modern="http://modernwpf"
         xmlns:local="clr-namespace:ModernWPF.Sample"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        x:Name="theWindow"
         Title="ModernWPF - Test" Height="610" Width="1020"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindow}">
     <Window.Resources>
         <sys:String x:Key="shortString">Lorem ipsum dolor sit amet</sys:String>
     </Window.Resources>
-    <Border Margin="{Binding ElementName=theWindow, Path=(modern:Chrome.CaptionHeight), Converter={x:Static modern:ThicknessZeroSideConverter.Instance}, ConverterParameter='left right bottom'}">
-        <Grid >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+	<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-            <modern:AnimatedScrollViewer HorizontalScrollBarVisibility="Auto">
-                <DockPanel Margin="8">
-                    <StackPanel Width="250" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8">
-                        <TextBlock TextWrapping="Wrap" 
-                                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." ></TextBlock>
+        <modern:AnimatedScrollViewer HorizontalScrollBarVisibility="Auto">
+            <DockPanel Margin="8">
+                <StackPanel Width="250" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8">
+                    <TextBlock TextWrapping="Wrap" 
+                               Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." ></TextBlock>
 
-                        <TextBlock Text="lower case:" Margin="0 10 0 0"></TextBlock>
-                        <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={x:Static modern:TextCaseConverter.Instance}, ConverterParameter=lower, Mode=OneTime}"></TextBox>
+                    <TextBlock Text="lower case:" Margin="0 10 0 0"></TextBlock>
+                    <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={x:Static modern:TextCaseConverter.Instance}, ConverterParameter=lower, Mode=OneTime}"></TextBox>
 
-                        <TextBlock Text="upper case:" Margin="0 10 0 0"></TextBlock>
-                        <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={x:Static modern:TextCaseConverter.Instance}, ConverterParameter=upper, Mode=OneTime}"></TextBox>
+                    <TextBlock Text="upper case:" Margin="0 10 0 0"></TextBlock>
+                    <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={x:Static modern:TextCaseConverter.Instance}, ConverterParameter=upper, Mode=OneTime}"></TextBox>
 
-                        <TextBlock Text="title case:" Margin="0 10 0 0"></TextBlock>
-                        <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={x:Static modern:TextCaseConverter.Instance}, ConverterParameter=title, Mode=OneTime}"></TextBox>
+                    <TextBlock Text="title case:" Margin="0 10 0 0"></TextBlock>
+                    <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={x:Static modern:TextCaseConverter.Instance}, ConverterParameter=title, Mode=OneTime}"></TextBox>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Light scale "></TextBlock>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccent}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight1}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight2}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight3}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight4}"></Rectangle>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Alpha scale "></TextBlock>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha1}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha2}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha3}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha4}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha5}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha6}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha7}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha8}"></Rectangle>
-                            <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha9}"></Rectangle>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Orientation="Horizontal">
-
-                        <StackPanel Orientation="Vertical" Width="180">
-                            <TextBox Text="normal textbox" Margin="2"></TextBox>
-                            <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
-                            <TextBox Text="with leading content" Margin="2">
-                                <modern:TextBoxUI.LeadingElement>
-                                    <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
-                                        <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
-                                                   VerticalAlignment="Center"/>
-                                    </Border>
-                                </modern:TextBoxUI.LeadingElement>
-                            </TextBox>
-                            <TextBox Text="with trailing content" Margin="2">
-                                <modern:TextBoxUI.TrailingElement>
-                                    <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
-                                        <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
-                                                   VerticalAlignment="Center"/>
-                                    </Border>
-                                </modern:TextBoxUI.TrailingElement>
-                            </TextBox>
-                            <TextBox Text="" modern:TextBoxUI.WatermarkText="with watermark" Margin="2"></TextBox>
-                            <TextBox Text="disabled textbox" Margin="2" IsEnabled="False"></TextBox>
-
-                            <PasswordBox Password="password" Margin="2"></PasswordBox>
-                            <PasswordBox modern:TextBoxUI.WatermarkText="password with watermark" Margin="2"></PasswordBox>
-
-
-
-                            <RichTextBox Height="140" HorizontalScrollBarVisibility="Disabled" Margin="2">
-                                <FlowDocument>
-                                    <Paragraph>Rich Text Box</Paragraph>
-                                    <Paragraph>
-                                        <Run>Paragraph 1</Run>
-                                    </Paragraph>
-                                    <Paragraph>
-                                        <Run>Paragraph 2</Run>
-                                    </Paragraph>
-                                    <Paragraph>
-                                        <Run>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat.</Run>
-                                    </Paragraph>
-                                </FlowDocument>
-                            </RichTextBox>
-                        </StackPanel>
-                        <StackPanel>
-                            <ComboBox SelectedIndex="0" Margin="2">
-                                <ComboBoxItem Content="normal combo 1"></ComboBoxItem>
-                                <ComboBoxItem Content="normal combo 2" IsEnabled="False"></ComboBoxItem>
-                                <ComboBoxItem Content="normal combo 3"></ComboBoxItem>
-                                <ComboBoxItem Content="normal combo 4"></ComboBoxItem>
-                                <ComboBoxItem Content="normal combo 5"></ComboBoxItem>
-                                <ComboBoxItem Content="normal combo 6"></ComboBoxItem>
-                            </ComboBox>
-                            <ComboBox SelectedIndex="1" Margin="2" IsEditable="True">
-                                <ComboBoxItem Content="edit combo 1"></ComboBoxItem>
-                                <ComboBoxItem Content="edit combo 2" IsEnabled="False"></ComboBoxItem>
-                                <ComboBoxItem Content="edit combo 3"></ComboBoxItem>
-                                <ComboBoxItem Content="edit combo 4"></ComboBoxItem>
-                                <ComboBoxItem Content="edit combo 5"></ComboBoxItem>
-                                <ComboBoxItem Content="edit combo 6"></ComboBoxItem>
-                            </ComboBox>
-                            <ComboBox SelectedIndex="0" Margin="2" IsEnabled="False">
-                                <ComboBoxItem Content="disabled combo"></ComboBoxItem>
-                            </ComboBox>
-
-                            <Label Content="a label"></Label>
-
-                            <CheckBox Content="a checkbox"></CheckBox>
-                            <CheckBox Content="three-state checkbox" IsThreeState="True"></CheckBox>
-                            <CheckBox Content="disabled checkbox" IsEnabled="False"></CheckBox>
-                            <CheckBox Content="disabled checkbox 2" IsChecked="True" IsEnabled="False"></CheckBox>
-
-                            <Slider Width="150" HorizontalAlignment="Left" Minimum="0" Maximum="100" Value="20" TickPlacement="Both" TickFrequency="10"></Slider>
-
-                            <Thumb Width="10" Height="20"></Thumb>
-
-                            <ProgressBar Maximum="100" Value="50" Margin="0 10"></ProgressBar>
-                            <ProgressBar IsIndeterminate="True" Margin="0 10"></ProgressBar>
-                        </StackPanel>
-                        <StackPanel Margin="2">
-                            <RadioButton Content="radio button 1"></RadioButton>
-                            <RadioButton Content="radio button 2"></RadioButton>
-                            <RadioButton Content="radio button 3"></RadioButton>
-                            <RadioButton Content="radio button 4" IsEnabled="False"></RadioButton>
-
-
-                            <Button Content="no chrome button" Style="{StaticResource ModernButtonNoChrome}"></Button>
-
-                            <Button Content="normal button"></Button>
-                            <Button Content="disabled button" IsEnabled="False"></Button>
-                            <Button Content="default button" IsDefault="True"></Button>
-
-                            <ToggleButton Content="toggle button"></ToggleButton>
-
-                            <RepeatButton Content="repeat button"></RepeatButton>
-
-                            <Button Content="hyperlink button" Style="{StaticResource ModernHyperlinkButton}"></Button>
-                        </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Light scale "></TextBlock>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccent}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight1}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight2}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight3}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight4}"></Rectangle>
                     </StackPanel>
 
-                    <DockPanel DockPanel.Dock="Left" >
-                        <ListBox Margin="2" DockPanel.Dock="Top">
-                            <ListBoxItem Content="listbox item 1"></ListBoxItem>
-                            <ListBoxItem Content="disabled item" IsEnabled="False"></ListBoxItem>
-                            <ListBoxItem Content="listbox item 3"></ListBoxItem>
-                        </ListBox>
-                        <ListBox Margin="2" DockPanel.Dock="Top">
-                            <ListBoxItem Content="listbox item 1"></ListBoxItem>
-                            <ListBoxItem Content="disabled item" IsSelected="True" IsEnabled="False"></ListBoxItem>
-                            <ListBoxItem Content="listbox item 3"></ListBoxItem>
-                        </ListBox>
-                        <ListBox Margin="2" DockPanel.Dock="Top" IsEnabled="False">
-                            <ListBoxItem Content="disabled list 1"></ListBoxItem>
-                            <ListBoxItem Content="disabled list 2"></ListBoxItem>
-                        </ListBox>
-                        <ListBox Margin="2" DockPanel.Dock="Top" x:Name="virtualListBox" Height="100" VerticalAlignment="Top">
-                        </ListBox>
-                    </DockPanel>
-
-                    <modern:AnimatedScrollViewer HorizontalAlignment="Left" Width="120"
-                                                  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"
-                                                  modern:ScrollViewerUI.OverContent="True">
-                        <Border Background="#FFF58383">
-                            <TextBlock Text="Scrollbar can also be over content"></TextBlock>
-                        </Border>
-                    </modern:AnimatedScrollViewer>
-                </DockPanel>
-            </modern:AnimatedScrollViewer>
-
-            <StackPanel Orientation="Vertical" Grid.Row="1">
-
-
-                <ItemsControl  DataContext="{Binding Source={x:Static modern:ModernTheme.PredefinedAccents}}" ItemsSource="{Binding}"
-                                HorizontalAlignment="Center">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <RadioButton GroupName="GroupColor" Margin="4"
-                                         ToolTip="{Binding Name}"
-                                             Checked="RadioButton_Checked">
-                                <Rectangle Width="32" Height="32"
-                                               Fill="{Binding MainBrush}" />
-                            </RadioButton>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="another window" x:Name="btnWindow" Click="btnWindow_Click"></Button>
-                    <Button Content="normal dialog" x:Name="btnDialog" Click="btnDialog_Click"></Button>
-                    <Button Content="in window dialog" x:Name="btnDialog2" Click="btnDialog2_Click"></Button>
-                    <Button Content="toggle theme" x:Name="btnTheme" Click="btnTheme_Click"></Button>
-                    <Button Content="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click"></Button>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Alpha scale "></TextBlock>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha1}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha2}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha3}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha4}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha5}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha6}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha7}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha8}"></Rectangle>
+                        <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha9}"></Rectangle>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+                <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Orientation="Horizontal">
 
-            <StatusBar Grid.Row="2">
-                <StatusBarItem Content="status 1"></StatusBarItem>
-                <StatusBarItem Content="status 2"></StatusBarItem>
-            </StatusBar>
-        </Grid>
-    </Border>
+                    <StackPanel Orientation="Vertical" Width="180">
+                        <TextBox Text="normal textbox" Margin="2"></TextBox>
+                        <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
+                        <TextBox Text="with leading content" Margin="2">
+                            <modern:TextBoxUI.LeadingElement>
+                                <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
+                                    <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
+                                               VerticalAlignment="Center"/>
+                                </Border>
+                            </modern:TextBoxUI.LeadingElement>
+                        </TextBox>
+                        <TextBox Text="with trailing content" Margin="2">
+                            <modern:TextBoxUI.TrailingElement>
+                                <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
+                                    <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
+                                               VerticalAlignment="Center"/>
+                                </Border>
+                            </modern:TextBoxUI.TrailingElement>
+                        </TextBox>
+                        <TextBox Text="" modern:TextBoxUI.WatermarkText="with watermark" Margin="2"></TextBox>
+                        <TextBox Text="disabled textbox" Margin="2" IsEnabled="False"></TextBox>
+
+                        <PasswordBox Password="password" Margin="2"></PasswordBox>
+                        <PasswordBox modern:TextBoxUI.WatermarkText="password with watermark" Margin="2"></PasswordBox>
+
+
+
+                        <RichTextBox Height="140" HorizontalScrollBarVisibility="Disabled" Margin="2">
+                            <FlowDocument>
+                                <Paragraph>Rich Text Box</Paragraph>
+                                <Paragraph>
+                                    <Run>Paragraph 1</Run>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>Paragraph 2</Run>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat.</Run>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </StackPanel>
+                    <StackPanel>
+                        <ComboBox SelectedIndex="0" Margin="2">
+                            <ComboBoxItem Content="normal combo 1"></ComboBoxItem>
+                            <ComboBoxItem Content="normal combo 2" IsEnabled="False"></ComboBoxItem>
+                            <ComboBoxItem Content="normal combo 3"></ComboBoxItem>
+                            <ComboBoxItem Content="normal combo 4"></ComboBoxItem>
+                            <ComboBoxItem Content="normal combo 5"></ComboBoxItem>
+                            <ComboBoxItem Content="normal combo 6"></ComboBoxItem>
+                        </ComboBox>
+                        <ComboBox SelectedIndex="1" Margin="2" IsEditable="True">
+                            <ComboBoxItem Content="edit combo 1"></ComboBoxItem>
+                            <ComboBoxItem Content="edit combo 2" IsEnabled="False"></ComboBoxItem>
+                            <ComboBoxItem Content="edit combo 3"></ComboBoxItem>
+                            <ComboBoxItem Content="edit combo 4"></ComboBoxItem>
+                            <ComboBoxItem Content="edit combo 5"></ComboBoxItem>
+                            <ComboBoxItem Content="edit combo 6"></ComboBoxItem>
+                        </ComboBox>
+                        <ComboBox SelectedIndex="0" Margin="2" IsEnabled="False">
+                            <ComboBoxItem Content="disabled combo"></ComboBoxItem>
+                        </ComboBox>
+
+                        <Label Content="a label"></Label>
+
+                        <CheckBox Content="a checkbox"></CheckBox>
+                        <CheckBox Content="three-state checkbox" IsThreeState="True"></CheckBox>
+                        <CheckBox Content="disabled checkbox" IsEnabled="False"></CheckBox>
+                        <CheckBox Content="disabled checkbox 2" IsChecked="True" IsEnabled="False"></CheckBox>
+
+                        <Slider Width="150" HorizontalAlignment="Left" Minimum="0" Maximum="100" Value="20" TickPlacement="Both" TickFrequency="10"></Slider>
+
+                        <Thumb Width="10" Height="20"></Thumb>
+
+                        <ProgressBar Maximum="100" Value="50" Margin="0 10"></ProgressBar>
+                        <ProgressBar IsIndeterminate="True" Margin="0 10"></ProgressBar>
+                    </StackPanel>
+                    <StackPanel Margin="2">
+                        <RadioButton Content="radio button 1"></RadioButton>
+                        <RadioButton Content="radio button 2"></RadioButton>
+                        <RadioButton Content="radio button 3"></RadioButton>
+                        <RadioButton Content="radio button 4" IsEnabled="False"></RadioButton>
+
+
+                        <Button Content="no chrome button" Style="{StaticResource ModernButtonNoChrome}"></Button>
+
+                        <Button Content="normal button"></Button>
+                        <Button Content="disabled button" IsEnabled="False"></Button>
+                        <Button Content="default button" IsDefault="True"></Button>
+
+                        <ToggleButton Content="toggle button"></ToggleButton>
+
+                        <RepeatButton Content="repeat button"></RepeatButton>
+
+                        <Button Content="hyperlink button" Style="{StaticResource ModernHyperlinkButton}"></Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <DockPanel DockPanel.Dock="Left" >
+                    <ListBox Margin="2" DockPanel.Dock="Top">
+                        <ListBoxItem Content="listbox item 1"></ListBoxItem>
+                        <ListBoxItem Content="disabled item" IsEnabled="False"></ListBoxItem>
+                        <ListBoxItem Content="listbox item 3"></ListBoxItem>
+                    </ListBox>
+                    <ListBox Margin="2" DockPanel.Dock="Top">
+                        <ListBoxItem Content="listbox item 1"></ListBoxItem>
+                        <ListBoxItem Content="disabled item" IsSelected="True" IsEnabled="False"></ListBoxItem>
+                        <ListBoxItem Content="listbox item 3"></ListBoxItem>
+                    </ListBox>
+                    <ListBox Margin="2" DockPanel.Dock="Top" IsEnabled="False">
+                        <ListBoxItem Content="disabled list 1"></ListBoxItem>
+                        <ListBoxItem Content="disabled list 2"></ListBoxItem>
+                    </ListBox>
+                    <ListBox Margin="2" DockPanel.Dock="Top" x:Name="virtualListBox" Height="100" VerticalAlignment="Top">
+                    </ListBox>
+                </DockPanel>
+
+                <modern:AnimatedScrollViewer HorizontalAlignment="Left" Width="120"
+                                              VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"
+                                              modern:ScrollViewerUI.OverContent="True">
+                    <Border Background="#FFF58383">
+                        <TextBlock Text="Scrollbar can also be over content"></TextBlock>
+                    </Border>
+                </modern:AnimatedScrollViewer>
+            </DockPanel>
+        </modern:AnimatedScrollViewer>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+
+
+            <ItemsControl  DataContext="{Binding Source={x:Static modern:ModernTheme.PredefinedAccents}}" ItemsSource="{Binding}"
+                            HorizontalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton GroupName="GroupColor" Margin="4"
+                                     ToolTip="{Binding Name}"
+                                         Checked="RadioButton_Checked">
+                            <Rectangle Width="32" Height="32"
+                                           Fill="{Binding MainBrush}" />
+                        </RadioButton>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="another window" x:Name="btnWindow" Click="btnWindow_Click"></Button>
+                <Button Content="normal dialog" x:Name="btnDialog" Click="btnDialog_Click"></Button>
+                <Button Content="in window dialog" x:Name="btnDialog2" Click="btnDialog2_Click"></Button>
+                <Button Content="toggle theme" x:Name="btnTheme" Click="btnTheme_Click"></Button>
+                <Button Content="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click"></Button>
+            </StackPanel>
+        </StackPanel>
+
+        <StatusBar Grid.Row="2">
+            <StatusBarItem Content="status 1"></StatusBarItem>
+            <StatusBarItem Content="status 2"></StatusBarItem>
+        </StatusBar>
+    </Grid>
 </Window>
