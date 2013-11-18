@@ -700,6 +700,134 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ModernWindowFull" TargetType="Window">
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+        <Setter Property="local:Chrome.Chrome">
+            <Setter.Value>
+                <local:Chrome x:Name="chrome" 
+                              ActiveBorderBrush="{DynamicResource ModernAccent}"
+                              InactiveBorderBrush="{DynamicResource ModernForeground4}"
+                              ActiveCaptionForeground="{DynamicResource ActiveCaptionForeground}"
+                              InactiveCaptionForeground="{DynamicResource InactiveCaptionForeground}"
+                              />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Window">
+                    <AdornerDecorator>
+                        <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}">
+
+                            <Rectangle x:Name="PART_Caption" 
+                                       HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                       Grid.ColumnSpan="2" 
+                                       Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}"
+                                       ></Rectangle>
+
+                            <ctrl:ModernContentControl Content="{TemplateBinding Content}"
+                                                       x:Name="MainContent"
+                                                       ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:ModernContentControl>
+
+                            <Grid x:Name="PART_Control" VerticalAlignment="Top">
+                                <Grid.Resources>
+                                    <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <DockPanel>
+                                    <Image Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="24" Height="24"
+                                           Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
+                                           Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
+                                           DockPanel.Dock="Left"></Image>
+
+                                    <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
+                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                               HorizontalAlignment="Left"
+                                               FontSize="15" Margin="{DynamicResource ContentThemePadding}"
+                                               Style="{StaticResource ModernTextBlock}"
+                                               Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
+                                </DockPanel>
+
+
+                                <!--<ContentControl Content="{TemplateBinding Content}" Grid.Column="1" />-->
+
+                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
+                                            VerticalAlignment="Top"  
+                                            DataContext="{Binding Source={StaticResource WindowCommands}}"
+                                            Margin="0 -1 -1 0"
+                                            Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
+                                            >
+                                    <Button x:Name="ButtonMin"
+                                            Command="{Binding Path=MinimizeCommand}"
+										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
+                                            Style="{StaticResource ModernControlButton}">
+                                        <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                                    </Button>
+                                    <Button x:Name="ButtonMax"
+										    Command="{Binding Path=MaximizeCommand}"
+										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
+                                            Style="{StaticResource ModernControlButton}">
+                                        <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                                    </Button>
+
+                                    <Button x:Name="ButtonRestore"
+										    Command="{Binding Path=RestoreCommand}"
+										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
+                                            Style="{StaticResource ModernControlButton}">
+                                        <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                                    </Button>
+
+                                    <Button x:Name="ButtonClose"
+										    Command="{Binding Path=CloseCommand}"
+										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
+                                            Style="{StaticResource ModernControlButton}">
+                                        <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+
+                            <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"></ctrl:DialogControlContainer>
+
+                            <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom" Visibility="Collapsed" IsTabStop="False" />
+                        </Grid>
+                    </AdornerDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="True">
+                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResizeWithGrip" />
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_ResizeGrip" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--status-->
     <Style x:Key="ModernStatusBar" TargetType="StatusBar">
         <Setter Property="Padding" Value="4 1"/>
