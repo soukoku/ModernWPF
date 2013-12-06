@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:local="clr-namespace:ModernWPF"
 	xmlns:ctrl="clr-namespace:ModernWPF.Controls"
+    xmlns:conv="clr-namespace:ModernWPF.Converters"
     >
 
     <Style TargetType="ctrl:ModernContentControl">
@@ -152,11 +153,12 @@
 
     <Style TargetType="ctrl:AppButton">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="local:Chrome.IsHitTestVisible" Value="true"/>
         <Setter Property="Background" Value="{DynamicResource AppBarItemBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource AppBarItemForegroundThemeBrush}"/>
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="Margin" Value="2 0" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
@@ -173,7 +175,6 @@
                                          Stroke="{DynamicResource AppBarItemForegroundThemeBrush}"
                                          Fill="{TemplateBinding Background}"
                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                         Margin="2"
                                          x:Name="Circle"/>
                                 <Viewbox x:Name="contentSizer" Width="48" Height="48"
                                      VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -187,7 +188,8 @@
                                        TextAlignment="Center"
                                        Foreground="{DynamicResource AppBarItemForegroundThemeBrush}"
                                        TextWrapping="Wrap"
-                                       Margin="2 0"/>
+                                       Margin="2 0"
+                                       Visibility="{Binding Path=Text, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}, RelativeSource={RelativeSource Self}}"/>
                         </StackPanel>
                         <Rectangle x:Name="FocusVisualWhite"
                                IsHitTestVisible="False"
@@ -210,9 +212,8 @@
                             <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
                         </Trigger>
                         <Trigger Property="ButtonSize" Value="Small">
-                            <Setter TargetName="contentSizer" Property="Width" Value="30"/>
-                            <Setter TargetName="contentSizer" Property="Height" Value="30"/>
-                            <Setter TargetName="Circle" Property="Margin" Value="0"/>
+                            <Setter TargetName="contentSizer" Property="Width" Value="26"/>
+                            <Setter TargetName="contentSizer" Property="Height" Value="26"/>
                         </Trigger>
                         <Trigger Property="TextSize" Value="Large">
                             <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>

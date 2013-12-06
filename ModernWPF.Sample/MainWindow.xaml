@@ -4,7 +4,7 @@
         xmlns:modern="http://modernwpf"
         xmlns:local="clr-namespace:ModernWPF.Sample"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Title="ModernWPF - Test" Height="610" Width="1020"
+        Title="ModernWPF - Test" Height="650" Width="1030"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindow}">
     <Window.Resources>
@@ -138,6 +138,7 @@
                         <RadioButton Content="radio button 2"></RadioButton>
                         <RadioButton Content="radio button 3"></RadioButton>
                         <RadioButton Content="radio button 4" IsEnabled="False"></RadioButton>
+                        <RadioButton Content="radio button 5" IsChecked="True" IsEnabled="False"></RadioButton>
 
 
                         <Button Content="no chrome button" Style="{StaticResource ModernButtonNoChrome}"></Button>
@@ -208,17 +209,17 @@
                 <StackPanel.Resources>
                     <Canvas x:Key="IconWindow" x:Shared="False"  Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
                         <Path Width="40" Height="30" Canvas.Left="18" Canvas.Top="23" Stretch="Fill" 
-                              Fill="{Binding RelativeSource={RelativeSource AncestorType=modern:AppButton}, Path=Foreground}" 
+                              Fill="{Binding RelativeSource={RelativeSource AncestorType=ButtonBase}, Path=Foreground}" 
                               Data="F1 M 18,23L 58,23L 58,53L 18,53L 18,23 Z M 54,31L 22,31L 22,49L 54,49L 54,31 Z "/>
                     </Canvas>
                     <Canvas x:Key="IconBaby" x:Shared="False" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
                         <Path Width="31.6666" Height="44.3333" Canvas.Left="22.1667" Canvas.Top="15.8333" Stretch="Fill" 
-                              Fill="{Binding RelativeSource={RelativeSource AncestorType=modern:AppButton}, Path=Foreground}" 
+                              Fill="{Binding RelativeSource={RelativeSource AncestorType=ButtonBase}, Path=Foreground}" 
                               Data="F1 M 38,15.8333C 41.4978,15.8333 44.3333,18.6689 44.3333,22.1667C 44.3333,25.6645 41.4978,28.5 38,28.5L 42.75,28.5L 43.5417,28.5L 52.25,38L 52.1482,38.1018C 53.1234,38.3974 53.8333,39.3033 53.8333,40.375C 53.8333,41.6867 52.77,42.75 51.4583,42.75C 50.3866,42.75 49.4807,42.0401 49.1851,41.0649L 49.0833,41.1667L 43.6548,35.7381L 44.3333,41.1667L 31.6667,41.1667L 32.3452,35.7381L 26.9167,41.1667L 26.8149,41.0649C 26.5193,42.0401 25.6134,42.75 24.5417,42.75C 23.23,42.75 22.1667,41.6867 22.1667,40.375C 22.1667,39.3033 22.8765,38.3973 23.8518,38.1018L 23.75,38L 32.4583,28.5L 33.25,28.5L 38,28.5C 34.5022,28.5 31.6667,25.6645 31.6667,22.1667C 31.6667,18.6689 34.5022,15.8333 38,15.8333 Z M 45.125,57C 45.125,58.7489 43.7072,60.1667 41.9583,60.1667C 40.2094,60.1667 38.7917,58.7489 38.7917,57C 38.7917,55.4957 39.8406,54.2364 43.5417,51.4583L 39.1875,47.1042L 44.7291,42.75L 50.6666,50.6667L 45.125,57 Z M 30.875,57L 25.3333,50.6667L 31.2708,42.75L 36.8125,47.1042L 32.4583,51.4583C 36.1594,54.2364 37.2083,55.4957 37.2083,57C 37.2083,58.7489 35.7906,60.1667 34.0417,60.1667C 32.2928,60.1667 30.875,58.7489 30.875,57 Z "/>
                     </Canvas>
                     <Canvas x:Key="IconCrown" x:Shared="False" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
                         <Path Width="42.1333" Height="39.5" Canvas.Left="16.9667" Canvas.Top="18.5" Stretch="Fill" 
-                              Fill="{Binding RelativeSource={RelativeSource AncestorType=modern:AppButton}, Path=Foreground}" 
+                              Fill="{Binding RelativeSource={RelativeSource AncestorType=ButtonBase}, Path=Foreground}" 
                               Data="F1 M 38.0333,18.5C 39.4877,18.5 40.6667,19.679 40.6667,21.1333C 40.6667,22.5877 39.4877,23.7667 38.0333,23.7667C 36.579,23.7667 35.4,22.5877 35.4,21.1333C 35.4,19.679 36.579,18.5 38.0333,18.5 Z M 56.4666,26.4C 57.921,26.4 59.1,27.579 59.1,29.0333C 59.1,30.4877 57.921,31.6667 56.4666,31.6667C 55.0123,31.6667 53.8333,30.4877 53.8333,29.0333C 53.8333,27.579 55.0123,26.4 56.4666,26.4 Z M 19.6,26.4C 21.0543,26.4 22.2333,27.579 22.2333,29.0333C 22.2333,30.4877 21.0543,31.6667 19.6,31.6667C 18.1456,31.6667 16.9667,30.4877 16.9667,29.0333C 16.9667,27.579 18.1456,26.4 19.6,26.4 Z M 27.5,40.8833L 31.45,54.05L 44.6167,54.05L 48.5667,40.8833C 41.9833,40.8833 38.0333,34.3 38.0333,34.3C 38.0333,34.3 34.0833,40.8833 27.5,40.8833 Z M 38.0333,25.0833C 38.0333,25.0833 41.9833,46.15 55.15,32.9833L 47.25,58L 28.8167,58C 25.7444,50.1 20.9167,32.9833 20.9167,32.9833C 34.0833,46.15 38.0333,25.0833 38.0333,25.0833 Z M 32,51L 31.25,49L 44.75,49L 44,51L 32,51 Z "/>
                     </Canvas>
 

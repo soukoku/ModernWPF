@@ -315,7 +315,7 @@
                                          UseLayoutRounding="False"
                                          SnapsToDevicePixels="True"
                                          Opacity="0"
-                                         Fill="{DynamicResource RadioButtonForegroundThemeBrush}" />
+                                         Fill="{DynamicResource ModernAccent}" />
                                 <Rectangle x:Name="FocusVisualWhite"
                                            Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
                                            StrokeEndLineCap="Square"
@@ -353,12 +353,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="BackgroundEllipse" Property="Fill" Value="{DynamicResource RadioButtonPointerOverBackgroundThemeBrush}" />
                             <Setter TargetName="BackgroundEllipse" Property="Stroke" Value="{DynamicResource RadioButtonPointerOverBorderThemeBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Fill" Value="{DynamicResource RadioButtonPointerOverForegroundThemeBrush}" />
+                            <!--<Setter TargetName="CheckGlyph" Property="Fill" Value="{DynamicResource RadioButtonPointerOverForegroundThemeBrush}" />-->
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="BackgroundEllipse" Property="Fill" Value="{DynamicResource RadioButtonPressedBackgroundThemeBrush}" />
                             <Setter TargetName="BackgroundEllipse" Property="Stroke" Value="{DynamicResource RadioButtonPressedBorderThemeBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Fill" Value="{DynamicResource RadioButtonPressedForegroundThemeBrush}" />
+                            <!--<Setter TargetName="CheckGlyph" Property="Fill" Value="{DynamicResource RadioButtonPressedForegroundThemeBrush}" />-->
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="BackgroundEllipse" Property="Fill" Value="{DynamicResource RadioButtonDisabledBackgroundThemeBrush}" />
@@ -451,7 +451,7 @@
         <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundThemeBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource HyperlinkButtonBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource HyperlinkButtonBorderThemeThickness}" />
-        <Setter Property="Padding" Value="12,4,12,4" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
@@ -902,7 +902,7 @@
                                            Width="21" />
                                 <Path x:Name="CheckGlyph"
                                       Data="F1 M 0,58 L 2,56 L 6,60 L 13,51 L 15,53 L 6,64 z"
-                                      Fill="{DynamicResource CheckBoxForegroundThemeBrush}"
+                                      Fill="{DynamicResource ModernAccent}"
                                       Height="14"
                                       Stretch="Fill"
                                       Width="16"
@@ -912,7 +912,7 @@
                                 <Rectangle x:Name="IndeterminateGlyph"
                                            Width="9"
                                            Height="9"
-                                           Fill="{DynamicResource CheckBoxForegroundThemeBrush}"
+                                           Fill="{DynamicResource ModernAccent}"
                                            Opacity="0"
                                            UseLayoutRounding="False" 
                                            SnapsToDevicePixels="True"/>
@@ -956,14 +956,14 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource CheckBoxPointerOverBackgroundThemeBrush}" />
                             <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource CheckBoxPointerOverBorderThemeBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Fill" Value="{DynamicResource CheckBoxPointerOverForegroundThemeBrush}" />
-                            <Setter TargetName="IndeterminateGlyph" Property="Fill" Value="{DynamicResource CheckBoxPointerOverForegroundThemeBrush}" />
+                            <!--<Setter TargetName="CheckGlyph" Property="Fill" Value="{DynamicResource CheckBoxPointerOverForegroundThemeBrush}" />-->
+                            <!--<Setter TargetName="IndeterminateGlyph" Property="Fill" Value="{DynamicResource CheckBoxPointerOverForegroundThemeBrush}" />-->
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource CheckBoxPressedBackgroundThemeBrush}" />
                             <Setter TargetName="NormalRectangle" Property="Stroke" Value="{DynamicResource CheckBoxPressedBorderThemeBrush}" />
-                            <Setter TargetName="CheckGlyph" Property="Fill" Value="{DynamicResource CheckBoxPressedForegroundThemeBrush}" />
-                            <Setter TargetName="IndeterminateGlyph" Property="Fill" Value="{DynamicResource CheckBoxPressedForegroundThemeBrush}" />
+                            <!--<Setter TargetName="CheckGlyph" Property="Fill" Value="{DynamicResource CheckBoxPressedForegroundThemeBrush}" />-->
+                            <!--<Setter TargetName="IndeterminateGlyph" Property="Fill" Value="{DynamicResource CheckBoxPressedForegroundThemeBrush}" />-->
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="NormalRectangle" Property="Fill" Value="{DynamicResource CheckBoxDisabledBackgroundThemeBrush}" />
