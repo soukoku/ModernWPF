@@ -74,6 +74,7 @@
     <Compile Include="Controls\AnimatedScrollViewer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\AppButton.cs" />
     <Compile Include="Controls\BorderWindow.cs" />
     <Compile Include="Controls\DialogControl.cs" />
     <Compile Include="Controls\DialogControlContainer.cs" />

@@ -148,4 +148,105 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <Style TargetType="ctrl:AppButton">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{DynamicResource AppBarItemBackgroundThemeBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource AppBarItemForegroundThemeBrush}"/>
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="10.5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctrl:AppButton">
+                    <Grid Margin="{TemplateBinding Margin}"
+                          Background="#01000000">
+                        <StackPanel Orientation="{TemplateBinding Orientation}"
+                                    Margin="{TemplateBinding Padding}">
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Ellipse StrokeThickness="2" 
+                                         Stroke="{DynamicResource AppBarItemForegroundThemeBrush}"
+                                         Fill="{TemplateBinding Background}"
+                                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                         Margin="2"
+                                         x:Name="Circle"/>
+                                <Viewbox x:Name="contentSizer" Width="48" Height="48"
+                                     VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <ContentPresenter x:Name="ContentPresenter" 
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                </Viewbox>
+                            </Grid>
+                            <TextBlock Text="{TemplateBinding Text}"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       Foreground="{DynamicResource AppBarItemForegroundThemeBrush}"
+                                       TextWrapping="Wrap"
+                                       Margin="2 0"/>
+                        </StackPanel>
+                        <Rectangle x:Name="FocusVisualWhite"
+                               IsHitTestVisible="False"
+                               Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="1.5" />
+                        <Rectangle x:Name="FocusVisualBlack"
+                               IsHitTestVisible="False"
+                               Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
+                               StrokeEndLineCap="Square"
+                               StrokeDashArray="1,1"
+                               Opacity="0"
+                               StrokeDashOffset="0.5" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
+                            <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="ButtonSize" Value="Small">
+                            <Setter TargetName="contentSizer" Property="Width" Value="30"/>
+                            <Setter TargetName="contentSizer" Property="Height" Value="30"/>
+                            <Setter TargetName="Circle" Property="Margin" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="TextSize" Value="Large">
+                            <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ButtonSize" Value="Large"/>
+                                <Condition Property="Orientation" Value="Vertical"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Width" Value="76"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ButtonSize" Value="Small"/>
+                                <Condition Property="Orientation" Value="Vertical"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Width" Value="50"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource AppBarItemPointerOverBackgroundThemeBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource AppBarItemPointerOverForegroundThemeBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ButtonPressedBackgroundThemeBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource AppBarItemPressedForegroundThemeBrush}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

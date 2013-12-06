@@ -21,6 +21,13 @@ namespace ModernWPF.Sample
         public DialogWindow()
         {
             InitializeComponent();
+
+            List<string> items = new List<string>();
+            for (int i = 0; i < 50; i++)
+            {
+                items.Add(string.Format("Item {0:00}", i));
+            }
+            list.ItemsSource = items;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

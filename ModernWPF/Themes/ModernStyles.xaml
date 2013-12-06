@@ -12,7 +12,7 @@
 
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+        <!--<Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>-->
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Style.Triggers>
@@ -118,6 +118,7 @@
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />

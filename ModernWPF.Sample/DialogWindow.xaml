@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:modern="http://modernwpf"
         x:Name="theWindow"
-        Title="Dialog Window" Height="300" Width="300"
+        Title="Dialog Window" Height="300" Width="400"
         ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
-        modern:Chrome.CaptionHeight="60"
-        Style="{StaticResource ModernWindow}">
+        modern:Chrome.CaptionHeight="40"
+        Style="{StaticResource ModernWindowFull}">
     <modern:Chrome.Chrome>
         <modern:Chrome ActiveBorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
                        ActiveCaptionBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" 
@@ -19,13 +19,32 @@
             Padding="8">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock TextWrapping="Wrap" VerticalAlignment="Top">Just a dialog showing different chrome color than ModernWindow style</TextBlock>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                     Grid.Row="1"
+                     x:Name="list">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="Green" Padding="10" MinWidth="100">
+                            <TextBlock Text="{Binding}" />
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="OK" IsDefault="True" MinWidth="75" Click="Button_Click"></Button>
                 <Button Content="Cancel" IsCancel="True" MinWidth="75"></Button>
             </StackPanel>

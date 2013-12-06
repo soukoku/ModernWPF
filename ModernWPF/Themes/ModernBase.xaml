@@ -7,8 +7,9 @@
     <s:Double x:Key="WindowTitleFontSize">28</s:Double>
     <s:Double x:Key="TopTitleFontSize">22</s:Double>
     <s:Double x:Key="SubTitleFontSize">18</s:Double>
+    <s:Double x:Key="ContentFontSize">13</s:Double>
     <s:Double x:Key="SmallFontSize">12</s:Double>
-    <s:Double x:Key="TinyFontSize">10</s:Double>
+    <s:Double x:Key="TinyFontSize">10.5</s:Double>
     <Thickness x:Key="ContentThemePadding">8 4</Thickness>
 
 
