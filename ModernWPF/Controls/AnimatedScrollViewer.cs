@@ -472,6 +472,9 @@ namespace ModernWPF.Controls
             set { SetValue(AnimateSplineProperty, value); }
         }
 
+        /// <summary>
+        /// The dependency property for <see cref="AnimateSpline"/>.
+        /// </summary>
         public static readonly DependencyProperty AnimateSplineProperty =
             DependencyProperty.Register("AnimateSpline", typeof(KeySpline), typeof(AnimatedScrollViewer),
               new PropertyMetadata(new KeySpline(0.024, 0.914, 0.717, 1)));

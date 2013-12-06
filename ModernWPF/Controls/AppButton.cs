@@ -13,6 +13,7 @@ namespace ModernWPF.Controls
     /// </summary>
     public class AppButton : ButtonBase
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static AppButton()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AppButton), new FrameworkPropertyMetadata(typeof(AppButton)));
@@ -104,11 +105,17 @@ namespace ModernWPF.Controls
     }
 
     /// <summary>
-    /// Indicates the <see cref="AppButton"/> size.
+    /// Indicates the text or icon size for <see cref="AppButton"/>.
     /// </summary>
     public enum AppButtonSize
     {
+        /// <summary>
+        /// Use the large size.
+        /// </summary>
         Large,
+        /// <summary>
+        /// Use the small size.
+        /// </summary>
         Small
     }
 }
