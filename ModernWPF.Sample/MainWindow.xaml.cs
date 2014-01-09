@@ -85,5 +85,10 @@ namespace ModernWPF.Sample
                 if (Dispatcher.HasShutdownStarted || Dispatcher.HasShutdownStarted) { break; }
             }
         }
+
+        private void btnMsgWindow_Click(object sender, RoutedEventArgs e)
+        {
+            new MsgWindow { Owner = this }.Show();
+        }
     }
 }

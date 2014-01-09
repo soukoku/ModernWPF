@@ -601,14 +601,19 @@ namespace ModernWPF
                             handled = !Dwmapi.IsCompositionEnabled;
                             break;
                         case WindowMessage.WM_NCACTIVATE:
-                            // prevent default non-client border from showing in classic mode
-                            if (wParam == BasicValues.FALSE)
+                            // handled to prevent default non-client border from showing in classic mode
+                            // False means draw inactive title bar (which we do nothing).
+                            if (wParam == BasicValues.FALSE) 
                             {
                                 retVal = BasicValues.TRUE;
                             }
                             else
                             {
-                                retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, new IntPtr(-1));
+                                // Also skip default wndproc on maximized window to prevent non-dwm theme titlebar being drawn
+                                if (_contentWindow.WindowState != WindowState.Maximized)
+                                {
+                                    User32.DefWindowProc(hwnd, (uint)msg, wParam, new IntPtr(-1));
+                                }
                             }
                             handled = true;
                             break;
