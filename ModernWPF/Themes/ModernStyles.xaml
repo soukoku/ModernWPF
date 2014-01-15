@@ -596,16 +596,6 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="1">
-                                <ctrl:ModernContentControl Content="{TemplateBinding Content}"
-                                                       x:Name="MainContent"
-                                                       ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:ModernContentControl>
-
-                                <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"></ctrl:DialogControlContainer>
-
-                                <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom" Visibility="Collapsed" IsTabStop="False" />
-                            </Grid>
                             <Grid Grid.Row="0">
                                 <Rectangle x:Name="PART_Caption" 
                                            HorizontalAlignment="Stretch" VerticalAlignment="Top"
@@ -683,6 +673,18 @@
                                     </StackPanel>
                                 </Grid>
                             </Grid>
+                            <ctrl:ModernContentControl Content="{TemplateBinding Content}"
+                                                       x:Name="MainContent"
+                                                       Grid.Row="1"
+                                                       ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:ModernContentControl>
+
+                            <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"
+                                                         Grid.RowSpan="2"></ctrl:DialogControlContainer>
+
+                            <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom" Visibility="Collapsed" IsTabStop="False" 
+                                        Grid.RowSpan="2"/>
+
                         </Grid>
                     </AdornerDecorator>
                     <ControlTemplate.Triggers>
