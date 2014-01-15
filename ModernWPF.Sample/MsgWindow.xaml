@@ -1,0 +1,10 @@
+﻿<Window x:Class="ModernWPF.Sample.MsgWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:modern="http://modernwpf"
+        Title="MsgWindow" Height="700" Width="300"
+        Style="{StaticResource ModernWindow}">
+    <TextBox AcceptsReturn="True" VerticalAlignment="Stretch"
+             x:Name="msgBox" modern:TextBoxUI.ShowClearButton="False"
+             VerticalScrollBarVisibility="Visible"></TextBox>
+</Window>
