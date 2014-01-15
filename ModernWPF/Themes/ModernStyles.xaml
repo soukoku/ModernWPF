@@ -544,14 +544,20 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ToolHoverBackground}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ToolHoverBackground}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ToolHoverBorder}"/>
-                <Setter Property="Foreground" Value="{DynamicResource ToolHoverForeground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ToolHoverForeground}"/>-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ModernAccentAlpha8}"/>
+                <!--<Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>-->
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ToolActiveBackground}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ToolActiveBackground}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ToolActiveBorder}"/>
-                <Setter Property="Foreground" Value="{DynamicResource ToolActiveForeground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ToolActiveForeground}"/>-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccent}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}"/>
+                <Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
