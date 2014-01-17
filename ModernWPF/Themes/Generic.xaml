@@ -245,9 +245,13 @@
                 <Setter Property="Background" Value="{DynamicResource ButtonPressedBackgroundThemeBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource AppBarItemPressedForegroundThemeBrush}" />
             </Trigger>
-            <Trigger Property="IsEnabled" Value="false">
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="false"/>
+                    <Condition Property="CollapseOnDisable" Value="True"/>
+                </MultiTrigger.Conditions>
                 <Setter Property="Visibility" Value="Collapsed" />
-            </Trigger>
+            </MultiTrigger>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

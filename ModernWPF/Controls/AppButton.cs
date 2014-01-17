@@ -102,6 +102,28 @@ namespace ModernWPF.Controls
 
 
 
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the button will collapse if not enabled.
+        /// Default is true.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> to collapse on disable; otherwise, <c>false</c>.
+        /// </value>
+        public bool CollapseOnDisable
+        {
+            get { return (bool)GetValue(CollapseOnDisableProperty); }
+            set { SetValue(CollapseOnDisableProperty, value); }
+        }
+
+
+        /// <summary>
+        /// Dependency property for <see cref="CollapseOnDisable"/>.
+        /// </summary>
+        public static readonly DependencyProperty CollapseOnDisableProperty =
+            DependencyProperty.Register("CollapseOnDisable", typeof(bool), typeof(AppButton), new PropertyMetadata(true));
+
+
     }
 
     /// <summary>
