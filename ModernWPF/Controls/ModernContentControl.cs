@@ -36,7 +36,7 @@ namespace ModernWPF.Controls
                     VisualStateManager.GoToState(this, "AfterLoaded", Animation.ShouldAnimate);
                     if (Animation.ShouldAnimate)
                     {
-                        Animation.SlideIn(_presenter, TimeSpan.FromMilliseconds(500), 15);
+                        Animation.SlideIn(_presenter, TimeSpan.FromMilliseconds(500));
                     }
                 };
                 //this.DataContextChanged += (s, e) =>

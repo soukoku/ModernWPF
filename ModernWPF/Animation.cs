@@ -49,6 +49,24 @@ namespace ModernWPF
         public static QuarticEase TypicalEasing { get; private set; }
 
         /// <summary>
+        /// Gets the typical slide offset value. Default is 15.
+        /// </summary>
+        /// <value>
+        /// The typical slide offset.
+        /// </value>
+        public static double TypicalSlideOffset { get { return 15; } }
+
+        /// <summary>
+        /// Slides the element in with translate transform.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="duration">The duration.</param>
+        public static void SlideIn(UIElement element, TimeSpan duration)
+        {
+            SlideIn(element, duration, TypicalSlideOffset, TypicalEasing);
+        }
+
+        /// <summary>
         /// Slides the element in with translate transform.
         /// </summary>
         /// <param name="element">The element.</param>
@@ -87,8 +105,8 @@ namespace ModernWPF
             da.Duration = duration;
             da.EasingFunction = easing;
             da.To = 0;
-            TranslateTransform transform = new TranslateTransform();
-            element.RenderTransform = transform;
+
+            TranslateTransform transform = FindOrCreateRenderXform(element);
             switch (direction)
             {
                 case SlideFromDirection.Top:
@@ -108,6 +126,32 @@ namespace ModernWPF
                     transform.BeginAnimation(TranslateTransform.YProperty, da);
                     break;
             }
+        }
+
+        private static TranslateTransform FindOrCreateRenderXform(UIElement element)
+        {
+            TranslateTransform transform = null;
+            if (element.RenderTransform != null)
+            {
+                var grp = element.RenderTransform as TransformGroup;
+                if (grp == null)
+                {
+                    var hit = grp.Children.FirstOrDefault(t => t is TranslateTransform);
+                    transform = (TranslateTransform)hit;
+                }
+                else
+                {
+                    transform = element.RenderTransform as TranslateTransform;
+                }
+            }
+
+            if (transform == null)
+            {
+                transform = new TranslateTransform();
+                // probably shouldn't replace existing transform but anyway
+                element.RenderTransform = transform;
+            }
+            return transform;
         }
 
         /// <summary>
