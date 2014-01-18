@@ -136,12 +136,12 @@ namespace ModernWPF
                 var grp = element.RenderTransform as TransformGroup;
                 if (grp == null)
                 {
-                    var hit = grp.Children.FirstOrDefault(t => t is TranslateTransform);
-                    transform = (TranslateTransform)hit;
+                    transform = element.RenderTransform as TranslateTransform;
                 }
                 else
                 {
-                    transform = element.RenderTransform as TranslateTransform;
+                    var hit = grp.Children.FirstOrDefault(t => t is TranslateTransform);
+                    transform = (TranslateTransform)hit;
                 }
             }
 
