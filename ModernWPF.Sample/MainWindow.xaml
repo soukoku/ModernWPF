@@ -6,18 +6,25 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="ModernWPF - Test" Height="650" Width="1030"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
-        Style="{StaticResource ModernWindow}">
+        Style="{StaticResource ModernWindowFull}">
     <Window.Resources>
         <sys:String x:Key="shortString">Lorem ipsum dolor sit amet</sys:String>
     </Window.Resources>
 	<Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <modern:AnimatedScrollViewer HorizontalScrollBarVisibility="Auto">
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 120 0">
+            <Button Style="{StaticResource ModernCaptionButton}" Content="caption button 1"></Button>
+            <Button Style="{StaticResource ModernCaptionButton}" Content="caption button disabled" IsEnabled="False"></Button>
+        </StackPanel>
+
+        <modern:AnimatedScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="1">
             <DockPanel Margin="8">
                 <StackPanel Width="250" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8">
                     <TextBlock TextWrapping="Wrap" 
@@ -184,7 +191,7 @@
             </DockPanel>
         </modern:AnimatedScrollViewer>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1">
+        <StackPanel Orientation="Vertical" Grid.Row="2">
 
 
             <ItemsControl  DataContext="{Binding Source={x:Static modern:ModernTheme.PredefinedAccents}}" ItemsSource="{Binding}"
@@ -233,7 +240,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StatusBar Grid.Row="2">
+        <StatusBar Grid.Row="3">
             <StatusBarItem Content="status 1"></StatusBarItem>
             <StatusBarItem Content="status 2"></StatusBarItem>
         </StatusBar>

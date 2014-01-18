@@ -512,6 +512,52 @@
     </Style>
 
     <Style x:Key="ModernCaptionButton" TargetType="Button">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ActiveCaptionForeground}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="local:Chrome.IsHitTestVisible" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Margin" Value="0 0 0 0" />
+        <Setter Property="Padding" Value="9 6" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Opacity" Value=".85"/>
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ButtonBorder" 
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter x:Name="ButtonContent" RecognizesAccessKey="False"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value=".8"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value=".4"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ModernControlButton" TargetType="Button">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
@@ -542,6 +588,8 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsTabStop" Value="False" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <!--<Setter Property="Background" Value="{DynamicResource ToolHoverBackground}" />
@@ -559,13 +607,6 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}"/>
                 <Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>
             </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="ModernControlButton" TargetType="Button" BasedOn="{StaticResource ModernCaptionButton}">
-        <Setter Property="Focusable" Value="False"/>
-        <Setter Property="IsTabStop" Value="False" />
-        <Style.Triggers>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Visibility" Value="Collapsed" />
             </Trigger>
