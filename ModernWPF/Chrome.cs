@@ -488,13 +488,6 @@ namespace ModernWPF
             {
                 Debug.WriteLine("ChromeWorker detatched");
                 _resizeGrip = null;
-                if (_contentWindow != null)
-                {
-                    _contentWindow.Closed -= _contentWindow_Closed;
-                    _contentWindow.ContentRendered -= _contentWindow_ContentRendered;
-                    _contentWindow.SourceInitialized -= window_SourceInitialized;
-                    _contentWindow = null;
-                }
                 if (_borderWindow != null)
                 {
                     var toFoxus = _borderWindow.Owner;
@@ -505,6 +498,13 @@ namespace ModernWPF
                     // hack to not let owner window move to background for some reason
                     if (toFoxus != null) { toFoxus.Activate(); }
                 }
+                if (_contentWindow != null)
+                {
+                    _contentWindow.Closed -= _contentWindow_Closed;
+                    _contentWindow.ContentRendered -= _contentWindow_ContentRendered;
+                    _contentWindow.SourceInitialized -= window_SourceInitialized;
+                    _contentWindow = null;
+                }
             }
 
 
@@ -512,6 +512,7 @@ namespace ModernWPF
             BorderWindow _borderWindow;
             ResizeGrip _resizeGrip;
             bool _hideOverride;
+            bool _contentShown;
 
             #region window events
 
@@ -523,6 +524,8 @@ namespace ModernWPF
             void _contentWindow_ContentRendered(object sender, EventArgs e)
             {
                 _resizeGrip = _contentWindow.FindInVisualTree<ResizeGrip>();
+                _contentShown = true;
+                _borderWindow.RepositionToContent(new WindowInteropHelper(_contentWindow).Handle, _hideOverride);
             }
 
             void window_SourceInitialized(object sender, EventArgs e)
@@ -654,7 +657,10 @@ namespace ModernWPF
                                 {
                                     _hideOverride = false;
                                 }
-                                _borderWindow.RepositionToContent(hwnd, _hideOverride);
+                                if (_contentShown)
+                                {
+                                    _borderWindow.RepositionToContent(hwnd, _hideOverride);
+                                }
                             }
                             break;
                         case WindowMessage.WM_DWMCOMPOSITIONCHANGED:
