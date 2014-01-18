@@ -15,6 +15,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Diagnostics;
+using CommonWin32.Monitors;
 
 namespace ModernWPF.Controls
 {
@@ -180,7 +181,7 @@ namespace ModernWPF.Controls
             }
             else
             {
-                var thick = BorderThickness;
+                var thick = TranslateToPixels(BorderThickness);
                 var wpl = default(WINDOWPLACEMENT);
                 wpl.length = (uint)Marshal.SizeOf(typeof(WINDOWPLACEMENT));
 
@@ -221,6 +222,37 @@ namespace ModernWPF.Controls
                     }
                 }
             }
+        }
+
+        private Thickness TranslateToPixels(Thickness wpfThickness)
+        {
+            // translate wpf units to actual pixels for high-dpi scaling
+            var source = PresentationSource.FromVisual(this);
+            if (source != null)
+            {
+                Matrix transformToDevice = source.CompositionTarget.TransformToDevice;
+                if (!transformToDevice.IsIdentity)
+                {
+                    var left = transformToDevice.Transform(new Point(wpfThickness.Left, wpfThickness.Left)).X;
+                    var top = left;
+                    if (wpfThickness.Left != wpfThickness.Top)
+                    {
+                        top = transformToDevice.Transform(new Point(wpfThickness.Top, wpfThickness.Top)).X;
+                    }
+                    var right = left;
+                    if (wpfThickness.Left != wpfThickness.Right)
+                    {
+                        right = transformToDevice.Transform(new Point(wpfThickness.Right, wpfThickness.Right)).X;
+                    }
+                    var bottom = left;
+                    if (wpfThickness.Left != wpfThickness.Bottom)
+                    {
+                        bottom = transformToDevice.Transform(new Point(wpfThickness.Bottom, wpfThickness.Bottom)).X;
+                    }
+                    return new Thickness(left, top, right, bottom);
+                }
+            }
+            return wpfThickness;
         }
 
         IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -284,9 +316,25 @@ namespace ModernWPF.Controls
                         // prevent more flickers
                         handled = true;
                         break;
+                    case WindowMessage.WM_GETMINMAXINFO:
+                        HandleMinMaxInfo(hwnd, wParam, lParam);
+                        break;
                 }
             }
             return retVal;
+        }
+
+        private void HandleMinMaxInfo(IntPtr hwnd, IntPtr wParam, IntPtr lParam)
+        {
+            // overridden so max size = normal max + resize border (for when resizing content window to max size without maximizing)
+            var thick = TranslateToPixels(BorderThickness);
+
+            MINMAXINFO para = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
+            var orig = para.ptMaxTrackSize;
+            orig.x += (int)(thick.Left + thick.Right);
+            orig.y += (int)(thick.Top + thick.Bottom);
+            para.ptMaxTrackSize = orig;
+            Marshal.StructureToPtr(para, lParam, true);
         }
 
         NcHitTest HandleNcHitTest(Point screenPoint)
