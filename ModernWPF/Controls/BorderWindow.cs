@@ -33,6 +33,10 @@ namespace ModernWPF.Controls
             WindowStyleProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(WindowStyle.None));
             ShowInTaskbarProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(false));
             AllowsTransparencyProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(true));
+            // override to make border less visible initially for slow machines
+            WindowStateProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(WindowState.Minimized));
+            WidthProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(1d));
+            HeightProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(1d));
         }
 
         public bool IsContentActive
@@ -83,6 +87,10 @@ namespace ModernWPF.Controls
             {
                 _showTimer.Stop();
                 this.Show();
+                if (this.WindowState != System.Windows.WindowState.Normal)
+                {
+                    this.WindowState = System.Windows.WindowState.Normal;
+                }
                 if (_contentWindow != null)
                     _contentWindow.Activate();
             };
@@ -161,6 +169,10 @@ namespace ModernWPF.Controls
                     else
                     {
                         this.Show();
+                        if (this.WindowState != System.Windows.WindowState.Normal)
+                        {
+                            this.WindowState = System.Windows.WindowState.Normal;
+                        }
                         if (_contentWindow != null)
                             _contentWindow.Activate();
                     }
@@ -230,25 +242,17 @@ namespace ModernWPF.Controls
             var source = PresentationSource.FromVisual(this);
             if (source != null)
             {
-                Matrix transformToDevice = source.CompositionTarget.TransformToDevice;
-                if (!transformToDevice.IsIdentity)
+                var transform = source.CompositionTarget.TransformToDevice;
+                if (!transform.IsIdentity)
                 {
-                    var left = transformToDevice.Transform(new Point(wpfThickness.Left, wpfThickness.Left)).X;
-                    var top = left;
-                    if (wpfThickness.Left != wpfThickness.Top)
-                    {
-                        top = transformToDevice.Transform(new Point(wpfThickness.Top, wpfThickness.Top)).X;
-                    }
-                    var right = left;
-                    if (wpfThickness.Left != wpfThickness.Right)
-                    {
-                        right = transformToDevice.Transform(new Point(wpfThickness.Right, wpfThickness.Right)).X;
-                    }
-                    var bottom = left;
-                    if (wpfThickness.Left != wpfThickness.Bottom)
-                    {
-                        bottom = transformToDevice.Transform(new Point(wpfThickness.Bottom, wpfThickness.Bottom)).X;
-                    }
+                    var xScale = transform.M11;
+                    var yScale = transform.M22;
+
+                    var left = wpfThickness.Left * xScale;
+                    var top = wpfThickness.Top * yScale;
+                    var right = wpfThickness.Right * xScale;
+                    var bottom = wpfThickness.Bottom * yScale;
+
                     return new Thickness(left, top, right, bottom);
                 }
             }
