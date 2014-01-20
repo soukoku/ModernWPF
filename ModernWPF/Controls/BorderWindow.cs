@@ -34,7 +34,7 @@ namespace ModernWPF.Controls
             ShowInTaskbarProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(false));
             AllowsTransparencyProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(true));
             // override to make border less visible initially for slow machines
-            WindowStateProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(WindowState.Minimized));
+            //WindowStateProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(WindowState.Minimized));
             WidthProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(1d));
             HeightProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(1d));
         }
