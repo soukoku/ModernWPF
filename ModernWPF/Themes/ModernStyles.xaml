@@ -10,6 +10,51 @@
     <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"-->
 
+    <Style x:Key="ModernFocusVisualDashed">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Rectangle x:Name="FocusVisualWhite"
+                                   IsHitTestVisible="False"
+                                   Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
+                                   StrokeEndLineCap="Square"
+                                   StrokeDashArray="1,1"
+                                   StrokeDashOffset="1.5"
+                                   SnapsToDevicePixels="True"/>
+                        <Rectangle x:Name="FocusVisualBlack"
+                                   IsHitTestVisible="False"
+                                   Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
+                                   StrokeEndLineCap="Square"
+                                   StrokeDashArray="1,1"
+                                   StrokeDashOffset="0.5"
+                                   SnapsToDevicePixels="True"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ModernFocusVisualSolid">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Rectangle x:Name="FocusVisualWhite"
+                                   IsHitTestVisible="False"
+                                   Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
+                                   StrokeThickness="2"
+                                   SnapsToDevicePixels="True"/>
+                        <Rectangle x:Name="FocusVisualBlack"
+                                   IsHitTestVisible="False"
+                                   Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
+                                   StrokeThickness="2"
+                                   SnapsToDevicePixels="True"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
         <!--<Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>-->
@@ -35,7 +80,7 @@
 
     <!--buttons-->
     <Style x:Key="ModernButton" TargetType="Button">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Background" Value="{DynamicResource ButtonBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderThemeBrush}" />
@@ -62,27 +107,7 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
-                        <Rectangle x:Name="FocusVisualWhite"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="1.5" />
-                        <Rectangle x:Name="FocusVisualBlack"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="0.5" />
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
-                            <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -112,7 +137,7 @@
     </Style>
 
     <Style x:Key="ModernButtonNoChrome" TargetType="ButtonBase">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -141,27 +166,7 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
-                        <Rectangle x:Name="FocusVisualWhite"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="1.5" />
-                        <Rectangle x:Name="FocusVisualBlack"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="0.5" />
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
-                            <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -179,7 +184,7 @@
     </Style>
 
     <Style x:Key="ModernToggleButton" TargetType="ToggleButton">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ToggleButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderThemeBrush}" />
@@ -206,27 +211,7 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
-                        <Rectangle x:Name="FocusVisualWhite"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="1.5" />
-                        <Rectangle x:Name="FocusVisualBlack"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="0.5" />
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
-                            <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -278,7 +263,7 @@
     </Style>
 
     <Style x:Key="ModernRadioButton" TargetType="RadioButton">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource RadioButtonContentForegroundThemeBrush}"/>
@@ -287,6 +272,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="MinHeight" Value="29"/>
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Template">
@@ -316,7 +302,7 @@
                                          SnapsToDevicePixels="True"
                                          Opacity="0"
                                          Fill="{DynamicResource ModernAccent}" />
-                                <Rectangle x:Name="FocusVisualWhite"
+                                <!--<Rectangle x:Name="FocusVisualWhite"
                                            Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
                                            StrokeEndLineCap="Square"
                                            StrokeDashArray="1,1"
@@ -331,7 +317,7 @@
                                            Opacity="0"
                                            StrokeDashOffset="0.5"
                                            Width="29"
-                                           Height="29" />
+                                           Height="29" />-->
                             </Grid>
                             <ContentPresenter x:Name="ContentPresenter"
                                               Content="{TemplateBinding Content}"
@@ -343,10 +329,10 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                        <!--<Trigger Property="IsKeyboardFocusWithin" Value="True">
                             <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
                             <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
+                        </Trigger>-->
                         <Trigger Property="IsChecked" Value="true">
                             <Setter TargetName="CheckGlyph" Property="Opacity" Value="1"/>
                         </Trigger>
@@ -377,7 +363,7 @@
     </Style>
 
     <Style x:Key="ModernRepeatButton" TargetType="RepeatButton">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Background" Value="{DynamicResource ButtonBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource RepeatButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource RepeatButtonBorderThemeBrush}" />
@@ -404,27 +390,7 @@
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
-                        <Rectangle x:Name="FocusVisualWhite"
-                                   IsHitTestVisible="False"
-                                   Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
-                                   StrokeEndLineCap="Square"
-                                   StrokeDashArray="1,1"
-                                   Opacity="0"
-                                   StrokeDashOffset="1.5" />
-                        <Rectangle x:Name="FocusVisualBlack"
-                                   IsHitTestVisible="False"
-                                   Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
-                                   StrokeEndLineCap="Square"
-                                   StrokeDashArray="1,1"
-                                   Opacity="0"
-                                   StrokeDashOffset="0.5" />
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
-                            <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -446,7 +412,7 @@
     </Style>
 
     <Style x:Key="ModernHyperlinkButton" TargetType="ButtonBase">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Foreground" Value="{DynamicResource HyperlinkForegroundThemeBrush}" />
         <Setter Property="Background" Value="{DynamicResource HyperlinkButtonBackgroundThemeBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource HyperlinkButtonBorderThemeBrush}" />
@@ -474,27 +440,7 @@
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
                                        TextDecorations="Underline"/>
                         </Border>
-                        <Rectangle x:Name="FocusVisualWhite"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="1.5" />
-                        <Rectangle x:Name="FocusVisualBlack"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="0.5" />
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
-                            <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -512,6 +458,7 @@
     </Style>
 
     <Style x:Key="ModernCaptionButton" TargetType="Button">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
@@ -643,7 +590,7 @@
                                            Grid.ColumnSpan="2" 
                                            Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}"
                                            ></Rectangle>
-    
+
                                 <Grid x:Name="PART_Control" VerticalAlignment="Top">
                                     <Grid.Resources>
                                         <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
@@ -653,13 +600,13 @@
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
-    
+
                                     <DockPanel>
                                         <Image Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="24" Height="24"
                                                Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                                Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                                DockPanel.Dock="Left"></Image>
-    
+
                                         <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
                                                    VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
                                                    HorizontalAlignment="Left"
@@ -667,10 +614,10 @@
                                                    Style="{StaticResource ModernTextBlock}"
                                                    Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
                                     </DockPanel>
-    
-    
+
+
                                     <!--<ContentControl Content="{TemplateBinding Content}" Grid.Column="1" />-->
-    
+
                                     <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
                                                 VerticalAlignment="Top"  
                                                 DataContext="{Binding Source={StaticResource WindowCommands}}"
@@ -683,7 +630,7 @@
                                                 ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
                                                 Style="{StaticResource ModernControlButton}">
                                             <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-    
+
                                         </Button>
                                         <Button x:Name="ButtonMax"
                                                 Command="{Binding Path=MaximizeCommand}"
@@ -691,25 +638,25 @@
                                                 ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
                                                 Style="{StaticResource ModernControlButton}">
                                             <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-    
+
                                         </Button>
-    
+
                                         <Button x:Name="ButtonRestore"
                                                 Command="{Binding Path=RestoreCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                 ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
                                                 Style="{StaticResource ModernControlButton}">
                                             <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-    
+
                                         </Button>
-    
+
                                         <Button x:Name="ButtonClose"
                                                 Command="{Binding Path=CloseCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                 ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
                                                 Style="{StaticResource ModernControlButton}">
                                             <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-    
+
                                         </Button>
                                     </StackPanel>
                                 </Grid>
@@ -917,7 +864,7 @@
 
     <!--checkbox-->
     <Style x:Key="ModernCheckBox" TargetType="CheckBox">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource CheckBoxContentForegroundThemeBrush}"/>
@@ -928,6 +875,7 @@
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="MinHeight" Value="27"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
@@ -965,7 +913,7 @@
                                            Opacity="0"
                                            UseLayoutRounding="False" 
                                            SnapsToDevicePixels="True"/>
-                                <Rectangle x:Name="FocusVisualWhite"
+                                <!--<Rectangle x:Name="FocusVisualWhite"
                                        Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
                                        StrokeEndLineCap="Square"
                                        StrokeDashArray="1,1"
@@ -980,7 +928,7 @@
                                        Opacity="0"
                                        StrokeDashOffset="1.5"
                                        Width="27"
-                                       Height="27" />
+                                       Height="27" />-->
                             </Grid>
                             <ContentPresenter x:Name="ContentPresenter"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -992,10 +940,10 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                        <!--<Trigger Property="IsKeyboardFocusWithin" Value="True">
                             <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
                             <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
+                        </Trigger>-->
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter TargetName="IndeterminateGlyph" Property="Opacity" Value="1"/>
                         </Trigger>
@@ -1497,7 +1445,7 @@
     <!--combobox-->
 
     <Style x:Key="ModernComboBoxItem" TargetType="ComboBoxItem">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Foreground" Value="{DynamicResource ComboBoxForegroundThemeBrush}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="6" />
@@ -1519,26 +1467,8 @@
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Margin="{TemplateBinding Padding}" />
-                            <Rectangle x:Name="FocusVisualWhite"
-                                       Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
-                                       StrokeEndLineCap="Square"
-                                       StrokeDashArray="1,1"
-                                       Opacity="0"
-                                       StrokeDashOffset=".5" />
-                            <Rectangle x:Name="FocusVisualBlack"
-                                       Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
-                                       StrokeEndLineCap="Square"
-                                       StrokeDashArray="1,1"
-                                       Opacity="0"
-                                       StrokeDashOffset="1.5" />
                         </Grid>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
-                            <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -1820,7 +1750,7 @@
     </Style>
 
     <Style x:Key="ModernListBoxItem" TargetType="ListBoxItem">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ListBoxForegroundThemeBrush}" />
         <Setter Property="Padding" Value="8 4" />
@@ -1842,26 +1772,8 @@
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Margin="{TemplateBinding Padding}" />
-                            <Rectangle x:Name="FocusVisualWhite"
-                                       Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
-                                       StrokeEndLineCap="Square"
-                                       StrokeDashArray="1,1"
-                                       Opacity="0"
-                                       StrokeDashOffset=".5" />
-                            <Rectangle x:Name="FocusVisualBlack"
-                                       Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
-                                       StrokeEndLineCap="Square"
-                                       StrokeDashArray="1,1"
-                                       Opacity="0"
-                                       StrokeDashOffset="1.5" />
                         </Grid>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
-                            <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -1899,6 +1811,7 @@
     </Style>
 
     <Style x:Key="ModernListBoxItemNoChrome" TargetType="ListBoxItem">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Padding" Value="8 4" />
         <Setter Property="Background" Value="#01000000" />
         <Setter Property="BorderThickness" Value="0" />
@@ -2339,6 +2252,7 @@
     </Style>
 
     <Style x:Key="ModernSlider" TargetType="Slider">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <!--<Setter Property="Background" Value="{DynamicResource SliderTrackBackgroundThemeBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource SliderBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource SliderBorderThemeThickness}" />-->

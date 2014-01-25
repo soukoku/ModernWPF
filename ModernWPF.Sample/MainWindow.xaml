@@ -30,17 +30,17 @@
                     <TextBlock TextWrapping="Wrap" 
                                Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." ></TextBlock>
 
-                    <TextBlock Text="lower case:" Margin="0 10 0 0"></TextBlock>
+                    <TextBlock Text="Lower case:" Margin="0 10 0 0"></TextBlock>
                     <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={x:Static modern:TextCaseConverter.Instance}, ConverterParameter=lower, Mode=OneTime}"></TextBox>
 
-                    <TextBlock Text="upper case:" Margin="0 10 0 0"></TextBlock>
+                    <TextBlock Text="Upper case:" Margin="0 10 0 0"></TextBlock>
                     <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={x:Static modern:TextCaseConverter.Instance}, ConverterParameter=upper, Mode=OneTime}"></TextBox>
 
-                    <TextBlock Text="title case:" Margin="0 10 0 0"></TextBlock>
+                    <TextBlock Text="Title case:" Margin="0 10 0 0"></TextBlock>
                     <TextBox Margin="-2 0 0 0" Style="{StaticResource ModernTextBoxNoChrome}" Text="{Binding Source={StaticResource shortString}, Converter={x:Static modern:TextCaseConverter.Instance}, ConverterParameter=title, Mode=OneTime}"></TextBox>
 
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Light scale "></TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <TextBlock Text="Light scale: "></TextBlock>
                         <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccent}"></Rectangle>
                         <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight1}"></Rectangle>
                         <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight2}"></Rectangle>
@@ -48,8 +48,8 @@
                         <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight4}"></Rectangle>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Alpha scale "></TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <TextBlock Text="Alpha scale: "></TextBlock>
                         <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha1}"></Rectangle>
                         <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha2}"></Rectangle>
                         <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha3}"></Rectangle>
@@ -206,7 +206,7 @@
                         <RadioButton GroupName="GroupColor" Margin="4"
                                      ToolTip="{Binding Name}"
                                          Checked="RadioButton_Checked">
-                            <Rectangle Width="32" Height="32"
+                            <Rectangle Width="32" Height="32" Margin="0 0 2 2"
                                            Fill="{Binding MainBrush}" />
                         </RadioButton>
                     </DataTemplate>

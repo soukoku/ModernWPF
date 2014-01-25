@@ -5,6 +5,30 @@
 	xmlns:ctrl="clr-namespace:ModernWPF.Controls"
     xmlns:conv="clr-namespace:ModernWPF.Converters"
     >
+    <Style x:Key="ModernFocusVisualDashed">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <Rectangle x:Name="FocusVisualWhite"
+                                   IsHitTestVisible="False"
+                                   Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
+                                   StrokeEndLineCap="Square"
+                                   StrokeDashArray="1,1"
+                                   StrokeDashOffset="1.5"
+                                   SnapsToDevicePixels="True"/>
+                        <Rectangle x:Name="FocusVisualBlack"
+                                   IsHitTestVisible="False"
+                                   Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
+                                   StrokeEndLineCap="Square"
+                                   StrokeDashArray="1,1"
+                                   StrokeDashOffset="0.5"
+                                   SnapsToDevicePixels="True"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="ctrl:ModernContentControl">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -150,9 +174,8 @@
         </Style.Triggers>
     </Style>
 
-
     <Style TargetType="ctrl:AppButton">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="local:Chrome.IsHitTestVisible" Value="true"/>
         <Setter Property="Background" Value="{DynamicResource AppBarItemBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource AppBarItemForegroundThemeBrush}"/>
@@ -191,26 +214,8 @@
                                        Margin="2 0"
                                        Visibility="{Binding Path=Text, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}, RelativeSource={RelativeSource Self}}"/>
                         </StackPanel>
-                        <Rectangle x:Name="FocusVisualWhite"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="1.5" />
-                        <Rectangle x:Name="FocusVisualBlack"
-                               IsHitTestVisible="False"
-                               Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
-                               StrokeEndLineCap="Square"
-                               StrokeDashArray="1,1"
-                               Opacity="0"
-                               StrokeDashOffset="0.5" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter TargetName="FocusVisualWhite" Property="Opacity" Value="1" />
-                            <Setter TargetName="FocusVisualBlack" Property="Opacity" Value="1" />
-                        </Trigger>
                         <Trigger Property="ButtonSize" Value="Small">
                             <Setter TargetName="contentSizer" Property="Width" Value="26"/>
                             <Setter TargetName="contentSizer" Property="Height" Value="26"/>
