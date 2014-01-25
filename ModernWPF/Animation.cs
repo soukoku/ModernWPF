@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -15,7 +16,7 @@ namespace ModernWPF
     {
         static Animation()
         {
-            TypicalDuration = TimeSpan.FromMilliseconds(250);
+            TypicalDuration = TimeSpan.FromMilliseconds((double)AnimationSpeed.Normal);
             TypicalEasing = new QuarticEase { EasingMode = EasingMode.EaseOut };
             TypicalEasing.Freeze();
         }
@@ -60,44 +61,34 @@ namespace ModernWPF
         /// Slides the element in with translate transform.
         /// </summary>
         /// <param name="element">The element.</param>
+        /// <param name="direction">The direction.</param>
         /// <param name="duration">The duration.</param>
-        public static void SlideIn(UIElement element, TimeSpan duration)
+        public static void SlideIn(UIElement element, SlideFromDirection direction, TimeSpan duration)
         {
-            SlideIn(element, duration, TypicalSlideOffset, TypicalEasing);
+            SlideIn(element, direction, duration, TypicalSlideOffset, TypicalEasing);
         }
 
         /// <summary>
         /// Slides the element in with translate transform.
         /// </summary>
         /// <param name="element">The element.</param>
+        /// <param name="direction">The direction.</param>
         /// <param name="duration">The duration.</param>
         /// <param name="startOffset">The start offset.</param>
-        public static void SlideIn(UIElement element, TimeSpan duration, double startOffset)
+        public static void SlideIn(UIElement element, SlideFromDirection direction, TimeSpan duration, double startOffset)
         {
-            SlideIn(element, duration, startOffset, TypicalEasing);
-        }
-
-        /// <summary>
-        /// Slides the element in with translate transform.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <param name="duration">The duration.</param>
-        /// <param name="startOffset">The start offset.</param>
-        /// <param name="easing">The easing.</param>
-        public static void SlideIn(UIElement element, TimeSpan duration, double startOffset, IEasingFunction easing)
-        {
-            SlideIn(element, duration, startOffset, easing, SlideFromDirection.Left);
+            SlideIn(element, direction, duration, startOffset, TypicalEasing);
         }
 
         /// <summary>
         /// Slides the element in with translate transform
         /// </summary>
         /// <param name="element">The element.</param>
+        /// <param name="direction">The direction.</param>
         /// <param name="duration">The duration.</param>
         /// <param name="startOffset">The start offset.</param>
         /// <param name="easing">The easing.</param>
-        /// <param name="direction">The direction.</param>
-        public static void SlideIn(UIElement element, TimeSpan duration, double startOffset, IEasingFunction easing, SlideFromDirection direction)
+        public static void SlideIn(UIElement element, SlideFromDirection direction, TimeSpan duration, double startOffset, IEasingFunction easing)
         {
             if (element == null) { return; }
 
@@ -155,26 +146,76 @@ namespace ModernWPF
         }
 
         /// <summary>
-        /// Indicates the slide direction.
+        /// Animates the element's opacity from 0 to 1.
         /// </summary>
-        public enum SlideFromDirection
+        /// <param name="element">The element.</param>
+        /// <param name="duration">The duration.</param>
+        public static void FadeIn(UIElement element, TimeSpan duration)
         {
-            /// <summary>
-            /// Slide from the left.
-            /// </summary>
-            Left,
-            /// <summary>
-            /// Slide from the top.
-            /// </summary>
-            Top,
-            /// <summary>
-            /// Slide from the right.
-            /// </summary>
-            Right,
-            /// <summary>
-            /// Slide from the bottom.
-            /// </summary>
-            Bottom
+            var da = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = duration
+            };
+            element.BeginAnimation(UIElement.OpacityProperty, da, HandoffBehavior.SnapshotAndReplace);
         }
+
+        /// <summary>
+        /// Animates the element's opacity to 1.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="duration">The duration.</param>
+        public static void FadeOut(UIElement element, TimeSpan duration)
+        {
+            var da = new DoubleAnimation
+            {
+                To = 0,
+                Duration = duration
+            };
+            element.BeginAnimation(UIElement.OpacityProperty, da, HandoffBehavior.SnapshotAndReplace);
+        }
+    }
+
+    /// <summary>
+    /// Named values for common animation duration in ms.
+    /// </summary>
+    public enum AnimationSpeed
+    {
+        /// <summary>
+        /// Short duration, 100ms,
+        /// </summary>
+        Fast = 100,
+        /// <summary>
+        /// Normal duration, 250ms.
+        /// </summary>
+        Normal = 250,
+        /// <summary>
+        /// Long duration, 500ms.
+        /// </summary>
+        Slow = 500
+    }
+
+    /// <summary>
+    /// Indicates the slide direction.
+    /// </summary>
+    public enum SlideFromDirection
+    {
+        /// <summary>
+        /// Slide from the left.
+        /// </summary>
+        Left,
+        /// <summary>
+        /// Slide from the top.
+        /// </summary>
+        Top,
+        /// <summary>
+        /// Slide from the right.
+        /// </summary>
+        Right,
+        /// <summary>
+        /// Slide from the bottom.
+        /// </summary>
+        Bottom
     }
 }

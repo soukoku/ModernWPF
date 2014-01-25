@@ -34,26 +34,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ModernFocusVisualSolid">
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid>
-                        <Rectangle x:Name="FocusVisualWhite"
-                                   IsHitTestVisible="False"
-                                   Stroke="{DynamicResource FocusVisualWhiteStrokeThemeBrush}"
-                                   StrokeThickness="2"
-                                   SnapsToDevicePixels="True"/>
-                        <Rectangle x:Name="FocusVisualBlack"
-                                   IsHitTestVisible="False"
-                                   Stroke="{DynamicResource FocusVisualBlackStrokeThemeBrush}"
-                                   StrokeThickness="2"
-                                   SnapsToDevicePixels="True"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
@@ -2888,11 +2868,12 @@
 
 
     <Style x:Key="ModernTabItem" TargetType="TabItem">
-        <!--<Setter Property="FocusVisualStyle" Value="{StaticResource TabItemFocusVisual}"/>-->
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="9 6"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
@@ -2900,10 +2881,11 @@
                         <Border x:Name="Bd" Background="{TemplateBinding Background}"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="Content" ContentSource="Header"
-                                    HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                    RecognizesAccessKey="True"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                    VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                                              HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              RecognizesAccessKey="True" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              TextBlock.FontSize="15"/>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -2991,7 +2973,7 @@
                             <RowDefinition x:Name="RowDefinition1" Height="*" />
                         </Grid.RowDefinitions>
                         <Border x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0"
-                                IsHitTestVisible="True" Background="Transparent" Margin="30 0 0 0"
+                                IsHitTestVisible="True" Background="Transparent" Margin="24 0 0 0"
                                 HorizontalAlignment="Left">
                             <TabPanel IsItemsHost="true" KeyboardNavigation.TabIndex="1"
                                     Panel.ZIndex="1">
@@ -3003,10 +2985,14 @@
                                 KeyboardNavigation.TabIndex="2"
                                 KeyboardNavigation.TabNavigation="Local">
 
+                            <!--<ctrl:ModernContentControl x:Name="PART_SelectedContentHost"
+                                                       Margin="{TemplateBinding Padding}"
+                                                       Content="{TemplateBinding SelectedContent}"
+                                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"></ctrl:ModernContentControl>-->
                             <ContentPresenter x:Name="PART_SelectedContentHost"
-                                    ContentSource="SelectedContent"
-                                    Margin="{TemplateBinding Padding}"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                ContentSource="SelectedContent"
+                                                Margin="{TemplateBinding Padding}"
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>

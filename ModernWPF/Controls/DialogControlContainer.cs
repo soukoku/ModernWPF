@@ -181,11 +181,11 @@ namespace ModernWPF.Controls
         void DoShowContentAnimation(DialogControl content)
         {
             var dir = DetermineAniDirection(content);
-            Animation.SlideIn(_presenter, Animation.TypicalDuration, 200, Animation.TypicalEasing, dir);
+            Animation.SlideIn(_presenter, dir, Animation.TypicalDuration, 200, Animation.TypicalEasing);
 
         }
 
-        static Animation.SlideFromDirection DetermineAniDirection(DialogControl content)
+        static SlideFromDirection DetermineAniDirection(DialogControl content)
         {
             if (content != null)
             {
@@ -194,18 +194,18 @@ namespace ModernWPF.Controls
                     switch (content.HorizontalAlignment)
                     {
                         case System.Windows.HorizontalAlignment.Left:
-                            return Animation.SlideFromDirection.Left;
+                            return SlideFromDirection.Left;
                         case System.Windows.HorizontalAlignment.Right:
-                            return Animation.SlideFromDirection.Right;
+                            return SlideFromDirection.Right;
                     }
                 }
                 else if (content.HorizontalAlignment == System.Windows.HorizontalAlignment.Stretch &&
                     content.VerticalAlignment == System.Windows.VerticalAlignment.Bottom)
                 {
-                    return Animation.SlideFromDirection.Bottom;
+                    return SlideFromDirection.Bottom;
                 }
             }
-            return Animation.SlideFromDirection.Top;
+            return SlideFromDirection.Top;
         }
 
     }

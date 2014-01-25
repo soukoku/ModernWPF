@@ -82,7 +82,7 @@ namespace ModernWPF.Controls
 
             _showTimer = new DispatcherTimer();
             // magic # for windows animation duration
-            _showTimer.Interval = TimeSpan.FromMilliseconds(250);
+            _showTimer.Interval = Animation.TypicalDuration;
             _showTimer.Tick += (s, e) =>
             {
                 _showTimer.Stop();

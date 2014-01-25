@@ -45,19 +45,6 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           Margin="{TemplateBinding Padding}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="LayoutStates">
-                                <VisualState x:Name="AfterLoaded">
-                                    <Storyboard>
-                                        <DoubleAnimation To="1" Storyboard.TargetProperty="Opacity" Duration="0"/>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0:0:0.100" To="AfterLoaded">
-                                    </VisualTransition>
-                                </VisualStateGroup.Transitions>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
