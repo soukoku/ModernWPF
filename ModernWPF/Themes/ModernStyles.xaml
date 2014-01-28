@@ -442,7 +442,7 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource ActiveCaptionForeground}"/>
+        <Setter Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Top" />
@@ -488,7 +488,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource ActiveCaptionForeground}"/>
+        <Setter Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Top" />
@@ -2885,7 +2885,7 @@
                                               RecognizesAccessKey="True" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                              TextBlock.FontSize="15"/>
+                                              TextBlock.FontSize="16"/>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>

@@ -107,7 +107,7 @@ namespace ModernWPF
         /// The modern chrome attached property.
         /// </summary>
         public static readonly DependencyProperty ChromeProperty =
-            DependencyProperty.RegisterAttached("Chrome", typeof(Chrome), typeof(Chrome), new PropertyMetadata(null, ChromeChanged));
+            DependencyProperty.RegisterAttached("Chrome", typeof(Chrome), typeof(Chrome), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits, ChromeChanged));
 
         private static void ChromeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
