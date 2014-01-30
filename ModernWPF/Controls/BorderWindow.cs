@@ -321,14 +321,14 @@ namespace ModernWPF.Controls
                         handled = true;
                         break;
                     case WindowMessage.WM_GETMINMAXINFO:
-                        HandleMinMaxInfo(hwnd, wParam, lParam);
+                        HandleMinMaxInfo(lParam);
                         break;
                 }
             }
             return retVal;
         }
 
-        private void HandleMinMaxInfo(IntPtr hwnd, IntPtr wParam, IntPtr lParam)
+        private void HandleMinMaxInfo(IntPtr lParam)
         {
             // overridden so max size = normal max + resize border (for when resizing content window to max size without maximizing)
             var thick = TranslateToPixels(BorderThickness);

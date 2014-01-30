@@ -152,13 +152,16 @@ namespace ModernWPF
         /// <param name="duration">The duration.</param>
         public static void FadeIn(UIElement element, TimeSpan duration)
         {
-            var da = new DoubleAnimation
+            if (element != null)
             {
-                From = 0,
-                To = 1,
-                Duration = duration
-            };
-            element.BeginAnimation(UIElement.OpacityProperty, da, HandoffBehavior.SnapshotAndReplace);
+                var da = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 1,
+                    Duration = duration
+                };
+                element.BeginAnimation(UIElement.OpacityProperty, da, HandoffBehavior.SnapshotAndReplace);
+            }
         }
 
         /// <summary>
@@ -168,12 +171,15 @@ namespace ModernWPF
         /// <param name="duration">The duration.</param>
         public static void FadeOut(UIElement element, TimeSpan duration)
         {
-            var da = new DoubleAnimation
+            if (element != null)
             {
-                To = 0,
-                Duration = duration
-            };
-            element.BeginAnimation(UIElement.OpacityProperty, da, HandoffBehavior.SnapshotAndReplace);
+                var da = new DoubleAnimation
+                {
+                    To = 0,
+                    Duration = duration
+                };
+                element.BeginAnimation(UIElement.OpacityProperty, da, HandoffBehavior.SnapshotAndReplace);
+            }
         }
     }
 
@@ -182,6 +188,10 @@ namespace ModernWPF
     /// </summary>
     public enum AnimationSpeed
     {
+        /// <summary>
+        /// No duration, 0.
+        /// </summary>
+        None = 0,
         /// <summary>
         /// Short duration, 100ms,
         /// </summary>

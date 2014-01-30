@@ -411,8 +411,7 @@
                         <Border x:Name="Border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Margin="3">
+                            BorderThickness="{TemplateBinding BorderThickness}">
                             <TextBlock x:Name="MainContent"
                                        Margin="{TemplateBinding Padding}" 
                                        Text="{TemplateBinding Content}"
@@ -1431,7 +1430,6 @@
         <Setter Property="Padding" Value="6" />
         <Setter Property="Margin" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBoxItem">
@@ -1734,7 +1732,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ListBoxForegroundThemeBrush}" />
         <Setter Property="Padding" Value="8 4" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -2871,8 +2869,6 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Padding" Value="9 6"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -2881,10 +2877,10 @@
                         <Border x:Name="Bd" Background="{TemplateBinding Background}"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="Content" ContentSource="Header"
-                                              HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               RecognizesAccessKey="True" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                              VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               TextBlock.FontSize="16"/>
                         </Border>
                     </Grid>
@@ -2893,7 +2889,7 @@
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Panel.ZIndex" Value="1" />
+                            <!--<Setter Property="Panel.ZIndex" Value="1" />-->
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
                         </Trigger>
                         <!--<MultiTrigger>
@@ -2954,8 +2950,6 @@
     </Style>
 
     <Style x:Key="ModernTabControl" TargetType="TabControl">
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource ModernTabItem}" />

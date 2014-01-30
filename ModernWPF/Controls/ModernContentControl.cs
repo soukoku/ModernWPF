@@ -17,6 +17,7 @@ namespace ModernWPF.Controls
     //[TemplatePart(Name = PARTContent, Type = typeof(ContentPresenter))]
     public class ModernContentControl : ContentControl
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static ModernContentControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ModernContentControl), new FrameworkPropertyMetadata(typeof(ModernContentControl)));
@@ -98,7 +99,7 @@ namespace ModernWPF.Controls
         /// The DP for <see cref="SlideFromDirection"/>.
         /// </summary>
         public static readonly DependencyProperty SlideFromDirectionProperty =
-            DependencyProperty.Register("SlideFromDirection", typeof(SlideFromDirection), typeof(ModernContentControl), new PropertyMetadata(SlideFromDirection.Left));
+            DependencyProperty.Register("SlideFromDirection", typeof(SlideFromDirection), typeof(ModernContentControl), new PropertyMetadata(SlideFromDirection.Right));
 
 
     }

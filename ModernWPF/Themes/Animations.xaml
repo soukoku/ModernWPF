@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!--this is the old animation xaml for reference purposes only-->
+    
 	<Storyboard x:Key="FadeSlideInFromLeft">
 		<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="Opacity">
 			<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
