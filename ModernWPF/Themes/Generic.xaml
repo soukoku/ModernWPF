@@ -176,8 +176,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:AppButton">
-                    <Grid Margin="{TemplateBinding Margin}"
-                          Background="#01000000">
+                    <Grid Background="#01000000">
                         <StackPanel Orientation="{TemplateBinding Orientation}"
                                     Margin="{TemplateBinding Padding}">
                             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -243,6 +242,13 @@
                     <Condition Property="CollapseOnDisable" Value="True"/>
                 </MultiTrigger.Conditions>
                 <Setter Property="Visibility" Value="Collapsed" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="false"/>
+                    <Condition Property="CollapseOnDisable" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Opacity" Value=".4" />
             </MultiTrigger>
         </Style.Triggers>
     </Style>
