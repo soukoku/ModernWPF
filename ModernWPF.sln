@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWPF", "ModernWPF\ModernWPF.csproj", "{77D86B3D-EE36-4E4F-951D-A220DE7FBCCB}"
 EndProject
@@ -10,13 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{D41E34
 		LICENSE.txt = LICENSE.txt
 		README.markdown = README.markdown
 		VersionInfo.cs = VersionInfo.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1579F78C-0251-4ADA-BEF3-3F7B750CB59D}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWPF.Sample", "ModernWPF.Sample\ModernWPF.Sample.csproj", "{816E78C7-1709-4586-A59D-B52D3495DE26}"
