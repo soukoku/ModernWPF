@@ -461,7 +461,8 @@ namespace ModernWPF
             public void ChangeChrome(Chrome chrome)
             {
                 Debug.WriteLine("ChromeWorker changing chrome.");
-                _borderWindow.UpdateChromeBindings(chrome);
+                if (_borderWindow != null)
+                    _borderWindow.UpdateChromeBindings(chrome);
             }
 
             private void AttachWindow(Window window)
@@ -526,7 +527,8 @@ namespace ModernWPF
                 _resizeGrip = _contentWindow.FindInVisualTree<ResizeGrip>();
                 // hack to make sure the border is shown after content is shown
                 _contentShown = true;
-                _borderWindow.RepositionToContent(new WindowInteropHelper(_contentWindow).Handle, _hideOverride);
+                if (_borderWindow != null)
+                    _borderWindow.RepositionToContent(new WindowInteropHelper(_contentWindow).Handle, _hideOverride);
             }
 
             void window_SourceInitialized(object sender, EventArgs e)
@@ -606,8 +608,11 @@ namespace ModernWPF
                             break;
                         case WindowMessage.WM_NCACTIVATE:
                             // handled to prevent default non-client border from showing in classic mode
-                            // False means draw inactive title bar (which we do nothing).
-                            if (wParam == BasicValues.FALSE) 
+                            // wParam False means draw inactive title bar (which we do nothing).
+
+                            Debug.WriteLine(hwnd.ToInt64() + " wparam " + wParam.ToInt32());
+
+                            if (wParam == BasicValues.FALSE)
                             {
                                 retVal = BasicValues.TRUE;
                             }
@@ -616,7 +621,7 @@ namespace ModernWPF
                                 // Also skip default wndproc on maximized window to prevent non-dwm theme titlebar being drawn
                                 if (_contentWindow.WindowState != WindowState.Maximized)
                                 {
-                                    User32.DefWindowProc(hwnd, (uint)msg, wParam, new IntPtr(-1));
+                                    retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, new IntPtr(-1));
                                 }
                             }
                             handled = true;
