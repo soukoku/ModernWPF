@@ -619,7 +619,8 @@ namespace ModernWPF
                             else
                             {
                                 // Also skip default wndproc on maximized window to prevent non-dwm theme titlebar being drawn
-                                if (_contentWindow.WindowState != WindowState.Maximized)
+                                if (_contentWindow.WindowState != WindowState.Maximized ||
+                                    Dwmapi.IsCompositionEnabled)
                                 {
                                     retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, new IntPtr(-1));
                                 }

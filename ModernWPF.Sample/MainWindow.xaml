@@ -259,8 +259,8 @@
                     </Canvas>
 
                 </StackPanel.Resources>
-                <modern:AppButton Text="another window" x:Name="btnWindow" Click="btnWindow_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
-                <modern:AppButton Text="normal dialog" x:Name="btnDialog" Click="btnDialog_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
+                <modern:AppButton Text="_another window" x:Name="btnWindow" Click="btnWindow_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
+                <modern:AppButton Text="_normal dialog" x:Name="btnDialog" Click="btnDialog_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="in window dialog" x:Name="btnDialog2" Click="btnDialog2_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="msg window" x:Name="btnMsgWindow" Click="btnMsgWindow_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="toggle theme" x:Name="btnTheme" Click="btnTheme_Click" Content="{StaticResource IconCrown}"></modern:AppButton>

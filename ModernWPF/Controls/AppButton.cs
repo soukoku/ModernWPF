@@ -11,7 +11,7 @@ namespace ModernWPF.Controls
     /// <summary>
     /// A button with circle around the content and optional text.
     /// </summary>
-    public class AppButton : ButtonBase
+    public class AppButton : ToggleButton
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static AppButton()
@@ -123,7 +123,11 @@ namespace ModernWPF.Controls
         public static readonly DependencyProperty CollapseOnDisableProperty =
             DependencyProperty.Register("CollapseOnDisable", typeof(bool), typeof(AppButton), new PropertyMetadata(true));
 
-
+        protected override void OnContextMenuOpening(ContextMenuEventArgs e)
+        {
+            e.Handled = true;
+            base.OnContextMenuOpening(e);
+        }
     }
 
     /// <summary>
