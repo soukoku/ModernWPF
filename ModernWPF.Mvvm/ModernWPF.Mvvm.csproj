@@ -117,6 +117,9 @@
     <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\ChooseFolderMsg.cs">
       <Link>Messages\ChooseFolderMsg.cs</Link>
     </Compile>
+    <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\MessageRoutine.cs">
+      <Link>Messages\MessageRoutine.cs</Link>
+    </Compile>
     <Compile Include="..\ModernWPF.Mvvm.Fx45\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
@@ -125,6 +128,9 @@
     </Compile>
     <Compile Include="..\ModernWPF.Mvvm.Fx45\ViewModels\PagedCollectionViewModel.cs">
       <Link>ViewModels\PagedCollectionViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\ModernWPF.Mvvm.Fx45\ViewModels\ProgressViewModel.cs">
+      <Link>ViewModels\ProgressViewModel.cs</Link>
     </Compile>
     <Compile Include="..\ModernWPF.Mvvm.Fx45\ViewModels\SelectableViewModel.cs">
       <Link>ViewModels\SelectableViewModel.cs</Link>
