@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernWPF.Controls;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -89,6 +90,12 @@ namespace ModernWPF.Sample
         private void btnMsgWindow_Click(object sender, RoutedEventArgs e)
         {
             new MsgWindow { Owner = this }.Show();
+        }
+
+        private void btnMsgBox_Click(object sender, RoutedEventArgs e)
+        {
+            ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.YesNoCancel);
+            ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.OKCancel);
         }
     }
 }

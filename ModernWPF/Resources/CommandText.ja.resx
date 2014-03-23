@@ -150,4 +150,22 @@
   <data name="CmdUndo" xml:space="preserve">
     <value>元に戻す</value>
   </data>
+  <data name="CmdOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="CmdCancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="CmdYes" xml:space="preserve">
+    <value>はい(_Y)</value>
+  </data>
+  <data name="CmdNo" xml:space="preserve">
+    <value>いいえ(_N)</value>
+  </data>
+  <data name="CmdNo2" xml:space="preserve">
+    <value>いいえ</value>
+  </data>
+  <data name="CmdYes2" xml:space="preserve">
+    <value>はい</value>
+  </data>
 </root>

@@ -54,7 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\VersionInfo.cs">
+    <Compile Include="..\ModernWPF\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="TextCaseConverterTest.cs" />

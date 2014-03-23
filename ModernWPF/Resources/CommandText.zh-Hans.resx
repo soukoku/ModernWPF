@@ -150,4 +150,22 @@
   <data name="CmdUndo" xml:space="preserve">
     <value>撤销</value>
   </data>
+  <data name="CmdCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="CmdOK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="CmdNo" xml:space="preserve">
+    <value>否(_N)</value>
+  </data>
+  <data name="CmdYes" xml:space="preserve">
+    <value>是(_Y)</value>
+  </data>
+  <data name="CmdYes2" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="CmdNo2" xml:space="preserve">
+    <value>否</value>
+  </data>
 </root>

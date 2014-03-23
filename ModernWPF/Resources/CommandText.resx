@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CmdCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="CmdClose" xml:space="preserve">
     <value>Close</value>
   </data>
@@ -135,6 +138,15 @@
   <data name="CmdMinimize" xml:space="preserve">
     <value>Minimize</value>
   </data>
+  <data name="CmdNo" xml:space="preserve">
+    <value>_No</value>
+  </data>
+  <data name="CmdNo2" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="CmdOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
   <data name="CmdPaste" xml:space="preserve">
     <value>Paste</value>
   </data>
@@ -149,5 +161,11 @@
   </data>
   <data name="CmdUndo" xml:space="preserve">
     <value>Undo</value>
+  </data>
+  <data name="CmdYes" xml:space="preserve">
+    <value>_Yes</value>
+  </data>
+  <data name="CmdYes2" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

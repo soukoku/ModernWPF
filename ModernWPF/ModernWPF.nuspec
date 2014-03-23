@@ -13,7 +13,7 @@
 		<description>$description$</description>
 		<!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
 		<copyright>$copyright$</copyright>
-		<tags>Metro Modern WPF</tags>
+		<tags>metro modern wpf</tags>
 	</metadata>
 	<files>
 		<file src="bin\$configuration$\$id$.pdb" target="lib\net40-Client"/>
