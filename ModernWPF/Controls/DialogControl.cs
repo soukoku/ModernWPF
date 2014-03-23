@@ -126,6 +126,10 @@ namespace ModernWPF.Controls
             var focusMethod = this.GetType().GetMethod("OnFocus", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             if (focusMethod != null && focusMethod.DeclaringType != typeof(DialogControl))
             {
+                OnFocus();
+            }
+            else
+            {
                 this.ProcessInVisualTree<FrameworkElement>(fe =>
                 {
                     var matches = fe.Visibility == System.Windows.Visibility.Visible && fe.IsEnabled && fe.Focusable;
@@ -135,10 +139,6 @@ namespace ModernWPF.Controls
                     }
                     return matches;
                 });
-            }
-            else
-            {
-                OnFocus();
             }
         }
 
