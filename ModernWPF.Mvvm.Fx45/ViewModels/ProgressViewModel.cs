@@ -75,14 +75,14 @@ namespace ModernWPF.ViewModels
         /// <value>
         /// The maximum.
         /// </value>
-        public double Maximum { get { return 100; } }
+        public static double Maximum { get { return 100; } }
         /// <summary>
         /// Gets the minimum for data-binding purposes.
         /// </summary>
         /// <value>
         /// The minimum.
         /// </value>
-        public double Minimum { get { return 0; } }
+        public static double Minimum { get { return 0; } }
         /// <summary>
         /// Gets the current progress value.
         /// </summary>

@@ -14,7 +14,7 @@ namespace ModernWPF.Messages
     public static class MessageRoutine
     {
         /// <summary>
-        /// Handles the <see cref="ChooseFileMsg" /> on a window by showing a <see cref="FileDialog" /> based on the message options.
+        /// Handles the <see cref="ChooseFileMessage" /> on a window by showing a <see cref="FileDialog" /> based on the message options.
         /// </summary>
         /// <param name="owner">The owner.</param>
         /// <param name="message">The MSG.</param>
@@ -23,7 +23,7 @@ namespace ModernWPF.Messages
         /// or
         /// message
         /// </exception>
-        public static void HandleChooseFile(this Window owner, ChooseFileMsg message)
+        public static void HandleChooseFile(this Window owner, ChooseFileMessage message)
         {
             if (owner == null) { throw new ArgumentNullException("owner"); }
             if (message == null) { throw new ArgumentNullException("message"); }
@@ -32,15 +32,15 @@ namespace ModernWPF.Messages
 
             switch (message.Purpose)
             {
-                case ChooseFileMsg.FilePurpose.OpenMultiple:
+                case ChooseFileMessage.FilePurpose.OpenMultiple:
                     var d = new OpenFileDialog();
                     d.Multiselect = true;
                     dialog = d;
                     break;
-                case ChooseFileMsg.FilePurpose.OpenSingle:
+                case ChooseFileMessage.FilePurpose.OpenSingle:
                     dialog = new OpenFileDialog();
                     break;
-                case ChooseFileMsg.FilePurpose.Save:
+                case ChooseFileMessage.FilePurpose.Save:
                     dialog = new SaveFileDialog();
                     break;
             }

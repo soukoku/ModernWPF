@@ -19,21 +19,27 @@
             </Grid.RowDefinitions>
 
             <DockPanel >
+                <DockPanel.Resources>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="32"></Setter>
+                        <Setter Property="Height" Value="32"></Setter>
+                        <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        <Setter Property="DockPanel.Dock" Value="Left"></Setter>
+                    </Style>
+                </DockPanel.Resources>
 
-                <Image DockPanel.Dock="Left" x:Name="iconWarning" Source="/ModernWPF.Mvvm;component/Assets/warning.png"
-                       Width="32" Height="32" SnapsToDevicePixels="True"></Image>
+                <Image x:Name="iconWarning" Source="/ModernWPF.Mvvm;component/Assets/warning.png"></Image>
 
+                <Image x:Name="iconInfo" Source="/ModernWPF.Mvvm;component/Assets/info.png"></Image>
 
-                <Image DockPanel.Dock="Left" x:Name="iconInfo" Source="/ModernWPF.Mvvm;component/Assets/info.png"
-                       Width="32" Height="32" SnapsToDevicePixels="True"></Image>
-                
-                <Image DockPanel.Dock="Left" x:Name="iconError" Source="/ModernWPF.Mvvm;component/Assets/error.png"
-                       Width="32" Height="32" SnapsToDevicePixels="True"></Image>
+                <Image x:Name="iconError" Source="/ModernWPF.Mvvm;component/Assets/error.png"></Image>
 
-                <Image DockPanel.Dock="Left" x:Name="iconQuest" Source="/ModernWPF.Mvvm;component/Assets/question.png"
-                       Width="32" Height="32" SnapsToDevicePixels="True"></Image>
+                <Image x:Name="iconQuest" Source="/ModernWPF.Mvvm;component/Assets/question.png"></Image>
 
-                <TextBlock x:Name="txtTitle" TextTrimming="CharacterEllipsis" FontSize="28" Margin="2 0"></TextBlock>
+                <TextBlock x:Name="txtTitle" TextTrimming="CharacterEllipsis" FontSize="24" Margin="2 0"
+                           FontWeight="Light"
+                           VerticalAlignment="Center"></TextBlock>
             </DockPanel>
 
             <TextBox x:Name="txtMsg" Grid.Row="1" Margin="0 20"
@@ -43,16 +49,16 @@
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <StackPanel.Resources>
-                    <Style x:Key="DialogBtn" TargetType="Button" BasedOn="{StaticResource ModernButton}">
-                        <Setter Property="MinWidth" Value="75"></Setter>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="MinWidth" Value="80"></Setter>
                         <Setter Property="Margin" Value="4 0 0 0"></Setter>
                     </Style>
                 </StackPanel.Resources>
 
-                <Button Style="{StaticResource DialogBtn}" Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdOK], Mode=OneWay}" x:Name="btnOK" Click="btnOK_Click"></Button>
-                <Button Style="{StaticResource DialogBtn}" Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdYes], Mode=OneWay}" x:Name="btnYes" Click="btnYes_Click"></Button>
-                <Button Style="{StaticResource DialogBtn}" Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdNo], Mode=OneWay}" x:Name="btnNo" Click="btnNo_Click"></Button>
-                <Button Style="{StaticResource DialogBtn}" Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" x:Name="btnCancel" IsCancel="True" Click="btnCancel_Click"></Button>
+                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdOK], Mode=OneWay}" x:Name="btnOK" Click="btnOK_Click"></Button>
+                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdYes], Mode=OneWay}" x:Name="btnYes" Click="btnYes_Click"></Button>
+                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdNo], Mode=OneWay}" x:Name="btnNo" Click="btnNo_Click"></Button>
+                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" x:Name="btnCancel" IsCancel="True" Click="btnCancel_Click"></Button>
             </StackPanel>
         </Grid>
     </Border>

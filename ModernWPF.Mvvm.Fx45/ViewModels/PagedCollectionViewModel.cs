@@ -22,8 +22,10 @@ namespace ModernWPF.ViewModels
         /// Initializes a new instance of the <see cref="PagedCollectionViewModel{TItem}"/> class.
         /// </summary>
         /// <param name="pageSize">Size of a page.</param>
-        public PagedCollectionViewModel(int pageSize = 15)
+        protected PagedCollectionViewModel(int pageSize = 15)
         {
+            _currentPage = 1;
+            _totalPages = 1;
             _pageSize = pageSize > 0 ? pageSize : 15;
             _items = new ObservableCollection<TItem>();
             Items = new ReadOnlyObservableCollection<TItem>(_items);
@@ -40,7 +42,7 @@ namespace ModernWPF.ViewModels
         /// </value>
         protected ICollectionView View { get; private set; }
 
-        private int _currentPage = 1;
+        private int _currentPage;
         /// <summary>
         /// Gets or sets the current page.
         /// </summary>
@@ -57,7 +59,7 @@ namespace ModernWPF.ViewModels
             }
         }
 
-        private int _totalPages = 1;
+        private int _totalPages;
         /// <summary>
         /// Gets the total pages.
         /// </summary>
@@ -268,6 +270,9 @@ namespace ModernWPF.ViewModels
 
         #region work methods
 
+        /// <summary>
+        /// Reset by clearing items and setting page to 1.
+        /// </summary>
         protected void Reset()
         {
             _items.Clear();
@@ -281,7 +286,7 @@ namespace ModernWPF.ViewModels
 
         RETRY:
 
-            var data = new NewPageData(page);
+            var data = new NewPageData<TItem>(page);
 
             try
             {
@@ -301,7 +306,7 @@ namespace ModernWPF.ViewModels
                 goto RETRY;
             }
 
-            if (data.Behavior == NewPageData.NewItemBehavior.Replace)
+            if (data.Behavior == NewItemBehavior.Replace)
             {
                 _items.Clear();
             }
@@ -331,82 +336,82 @@ namespace ModernWPF.ViewModels
         }
 
         /// <summary>
-        /// Called when items needs to be retrieved.
+        /// Called when items needs to be retrieved. Populate the new items on the provided data object.
         /// </summary>
         /// <param name="data">The data to populate the retrieved item info.</param>
         /// <returns></returns>
-        protected abstract Task OnRetrieveItems(NewPageData data);
+        protected abstract Task OnRetrieveItems(NewPageData<TItem> data);
 
         #endregion
+    }
+
+    /// <summary>
+    /// Data for retrieving a new page of items.
+    /// </summary>
+    public class NewPageData<TItem>
+    {
+        internal NewPageData(int newPage)
+        {
+            NewItems = new List<TItem>();
+            NewPage = newPage;
+        }
 
         /// <summary>
-        /// Data for new page item info.
+        /// Gets the new page number to retrive items for.
         /// </summary>
-        public class NewPageData
+        /// <value>
+        /// The new page.
+        /// </value>
+        public int NewPage { get; private set; }
+
+        private int _total;
+        /// <summary>
+        /// Gets/sets the total items count across all pages.
+        /// </summary>
+        /// <value>
+        /// The total count.
+        /// </value>
+        public int TotalCount
         {
-            internal NewPageData(int newPage)
+            get { return _total; }
+            set
             {
-                NewItems = new List<TItem>();
-                NewPage = newPage;
-            }
-
-            /// <summary>
-            /// Gets the new page number to retrive items for.
-            /// </summary>
-            /// <value>
-            /// The new page.
-            /// </value>
-            public int NewPage { get; private set; }
-
-            private int _total;
-            /// <summary>
-            /// Gets/sets the total items count across all pages.
-            /// </summary>
-            /// <value>
-            /// The total count.
-            /// </value>
-            public int TotalCount
-            {
-                get { return _total; }
-                set
+                if (value >= 0)
                 {
-                    if (value >= 0)
-                    {
-                        _total = value;
-                    }
+                    _total = value;
                 }
             }
-
-            /// <summary>
-            /// Gets the new items in this page.
-            /// </summary>
-            /// <value>
-            /// The new items.
-            /// </value>
-            public List<TItem> NewItems { get; private set; }
-
-            /// <summary>
-            /// Gets or sets the behavior for new items.
-            /// </summary>
-            /// <value>
-            /// The behavior.
-            /// </value>
-            public NewItemBehavior Behavior { get; set; }
-
-            /// <summary>
-            /// Indicates the behavior for new items.
-            /// </summary>
-            public enum NewItemBehavior
-            {
-                /// <summary>
-                /// Replace current items with new items.
-                /// </summary>
-                Replace,
-                /// <summary>
-                /// Append new items to the current list.
-                /// </summary>
-                Append
-            }
         }
+
+        /// <summary>
+        /// Gets the new items in this page.
+        /// </summary>
+        /// <value>
+        /// The new items.
+        /// </value>
+        public ICollection<TItem> NewItems { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the collection behavior on new items.
+        /// </summary>
+        /// <value>
+        /// The behavior.
+        /// </value>
+        public NewItemBehavior Behavior { get; set; }
+    }
+
+    /// <summary>
+    /// Indicates the collection behavior on new items.
+    /// </summary>
+    public enum NewItemBehavior
+    {
+        /// <summary>
+        /// Replace current items with new items.
+        /// </summary>
+        Replace,
+        /// <summary>
+        /// Append new items to the current list.
+        /// </summary>
+        Append
     }
 }

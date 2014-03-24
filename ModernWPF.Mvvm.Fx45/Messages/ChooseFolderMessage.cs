@@ -10,16 +10,35 @@ namespace ModernWPF.Messages
     /// <summary>
     /// Message for choosing a folder.
     /// </summary>
-    public class ChooseFolderMsg : MessageBase
+    public class ChooseFolderMessage : MessageBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChooseFolderMsg"/> class.
+        /// Initializes a new instance of the <see cref="ChooseFolderMessage"/> class.
         /// </summary>
         /// <param name="callback">The callback when a folder is chosen.</param>
-        public ChooseFolderMsg(Action<string> callback)
+        public ChooseFolderMessage(Action<string> callback) : this(null, null, callback) { }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChooseFolderMessage"/> class.
+        /// </summary>
+        /// <param name="sender">The message's original sender.</param>
+        /// <param name="callback">The callback when a folder is chosen.</param>
+        public ChooseFolderMessage(object sender, Action<string> callback)
+            : this(sender, null, callback) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChooseFolderMessage"/> class.
+        /// </summary>
+        /// <param name="sender">The message's original sender.</param>
+        /// <param name="target">The message's intended target.</param>
+        /// <param name="callback">The callback when a folder is chosen.</param>
+        public ChooseFolderMessage(object sender, object target, Action<string> callback)
+            : base(sender, target)
         {
             _callback = callback;
         }
+
+
         Action<string> _callback;
 
         /// <summary>

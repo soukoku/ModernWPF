@@ -18,7 +18,7 @@ namespace ModernWPF.ViewModels
         /// Initializes a new instance of the <see cref="SelectableViewModel{TModel}"/> class.
         /// </summary>
         /// <param name="model">The model.</param>
-        public SelectableViewModel(TModel model)
+        protected SelectableViewModel(TModel model)
         {
             Model = model;
         }

@@ -10,17 +10,35 @@ namespace ModernWPF.Messages
     /// <summary>
     /// Message for choosing file(s) for opening/saving.
     /// </summary>
-    public class ChooseFileMsg : MessageBase
+    public class ChooseFileMessage : MessageBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChooseFileMsg"/> class.
+        /// Initializes a new instance of the <see cref="ChooseFileMessage"/> class.
         /// </summary>
-        /// <param name="callback">The callback.</param>
-        public ChooseFileMsg(Action<IEnumerable<string>> callback)
+        /// <param name="callback">The callback when files are selected.</param>
+        public ChooseFileMessage(Action<IEnumerable<string>> callback) : this(null, null, callback) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChooseFileMessage"/> class.
+        /// </summary>
+        /// <param name="sender">The message's original sender.</param>
+        /// <param name="callback">The callback when files are selected.</param>
+        public ChooseFileMessage(object sender, Action<IEnumerable<string>> callback)
+            : this(sender, null, callback) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChooseFileMessage"/> class.
+        /// </summary>
+        /// <param name="sender">The message's original sender.</param>
+        /// <param name="target">The message's intended target.</param>
+        /// <param name="callback">The callback when files are selected.</param>
+        public ChooseFileMessage(object sender, object target, Action<IEnumerable<string>> callback)
+            : base(sender, target)
         {
             _callback = callback;
         }
-        Action<string[]> _callback;
+
+        Action<IEnumerable<string>> _callback;
 
         /// <summary>
         /// Gets or sets the UI caption.
@@ -64,7 +82,7 @@ namespace ModernWPF.Messages
 
 
         /// <summary>
-        /// Indicates the purpose for a <see cref="ChooseFileMsg"/>.
+        /// Indicates the purpose for a <see cref="ChooseFileMessage"/>.
         /// </summary>
         public enum FilePurpose
         {

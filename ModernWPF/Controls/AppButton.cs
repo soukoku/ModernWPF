@@ -123,6 +123,10 @@ namespace ModernWPF.Controls
         public static readonly DependencyProperty CollapseOnDisableProperty =
             DependencyProperty.Register("CollapseOnDisable", typeof(bool), typeof(AppButton), new PropertyMetadata(true));
 
+        /// <summary>
+        /// Invoked whenever an unhandled <see cref="E:System.Windows.FrameworkElement.ContextMenuOpening" /> routed event reaches this class in its route. Implement this method to add class handling for this event.
+        /// </summary>
+        /// <param name="e">The <see cref="T:System.Windows.RoutedEventArgs" /> that contains the event data.</param>
         protected override void OnContextMenuOpening(ContextMenuEventArgs e)
         {
             e.Handled = true;

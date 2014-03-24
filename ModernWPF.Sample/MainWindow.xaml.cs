@@ -94,8 +94,10 @@ namespace ModernWPF.Sample
 
         private void btnMsgBox_Click(object sender, RoutedEventArgs e)
         {
-            ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.YesNoCancel);
-            ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.OKCancel);
+            ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning, MessageBoxResult.No);
+            ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+            ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.Cancel);
+            ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
         }
     }
 }

@@ -107,15 +107,19 @@ namespace ModernWPF.Controls
             switch (_defResult)
             {
                 case System.Windows.MessageBoxResult.No:
+                    btnNo.IsDefault = true;
                     btnNo.Focus();
                     break;
                 case System.Windows.MessageBoxResult.OK:
+                    btnOK.IsDefault = true;
                     btnOK.Focus();
                     break;
                 case System.Windows.MessageBoxResult.Yes:
+                    btnYes.IsDefault = true;
                     btnYes.Focus();
                     break;
                 case System.Windows.MessageBoxResult.Cancel:
+                    btnCancel.IsDefault = true;
                     btnCancel.Focus();
                     break;
             }
