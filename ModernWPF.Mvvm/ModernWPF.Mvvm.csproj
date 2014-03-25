@@ -111,11 +111,11 @@
       <Link>Controls\ModernMessageBox.xaml.cs</Link>
       <DependentUpon>ModernMessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\ChooseFileMsg.cs">
-      <Link>Messages\ChooseFileMsg.cs</Link>
+    <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\ChooseFileMessage.cs">
+      <Link>Messages\ChooseFileMessage.cs</Link>
     </Compile>
-    <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\ChooseFolderMsg.cs">
-      <Link>Messages\ChooseFolderMsg.cs</Link>
+    <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\ChooseFolderMessage.cs">
+      <Link>Messages\ChooseFolderMessage.cs</Link>
     </Compile>
     <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\MessageRoutine.cs">
       <Link>Messages\MessageRoutine.cs</Link>

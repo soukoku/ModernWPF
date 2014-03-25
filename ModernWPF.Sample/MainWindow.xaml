@@ -70,6 +70,7 @@
                                 <PasswordBox Password="password" Margin="2"></PasswordBox>
                                 <PasswordBox modern:TextBoxUI.WatermarkText="password with watermark" Margin="2"></PasswordBox>
 
+                                <DatePicker Margin="2"></DatePicker>
                             </StackPanel>
                             <StackPanel>
 
@@ -142,7 +143,8 @@
 
                             <RepeatButton Content="repeat button"></RepeatButton>
 
-                            <Button Content="hyperlink button" Style="{StaticResource ModernHyperlinkButton}"></Button></StackPanel>
+                            <Button Content="hyperlink button" Style="{StaticResource ModernHyperlinkButton}"></Button>
+                        </StackPanel>
                         <StackPanel Margin="2">
                             <CheckBox Content="a checkbox"></CheckBox>
                             <CheckBox Content="three-state checkbox" IsThreeState="True"></CheckBox>

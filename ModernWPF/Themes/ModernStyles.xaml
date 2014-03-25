@@ -56,4 +56,11 @@
     <Style TargetType="ListBoxItem" BasedOn="{StaticResource ModernListBoxItem}" />
 
     <Style TargetType="ListView" BasedOn="{StaticResource ModernListView}" />
+
+    <Style TargetType="DatePicker" BasedOn="{StaticResource ModernDatePicker}" />
+    <Style TargetType="DatePickerTextBox" BasedOn="{StaticResource ModernDatePickerTextBox}" />
+    <Style TargetType="Calendar" BasedOn="{StaticResource ModernCalendar}" />
+    <Style TargetType="CalendarItem" BasedOn="{StaticResource ModernCalendarItem}" />
+    <Style TargetType="CalendarDayButton" BasedOn="{StaticResource ModernCalendarDayButton}" />
+    <Style TargetType="CalendarButton" BasedOn="{StaticResource ModernCalendarButton}" />
 </ResourceDictionary>
