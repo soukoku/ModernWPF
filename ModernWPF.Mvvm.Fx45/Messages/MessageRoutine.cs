@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Win32;
+using ModernWPF.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,18 @@ namespace ModernWPF.Messages
     /// </summary>
     public static class MessageRoutine
     {
+        /// <summary>
+        /// Handles a basic <see cref="DialogMessage" /> on a window by showing a <see cref="ModernMessageBox" />.
+        /// </summary>
+        /// <param name="owner">The owner.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
+        public static MessageBoxResult HandleDialogMessage(this Window owner, DialogMessage message)
+        {
+            return ModernMessageBox.Show(owner, message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult);
+        }
+
+
         /// <summary>
         /// Handles the <see cref="ChooseFileMessage" /> on a window by showing a <see cref="FileDialog" /> based on the message options.
         /// </summary>

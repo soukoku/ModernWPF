@@ -1,10 +1,11 @@
-﻿<modern:DialogControl
+﻿<cont:DialogControl
     x:Class="ModernWPF.Controls.ModernMessageBox"
 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:modern="http://modernwpf"
+    xmlns:cont="clr-namespace:ModernWPF.Controls"
+    xmlns:resx="clr-namespace:ModernWPF.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     VerticalAlignment="Center"
     DisableTarget="True"
@@ -29,13 +30,13 @@
                     </Style>
                 </DockPanel.Resources>
 
-                <Image x:Name="iconWarning" Source="/ModernWPF.Mvvm;component/Assets/warning.png"></Image>
+                <Image x:Name="iconWarning" Source="/ModernWPF;component/Assets/warning.png"></Image>
 
-                <Image x:Name="iconInfo" Source="/ModernWPF.Mvvm;component/Assets/info.png"></Image>
+                <Image x:Name="iconInfo" Source="/ModernWPF;component/Assets/info.png"></Image>
 
-                <Image x:Name="iconError" Source="/ModernWPF.Mvvm;component/Assets/error.png"></Image>
+                <Image x:Name="iconError" Source="/ModernWPF;component/Assets/error.png"></Image>
 
-                <Image x:Name="iconQuest" Source="/ModernWPF.Mvvm;component/Assets/question.png"></Image>
+                <Image x:Name="iconQuest" Source="/ModernWPF;component/Assets/question.png"></Image>
 
                 <TextBlock x:Name="txtTitle" TextTrimming="CharacterEllipsis" FontSize="24" Margin="2 0"
                            FontWeight="Light"
@@ -55,11 +56,11 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdOK], Mode=OneWay}" x:Name="btnOK" Click="btnOK_Click"></Button>
-                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdYes], Mode=OneWay}" x:Name="btnYes" Click="btnYes_Click"></Button>
-                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdNo], Mode=OneWay}" x:Name="btnNo" Click="btnNo_Click"></Button>
-                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" x:Name="btnCancel" IsCancel="True" Click="btnCancel_Click"></Button>
+                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdOK], Mode=OneWay}" x:Name="btnOK" Click="btnOK_Click"></Button>
+                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdYes], Mode=OneWay}" x:Name="btnYes" Click="btnYes_Click"></Button>
+                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdNo], Mode=OneWay}" x:Name="btnNo" Click="btnNo_Click"></Button>
+                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" x:Name="btnCancel" IsCancel="True" Click="btnCancel_Click"></Button>
             </StackPanel>
         </Grid>
     </Border>
-</modern:DialogControl>
+</cont:DialogControl>

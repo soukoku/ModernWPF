@@ -4,11 +4,13 @@
         xmlns:modern="http://modernwpf"
         xmlns:local="clr-namespace:ModernWPF.Sample"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:vm="clr-namespace:ModernWPF.Sample.VM"
         Title="ModernWPF - Test" Height="610" Width="850"
         ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ModernWindowFull}">
     <Window.Resources>
         <sys:String x:Key="shortString">Lorem ipsum dolor sit amet</sys:String>
+        <vm:SupportedLangs x:Key="Langs"></vm:SupportedLangs>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -259,6 +261,12 @@
                               Fill="{Binding RelativeSource={RelativeSource AncestorType=ButtonBase}, Path=Foreground}" 
                               Data="F1 M 38.0333,18.5C 39.4877,18.5 40.6667,19.679 40.6667,21.1333C 40.6667,22.5877 39.4877,23.7667 38.0333,23.7667C 36.579,23.7667 35.4,22.5877 35.4,21.1333C 35.4,19.679 36.579,18.5 38.0333,18.5 Z M 56.4666,26.4C 57.921,26.4 59.1,27.579 59.1,29.0333C 59.1,30.4877 57.921,31.6667 56.4666,31.6667C 55.0123,31.6667 53.8333,30.4877 53.8333,29.0333C 53.8333,27.579 55.0123,26.4 56.4666,26.4 Z M 19.6,26.4C 21.0543,26.4 22.2333,27.579 22.2333,29.0333C 22.2333,30.4877 21.0543,31.6667 19.6,31.6667C 18.1456,31.6667 16.9667,30.4877 16.9667,29.0333C 16.9667,27.579 18.1456,26.4 19.6,26.4 Z M 27.5,40.8833L 31.45,54.05L 44.6167,54.05L 48.5667,40.8833C 41.9833,40.8833 38.0333,34.3 38.0333,34.3C 38.0333,34.3 34.0833,40.8833 27.5,40.8833 Z M 38.0333,25.0833C 38.0333,25.0833 41.9833,46.15 55.15,32.9833L 47.25,58L 28.8167,58C 25.7444,50.1 20.9167,32.9833 20.9167,32.9833C 34.0833,46.15 38.0333,25.0833 38.0333,25.0833 Z M 32,51L 31.25,49L 44.75,49L 44,51L 32,51 Z "/>
                     </Canvas>
+                    <Canvas x:Key="IconBook" x:Shared="False" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                        <Path Width="26" Height="38" Canvas.Left="25" Canvas.Top="19" Stretch="Fill" 
+                              Fill="{Binding RelativeSource={RelativeSource AncestorType=ButtonBase}, Path=Foreground}" 
+                              Data="F1 M 25,27L 46,19L 46,22.25L 28.5,29L 31.75,31.25L 51,23.75L 51,48.5L 31.75,57L 25,52L 25,27 Z "/>
+                    </Canvas>
+
 
                 </StackPanel.Resources>
                 <modern:AppButton Text="_another window" x:Name="btnWindow" Click="btnWindow_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
@@ -266,6 +274,18 @@
                 <modern:AppButton Text="in window dialog" x:Name="btnDialog2" Click="btnDialog2_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="msg window" x:Name="btnMsgWindow" Click="btnMsgWindow_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="msg box" x:Name="btnMsgBox" Click="btnMsgBox_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
+                <modern:AppButton Text="msg box lang" x:Name="btnLang" Click="btnLang_Click" Content="{StaticResource IconBook}">
+                    <modern:AppButton.ContextMenu>
+                        <ContextMenu DataContext="{StaticResource Langs}" ItemsSource="{Binding Items}" VerticalOffset="-4">
+                            <ContextMenu.ItemContainerStyle>
+                                <Style TargetType="MenuItem" BasedOn="{StaticResource ModernMenuItem}">
+                                    <Setter Property="IsCheckable" Value="True"></Setter>
+                                    <Setter Property="IsChecked" Value="{Binding IsSelected}"></Setter>
+                                </Style>
+                            </ContextMenu.ItemContainerStyle>
+                        </ContextMenu>
+                    </modern:AppButton.ContextMenu>
+                </modern:AppButton>
                 <modern:AppButton Text="toggle theme" x:Name="btnTheme" Click="btnTheme_Click" Content="{StaticResource IconCrown}"></modern:AppButton>
                 <modern:AppButton Text="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click" Content="{StaticResource IconBaby}"></modern:AppButton>
             </StackPanel>

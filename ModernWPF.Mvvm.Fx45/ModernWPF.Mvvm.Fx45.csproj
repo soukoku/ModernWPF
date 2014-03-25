@@ -67,9 +67,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ModernMessageBox.xaml.cs">
-      <DependentUpon>ModernMessageBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Messages\ChooseFileMessage.cs" />
     <Compile Include="Messages\ChooseFolderMessage.cs" />
     <Compile Include="Messages\MessageRoutine.cs" />
@@ -95,24 +92,6 @@
       <Project>{77d86b3d-ee36-4e4f-951d-a220de7fbccb}</Project>
       <Name>ModernWPF</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\error.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\question.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\warning.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Controls\ModernMessageBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

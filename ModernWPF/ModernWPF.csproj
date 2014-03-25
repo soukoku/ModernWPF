@@ -75,6 +75,9 @@
     <Compile Include="Controls\DialogControl.cs" />
     <Compile Include="Controls\DialogControlContainer.cs" />
     <Compile Include="Controls\ModernContentControl.cs" />
+    <Compile Include="Controls\ModernMessageBox.xaml.cs">
+      <DependentUpon>ModernMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\AppIconImageConverter.cs" />
     <Compile Include="Converters\IsSmallFontConverter.cs" />
     <Compile Include="Converters\BoolVisibleConverter.cs" />
@@ -120,7 +123,9 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\error.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Sign.snk" />
@@ -128,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
+    <Page Include="Controls\ModernMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Animations.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -160,6 +169,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

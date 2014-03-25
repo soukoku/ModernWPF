@@ -99,5 +99,12 @@ namespace ModernWPF.Sample
             ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.OKCancel, MessageBoxImage.Information, MessageBoxResult.Cancel);
             ModernMessageBox.Show(this, "Test Message", "Caption", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
         }
+
+        private void btnLang_Click(object sender, RoutedEventArgs e)
+        {
+            btnLang.ContextMenu.Placement = PlacementMode.Top;
+            btnLang.ContextMenu.PlacementTarget = btnLang;
+            btnLang.ContextMenu.IsOpen = true;
+        }
     }
 }

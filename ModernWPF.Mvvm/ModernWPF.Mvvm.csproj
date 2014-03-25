@@ -107,10 +107,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\ModernWPF.Mvvm.Fx45\Controls\ModernMessageBox.xaml.cs">
-      <Link>Controls\ModernMessageBox.xaml.cs</Link>
-      <DependentUpon>ModernMessageBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\ChooseFileMessage.cs">
       <Link>Messages\ChooseFileMessage.cs</Link>
     </Compile>
@@ -136,28 +132,7 @@
       <Link>ViewModels\SelectableViewModel.cs</Link>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="..\ModernWPF.Mvvm.Fx45\Assets\error.png">
-      <Link>Assets\error.png</Link>
-    </Resource>
-    <Resource Include="..\ModernWPF.Mvvm.Fx45\Assets\info.png">
-      <Link>Assets\info.png</Link>
-    </Resource>
-    <Resource Include="..\ModernWPF.Mvvm.Fx45\Assets\question.png">
-      <Link>Assets\question.png</Link>
-    </Resource>
-    <Resource Include="..\ModernWPF.Mvvm.Fx45\Assets\warning.png">
-      <Link>Assets\warning.png</Link>
-    </Resource>
-  </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Page Include="..\ModernWPF.Mvvm.Fx45\Controls\ModernMessageBox.xaml">
-      <Link>Controls\ModernMessageBox.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

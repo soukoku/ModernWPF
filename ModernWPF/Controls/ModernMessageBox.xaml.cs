@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,33 +22,6 @@ namespace ModernWPF.Controls
     {
         #region static stuff
 
-        /// <summary>
-        /// Displays a message box in front of the specified window.
-        /// </summary>
-        /// <param name="owner">A <see cref="Window" /> that contains <see cref="DialogControlContainer" /> in its visual tree.</param>
-        /// <param name="message">The message object from MvvmLight.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">owner</exception>
-        /// <exception cref="System.ArgumentNullException">message</exception>
-        public static MessageBoxResult Show(Window owner, DialogMessage message)
-        {
-            return Show(owner.FindInVisualTree<DialogControlContainer>(), message);
-        }
-
-        /// <summary>
-        /// Displays a message box in front of the specified <see cref="DialogControlContainer"/>.
-        /// </summary>
-        /// <param name="owner">A <see cref="DialogControlContainer"/> to host this message box.</param>
-        /// <param name="message">The message object from MvvmLight.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">owner</exception>
-        /// <exception cref="System.ArgumentNullException">message</exception>
-        public static MessageBoxResult Show(DialogControlContainer owner, DialogMessage message)
-        {
-            if (message == null) { throw new ArgumentNullException("message"); }
-
-            return Show(owner, message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult);
-        }
 
         /// <summary>
         /// Displays a message box in front of the specified window.

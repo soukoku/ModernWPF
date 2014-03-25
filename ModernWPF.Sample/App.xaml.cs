@@ -14,16 +14,8 @@ namespace ModernWPF.Sample
     /// </summary>
     public partial class App : Application
     {
-        bool testCulture = true;
-
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (testCulture)
-            {
-                var zhTW = new System.Globalization.CultureInfo("zh-TW");
-                Thread.CurrentThread.CurrentUICulture = zhTW;
-                //CommandTextBinder.Current.UpdateCulture(zhTW);
-            }
             base.OnStartup(e);
         }
     }
