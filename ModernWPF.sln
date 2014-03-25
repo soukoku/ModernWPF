@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{D41E34D6-9D5E-40AE-BA89-2EFC75023605}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE.txt = LICENSE.txt
+		ModernUIIcons-License.txt = ModernUIIcons-License.txt
 		README.markdown = README.markdown
 	EndProjectSection
 EndProject
