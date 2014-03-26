@@ -15,7 +15,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
@@ -45,8 +45,9 @@
 
             <TextBox x:Name="txtMsg" Grid.Row="1" Margin="0 20"
                      BorderThickness="0" Background="Transparent"
-                     IsReadOnly="True" MaxHeight="300" 
-                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"></TextBox>
+                     IsReadOnly="True" MaxHeight="320" 
+                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                     TextWrapping="Wrap"></TextBox>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <StackPanel.Resources>

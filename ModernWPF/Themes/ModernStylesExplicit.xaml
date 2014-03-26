@@ -2307,7 +2307,7 @@
                                 </Button>
 
                                 <Popup x:Name="PART_Popup" 
-                                        PlacementTarget="{Binding ElementName=PART_TextBox}"
+                                        PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                         Placement="Bottom" 
                                         StaysOpen="False"
                                         AllowsTransparency="True" />
