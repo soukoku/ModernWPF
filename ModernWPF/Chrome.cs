@@ -610,21 +610,7 @@ namespace ModernWPF
                             // handled to prevent default non-client border from showing in classic mode
                             // wParam False means draw inactive title bar (which we do nothing).
 
-                            Debug.WriteLine(hwnd.ToInt64() + " wparam " + wParam.ToInt32());
-
-                            if (wParam == BasicValues.FALSE)
-                            {
-                                retVal = BasicValues.TRUE;
-                            }
-                            else
-                            {
-                                // Also skip default wndproc on maximized window to prevent non-dwm theme titlebar being drawn
-                                if (_contentWindow.WindowState != WindowState.Maximized ||
-                                    Dwmapi.IsCompositionEnabled)
-                                {
-                                    retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, new IntPtr(-1));
-                                }
-                            }
+                            retVal = HandleNcActivate(hwnd, msg, wParam, retVal);
                             handled = true;
                             break;
                         case WindowMessage.WM_NCHITTEST:
@@ -643,32 +629,7 @@ namespace ModernWPF
                             }
                             break;
                         case WindowMessage.WM_WINDOWPOSCHANGED:
-                            var windowpos = (WINDOWPOS)Marshal.PtrToStructure(lParam, typeof(WINDOWPOS));
-                            //Debug.WriteLine("Chrome {0} windowpos flags {1}.", _borderWindow.Id, ClearUndefined(windowpos.flags));
-
-                            if ((windowpos.flags & SetWindowPosOptions.SWP_NOSIZE) != SetWindowPosOptions.SWP_NOSIZE)
-                            {
-                                SetRegion(hwnd, windowpos.cx, windowpos.cy, false);
-                            }
-
-                            if (_borderWindow != null)
-                            {
-                                // The override is for a window with owner and the owner window minimizes.
-                                // In this case the window is hidden with SWP_HIDEWINDOW but not actually minimized
-                                // so the code detects the show/hide flags here as the override
-                                if ((windowpos.flags & SetWindowPosOptions.SWP_HIDEWINDOW) == SetWindowPosOptions.SWP_HIDEWINDOW)
-                                {
-                                    _hideOverride = true;
-                                }
-                                if ((windowpos.flags & SetWindowPosOptions.SWP_SHOWWINDOW) == SetWindowPosOptions.SWP_SHOWWINDOW)
-                                {
-                                    _hideOverride = false;
-                                }
-                                if (_contentShown)
-                                {
-                                    _borderWindow.RepositionToContent(hwnd, _hideOverride);
-                                }
-                            }
+                            HandleWindowPosChanged(hwnd, lParam);
                             break;
                         case WindowMessage.WM_DWMCOMPOSITIONCHANGED:
                             SetRegion(hwnd, 0, 0, true);
@@ -677,6 +638,56 @@ namespace ModernWPF
                             // prevent more flickers?
                             handled = true;
                             break;
+                    }
+                }
+                return retVal;
+            }
+
+            private void HandleWindowPosChanged(IntPtr hwnd, IntPtr lParam)
+            {
+                var windowpos = (WINDOWPOS)Marshal.PtrToStructure(lParam, typeof(WINDOWPOS));
+                //Debug.WriteLine("Chrome {0} windowpos flags {1}.", _borderWindow.Id, ClearUndefined(windowpos.flags));
+
+                if ((windowpos.flags & SetWindowPosOptions.SWP_NOSIZE) != SetWindowPosOptions.SWP_NOSIZE)
+                {
+                    SetRegion(hwnd, windowpos.cx, windowpos.cy, false);
+                }
+
+                if (_borderWindow != null)
+                {
+                    // The override is for a window with owner and the owner window minimizes.
+                    // In this case the window is hidden with SWP_HIDEWINDOW but not actually minimized
+                    // so the code detects the show/hide flags here as the override
+                    if ((windowpos.flags & SetWindowPosOptions.SWP_HIDEWINDOW) == SetWindowPosOptions.SWP_HIDEWINDOW)
+                    {
+                        _hideOverride = true;
+                    }
+                    if ((windowpos.flags & SetWindowPosOptions.SWP_SHOWWINDOW) == SetWindowPosOptions.SWP_SHOWWINDOW)
+                    {
+                        _hideOverride = false;
+                    }
+                    if (_contentShown)
+                    {
+                        _borderWindow.RepositionToContent(hwnd, _hideOverride);
+                    }
+                }
+            }
+
+            private IntPtr HandleNcActivate(IntPtr hwnd, int msg, IntPtr wParam, IntPtr retVal)
+            {
+                //Debug.WriteLine(hwnd.ToInt64() + " wparam " + wParam.ToInt32());
+
+                if (wParam == BasicValues.FALSE)
+                {
+                    retVal = BasicValues.TRUE;
+                }
+                else
+                {
+                    // Also skip default wndproc on maximized window to prevent non-dwm theme titlebar being drawn
+                    if (_contentWindow.WindowState != WindowState.Maximized ||
+                        Dwmapi.IsCompositionEnabled)
+                    {
+                        retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, new IntPtr(-1));
                     }
                 }
                 return retVal;

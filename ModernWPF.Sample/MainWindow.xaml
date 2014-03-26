@@ -118,6 +118,9 @@
                                 </ComboBox>
 
                             </StackPanel>
+                            <StackPanel>
+                                <Calendar></Calendar>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </modern:ModernContentControl>

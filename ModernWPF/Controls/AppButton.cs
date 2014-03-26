@@ -129,7 +129,7 @@ namespace ModernWPF.Controls
         /// <param name="e">The <see cref="T:System.Windows.RoutedEventArgs" /> that contains the event data.</param>
         protected override void OnContextMenuOpening(ContextMenuEventArgs e)
         {
-            e.Handled = true;
+            if (e != null) { e.Handled = true; }
             base.OnContextMenuOpening(e);
         }
     }
