@@ -16,9 +16,8 @@
     <tags>metro modern wpf mvvm</tags>
     <dependencies>
       <group>
-        <dependency id="ModernWPF" version="1.1.38" />
+        <dependency id="ModernWPF" version="1.1.40" />
       </group>
-      
       <!--<group targetFramework="net40-Client">
         <dependency id="Microsoft.Bcl.Async" version="1.0.165" />
       </group>-->
@@ -29,8 +28,5 @@
     <file src="bin\$configuration$\fx4\$id$.dll" target="lib\net40-Client"/>
     <file src="bin\$configuration$\fx4\$id$.xml" target="lib\net40-Client"/>
     <file src="bin\$configuration$\fx4\$id$.pdb" target="lib\net40-Client"/>
-    <!--<file src="bin\$configuration$\zh-Hant\$id$.resources.dll" target="lib\net40-Client\zh-Hant"/>
-    <file src="bin\$configuration$\zh-Hans\$id$.resources.dll" target="lib\net40-Client\zh-Hans"/>
-    <file src="bin\$configuration$\ja\$id$.resources.dll" target="lib\net40-Client\ja"/>-->
   </files>
 </package>
