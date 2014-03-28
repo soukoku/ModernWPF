@@ -76,24 +76,46 @@ namespace ModernWPF.Controls
         /// </summary>
         protected override void OnFocus()
         {
+            bool focused = false;
             switch (_defResult)
             {
                 case System.Windows.MessageBoxResult.No:
-                    btnNo.IsDefault = true;
-                    btnNo.Focus();
+                    if (btnNo.Visibility == System.Windows.Visibility.Visible)
+                    {
+                        btnNo.IsDefault = true;
+                        btnNo.Focus();
+                        focused = true;
+                    }
                     break;
                 case System.Windows.MessageBoxResult.Yes:
-                    btnYes.IsDefault = true;
-                    btnYes.Focus();
+                    if (btnYes.Visibility == System.Windows.Visibility.Visible)
+                    {
+                        btnYes.IsDefault = true;
+                        btnYes.Focus();
+                        focused = true;
+                    }
                     break;
                 case System.Windows.MessageBoxResult.Cancel:
-                    btnCancel.IsDefault = true;
-                    btnCancel.Focus();
+                    if (btnCancel.Visibility == System.Windows.Visibility.Visible)
+                    {
+                        btnCancel.IsDefault = true;
+                        btnCancel.Focus();
+                        focused = true;
+                    }
                     break;
-                default:
-                    btnOK.IsDefault = true;
-                    btnOK.Focus();
-                    break;
+            }
+
+            if (!focused)
+            {
+                foreach (Button c in btnPanel.Children)
+                {
+                    if (c.Visibility == System.Windows.Visibility.Visible)
+                    {
+                        c.IsDefault = true;
+                        c.Focus();
+                        break;
+                    }
+                }
             }
         }
 

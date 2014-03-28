@@ -50,7 +50,7 @@
                      Foreground="{DynamicResource ModernForeground}"
                      TextWrapping="Wrap"></TextBox>
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel x:Name="btnPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <StackPanel.Resources>
                     <Style TargetType="Button" BasedOn="{StaticResource ModernButton}">
                         <Setter Property="MinWidth" Value="80"></Setter>
