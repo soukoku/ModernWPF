@@ -6,5 +6,5 @@
 // keep this same in major releases
 [assembly: AssemblyVersion("1.0.0.0")]
 // change this for each nuget release
-[assembly: AssemblyFileVersion("1.1.40.1")]
-[assembly: AssemblyInformationalVersion("1.1.40.1")]
+[assembly: AssemblyFileVersion("1.1.40.2")]
+[assembly: AssemblyInformationalVersion("1.1.40.2")]

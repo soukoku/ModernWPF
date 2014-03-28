@@ -19,7 +19,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <DockPanel >
+            <DockPanel SnapsToDevicePixels="True" UseLayoutRounding="True">
                 <DockPanel.Resources>
                     <Style TargetType="Image">
                         <Setter Property="Width" Value="32"></Setter>
@@ -47,11 +47,12 @@
                      BorderThickness="0" Background="Transparent"
                      IsReadOnly="True" MaxHeight="320" 
                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                     Foreground="{DynamicResource ModernForeground}"
                      TextWrapping="Wrap"></TextBox>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <StackPanel.Resources>
-                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}">
                         <Setter Property="MinWidth" Value="80"></Setter>
                         <Setter Property="Margin" Value="4 0 0 0"></Setter>
                     </Style>

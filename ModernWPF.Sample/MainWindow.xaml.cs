@@ -94,6 +94,7 @@ namespace ModernWPF.Sample
 
         private void btnMsgBox_Click(object sender, RoutedEventArgs e)
         {
+            //ModernMessageBox.Show(this, "howdy");
             ModernMessageBox.Show(this, 
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus venenatis felis a luctus. Cras cursus est sed interdum consectetur. Fusce vestibulum cursus interdum. Praesent ultricies egestas dolor at elementum. Quisque et pellentesque magna, ac mattis purus. Ut pretium laoreet ullamcorper. Morbi venenatis accumsan varius. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sit amet laoreet leo. Vestibulum sodales tempus libero vitae tincidunt. Nulla facilisi. Donec posuere sapien ut interdum condimentum. Vivamus nec velit suscipit, dignissim odio a, ullamcorper arcu. Proin ac tellus enim. Quisque in cursus dolor. Curabitur adipiscing vitae sem in ornare.\n\n" +
                 "Duis in lacus volutpat, laoreet felis eget, tristique mauris. Maecenas dictum porta purus, id fringilla diam suscipit eu. Sed vitae vulputate erat. Praesent sit amet volutpat urna. Aenean id eros tincidunt, tempor nisl ut, malesuada augue. Nullam ullamcorper, sem sed consequat placerat, velit lacus porttitor velit, et suscipit ipsum nisi id lorem. Vivamus eleifend congue erat, ut rhoncus magna lacinia et.\n\n" +

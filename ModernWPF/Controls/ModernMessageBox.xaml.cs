@@ -82,10 +82,6 @@ namespace ModernWPF.Controls
                     btnNo.IsDefault = true;
                     btnNo.Focus();
                     break;
-                case System.Windows.MessageBoxResult.OK:
-                    btnOK.IsDefault = true;
-                    btnOK.Focus();
-                    break;
                 case System.Windows.MessageBoxResult.Yes:
                     btnYes.IsDefault = true;
                     btnYes.Focus();
@@ -93,6 +89,10 @@ namespace ModernWPF.Controls
                 case System.Windows.MessageBoxResult.Cancel:
                     btnCancel.IsDefault = true;
                     btnCancel.Focus();
+                    break;
+                default:
+                    btnOK.IsDefault = true;
+                    btnOK.Focus();
                     break;
             }
         }
@@ -144,7 +144,7 @@ namespace ModernWPF.Controls
                     btnCancel.Visibility = System.Windows.Visibility.Visible;
                     btnOK.Visibility = System.Windows.Visibility.Visible;
                     break;
-                case MessageBoxButton.OK:
+                default:
                     btnOK.Visibility = System.Windows.Visibility.Visible;
                     break;
             }
