@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using ModernWPF.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,6 +80,23 @@ namespace ModernWPF.Messages
                     }));
                 }
             }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="ChooseFileMessage"/>.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public static void HandleOpenExplorer(this OpenExplorerMessage message)
+        {
+            if (!string.IsNullOrEmpty(message.SelectedPath))
+            {
+                using (Process.Start("explorer", string.Format("/select,{0}", message.SelectedPath))) { }
+            }
+            else if (string.IsNullOrEmpty(message.FolderPath))
+            {
+                using (Process.Start("explorer", message.FolderPath)) { }
+            }
+            using (Process.Start("explorer")) { }
         }
     }
 }
