@@ -1725,7 +1725,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="ModernListBoxNoChrome" TargetType="ListBox">
+    <Style x:Key="ModernListBoxNoChrome" TargetType="ListBox" BasedOn="{StaticResource ModernListBox}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
     </Style>
