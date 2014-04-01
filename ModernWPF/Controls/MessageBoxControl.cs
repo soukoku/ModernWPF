@@ -106,14 +106,20 @@ namespace ModernWPF.Controls
 
         void _btnYes_Click(object sender, RoutedEventArgs e)
         {
-            _result = MessageBoxResult.Yes;
-            DialogResult = true;
+            if (OnClosing(MessageBoxResult.Yes))
+            {
+                _result = MessageBoxResult.Yes;
+                DialogResult = true;
+            }
         }
 
         void _btnNo_Click(object sender, RoutedEventArgs e)
         {
-            _result = MessageBoxResult.No;
-            DialogResult = false;
+            if (OnClosing(MessageBoxResult.No))
+            {
+                _result = MessageBoxResult.No;
+                DialogResult = false;
+            }
         }
 
         void _btnCancel_Click(object sender, RoutedEventArgs e)
@@ -124,8 +130,21 @@ namespace ModernWPF.Controls
 
         void _btnOK_Click(object sender, RoutedEventArgs e)
         {
-            _result = MessageBoxResult.OK;
-            DialogResult = true;
+            if (OnClosing(MessageBoxResult.OK))
+            {
+                _result = MessageBoxResult.OK;
+                DialogResult = true;
+            }
+        }
+
+        /// <summary>
+        /// Called when a non-cancel button is pressed and the control needs to verify if the result is allowed.
+        /// </summary>
+        /// <param name="result">The result.</param>
+        /// <returns>true to allow closing the dialog with the result.</returns>
+        protected virtual bool OnClosing(MessageBoxResult result)
+        {
+            return true;
         }
 
         /// <summary>
@@ -227,8 +246,11 @@ namespace ModernWPF.Controls
 
                 _btnCancel.Visibility = System.Windows.Visibility.Collapsed;
                 _btnOK.Visibility = System.Windows.Visibility.Collapsed;
+                _btnOK.IsDefault = false;
                 _btnYes.Visibility = System.Windows.Visibility.Collapsed;
+                _btnYes.IsDefault = false;
                 _btnNo.Visibility = System.Windows.Visibility.Collapsed;
+                _btnNo.IsDefault = false;
                 switch (_button)
                 {
                     case MessageBoxButton.YesNo:
