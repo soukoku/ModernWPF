@@ -18,7 +18,7 @@ namespace ModernWPF.Controls
     /// <summary>
     /// An in-window <see cref="MessageBox"/> replacment when using ModernWPF.
     /// </summary>
-    public sealed partial class ModernMessageBox : DialogControl
+    public sealed partial class ModernMessageBox : MessageBoxControl
     {
         #region static stuff
 
@@ -54,8 +54,7 @@ namespace ModernWPF.Controls
             if (owner == null) { throw new ArgumentNullException("owner"); }
 
             var diag = new ModernMessageBox();
-            diag.ShowDialogReal(owner, messageBoxText, caption, button, icon, defaultResult);
-            return diag._result;
+            return diag.ShowDialogReal(owner, messageBoxText, caption, button, icon, defaultResult);
         }
 
         #endregion
@@ -67,136 +66,12 @@ namespace ModernWPF.Controls
             InitializeComponent();
         }
 
-        MessageBoxResult _defResult;
-        MessageBoxResult _result;
-
-
-        /// <summary>
-        /// Called when dialog has been shown and focus needs to happen.
-        /// </summary>
-        protected override void OnFocus()
+        MessageBoxResult ShowDialogReal(DialogControlContainer owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
         {
-            bool focused = false;
-            switch (_defResult)
-            {
-                case System.Windows.MessageBoxResult.No:
-                    if (btnNo.Visibility == System.Windows.Visibility.Visible)
-                    {
-                        btnNo.IsDefault = true;
-                        btnNo.Focus();
-                        focused = true;
-                    }
-                    break;
-                case System.Windows.MessageBoxResult.Yes:
-                    if (btnYes.Visibility == System.Windows.Visibility.Visible)
-                    {
-                        btnYes.IsDefault = true;
-                        btnYes.Focus();
-                        focused = true;
-                    }
-                    break;
-                case System.Windows.MessageBoxResult.Cancel:
-                    if (btnCancel.Visibility == System.Windows.Visibility.Visible)
-                    {
-                        btnCancel.IsDefault = true;
-                        btnCancel.Focus();
-                        focused = true;
-                    }
-                    break;
-            }
-
-            if (!focused)
-            {
-                foreach (Button c in btnPanel.Children)
-                {
-                    if (c.Visibility == System.Windows.Visibility.Visible)
-                    {
-                        c.IsDefault = true;
-                        c.Focus();
-                        break;
-                    }
-                }
-            }
-        }
-
-        void ShowDialogReal(DialogControlContainer owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
-        {
-            _defResult = defaultResult;
-            txtTitle.Text = caption;
             txtMsg.Text = messageBoxText;
-
-
-            iconWarning.Visibility = System.Windows.Visibility.Collapsed;
-            iconInfo.Visibility = System.Windows.Visibility.Collapsed;
-            iconError.Visibility = System.Windows.Visibility.Collapsed;
-            iconQuest.Visibility = System.Windows.Visibility.Collapsed;
-
-            switch (icon)
-            {
-                case MessageBoxImage.Error:
-                    iconError.Visibility = System.Windows.Visibility.Visible;
-                    break;
-                case MessageBoxImage.Question:
-                    iconQuest.Visibility = System.Windows.Visibility.Visible;
-                    break;
-                case MessageBoxImage.Warning:
-                    iconWarning.Visibility = System.Windows.Visibility.Visible;
-                    break;
-                case MessageBoxImage.Information:
-                    iconInfo.Visibility = System.Windows.Visibility.Visible;
-                    break;
-            }
-
-            btnCancel.Visibility = System.Windows.Visibility.Collapsed;
-            btnOK.Visibility = System.Windows.Visibility.Collapsed;
-            btnYes.Visibility = System.Windows.Visibility.Collapsed;
-            btnNo.Visibility = System.Windows.Visibility.Collapsed;
-            switch (button)
-            {
-                case MessageBoxButton.YesNo:
-                    btnYes.Visibility = System.Windows.Visibility.Visible;
-                    btnNo.Visibility = System.Windows.Visibility.Visible;
-                    break;
-                case MessageBoxButton.YesNoCancel:
-                    btnYes.Visibility = System.Windows.Visibility.Visible;
-                    btnNo.Visibility = System.Windows.Visibility.Visible;
-                    btnCancel.Visibility = System.Windows.Visibility.Visible;
-                    break;
-                case MessageBoxButton.OKCancel:
-                    btnCancel.Visibility = System.Windows.Visibility.Visible;
-                    btnOK.Visibility = System.Windows.Visibility.Visible;
-                    break;
-                default:
-                    btnOK.Visibility = System.Windows.Visibility.Visible;
-                    break;
-            }
-            ShowDialogModal(owner);
+            return base.ShowDialogModal(owner, caption, button, icon, defaultResult);
         }
 
-
-        private void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            _result = MessageBoxResult.OK;
-            DialogResult = true;
-        }
-
-        private void btnYes_Click(object sender, RoutedEventArgs e)
-        {
-            _result = MessageBoxResult.Yes;
-            DialogResult = true;
-        }
-
-        private void btnNo_Click(object sender, RoutedEventArgs e)
-        {
-            _result = MessageBoxResult.No;
-            DialogResult = false;
-        }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            _result = MessageBoxResult.Cancel;
-            DialogResult = false;
-        }
 
         #endregion
 

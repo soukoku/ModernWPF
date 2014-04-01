@@ -74,6 +74,7 @@
     <Compile Include="Controls\BorderWindow.cs" />
     <Compile Include="Controls\DialogControl.cs" />
     <Compile Include="Controls\DialogControlContainer.cs" />
+    <Compile Include="Controls\MessageBoxControl.cs" />
     <Compile Include="Controls\ModernContentControl.cs" />
     <Compile Include="Controls\ModernMessageBox.xaml.cs">
       <DependentUpon>ModernMessageBox.xaml</DependentUpon>

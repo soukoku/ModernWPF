@@ -4,7 +4,13 @@
     xmlns:local="clr-namespace:ModernWPF"
 	xmlns:ctrl="clr-namespace:ModernWPF.Controls"
     xmlns:conv="clr-namespace:ModernWPF.Converters"
+    xmlns:resx="clr-namespace:ModernWPF.Resources"
     >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ModernWPF;component/Themes/ModernStylesExplicit.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    
     <Style x:Key="ModernFocusVisualDashed">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -107,6 +113,78 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}">
                         <ContentPresenter></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="ctrl:MessageBoxControl">
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="DisableTarget" Value="False"/>
+        <Setter Property="CloseOnEscapeKey" Value="True"/>
+        <Setter Property="Padding" Value="0 20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctrl:MessageBoxControl">
+                    <Border Background="{TemplateBinding Background}"
+                            Margin="{TemplateBinding Margin}"
+                            Padding="{TemplateBinding Padding}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid MinWidth="{TemplateBinding ContentMinWidth}" 
+                              MaxWidth="{TemplateBinding ContentMaxWidth}" 
+                              HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DockPanel SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                <DockPanel.Resources>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Width" Value="32"></Setter>
+                                        <Setter Property="Height" Value="32"></Setter>
+                                        <Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"></Setter>
+                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                        <Setter Property="DockPanel.Dock" Value="Left"></Setter>
+                                    </Style>
+                                </DockPanel.Resources>
+
+                                <Image x:Name="PART_iconWarning" Source="/ModernWPF;component/Assets/warning.png"></Image>
+
+                                <Image x:Name="PART_iconInfo" Source="/ModernWPF;component/Assets/info.png"></Image>
+
+                                <Image x:Name="PART_iconError" Source="/ModernWPF;component/Assets/error.png"></Image>
+
+                                <Image x:Name="PART_iconQuest" Source="/ModernWPF;component/Assets/question.png"></Image>
+
+                                <TextBlock x:Name="PART_txtTitle" TextTrimming="CharacterEllipsis" FontSize="24" Margin="2 0"
+                                           FontWeight="Light"
+                                           VerticalAlignment="Center"></TextBlock>
+                            </DockPanel>
+
+                            <ContentPresenter Grid.Row="1" />
+
+                            <StackPanel x:Name="PART_btnPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}">
+                                        <Setter Property="MinWidth" Value="80"></Setter>
+                                        <Setter Property="Margin" Value="4 0 0 0"></Setter>
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdOK], Mode=OneWay}" x:Name="PART_btnOK"></Button>
+                                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdYes], Mode=OneWay}" x:Name="PART_btnYes"></Button>
+                                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdNo], Mode=OneWay}" x:Name="PART_btnNo"></Button>
+                                <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" x:Name="PART_btnCancel" IsCancel="True" ></Button>
+                            </StackPanel>
+                        </Grid>
+                        
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
