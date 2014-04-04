@@ -16,7 +16,7 @@
     <tags>metro modern wpf mvvm</tags>
     <dependencies>
       <group>
-        <dependency id="ModernWPF" version="1.1.40" />
+        <dependency id="ModernWPF" version="1.1.41.2" />
       </group>
       <!--<group targetFramework="net40-Client">
         <dependency id="Microsoft.Bcl.Async" version="1.0.165" />

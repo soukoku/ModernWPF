@@ -54,7 +54,8 @@ namespace ModernWPF.Controls
             if (owner == null) { throw new ArgumentNullException("owner"); }
 
             var diag = new ModernMessageBox();
-            return diag.ShowDialogReal(owner, messageBoxText, caption, button, icon, defaultResult);
+            diag.txtMsg.Text = messageBoxText;
+            return diag.ShowDialogModal(owner, caption, button, icon, defaultResult);
         }
 
         #endregion
@@ -65,13 +66,6 @@ namespace ModernWPF.Controls
         {
             InitializeComponent();
         }
-
-        MessageBoxResult ShowDialogReal(DialogControlContainer owner, string messageBoxText, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
-        {
-            txtMsg.Text = messageBoxText;
-            return base.ShowDialogModal(owner, caption, button, icon, defaultResult);
-        }
-
 
         #endregion
 

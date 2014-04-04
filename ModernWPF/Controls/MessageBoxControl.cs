@@ -199,14 +199,28 @@ namespace ModernWPF.Controls
         }
 
         /// <summary>
+        /// Shows the dialog modal.
+        /// </summary>
+        /// <param name="owner">A <see cref="Window" /> that contains <see cref="DialogControlContainer" /> in its visual tree.</param>
+        /// <param name="caption">The caption.</param>
+        /// <param name="button">The button to display.</param>
+        /// <param name="icon">The icon to display.</param>
+        /// <param name="defaultResult">The default result.</param>
+        /// <returns></returns>
+        public virtual MessageBoxResult ShowDialogModal(Window owner, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
+        {
+            return ShowDialogModal(owner.FindInVisualTree<DialogControlContainer>(), caption, button, icon, defaultResult);
+        }
+
+        /// <summary>
         /// Shows the dialog with icon/caption/buttons.
         /// </summary>
-        /// <param name="owner">The owner.</param>
+        /// <param name="owner">A <see cref="DialogControlContainer" /> to host this message box.</param>
         /// <param name="caption">The caption.</param>
-        /// <param name="button">The button.</param>
-        /// <param name="icon">The icon.</param>
+        /// <param name="button">The button to display.</param>
+        /// <param name="icon">The icon to display.</param>
         /// <param name="defaultResult">The default result.</param>
-        public MessageBoxResult ShowDialogModal(DialogControlContainer owner, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
+        public virtual MessageBoxResult ShowDialogModal(DialogControlContainer owner, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
         {
             _title = caption;
             _button = button;

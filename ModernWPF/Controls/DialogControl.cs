@@ -158,7 +158,7 @@ namespace ModernWPF.Controls
         /// </summary>
         /// <param name="window">The window.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
-        public void ShowDialog(Window window)
+        public virtual void ShowDialog(Window window)
         {
             ShowDialog(window.FindInVisualTree<DialogControlContainer>());
         }
@@ -168,7 +168,7 @@ namespace ModernWPF.Controls
         /// </summary>
         /// <param name="container">The container.</param>
         /// <exception cref="System.ArgumentNullException">container</exception>
-        public void ShowDialog(DialogControlContainer container)
+        public virtual void ShowDialog(DialogControlContainer container)
         {
             if (container == null) { throw new ArgumentNullException("container"); }
 
@@ -184,7 +184,7 @@ namespace ModernWPF.Controls
         /// </summary>
         /// <param name="window">The window.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
-        public bool? ShowDialogModal(Window window)
+        public virtual bool? ShowDialogModal(Window window)
         {
             return ShowDialogModal(window.FindInVisualTree<DialogControlContainer>());
         }
@@ -195,7 +195,7 @@ namespace ModernWPF.Controls
         /// </summary>
         /// <param name="container">The container.</param>
         /// <exception cref="System.ArgumentNullException">container</exception>
-        public bool? ShowDialogModal(DialogControlContainer container)
+        public virtual bool? ShowDialogModal(DialogControlContainer container)
         {
             ShowDialog(container);
 
