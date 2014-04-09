@@ -3426,9 +3426,6 @@
         </Style.Triggers>
     </Style>
 
-
-
-
     <Style x:Key="ModernTabItem" TargetType="TabItem">
         <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground3}" />
@@ -3439,13 +3436,15 @@
                 <ControlTemplate TargetType="TabItem">
                     <Grid SnapsToDevicePixels="true">
                         <Border x:Name="Bd" Background="{TemplateBinding Background}"
-                                Padding="{TemplateBinding Padding}">
+                                Padding="{TemplateBinding Padding}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}">
                             <ContentPresenter x:Name="Content" ContentSource="Header"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               RecognizesAccessKey="True" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              TextBlock.FontSize="16"/>
+                                              TextElement.FontSize="16"/>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -3517,6 +3516,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource ModernTabItem}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabControl">
@@ -3531,10 +3531,11 @@
                             <RowDefinition x:Name="RowDefinition1" Height="*" />
                         </Grid.RowDefinitions>
                         <Border x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0"
-                                IsHitTestVisible="True" Background="Transparent" Margin="24 0 0 0"
-                                HorizontalAlignment="Left">
+                                IsHitTestVisible="True" Background="Transparent"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
                             <TabPanel IsItemsHost="true" KeyboardNavigation.TabIndex="1"
-                                    Panel.ZIndex="1">
+                                      Margin="{TemplateBinding Padding}"
+                                      Panel.ZIndex="1">
                             </TabPanel>
                         </Border>
                         <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}"
@@ -3544,13 +3545,11 @@
                                 KeyboardNavigation.TabNavigation="Local">
 
                             <!--<ctrl:ModernContentControl x:Name="PART_SelectedContentHost"
-                                                       Margin="{TemplateBinding Padding}"
                                                        Content="{TemplateBinding SelectedContent}"
                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"></ctrl:ModernContentControl>-->
                             <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                ContentSource="SelectedContent"
-                                                Margin="{TemplateBinding Padding}"
-                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                              ContentSource="SelectedContent"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
