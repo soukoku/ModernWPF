@@ -585,13 +585,13 @@ namespace ModernWPF
                     //Debug.WriteLine(wmsg);
                     switch (wmsg)
                     {
-                        case WindowMessage.WM_SETTEXT:
-                        case WindowMessage.WM_SETICON:
-                            var changed = User32Ex.ModifyStyle(hwnd, WindowStyles.WS_VISIBLE, WindowStyles.WS_OVERLAPPED);
-                            retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, lParam);
-                            if (changed) { User32Ex.ModifyStyle(hwnd, WindowStyles.WS_OVERLAPPED, WindowStyles.WS_VISIBLE); }
-                            handled = true;
-                            break;
+                        //case WindowMessage.WM_SETTEXT:
+                        //case WindowMessage.WM_SETICON:
+                        //    var changed = User32Ex.ModifyStyle(hwnd, WindowStyles.WS_VISIBLE, WindowStyles.WS_OVERLAPPED);
+                        //    retVal = User32.DefWindowProc(hwnd, (uint)msg, wParam, lParam);
+                        //    if (changed) { User32Ex.ModifyStyle(hwnd, WindowStyles.WS_OVERLAPPED, WindowStyles.WS_VISIBLE); }
+                        //    handled = true;
+                        //    break;
                         case WindowMessage.WM_NCUAHDRAWCAPTION:
                         case WindowMessage.WM_NCUAHDRAWFRAME:
                             // undocumented stuff for non-dwm themes that will sometimes draw old control buttons
