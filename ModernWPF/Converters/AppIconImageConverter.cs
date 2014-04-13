@@ -47,10 +47,9 @@ namespace ModernWPF.Converters
             try
             {
                 var exe = Assembly.GetEntryAssembly().Location;
-                StringBuilder sb = new StringBuilder(exe);
                 int r = 0;
                 // use direct pinvoke to work with unc paths
-                iconPtr = Shell32.ExtractAssociatedIcon(IntPtr.Zero, sb, ref r);
+                iconPtr = Shell32.ExtractAssociatedIcon(IntPtr.Zero, exe, ref r);
                 var img = Imaging.CreateBitmapSourceFromHIcon(iconPtr, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                 if (img.CanFreeze)
                 {
