@@ -39,24 +39,44 @@ namespace ModernWPF
         /// <typeparam name="T"></typeparam>
         /// <param name="control">The control.</param>
         /// <returns></returns>
-        public static T FindInVisualTree<T>(this DependencyObject control) where T : DependencyObject
+        public static T FindInVisualTree<T>(this DependencyObject control, bool reverse = false) where T : DependencyObject
         {
             if (control != null)
             {
                 var count = VisualTreeHelper.GetChildrenCount(control);
 
-                for (int i = 0; i < count; i++)
+                if (reverse)
                 {
-                    var c = VisualTreeHelper.GetChild(control, i);
-                    var casted = c as T;
-                    if (casted != null)
+                    for (int i = count - 1; i >= 0; i--)
                     {
-                        return casted;
+                        var c = VisualTreeHelper.GetChild(control, i);
+                        var casted = c as T;
+                        if (casted != null)
+                        {
+                            return casted;
+                        }
+                        else if (c != null)
+                        {
+                            var subHit = FindInVisualTree<T>(c);
+                            if (subHit != null) { return subHit; }
+                        }
                     }
-                    else if (c != null)
+                }
+                else
+                {
+                    for (int i = 0; i < count; i++)
                     {
-                        var subHit = FindInVisualTree<T>(c);
-                        if (subHit != null) { return subHit; }
+                        var c = VisualTreeHelper.GetChild(control, i);
+                        var casted = c as T;
+                        if (casted != null)
+                        {
+                            return casted;
+                        }
+                        else if (c != null)
+                        {
+                            var subHit = FindInVisualTree<T>(c);
+                            if (subHit != null) { return subHit; }
+                        }
                     }
                 }
             }

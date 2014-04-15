@@ -15,6 +15,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -25,8 +26,52 @@
             <Button Style="{StaticResource ModernCaptionButton}" Content="caption button 1"></Button>
             <Button Style="{StaticResource ModernCaptionButton}" Content="caption button disabled" IsEnabled="False"></Button>
         </StackPanel>
+        
+        <Menu Grid.Row="1">
+            <MenuItem Header="_FILE">
+                <MenuItem Header="has sub" IsChecked="True">
+                    <MenuItem Header="has sub">
+                        <MenuItem Header="asdf" IsChecked="True"></MenuItem>
+                        <MenuItem Header="asdf"></MenuItem>
+                        <MenuItem Header="asdf"></MenuItem>
+                        <MenuItem Header="asdf"></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="asdf"></MenuItem>
+                    <MenuItem Header="asdf"></MenuItem>
+                    <MenuItem Header="asdf"></MenuItem>
+                    <MenuItem Header="asdf"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="asdf"></MenuItem>
+                <MenuItem Header="asdf"></MenuItem>
+                <MenuItem Header="asdf"></MenuItem>
+                <MenuItem Header="asdf"></MenuItem>
+                <Separator/>
+                <MenuItem Header="asdf"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_EDIT">
+                <MenuItem Header="asdf"></MenuItem>
+                <MenuItem Header="asdf"></MenuItem>
+                <MenuItem Header="asdf">
+                    <MenuItem Header="asdf"></MenuItem>
+                    <MenuItem Header="asdf"></MenuItem>
+                    <MenuItem Header="asdf"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="asdf"></MenuItem>
+                <MenuItem Header="asdf"></MenuItem>
+                <MenuItem Header="asdf"></MenuItem>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="_VIEW">
+                <MenuItem Header="asdf"></MenuItem>
+                <MenuItem Header="asdf">
+                    <MenuItem Header="asdf"></MenuItem>
+                    <MenuItem Header="asdf"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="asdf"></MenuItem>
+            </MenuItem>
+        </Menu>
 
-        <TabControl Style="{StaticResource ModernTabControl}" Grid.Row="1" Margin="8">
+        <TabControl Style="{StaticResource ModernTabControl}" Grid.Row="2" Margin="8">
             <TabItem Header="text controls" Style="{StaticResource ModernTabItem}">
                 <modern:ModernContentControl>
                     <StackPanel Orientation="Horizontal">
@@ -201,7 +246,7 @@
             </TabItem>
         </TabControl>
 
-        <StackPanel Orientation="Vertical" Grid.Row="2">
+        <StackPanel Orientation="Vertical" Grid.Row="3">
 
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -294,7 +339,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StatusBar Grid.Row="3">
+        <StatusBar Grid.Row="4">
             <StatusBarItem Content="status 1"></StatusBarItem>
             <StatusBarItem Content="status 2"></StatusBarItem>
         </StatusBar>

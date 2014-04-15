@@ -50,6 +50,7 @@
 
     <Style TargetType="Separator" BasedOn="{StaticResource ModernSeparator}"/>
 
+    <Style TargetType="Menu" BasedOn="{StaticResource ModernMenu}"/>
     <Style TargetType="ContextMenu" BasedOn="{StaticResource ModernContextMenu}" />
 
     <Style TargetType="ListBox" BasedOn="{StaticResource ModernListBox}" />

@@ -160,7 +160,7 @@ namespace ModernWPF.Controls
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public virtual void ShowDialog(Window window)
         {
-            ShowDialog(window.FindInVisualTree<DialogControlContainer>());
+            ShowDialog(window.FindInVisualTree<DialogControlContainer>(true));
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace ModernWPF.Controls
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public virtual bool? ShowDialogModal(Window window)
         {
-            return ShowDialogModal(window.FindInVisualTree<DialogControlContainer>());
+            return ShowDialogModal(window.FindInVisualTree<DialogControlContainer>(true));
         }
 
 
