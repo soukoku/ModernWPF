@@ -38,6 +38,7 @@ namespace ModernWPF
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="control">The control.</param>
+        /// <param name="reverse">if set to <c>true</c> then find in reverse order.</param>
         /// <returns></returns>
         public static T FindInVisualTree<T>(this DependencyObject control, bool reverse = false) where T : DependencyObject
         {
@@ -57,7 +58,7 @@ namespace ModernWPF
                         }
                         else if (c != null)
                         {
-                            var subHit = FindInVisualTree<T>(c);
+                            var subHit = FindInVisualTree<T>(c, reverse);
                             if (subHit != null) { return subHit; }
                         }
                     }
@@ -74,7 +75,7 @@ namespace ModernWPF
                         }
                         else if (c != null)
                         {
-                            var subHit = FindInVisualTree<T>(c);
+                            var subHit = FindInVisualTree<T>(c, reverse);
                             if (subHit != null) { return subHit; }
                         }
                     }

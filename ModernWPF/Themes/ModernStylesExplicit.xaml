@@ -1728,6 +1728,11 @@
     <Style x:Key="ModernListBoxNoChrome" TargetType="ListBox" BasedOn="{StaticResource ModernListBox}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                <Setter Property="Background" Value="Transparent"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="ModernListBoxItem" TargetType="ListBoxItem">
@@ -2963,46 +2968,49 @@
     </Style>
 
     <ControlTemplate x:Key="ModernTopLevelHeaderTemplate" TargetType="MenuItem">
-        <Grid SnapsToDevicePixels="true" Background="{TemplateBinding Background}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="1"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                VerticalAlignment="Center" />
-            <Border x:Name="GlyphPanel" Height="22" Margin="1" Visibility="Collapsed" Width="22">
-                <Path x:Name="Glyph" Data="{StaticResource Checkmark}"
-                        Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
-                        Height="11" Width="9" />
-            </Border>
-            <ContentPresenter ContentSource="Header" Margin="{TemplateBinding Padding}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                Grid.Column="1"/>
-            <Popup x:Name="PART_Popup" AllowsTransparency="true" Focusable="false"
-                    IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                    PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
-                    Placement="Bottom" VerticalOffset="-2">
-                <Border Style="{StaticResource ContextMenuBorder}" Padding="0">
-                    <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
-                                  Style="{DynamicResource ModernMenuScrollViewer}">
-                        <!--<Grid>-->
-                        <!--<Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top"
+        <Border x:Name="Root" Background="{TemplateBinding Background}">
+            <Grid SnapsToDevicePixels="true" Margin="{TemplateBinding Padding}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="0 0 2 0"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  VerticalAlignment="Center" />
+                <Border x:Name="GlyphPanel" Visibility="Collapsed" Width="15">
+                    <Path x:Name="Glyph" Data="{StaticResource Checkmark}"
+                          Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
+                          Height="11" Width="9" HorizontalAlignment="Left" />
+                </Border>
+                <ContentPresenter ContentSource="Header" 
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                  Grid.Column="1"/>
+                <Popup x:Name="PART_Popup" AllowsTransparency="true" Focusable="false"
+                       IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                       PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+                       Placement="Bottom" VerticalOffset="-2"
+                       PlacementTarget="{Binding ElementName=Root}">
+                    <Border Style="{StaticResource ContextMenuBorder}" Padding="0">
+                        <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
+                                      Style="{DynamicResource ModernMenuScrollViewer}">
+                            <!--<Grid>-->
+                            <!--<Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top"
                                     Width="0">
                                 <Rectangle Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
                                            Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
                             </Canvas>-->
-                        <ItemsPresenter x:Name="ItemsPresenter"
+                            <ItemsPresenter x:Name="ItemsPresenter"
                                             KeyboardNavigation.DirectionalNavigation="Cycle"
                                             Grid.IsSharedSizeScope="true" 
                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                             KeyboardNavigation.TabNavigation="Cycle" />
-                        <!--</Grid>-->
-                    </ScrollViewer>
-                </Border>
-            </Popup>
-        </Grid>
+                            <!--</Grid>-->
+                        </ScrollViewer>
+                    </Border>
+                </Popup>
+            </Grid>
+        </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsSuspendingPopupAnimation" Value="true">
                 <Setter Property="PopupAnimation" TargetName="PART_Popup" Value="None" />
@@ -3023,6 +3031,46 @@
             <Trigger Property="IsSubmenuOpen" Value="true">
                 <Setter Property="Background" Value="{DynamicResource ModernForeground3}" />
                 <Setter Property="Foreground" Value="{DynamicResource ModernBackground}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ModernTopLevelItemTemplate" TargetType="MenuItem">
+        <Border x:Name="Root" Background="{TemplateBinding Background}">
+            <Grid SnapsToDevicePixels="true" Margin="{TemplateBinding Padding}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="0 0 2 0"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  VerticalAlignment="Center" />
+                <Border x:Name="GlyphPanel" Visibility="Collapsed" Width="15">
+                    <Path x:Name="Glyph" Data="{StaticResource Checkmark}"
+                          Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
+                          Height="11" Width="9" HorizontalAlignment="Left" />
+                </Border>
+                <ContentPresenter ContentSource="Header" 
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                  Grid.Column="1"/>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="true">
+                <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible" />
+                <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="true">
+                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
@@ -3103,44 +3151,6 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <ControlTemplate x:Key="ModernTopLevelItemTemplate" TargetType="MenuItem">
-        <Grid SnapsToDevicePixels="true" Background="{TemplateBinding Background}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="1"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                VerticalAlignment="Center" />
-            <Border x:Name="GlyphPanel" Height="22" Margin="1" Visibility="Hidden" Width="22">
-                <Path x:Name="Glyph" Data="{StaticResource Checkmark}"
-                        Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
-                        Height="11" Width="9" />
-            </Border>
-            <ContentPresenter ContentSource="Header" Margin="{TemplateBinding Padding}"
-                        RecognizesAccessKey="True"
-                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                  Grid.Column="1"/>
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="Icon" Value="{x:Null}">
-                <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
-            </Trigger>
-            <Trigger Property="IsChecked" Value="true">
-                <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible" />
-                <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
-            </Trigger>
-            <Trigger Property="IsHighlighted" Value="true">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
-            </Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="true">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
     <ControlTemplate x:Key="ModernSubmenuItemTemplate" TargetType="MenuItem">
         <Grid SnapsToDevicePixels="true" Background="{TemplateBinding Background}">
             <Grid.ColumnDefinitions>
@@ -3195,17 +3205,18 @@
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Template" Value="{DynamicResource ModernSubmenuItemTemplate}" />
-        <Setter Property="Padding" Value="0 4 0 6" />
+        <Setter Property="Padding" Value="0 5 0 6" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
-                <Setter Property="Padding" Value="10 4 10 6" />
+                <Setter Property="Padding" Value="12 5 12 6" />
                 <Setter Property="Template" Value="{DynamicResource ModernTopLevelHeaderTemplate}" />
+            </Trigger>
+            <Trigger Property="Role" Value="TopLevelItem">
+                <Setter Property="Padding" Value="12 5 12 6" />
+                <Setter Property="Template" Value="{DynamicResource ModernTopLevelItemTemplate}" />
             </Trigger>
             <Trigger Property="Role" Value="SubmenuHeader">
                 <Setter Property="Template" Value="{DynamicResource ModernSubmenuHeaderTemplate}" />
-            </Trigger>
-            <Trigger Property="Role" Value="TopLevelItem">
-                <Setter Property="Template" Value="{DynamicResource ModernTopLevelItemTemplate}" />
             </Trigger>
             <Trigger Property="Role" Value="SubmenuItem">
             </Trigger>
