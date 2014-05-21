@@ -745,34 +745,34 @@
                                             >
                                     <Button x:Name="ButtonMin"
                                             Command="{Binding Path=MinimizeCommand}"
-										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                            ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
                                             Style="{StaticResource ModernControlButton}">
                                         <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
                                     </Button>
                                     <Button x:Name="ButtonMax"
-										    Command="{Binding Path=MaximizeCommand}"
-										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
+                                            Command="{Binding Path=MaximizeCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                            ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
                                             Style="{StaticResource ModernControlButton}">
                                         <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
                                     </Button>
 
                                     <Button x:Name="ButtonRestore"
-										    Command="{Binding Path=RestoreCommand}"
-										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
+                                            Command="{Binding Path=RestoreCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                            ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
                                             Style="{StaticResource ModernControlButton}">
                                         <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
                                     </Button>
 
                                     <Button x:Name="ButtonClose"
-										    Command="{Binding Path=CloseCommand}"
-										    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-										    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
+                                            Command="{Binding Path=CloseCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                            ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
                                             Style="{StaticResource ModernControlButton}">
                                         <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 

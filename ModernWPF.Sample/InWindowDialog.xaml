@@ -27,8 +27,8 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="OK" x:Name="btnOk" IsDefault="True" MinWidth="75" Click="btnOk_Click" ></Button>
-            <Button Content="Cancel" x:Name="btnCancel" MinWidth="75" Click="btnCancel_Click" ></Button>
+            <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdOK], Mode=OneWay}" x:Name="btnOk" IsDefault="True" MinWidth="75" Click="btnOk_Click" ></Button>
+            <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" x:Name="btnCancel" MinWidth="75" Click="btnCancel_Click" ></Button>
         </StackPanel>
     </Grid>
 </modern:DialogControl>

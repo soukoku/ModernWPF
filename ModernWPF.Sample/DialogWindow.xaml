@@ -45,8 +45,8 @@
             </ListBox>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="OK" IsDefault="True" MinWidth="75" Click="Button_Click"></Button>
-                <Button Content="Cancel" IsCancel="True" MinWidth="75"></Button>
+                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdOK], Mode=OneWay}" IsDefault="True" MinWidth="75" Click="Button_Click"></Button>
+                <Button Content="{Binding Source={x:Static modern:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" IsCancel="True" MinWidth="75"></Button>
             </StackPanel>
         </Grid>
     </Border>
