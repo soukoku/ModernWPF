@@ -11,26 +11,8 @@ namespace ModernWPF.ViewModels
     /// <summary>
     /// A view-model for something that can be selected.
     /// </summary>
-    /// <typeparam name="TModel">The type of the model.</typeparam>
-    public abstract class SelectableViewModel<TModel> : ViewModelBase
+    public abstract class SelectableViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SelectableViewModel{TModel}"/> class.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        protected SelectableViewModel(TModel model)
-        {
-            Model = model;
-        }
-
-        /// <summary>
-        /// Gets the model.
-        /// </summary>
-        /// <value>
-        /// The model.
-        /// </value>
-        protected TModel Model { get; private set; }
-
         private bool _isSelected;
 
         /// <summary>
@@ -56,6 +38,31 @@ namespace ModernWPF.ViewModels
         protected virtual void OnSelectedChanged()
         {
         }
+
+    }
+
+    /// <summary>
+    /// A selectable view-model wrapper for another model.
+    /// </summary>
+    /// <typeparam name="TModel">The type of the model.</typeparam>
+    public abstract class SelectableViewModel<TModel> : SelectableViewModel
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectableViewModel{TModel}"/> class.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        protected SelectableViewModel(TModel model)
+        {
+            Model = model;
+        }
+
+        /// <summary>
+        /// Gets the model.
+        /// </summary>
+        /// <value>
+        /// The model.
+        /// </value>
+        protected TModel Model { get; private set; }
 
     }
 }

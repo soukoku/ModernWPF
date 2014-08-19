@@ -47,7 +47,7 @@
   <ItemGroup>
     <Reference Include="CommonWin32, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a0a4edcfe233918d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CommonWin32.2.0.5\lib\net35-Client\CommonWin32.dll</HintPath>
+      <HintPath>..\packages\CommonWin32.2.0.5.3\lib\net35-Client\CommonWin32.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="Controls\AppButton.cs" />
     <Compile Include="Controls\BorderWindow.cs" />
+    <Compile Include="Controls\BorderWindow2.cs" />
     <Compile Include="Controls\DialogControl.cs" />
     <Compile Include="Controls\DialogControlContainer.cs" />
     <Compile Include="Controls\MessageBoxControl.cs" />
