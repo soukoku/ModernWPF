@@ -44,7 +44,7 @@
   <ItemGroup>
     <Reference Include="CommonWin32, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a0a4edcfe233918d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CommonWin32.2.0.5.3\lib\net35-Client\CommonWin32.dll</HintPath>
+      <HintPath>..\packages\CommonWin32.2.0.5.4\lib\net35-Client\CommonWin32.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight">
       <HintPath>..\packages\MvvmLightLibs.4.4.32.1\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
@@ -101,6 +101,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\VersionInfo.cs" />
+    <Compile Include="VM\ItemVM.cs" />
     <Compile Include="VM\LangVM.cs" />
     <Page Include="DialogWindow.xaml">
       <SubType>Designer</SubType>
