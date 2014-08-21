@@ -2866,6 +2866,7 @@
 
     <Style x:Key="ModernMenu" TargetType="Menu">
         <Setter Property="Background" Value="{DynamicResource ModernBackground2}"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
     </Style>
 
     <Style x:Key="ModernMenuScrollButton" TargetType="RepeatButton">
@@ -3264,12 +3265,13 @@
         <Setter Property="Background" Value="Transparent" />
     </Style>
 
-    <Style x:Key="ModernListViewItemStyle" TargetType="ListViewItem">
+    <Style x:Key="ModernListViewItem" TargetType="ListViewItem">
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="4" />
         <Setter Property="Background" Value="#01000000" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="BorderThickness" Value="0 0 0 1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -3287,11 +3289,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <!--<Setter Property="Background" Value="{DynamicResource ModernAccent9}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <!--<Setter Property="Background" Value="{DynamicResource ModernAccent8}" />-->
-                <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -3301,14 +3302,14 @@
         <Setter Property="Width" Value="18" />
         <Setter Property="Height"
                 Value="{Binding Path=ActualHeight,RelativeSource={RelativeSource TemplatedParent}}" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="0 6" />
         <Setter Property="Background" Value="{DynamicResource ModernForeground4}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
                     <Border Padding="{TemplateBinding Padding}" Background="Transparent">
                         <Rectangle HorizontalAlignment="Center" Width="1"
-                                Fill="{TemplateBinding Background}" />
+                                   Fill="{TemplateBinding Background}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -3316,18 +3317,19 @@
     </Style>
 
     <Style x:Key="ModernGridViewColumnHeader" TargetType="GridViewColumnHeader">
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="8 2" />
-        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
+        <Setter Property="BorderThickness" Value="0 0 0 2" />
+        <Setter Property="Padding" Value="8 4" />
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
                     <Grid SnapsToDevicePixels="true">
-                        <Border Name="HeaderBorder" BorderThickness="0,1,0,1"
+                        <Border Name="HeaderBorder" BorderThickness="{TemplateBinding BorderThickness}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 Background="{TemplateBinding Background}">
                             <Grid>
@@ -3344,25 +3346,19 @@
                                 </Border>
                             </Grid>
                         </Border>
-                        <Border Name="HeaderHoverBorder" BorderThickness="1,0,1,1" Margin="1,1,0,0" />
-                        <Border Name="HeaderPressBorder" BorderThickness="1,1,1,0" Margin="1,0,0,1" />
                         <Canvas>
                             <Thumb x:Name="PART_HeaderGripper"
-                                    Style="{StaticResource ModernGridViewColumnHeaderGripper}" />
+                                    Style="{StaticResource ModernGridViewColumnHeaderGripper}"/>
                         </Canvas>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <!--<Setter TargetName="HeaderBorder" Property="Background"
-                                    Value="{DynamicResource ModernAccent9}" />-->
-                            <Setter TargetName="PART_HeaderGripper" Property="Background"
-                                    Value="Transparent" />
+                            <Setter TargetName="PART_HeaderGripper" Property="Background" Value="{DynamicResource ModernForeground}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="HeaderBorder" Property="Background"
-                                    Value="{DynamicResource ModernAccentLight4}" />
-                            <Setter TargetName="PART_HeaderGripper" Property="Visibility"
-                                    Value="Hidden" />
+                            <Setter TargetName="PART_HeaderGripper" Property="Background" Value="{DynamicResource ModernForeground}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
                             <Setter TargetName="HeaderContent" Property="Margin" Value="1,1,0,0" />
                         </Trigger>
                         <Trigger Property="Height" Value="Auto">
@@ -3382,7 +3378,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="GridViewColumnHeader">
                             <Canvas Name="PART_FloatingHeaderCanvas">
-                                <Rectangle Opacity="0.4697" Fill="#FF000000"
+                                <Rectangle Opacity="0.4697" Fill="{DynamicResource ModernForeground}"
                                         Width="{TemplateBinding ActualWidth}"
                                         Height="{TemplateBinding ActualHeight}" />
                             </Canvas>
@@ -3394,7 +3390,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="GridViewColumnHeader">
-                            <Border Name="HeaderBorder" BorderThickness="0,1,0,1"
+                            <Border Name="HeaderBorder" BorderThickness="{TemplateBinding BorderThickness}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     Background="{TemplateBinding Background}" />
                             <ControlTemplate.Triggers>
@@ -3576,4 +3572,6 @@
         </Setter>
     </Style>
 
+    
+    
 </ResourceDictionary>

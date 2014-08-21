@@ -26,7 +26,7 @@
             <Button Style="{StaticResource ModernCaptionButton}" Content="caption button 1"></Button>
             <Button Style="{StaticResource ModernCaptionButton}" Content="caption button disabled" IsEnabled="False"></Button>
         </StackPanel>
-        
+
         <Menu Grid.Row="1">
             <MenuItem Header="_FILE">
                 <MenuItem Header="has sub" IsChecked="True">
@@ -234,15 +234,56 @@
                     </StackPanel>
                 </modern:ModernContentControl>
             </TabItem>
+
+            <TabItem Header="grid lists" Style="{StaticResource ModernTabItem}" IsSelected="True">
+                <modern:ModernContentControl>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="ListView" ></TextBlock>
+                        <ListView Grid.Row="1" x:Name="lvSample">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Boolean}" 
+                                                    Header="Boolean" ></GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=String}" 
+                                                    Header="String" ></GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Number}" 
+                                                    Header="Number" ></GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" 
+                                                    Header="Date" ></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        
+                        <TextBlock Text="DataGrid" Grid.Column="1"></TextBlock>
+                        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="dgSample" IsReadOnly="True">
+                        </DataGrid>
+                    </Grid>
+                </modern:ModernContentControl>
+            </TabItem>
+            
             <TabItem Header="misc" Style="{StaticResource ModernTabItem}">
                 <modern:ModernContentControl>
-                    <modern:AnimatedScrollViewer HorizontalAlignment="Left" Width="120"
-                                              VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"
-                                              modern:ScrollViewerUI.OverContent="True">
-                        <Border Background="#FFF58383">
-                            <TextBlock Text="Scrollbar can also be over content"></TextBlock>
-                        </Border>
-                    </modern:AnimatedScrollViewer>
+
+                    <Grid>
+                        <modern:AnimatedScrollViewer HorizontalAlignment="Left" Width="120"
+                                                     VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"
+                                                     modern:ScrollViewerUI.OverContent="True">
+                            <Border Background="#FFF58383">
+                                <TextBlock Text="Scrollbar can also be over content"></TextBlock>
+                            </Border>
+                        </modern:AnimatedScrollViewer>
+                        
+                    </Grid>
                 </modern:ModernContentControl>
             </TabItem>
         </TabControl>

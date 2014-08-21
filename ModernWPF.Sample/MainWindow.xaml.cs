@@ -1,4 +1,5 @@
 ﻿using ModernWPF.Controls;
+using ModernWPF.Sample.VM;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,11 +28,20 @@ namespace ModernWPF.Sample
             InitializeComponent();
 
             List<string> list = new List<string>();
+            List<ItemVM> items = new List<ItemVM>();
             for (int i = 1; i <= 1000; i++)
             {
                 list.Add(string.Format("should virtual {0}", i));
+                items.Add(new ItemVM
+                {
+                    Boolean = i % 5 == 0,
+                    Number = i,
+                    String = string.Format("Item # {0}", i)
+                });
             }
             virtualListBox.ItemsSource = list;
+            lvSample.ItemsSource = items;
+            dgSample.ItemsSource = items;
         }
 
 
@@ -95,7 +105,7 @@ namespace ModernWPF.Sample
         private void btnMsgBox_Click(object sender, RoutedEventArgs e)
         {
             //ModernMessageBox.Show(this, "howdy");
-            ModernMessageBox.Show(this, 
+            ModernMessageBox.Show(this,
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus venenatis felis a luctus. Cras cursus est sed interdum consectetur. Fusce vestibulum cursus interdum. Praesent ultricies egestas dolor at elementum. Quisque et pellentesque magna, ac mattis purus. Ut pretium laoreet ullamcorper. Morbi venenatis accumsan varius. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sit amet laoreet leo. Vestibulum sodales tempus libero vitae tincidunt. Nulla facilisi. Donec posuere sapien ut interdum condimentum. Vivamus nec velit suscipit, dignissim odio a, ullamcorper arcu. Proin ac tellus enim. Quisque in cursus dolor. Curabitur adipiscing vitae sem in ornare.\n\n" +
                 "Duis in lacus volutpat, laoreet felis eget, tristique mauris. Maecenas dictum porta purus, id fringilla diam suscipit eu. Sed vitae vulputate erat. Praesent sit amet volutpat urna. Aenean id eros tincidunt, tempor nisl ut, malesuada augue. Nullam ullamcorper, sem sed consequat placerat, velit lacus porttitor velit, et suscipit ipsum nisi id lorem. Vivamus eleifend congue erat, ut rhoncus magna lacinia et.\n\n" +
                 "Maecenas in sapien vitae ligula interdum vestibulum ac ut odio. Praesent id posuere ligula. In a neque magna. Cras vestibulum fringilla urna, nec aliquam ante. Proin consectetur a enim eget varius. Aliquam vitae nulla mattis, imperdiet sapien eu, hendrerit nulla. In vel lorem mauris. Vestibulum rutrum, lorem suscipit sagittis euismod, justo nulla pharetra augue, cursus semper ante ante mollis ipsum. Phasellus volutpat augue eget consequat pretium. Vivamus sed ante vel purus hendrerit sollicitudin. Aliquam dignissim leo eu enim interdum auctor. Nam augue tortor, scelerisque facilisis turpis at, venenatis imperdiet dui. Nulla facilisi.", "Caption", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning, MessageBoxResult.No);
