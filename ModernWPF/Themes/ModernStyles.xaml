@@ -60,6 +60,12 @@
     <Style TargetType="ListViewItem" BasedOn="{StaticResource ModernListViewItem}" />
     <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource ModernGridViewColumnHeader}"/>
 
+    <Style TargetType="DataGrid" BasedOn="{StaticResource ModernDataGrid}" />
+    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource ModernDataGridColumnHeader}" />
+    <Style TargetType="DataGridRow" BasedOn="{StaticResource ModernDataGridRow}" />
+    <Style TargetType="DataGridCell" BasedOn="{StaticResource ModernDataGridCell}" />
+
+
     <Style TargetType="DatePicker" BasedOn="{StaticResource ModernDatePicker}" />
     <Style TargetType="DatePickerTextBox" BasedOn="{StaticResource ModernDatePickerTextBox}" />
     <Style TargetType="Calendar" BasedOn="{StaticResource ModernCalendar}" />

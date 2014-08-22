@@ -265,7 +265,8 @@
                         </ListView>
                         
                         <TextBlock Text="DataGrid" Grid.Column="1"></TextBlock>
-                        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="dgSample" IsReadOnly="True">
+                        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="dgSample" CanUserAddRows="True"
+                                  HorizontalScrollBarVisibility="Auto" RowHeaderWidth="30">
                         </DataGrid>
                     </Grid>
                 </modern:ModernContentControl>

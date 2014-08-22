@@ -5,7 +5,8 @@
     xmlns:local="clr-namespace:ModernWPF"
     xmlns:ctrl="clr-namespace:ModernWPF.Controls"
     xmlns:conv="clr-namespace:ModernWPF.Converters"
-    xmlns:resx="clr-namespace:ModernWPF.Resources">
+    xmlns:resx="clr-namespace:ModernWPF.Resources"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
 
     <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"-->
@@ -3279,7 +3280,8 @@
                             Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}" UseLayoutRounding="True"
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            UseLayoutRounding="True"
                             SnapsToDevicePixels="True">
                         <GridViewRowPresenter
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
@@ -3355,10 +3357,12 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="PART_HeaderGripper" Property="Background" Value="{DynamicResource ModernForeground}" />
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="PART_HeaderGripper" Property="Background" Value="{DynamicResource ModernForeground}" />
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}"/>
                             <Setter TargetName="HeaderContent" Property="Margin" Value="1,1,0,0" />
                         </Trigger>
                         <Trigger Property="Height" Value="Auto">
@@ -3404,6 +3408,435 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+
+    <!--datagrid-->
+
+    <Style x:Key="ModernDataGridSelectAllButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="BorderThickness" Value="0 0 1 2" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                                SnapsToDevicePixels="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        <Polygon x:Name="Arrow" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="{TemplateBinding Padding}" Opacity="0.4"
+                                 Fill="{TemplateBinding Foreground}" Stretch="Uniform" Points="0,10 10,10 10,0" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Arrow" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ModernDataGrid" TargetType="DataGrid">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGrid">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True"
+                            Padding="{TemplateBinding Padding}">
+                        <ScrollViewer Focusable="false" Name="DG_ScrollViewer">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="ScrollViewer">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Command="{x:Static DataGrid.SelectAllCommand}"
+                                                Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=CellsPanelHorizontalOffset}"
+                                                Style="{StaticResource ModernDataGridSelectAllButton}"
+                                                Focusable="false"
+                                                Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.All}}" />
+                                        <DataGridColumnHeadersPresenter Grid.Column="1"
+                                                           Name="PART_ColumnHeadersPresenter"
+                                                           Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Column}}"/>
+
+                                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Grid.Row="1" Grid.ColumnSpan="2" CanContentScroll="{TemplateBinding CanContentScroll}" />
+
+                                        <ScrollBar Grid.Row="1" Grid.Column="2" Name="PART_VerticalScrollBar"
+                                                   Orientation="Vertical"
+                                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                                   Value="{Binding Path=VerticalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+
+                                        <Grid Grid.Row="2" Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=NonFrozenColumnsViewportHorizontalOffset}"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <ScrollBar Grid.Column="1"
+                                                       Name="PART_HorizontalScrollBar"
+                                                       Orientation="Horizontal"
+                                                       Maximum="{TemplateBinding ScrollableWidth}"
+                                                       ViewportSize="{TemplateBinding ViewportWidth}"
+                                                       Value="{Binding Path=HorizontalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <!--<MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsGrouping" Value="true" />
+                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false" />
+                </MultiTrigger.Conditions>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+            </MultiTrigger>-->
+        </Style.Triggers>
+    </Style>
+
+    <!--<Style x:Key="{x:Type DataGridColumnHeadersPresenter}" TargetType="{x:Type DataGridColumnHeadersPresenter}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeadersPresenter}">
+                    <Grid>
+                        <DataGridColumnHeader IsHitTestVisible="False" Name="PART_FillerColumnHeader"/>
+                        <ItemsPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+
+    <Style x:Key="ModernColumnHeaderGripper" TargetType="Thumb">
+        <Setter Property="Width" Value="8"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="SizeWE"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ModernRowHeaderGripper" TargetType="Thumb">
+        <Setter Property="Height" Value="8"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="SizeNS"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Border Padding="{TemplateBinding Padding}"
+                      Background="{TemplateBinding Background}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--<Style x:Key="{x:Static DataGridColumnHeader.ColumnFloatingHeaderStyleKey}" TargetType="{x:Type Control}">
+        <Setter Property="Opacity" Value="0.6"/>
+        <Setter Property="BorderBrush" Value="#FF688CAF"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Control}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              Padding ="{TemplateBinding Padding}"
+                              Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Canvas Name="PART_VisualBrushCanvas" Margin="{TemplateBinding Margin}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <!--<Style x:Key="{x:Static DataGridColumnHeader.ColumnHeaderDropSeparatorStyleKey}" TargetType="{x:Type Separator}">
+        <Setter Property="Background" Value="#FF000080" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Border Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              SnapsToDevicePixels="True">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+
+
+    <Style x:Key="ModernDataGridColumnHeader" TargetType="DataGridColumnHeader">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="BorderThickness" Value="0 0 0 2" />
+        <Setter Property="Padding" Value="8 4" />
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Grid>
+                        <Border Name="HeaderBorder" BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition MaxHeight="7" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Border Grid.RowSpan="2" Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter Name="HeaderContent" Margin="0,0,0,1"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            RecognizesAccessKey="True"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Border>
+                                <TextBlock Style="{StaticResource MarlettGlyph}" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                           Text="t" x:Name="SortAsc" Visibility="Collapsed" Margin="0 -2 0 0"></TextBlock>
+                                <TextBlock Style="{StaticResource MarlettGlyph}" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                           Text="u" x:Name="SortDesc" Visibility="Collapsed" Margin="0 -4 0 0"></TextBlock>
+                            </Grid>
+                        </Border>
+                        <Canvas>
+                            <Thumb x:Name="Separator"
+                                    Style="{StaticResource ModernGridViewColumnHeaderGripper}"/>
+                        </Canvas>
+                        <Thumb x:Name="PART_LeftHeaderGripper"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource ModernColumnHeaderGripper}"/>
+                        <Thumb x:Name="PART_RightHeaderGripper"
+                               HorizontalAlignment="Right"
+                               Style="{StaticResource ModernColumnHeaderGripper}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Separator" Property="Background" Value="{DynamicResource ModernForeground}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                            <!--<Setter Property="Background" Value="{DynamicResource ModernBackground2}"/>-->
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="Separator" Property="Background" Value="{DynamicResource ModernForeground}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                            <!--<Setter Property="Background" Value="{DynamicResource ModernBackground2}"/>-->
+                            <Setter TargetName="HeaderContent" Property="Margin" Value="1,1,0,0" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="SortAsc" Property="Visibility" Value="Visible"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                            <Setter TargetName="Separator" Property="Background" Value="{DynamicResource ModernForeground}" />
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="SortDesc" Property="Visibility" Value="Visible"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                            <Setter TargetName="Separator" Property="Background" Value="{DynamicResource ModernForeground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ModernDataGridRowHeader" TargetType="DataGridRowHeader">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="BorderThickness" Value="0 0 1 1" />
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ModernDataGridRow" TargetType="DataGridRow">
+        <Setter Property="Background" Value="Transparent"/>
+        <!--<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />-->
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+        <Setter Property="ValidationErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" Foreground="Red" Text="!" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridRow">
+                    <Border x:Name="DGR_Border"
+                      Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      SnapsToDevicePixels="True">
+                        <SelectiveScrollingGrid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DataGridCellsPresenter Grid.Column="1"
+                                             ItemsPanel="{TemplateBinding ItemsPanel}"
+                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+
+                            <DataGridDetailsPresenter  SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=AreRowDetailsFrozen, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}}"
+                                                Grid.Column="1" Grid.Row="1"
+                                                Visibility="{TemplateBinding DetailsVisibility}" />
+
+                            <DataGridRowHeader SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"  Grid.RowSpan="2"
+                                               Style="{StaticResource ModernDataGridRowHeader}"
+                                               Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Row}}"/>
+                        </SelectiveScrollingGrid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
+            </Trigger>
+            <!--<Trigger Property="IsNewItem" Value="True">
+                <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=NewItemMargin}"/>
+            </Trigger>-->
+        </Style.Triggers>
+    </Style>
+
+    <!--<Style x:Key="{x:Type DataGridCellsPresenter}" TargetType="{x:Type DataGridCellsPresenter}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCellsPresenter}">
+                    <ItemsPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <!--<SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}"
+                       Color="#FF000000" />-->
+
+    <Style x:Key="ModernDataGridCell" TargetType="DataGridCell">
+        <!--<Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />-->
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Border x:Name="Border" Margin="{TemplateBinding Margin}"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            UseLayoutRounding="True"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <!--<Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}" />-->
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true"/>
+                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <!--<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>-->
+            </MultiTrigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--<Style x:Key="{x:Static DataGridComboBoxColumn.TextBlockComboBoxStyleKey}" TargetType="{x:Type ComboBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <ContentPresenter Margin="1,1,1,1"
+                                Content="{TemplateBinding SelectionBoxItem}"
+                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                IsHitTestVisible="false" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+
+
 
     <!--tabs-->
 
@@ -3572,6 +4005,6 @@
         </Setter>
     </Style>
 
-    
-    
+
+
 </ResourceDictionary>
