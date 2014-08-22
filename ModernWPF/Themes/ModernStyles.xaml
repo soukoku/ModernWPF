@@ -34,7 +34,6 @@
     <Style TargetType="PasswordBox" BasedOn="{StaticResource ModernPasswordBox}"/>
 
     <Style TargetType="ComboBox" BasedOn="{StaticResource ModernComboBox}"/>
-    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource ModernComboBoxItem}"/>
 
     <Style TargetType="ProgressBar" BasedOn="{StaticResource ModernProgressBar}"/>
 
@@ -54,16 +53,11 @@
     <Style TargetType="ContextMenu" BasedOn="{StaticResource ModernContextMenu}" />
 
     <Style TargetType="ListBox" BasedOn="{StaticResource ModernListBox}" />
-    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ModernListBoxItem}" />
 
     <Style TargetType="ListView" BasedOn="{StaticResource ModernListView}" />
-    <Style TargetType="ListViewItem" BasedOn="{StaticResource ModernListViewItem}" />
     <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource ModernGridViewColumnHeader}"/>
 
     <Style TargetType="DataGrid" BasedOn="{StaticResource ModernDataGrid}" />
-    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource ModernDataGridColumnHeader}" />
-    <Style TargetType="DataGridRow" BasedOn="{StaticResource ModernDataGridRow}" />
-    <Style TargetType="DataGridCell" BasedOn="{StaticResource ModernDataGridCell}" />
 
 
     <Style TargetType="DatePicker" BasedOn="{StaticResource ModernDatePicker}" />
