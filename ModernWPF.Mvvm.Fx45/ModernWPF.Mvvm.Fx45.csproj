@@ -67,6 +67,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\AppCloseMessage.cs" />
+    <Compile Include="Messages\AppClosingMessage.cs" />
     <Compile Include="Messages\ChooseFileMessage.cs" />
     <Compile Include="Messages\ChooseFolderMessage.cs" />
     <Compile Include="Messages\MessageRoutine.cs" />

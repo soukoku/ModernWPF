@@ -105,6 +105,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\AppCloseMessage.cs">
+      <Link>Messages\AppCloseMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\AppClosingMessage.cs">
+      <Link>Messages\AppClosingMessage.cs</Link>
+    </Compile>
     <Compile Include="..\ModernWPF.Mvvm.Fx45\Messages\ChooseFileMessage.cs">
       <Link>Messages\ChooseFileMessage.cs</Link>
     </Compile>

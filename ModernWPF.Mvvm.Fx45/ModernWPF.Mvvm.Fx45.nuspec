@@ -14,14 +14,17 @@
     <releaseNotes>If using this under Framework 4.0 you will need to get the Microsoft.Bcl.Async package and the updated versions of its dependencies (Microsoft.Bcl and Microsoft.Bcl.Build).</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>metro modern wpf mvvm</tags>
-    <dependencies>
+    <!--addl cmd to pack -IncludeReferencedProjects-->
+    <!--<dependencies>
       <group>
-        <dependency id="ModernWPF" version="1.1.44" />
+        <dependency id="ModernWPF" version="1.1.45" />
       </group>
-      <!--<group targetFramework="net40-Client">
+      <group targetFramework="net45">
+      </group>
+      <group targetFramework="net40-Client">
         <dependency id="Microsoft.Bcl.Async" version="1.0.165" />
-      </group>-->
-    </dependencies>
+      </group>
+    </dependencies>-->
   </metadata>
   <files>
     <file src="bin\$configuration$\$id$.pdb" target="lib\net45"/>

@@ -22,9 +22,20 @@ namespace ModernWPF.Messages
         /// <param name="owner">The owner.</param>
         /// <param name="message">The message.</param>
         /// <returns></returns>
-        public static MessageBoxResult HandleDialogMessage(this Window owner, DialogMessage message)
+        public static MessageBoxResult HandleDialogMessageModern(this Window owner, DialogMessage message)
         {
             return ModernMessageBox.Show(owner, message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult);
+        }
+
+        /// <summary>
+        /// Handles a basic <see cref="DialogMessage" /> on a window by showing built-in <see cref="MessageBox"/>.
+        /// </summary>
+        /// <param name="owner">The owner.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
+        public static MessageBoxResult HandleDialogMessagePlatform(this Window owner, DialogMessage message)
+        {
+            return MessageBox.Show(owner, message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult, message.Options);
         }
 
 
