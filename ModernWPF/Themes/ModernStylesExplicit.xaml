@@ -2600,8 +2600,8 @@
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+        <!--<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>-->
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>

@@ -305,40 +305,45 @@ namespace ModernWPF.ViewModels
 
         RETRY:
 
-            var data = new NewPageData<TItem>(page);
+            NewPageData<TItem> data = null;
 
             try
             {
-                await OnRetrieveItems(data);
+                data = await OnRetrieveItems(page);
             }
             catch (Exception ex)
             {
                 OnLoadError(ex);
             }
-
-            var newTotalPgs = ((data.TotalCount - 1) / PageSize) + 1;
-
-            if (page > newTotalPgs)
+            if (data != null)
             {
-                // auto retry a previous pg
-                page = newTotalPgs - 1;
-                goto RETRY;
-            }
+                var newTotalPgs = ((data.Total - 1) / PageSize) + 1;
 
-            if (data.Behavior == NewItemBehavior.Replace)
-            {
-                _items.Clear();
-            }
-            foreach (var it in data.NewItems)
-            {
-                _items.Add(it);
-            }
+                if (page > newTotalPgs)
+                {
+                    // auto retry a previous pg
+                    page = newTotalPgs - 1;
+                    goto RETRY;
+                }
 
-            _currentPage = page;
-            _totalPages = newTotalPgs;
+                if (data.Behavior == NewItemBehavior.Replace)
+                {
+                    _items.Clear();
+                }
+                if (data.Items != null)
+                {
+                    foreach (var it in data.Items)
+                    {
+                        _items.Add(it);
+                    }
+                }
+
+                _currentPage = page;
+                _totalPages = newTotalPgs;
+                TotalItemCount = data.Total;
+            }
 
             IsLoading = false;
-            TotalItemCount = data.TotalCount;
             RaisePropertyChanged(() => this.CurrentPage);
             RaisePropertyChanged(() => this.TotalPages);
             if (_firstPageCommand != null) { _firstPageCommand.RaiseCanExecuteChanged(); }
@@ -358,9 +363,9 @@ namespace ModernWPF.ViewModels
         /// <summary>
         /// Called when items needs to be retrieved. Populate the new items on the provided data object.
         /// </summary>
-        /// <param name="data">The data to populate the retrieved item info.</param>
+        /// <param name="newPage">the new page number to retrive items for.</param>
         /// <returns></returns>
-        protected abstract Task OnRetrieveItems(NewPageData<TItem> data);
+        protected abstract Task<NewPageData<TItem>> OnRetrieveItems(int newPage);
 
         #endregion
     }
@@ -370,20 +375,6 @@ namespace ModernWPF.ViewModels
     /// </summary>
     public class NewPageData<TItem>
     {
-        internal NewPageData(int newPage)
-        {
-            NewItems = new List<TItem>();
-            NewPage = newPage;
-        }
-
-        /// <summary>
-        /// Gets the new page number to retrive items for.
-        /// </summary>
-        /// <value>
-        /// The new page.
-        /// </value>
-        public int NewPage { get; private set; }
-
         private int _total;
         /// <summary>
         /// Gets/sets the total items count across all pages.
@@ -391,7 +382,7 @@ namespace ModernWPF.ViewModels
         /// <value>
         /// The total count.
         /// </value>
-        public int TotalCount
+        public int Total
         {
             get { return _total; }
             set
@@ -409,7 +400,7 @@ namespace ModernWPF.ViewModels
         /// <value>
         /// The new items.
         /// </value>
-        public ICollection<TItem> NewItems { get; private set; }
+        public ICollection<TItem> Items { get; set; }
 
         /// <summary>
         /// Gets or sets the collection behavior on new items.
