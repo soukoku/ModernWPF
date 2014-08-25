@@ -13,7 +13,7 @@ namespace ModernWPF.Converters
     /// Inverts a boolean value.
     /// </summary>
     [ValueConversion(typeof(bool), typeof(bool))]
-    public class BoolNot : IValueConverter
+    public class BoolNotConverter : IValueConverter
     {
         #region IValueConverter Members
 
