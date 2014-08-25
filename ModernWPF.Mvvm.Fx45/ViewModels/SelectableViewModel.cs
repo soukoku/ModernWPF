@@ -64,5 +64,13 @@ namespace ModernWPF.ViewModels
         /// </value>
         protected TModel Model { get; private set; }
 
+
+        /// <summary>
+        /// Raises property changed event on the model.
+        /// </summary>
+        public void UpdateModelProperties()
+        {
+            RaisePropertyChanged(() => this.Model);
+        }
     }
 }

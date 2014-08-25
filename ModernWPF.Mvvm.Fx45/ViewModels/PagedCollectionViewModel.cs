@@ -97,6 +97,25 @@ namespace ModernWPF.ViewModels
             }
         }
 
+        private int _totalItemCount;
+
+        /// <summary>
+        /// Gets the total item count across all pages.
+        /// </summary>
+        /// <value>
+        /// The total item count.
+        /// </value>
+        public int TotalItemCount
+        {
+            get { return _totalItemCount; }
+            private set
+            {
+                _totalItemCount = value;
+                RaisePropertyChanged(() => TotalItemCount);
+            }
+        }
+
+
         private ObservableCollection<TItem> _items;
         /// <summary>
         /// Gets the items.
@@ -319,6 +338,7 @@ namespace ModernWPF.ViewModels
             _totalPages = newTotalPgs;
 
             IsLoading = false;
+            TotalItemCount = data.TotalCount;
             RaisePropertyChanged(() => this.CurrentPage);
             RaisePropertyChanged(() => this.TotalPages);
             if (_firstPageCommand != null) { _firstPageCommand.RaiseCanExecuteChanged(); }
