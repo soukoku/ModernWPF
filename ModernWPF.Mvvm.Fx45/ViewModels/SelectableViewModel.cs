@@ -45,7 +45,7 @@ namespace ModernWPF.ViewModels
     /// A selectable view-model wrapper for another model.
     /// </summary>
     /// <typeparam name="TModel">The type of the model.</typeparam>
-    public abstract class SelectableViewModel<TModel> : SelectableViewModel
+    public class SelectableViewModel<TModel> : SelectableViewModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectableViewModel{TModel}"/> class.
