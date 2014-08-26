@@ -62,7 +62,7 @@ namespace ModernWPF.ViewModels
         /// <value>
         /// The model.
         /// </value>
-        protected TModel Model { get; private set; }
+        public TModel Model { get; private set; }
 
 
         /// <summary>

@@ -127,7 +127,10 @@ namespace ModernWPF.Messages
             {
                 using (Process.Start("explorer", message.FolderPath)) { }
             }
-            using (Process.Start("explorer")) { }
+            else
+            {
+                using (Process.Start("explorer")) { }
+            }
         }
 
 
@@ -141,7 +144,7 @@ namespace ModernWPF.Messages
         /// or
         /// message
         /// </exception>
-        public static void HandleChooseFolder(Window owner, ChooseFolderMessage message)
+        public static void HandleChooseFolder(this Window owner, ChooseFolderMessage message)
         {
             if (owner == null) { throw new ArgumentNullException("owner"); }
             if (message == null) { throw new ArgumentNullException("message"); }
