@@ -123,7 +123,7 @@ namespace ModernWPF.Messages
             {
                 using (Process.Start("explorer", string.Format("/select,{0}", message.SelectedPath))) { }
             }
-            else if (string.IsNullOrEmpty(message.FolderPath))
+            else if (!string.IsNullOrEmpty(message.FolderPath))
             {
                 using (Process.Start("explorer", message.FolderPath)) { }
             }
