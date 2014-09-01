@@ -1,7 +1,10 @@
-﻿using ModernWPF.Controls;
+﻿using GalaSoft.MvvmLight.Messaging;
+using ModernWPF.Controls;
+using ModernWPF.Messages;
 using ModernWPF.Sample.VM;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -27,40 +30,18 @@ namespace ModernWPF.Sample
         {
             InitializeComponent();
 
-            List<string> list = new List<string>();
-            List<ItemVM> items = new List<ItemVM>();
-            for (int i = 1; i <= 1000; i++)
+            if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                list.Add(string.Format("should virtual {0}", i));
-                items.Add(new ItemVM
-                {
-                    Boolean = i % 5 == 0,
-                    Number = i,
-                    String = string.Format("Item # {0}", i)
-                });
-            }
-            virtualListBox.ItemsSource = list;
-            lvSample.ItemsSource = items;
-            dgSample.ItemsSource = items;
-        }
-
-
-        private void btnTheme_Click(object sender, RoutedEventArgs e)
-        {
-            if (ModernTheme.CurrentTheme.GetValueOrDefault() == ModernTheme.Theme.Dark)
-            {
-                ModernTheme.ApplyTheme(ModernTheme.Theme.Light, ModernTheme.CurrentAccent);
-            }
-            else
-            {
-                ModernTheme.ApplyTheme(ModernTheme.Theme.Dark, ModernTheme.CurrentAccent);
+                Messenger.Default.Register<DialogMessage>(this, m => { if (m.Sender == this) { this.HandleDialogMessageModern(m); } });
+                Messenger.Default.Register<ChooseFileMessage>(this, m => { if (m.Sender == this) { this.HandleChooseFile(m); } });
+                Messenger.Default.Register<ChooseFolderMessage>(this, m => { if (m.Sender == this) { this.HandleChooseFolder(m); } });
             }
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        protected override void OnClosed(EventArgs e)
         {
-            var selected = (sender as RadioButton).DataContext as Accent;
-            ModernTheme.ApplyTheme(ModernTheme.CurrentTheme.GetValueOrDefault(), selected);
+            Messenger.Default.Unregister(this);
+            base.OnClosed(e);
         }
 
         private void btnRtl_Click(object sender, RoutedEventArgs e)
@@ -119,6 +100,13 @@ namespace ModernWPF.Sample
             btnLang.ContextMenu.Placement = PlacementMode.Top;
             btnLang.ContextMenu.PlacementTarget = btnLang;
             btnLang.ContextMenu.IsOpen = true;
+        }
+
+        private void btnSysDiag_Click(object sender, RoutedEventArgs e)
+        {
+            btnSysDiag.ContextMenu.Placement = PlacementMode.Top;
+            btnSysDiag.ContextMenu.PlacementTarget = btnSysDiag;
+            btnSysDiag.ContextMenu.IsOpen = true;
         }
     }
 }

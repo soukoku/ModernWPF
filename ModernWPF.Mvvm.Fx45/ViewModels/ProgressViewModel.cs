@@ -19,7 +19,7 @@ namespace ModernWPF.ViewModels
         /// <param name="state">The state.</param>
         /// <param name="progressPercent">The progress percent (0 to 1).</param>
         /// <param name="info">The extra information.</param>
-        public void UpdateState(TaskbarItemProgressState state, double progressPercent, string info = null)
+        public void UpdateState(TaskbarItemProgressState state, double progressPercent = 0, string info = null)
         {
             Info = info;
             State = state;

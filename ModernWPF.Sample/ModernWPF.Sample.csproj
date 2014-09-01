@@ -101,8 +101,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\VersionInfo.cs" />
+    <Compile Include="VM\AccentVM.cs" />
     <Compile Include="VM\ItemVM.cs" />
-    <Compile Include="VM\LangVM.cs" />
+    <Compile Include="VM\CultureInfoVM.cs" />
+    <Compile Include="VM\SampleAppVM.cs" />
     <Page Include="DialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

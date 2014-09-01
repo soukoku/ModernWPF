@@ -5,12 +5,13 @@
         xmlns:local="clr-namespace:ModernWPF.Sample"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:vm="clr-namespace:ModernWPF.Sample.VM"
-        Title="ModernWPF - Test" Height="610" Width="850"
-        ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
-        Style="{StaticResource ModernWindowFull}">
+        x:Name="theWindow"
+        Title="ModernWPF - Test" Height="610" Width="880"
+        ResizeMode="CanResizeWithGrip" 
+        Style="{StaticResource ModernWindowFull}"
+        DataContext="{StaticResource appVM}">
     <Window.Resources>
         <sys:String x:Key="shortString">Lorem ipsum dolor sit amet</sys:String>
-        <vm:SupportedLangs x:Key="Langs"></vm:SupportedLangs>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -229,7 +230,7 @@
                             <ListBoxItem Content="disabled list 1"></ListBoxItem>
                             <ListBoxItem Content="disabled list 2"></ListBoxItem>
                         </ListBox>
-                        <ListBox Margin="2" DockPanel.Dock="Top" x:Name="virtualListBox">
+                        <ListBox Margin="2" DockPanel.Dock="Top" x:Name="virtualListBox" ItemsSource="{Binding Strings}">
                         </ListBox>
                     </StackPanel>
                 </modern:ModernContentControl>
@@ -249,7 +250,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="ListView" ></TextBlock>
-                        <ListView Grid.Row="1" x:Name="lvSample">
+                        <ListView Grid.Row="1" x:Name="lvSample" ItemsSource="{Binding Items}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Boolean}" 
@@ -266,7 +267,7 @@
                         
                         <TextBlock Text="DataGrid" Grid.Column="1"></TextBlock>
                         <DataGrid Grid.Row="1" Grid.Column="1" x:Name="dgSample" CanUserAddRows="True"
-                                  HorizontalScrollBarVisibility="Auto" RowHeaderWidth="30">
+                                  HorizontalScrollBarVisibility="Auto" RowHeaderWidth="30" ItemsSource="{Binding Items}">
                         </DataGrid>
                     </Grid>
                 </modern:ModernContentControl>
@@ -316,8 +317,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <ItemsControl  DataContext="{Binding Source={x:Static modern:ModernTheme.PredefinedAccents}}" ItemsSource="{Binding}"
-                            HorizontalAlignment="Center">
+            <ItemsControl ItemsSource="{Binding Accents}" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" />
@@ -325,11 +325,8 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <RadioButton GroupName="GroupColor" Margin="4"
-                                     ToolTip="{Binding Name}"
-                                         Checked="RadioButton_Checked">
-                            <Rectangle Width="32" Height="32" Margin="0 0 2 2"
-                                           Fill="{Binding MainBrush}" />
+                        <RadioButton GroupName="GroupColor" Margin="4" ToolTip="{Binding Model.Name}" IsChecked="{Binding IsSelected}">
+                            <Rectangle Width="32" Height="32" Margin="0 0 2 2" Fill="{Binding Model.MainBrush}" />
                         </RadioButton>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -363,21 +360,34 @@
                 <modern:AppButton Text="_another window" x:Name="btnWindow" Click="btnWindow_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="_normal dialog" x:Name="btnDialog" Click="btnDialog_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="in window dialog" x:Name="btnDialog2" Click="btnDialog2_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
+
+                <modern:AppButton Text="sys dialog" x:Name="btnSysDiag" Click="btnSysDiag_Click" Content="{StaticResource IconWindow}"
+                                  Tag="{Binding ElementName=theWindow}">
+                    <modern:AppButton.ContextMenu>
+                        <ContextMenu VerticalOffset="-4">
+                            <MenuItem Header="File save" x:Name="miFileSave" Command="{Binding SaveFileCommand}" CommandParameter="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"></MenuItem>
+                            <MenuItem Header="File open" x:Name="miFileOpen" Command="{Binding OpenFileCommand}" CommandParameter="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"></MenuItem>
+                            <MenuItem Header="Folder select" x:Name="miFolder" Command="{Binding ChooseFolderCommand}" CommandParameter="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}"></MenuItem>
+                        </ContextMenu>
+                    </modern:AppButton.ContextMenu>
+                </modern:AppButton>
+                
                 <modern:AppButton Text="msg window" x:Name="btnMsgWindow" Click="btnMsgWindow_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="msg box" x:Name="btnMsgBox" Click="btnMsgBox_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="msg box lang" x:Name="btnLang" Click="btnLang_Click" Content="{StaticResource IconBook}">
                     <modern:AppButton.ContextMenu>
-                        <ContextMenu DataContext="{StaticResource Langs}" ItemsSource="{Binding Items}" VerticalOffset="-4">
+                        <ContextMenu ItemsSource="{Binding Languages}" VerticalOffset="-4">
                             <ContextMenu.ItemContainerStyle>
                                 <Style TargetType="MenuItem" BasedOn="{StaticResource ModernMenuItem}">
                                     <Setter Property="IsCheckable" Value="True"></Setter>
                                     <Setter Property="IsChecked" Value="{Binding IsSelected}"></Setter>
+                                    <Setter Property="modern:MenuItemUI.GroupName" Value="langGrp"></Setter>
                                 </Style>
                             </ContextMenu.ItemContainerStyle>
                         </ContextMenu>
                     </modern:AppButton.ContextMenu>
                 </modern:AppButton>
-                <modern:AppButton Text="toggle theme" x:Name="btnTheme" Click="btnTheme_Click" Content="{StaticResource IconCrown}"></modern:AppButton>
+                <modern:AppButton Text="toggle theme" x:Name="btnTheme" Command="{Binding ToggleThemeCommand}" Content="{StaticResource IconCrown}"></modern:AppButton>
                 <modern:AppButton Text="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click" Content="{StaticResource IconBaby}"></modern:AppButton>
             </StackPanel>
         </StackPanel>

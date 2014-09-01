@@ -11,7 +11,7 @@ using System.Windows.Input;
 namespace ModernWPF
 {
     /// <summary>
-    /// Contains various attached properties for <see cref="ScrollViewer"/> using the modern theme..
+    /// Contains various attached properties for <see cref="ScrollViewer"/> using the modern theme.
     /// </summary>
     public static class ScrollViewerUI
     {

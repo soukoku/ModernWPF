@@ -92,6 +92,7 @@
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HSLColor.cs" />
+    <Compile Include="MenuItemUI.cs" />
     <Compile Include="ModernExtensions.cs" />
     <Compile Include="Chrome.cs" />
     <Compile Include="ModernTheme.cs" />
@@ -122,7 +123,9 @@
     <EmbeddedResource Include="Resources\CommandText.zh-Hans.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\CommandText.zh-Hant.resx" />
+    <EmbeddedResource Include="Resources\CommandText.zh-Hant.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="ModernWPF.nuspec">
       <SubType>Designer</SubType>
     </None>
