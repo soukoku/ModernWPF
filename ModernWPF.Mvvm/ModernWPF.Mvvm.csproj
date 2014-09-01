@@ -149,6 +149,9 @@
     <Compile Include="..\ModernWPF.Mvvm.Fx45\ViewModels\SelectableViewModel.cs">
       <Link>ViewModels\SelectableViewModel.cs</Link>
     </Compile>
+    <Compile Include="..\ModernWPF.Mvvm.Fx45\ViewModels\StatusViewModel.cs">
+      <Link>ViewModels\StatusViewModel.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

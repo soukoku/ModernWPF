@@ -14,14 +14,22 @@ namespace ModernWPF.ViewModels
     public class ProgressViewModel : ViewModelBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="ProgressViewModel"/> class.
+        /// </summary>
+        public ProgressViewModel()
+        {
+            Info = new StatusViewModel();
+        }
+
+        /// <summary>
         /// Updates the progress state.
         /// </summary>
         /// <param name="state">The state.</param>
         /// <param name="progressPercent">The progress percent (0 to 1).</param>
         /// <param name="info">The extra information.</param>
-        public void UpdateState(TaskbarItemProgressState state, double progressPercent = 0, string info = null)
+        public void UpdateState(TaskbarItemProgressState state, double progressPercent = 0, string info = null, StatusType infoType = StatusType.Info)
         {
-            Info = info;
+            Info.Update(info, infoType);
             State = state;
 
             var val = progressPercent * Maximum;
@@ -67,7 +75,7 @@ namespace ModernWPF.ViewModels
         /// <value>
         /// The information.
         /// </value>
-        public string Info { get; private set; }
+        public StatusViewModel Info { get; private set; }
 
         /// <summary>
         /// Gets the maximum for data-binding purposes.

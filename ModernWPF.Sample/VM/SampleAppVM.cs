@@ -2,12 +2,14 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using ModernWPF.Messages;
+using ModernWPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -37,6 +39,8 @@ namespace ModernWPF.Sample.VM
                 });
             }
             Accents = ModernTheme.PredefinedAccents.Select(a => new AccentVM(a)).ToList();
+
+            Progress = new ProgressViewModel();
         }
 
         public List<AccentVM> Accents { get; private set; }
@@ -46,6 +50,39 @@ namespace ModernWPF.Sample.VM
         public List<ItemVM> Items { get; private set; }
 
         public List<string> Strings { get; private set; }
+
+        public ProgressViewModel Progress { get; private set; }
+
+        private RelayCommand _testProgressCmd;
+        public ICommand TestProgressCommand
+        {
+            get
+            {
+                if (_testProgressCmd == null)
+                {
+                    _testProgressCmd = new RelayCommand(() =>
+                    {
+                        ThreadPool.QueueUserWorkItem(o =>
+                        {
+                            for (double i = 0; i < 100; i++)
+                            {
+                                Progress.UpdateState(System.Windows.Shell.TaskbarItemProgressState.Normal, i / 100, "Progres = " + i);
+                                Thread.Sleep(60);
+                            }
+                            Progress.UpdateState(System.Windows.Shell.TaskbarItemProgressState.None);
+                            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                _testProgressCmd.RaiseCanExecuteChanged();
+                            }));
+                        });
+                    }, () =>
+                    {
+                        return !Progress.IsBusy;
+                    });
+                }
+                return _testProgressCmd;
+            }
+        }
 
         private ICommand _toggleThemeCmd;
         public ICommand ToggleThemeCommand

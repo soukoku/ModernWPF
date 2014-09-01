@@ -81,6 +81,7 @@
     <Compile Include="Controls\ModernMessageBox.xaml.cs">
       <DependentUpon>ModernMessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TileView.cs" />
     <Compile Include="Converters\AppIconImageConverter.cs" />
     <Compile Include="Converters\BoolNotConverter.cs" />
     <Compile Include="Converters\FileIconConverter.cs" />

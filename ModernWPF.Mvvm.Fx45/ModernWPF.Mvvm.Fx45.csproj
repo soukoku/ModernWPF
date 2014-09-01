@@ -89,6 +89,7 @@
     <Compile Include="ViewModels\PagedCollectionViewModel.cs" />
     <Compile Include="ViewModels\ProgressViewModel.cs" />
     <Compile Include="ViewModels\SelectableViewModel.cs" />
+    <Compile Include="ViewModels\StatusViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />

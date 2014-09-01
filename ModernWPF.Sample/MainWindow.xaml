@@ -209,6 +209,9 @@
 
                             <ProgressBar Maximum="100" Value="50" Margin="0 10"></ProgressBar>
                             <ProgressBar IsIndeterminate="True" Margin="0 10"></ProgressBar>
+                            <ProgressBar DataContext="{Binding Progress}" Maximum="{Binding Maximum, Mode=OneWay}" Value="{Binding Value, Mode=OneWay}" Margin="0 10"></ProgressBar>
+                            <TextBlock Text="{Binding Progress.Info}"></TextBlock>
+                            <Button Content="Test Progress" Command="{Binding TestProgressCommand}"></Button>
                         </StackPanel>
                     </StackPanel>
                 </modern:ModernContentControl>
