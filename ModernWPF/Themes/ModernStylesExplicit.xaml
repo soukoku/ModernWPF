@@ -3210,14 +3210,14 @@
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Template" Value="{DynamicResource ModernSubmenuItemTemplate}" />
-        <Setter Property="Padding" Value="0 5 0 6" />
+        <Setter Property="Padding" Value="0 4 0 5" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
-                <Setter Property="Padding" Value="12 5 12 6" />
+                <Setter Property="Padding" Value="10 3 10 4" />
                 <Setter Property="Template" Value="{DynamicResource ModernTopLevelHeaderTemplate}" />
             </Trigger>
             <Trigger Property="Role" Value="TopLevelItem">
-                <Setter Property="Padding" Value="12 5 12 6" />
+                <Setter Property="Padding" Value="10 3 10 4" />
                 <Setter Property="Template" Value="{DynamicResource ModernTopLevelItemTemplate}" />
             </Trigger>
             <Trigger Property="Role" Value="SubmenuHeader">

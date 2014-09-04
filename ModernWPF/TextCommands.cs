@@ -27,7 +27,11 @@ namespace ModernWPF
                 {
                     _clearTextBoxCommand = new RelayCommand<TextBox>(box =>
                     {
-                        if (box != null) { box.Clear(); }
+                        if (box != null)
+                        {
+                            box.Clear();
+                            box.Focus();
+                        }
                     }, box =>
                     {
                         return box != null && !box.IsReadOnly && !string.IsNullOrEmpty(box.Text);
@@ -52,7 +56,11 @@ namespace ModernWPF
                 {
                     _clearPasswordBoxCommand = new RelayCommand<PasswordBox>(box =>
                     {
-                        if (box != null) { box.Clear(); }
+                        if (box != null)
+                        {
+                            box.Clear();
+                            box.Focus();
+                        }
                     }, box =>
                     {
                         return box != null && box.SecurePassword.Length > 0;
