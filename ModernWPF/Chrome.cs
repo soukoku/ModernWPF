@@ -585,6 +585,27 @@ namespace ModernWPF
                     //Debug.WriteLine(wmsg);
                     switch (wmsg)
                     {
+                        case WindowMessage.WM_MOUSEHWHEEL:
+                            // do our own horizontal wheel event
+                            var element = Mouse.DirectlyOver;
+                            if (element != null)
+                            {
+                                var delta = wParam.ToInt32() >> 16;
+                                var arg = new MouseWheelEventArgs(InputManager.Current.PrimaryMouseDevice, Environment.TickCount, delta)
+                                {
+                                    RoutedEvent = MouseEvents.PreviewMouseHWheelEvent
+                                };
+                                element.RaiseEvent(arg);
+                                if (!arg.Handled)
+                                {
+                                    arg.RoutedEvent = MouseEvents.MouseHWheelEvent;
+                                    arg.Handled = false;
+                                    element.RaiseEvent(arg);
+
+                                    handled = arg.Handled;
+                                }
+                            }
+                            break;
                         //case WindowMessage.WM_SETTEXT:
                         //case WindowMessage.WM_SETICON:
                         //    var changed = User32Ex.ModifyStyle(hwnd, WindowStyles.WS_VISIBLE, WindowStyles.WS_OVERLAPPED);

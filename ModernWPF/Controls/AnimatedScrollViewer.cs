@@ -43,6 +43,41 @@ namespace ModernWPF.Controls
         bool _isHOverride;
         bool _isVOverride;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AnimatedScrollViewer"/> class.
+        /// </summary>
+        public AnimatedScrollViewer()
+        {
+            MouseEvents.AddMouseHWheelHandler(this, HandleHWheel);
+        }
+
+        private void HandleHWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e != null && !e.Handled)
+            {
+                if (e.Delta < 0)
+                {
+                    if (this.CanHScrollLeft())
+                    {
+                        TargetHorizontalOffset = Math.Max(0, HorizontalOffset - largeStep);
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    if (this.CanHScrollRight())
+                    {
+                        TargetHorizontalOffset = Math.Min(ScrollableWidth, HorizontalOffset + largeStep);
+                        e.Handled = true;
+                    }
+                }
+                if (e.Handled)
+                {
+                    AnimateNow();
+                }
+            }
+        }
+
 
         #region ScrollViewer Override Methods
 

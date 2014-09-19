@@ -108,5 +108,10 @@ namespace ModernWPF.Sample
             btnSysDiag.ContextMenu.PlacementTarget = btnSysDiag;
             btnSysDiag.ContextMenu.IsOpen = true;
         }
+
+        private void theWindow_MouseHWheel(object sender, MouseWheelEventArgs e)
+        {
+            Debug.WriteLine("Got h-wheel with delta = " + e.Delta);
+        }
     }
 }

@@ -97,6 +97,7 @@
     <Compile Include="ModernExtensions.cs" />
     <Compile Include="Chrome.cs" />
     <Compile Include="ModernTheme.cs" />
+    <Compile Include="MouseEvents.cs" />
     <Compile Include="Native\User32Ex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

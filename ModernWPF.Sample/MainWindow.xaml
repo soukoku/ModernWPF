@@ -9,7 +9,8 @@
         Title="ModernWPF - Test" Height="610" Width="880"
         ResizeMode="CanResizeWithGrip" 
         Style="{StaticResource ModernWindowFull}"
-        DataContext="{StaticResource appVM}">
+        DataContext="{StaticResource appVM}"
+        modern:MouseEvents.MouseHWheel="theWindow_MouseHWheel">
     <Window.Resources>
         <sys:String x:Key="shortString">Lorem ipsum dolor sit amet</sys:String>
     </Window.Resources>
