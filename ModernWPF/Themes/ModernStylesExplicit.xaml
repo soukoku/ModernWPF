@@ -1713,9 +1713,16 @@
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <!--<Setter Property="Background" Value="{DynamicResource ListBoxItemSelectedBackgroundThemeBrush}"/>-->
-                <Setter Property="Background" Value="{DynamicResource ModernAccent}"/>
-                <Setter Property="Foreground" Value="{DynamicResource ListBoxItemSelectedForegroundThemeBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}"/>
+                <!--<Setter Property="Foreground" Value="{DynamicResource ListBoxItemSelectedForegroundThemeBrush}"/>-->
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true"/>
+                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource ModernBackground3}"/>
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Foreground" Value="{DynamicResource ListBoxItemDisabledForegroundThemeBrush}"/>
@@ -1726,7 +1733,7 @@
                     <Condition Property="IsMouseOver" Value="True"></Condition>
                 </MultiTrigger.Conditions>
                 <!--<Setter Property="Background" Value="{DynamicResource ListBoxItemSelectedPointerOverBackgroundThemeBrush}"/>-->
-                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha1}"/>
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha7}"/>
             </MultiTrigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
