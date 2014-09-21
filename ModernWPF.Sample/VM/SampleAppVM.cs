@@ -32,6 +32,7 @@ namespace ModernWPF.Sample.VM
 
             Strings = new List<string>();
             Items = new List<ItemVM>();
+
             for (int i = 1; i <= 1000; i++)
             {
                 Strings.Add(string.Format("should virtual {0}", i));
@@ -45,11 +46,19 @@ namespace ModernWPF.Sample.VM
             Accents = ModernTheme.PredefinedAccents.Select(a => new AccentVM(a)).ToList();
 
             Progress = new ProgressViewModel();
+
+            TreeItems = new ObservableCollection<HierarchyVM>();
+            for (int i = 0; i < 50; i++)
+            {
+                TreeItems.Add(new HierarchyVM(5));
+            }
         }
 
         public List<AccentVM> Accents { get; private set; }
 
         public ObservableCollection<CultureInfoVM> Languages { get; private set; }
+
+        public ObservableCollection<HierarchyVM> TreeItems { get; private set; }
 
         public List<ItemVM> Items { get; private set; }
 
@@ -80,7 +89,7 @@ namespace ModernWPF.Sample.VM
                                 if (view.CanSort)
                                 {
                                     //view.DeferRefresh();
-                                 
+
                                     view.SortDescriptions.Clear();
                                     if (e.NewSortDirection.HasValue)
                                     {

@@ -92,6 +92,7 @@
     <Compile Include="Converters\NullEmptyCollapsedConverter.cs" />
     <Compile Include="Converters\TextCaseConverter.cs" />
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
+    <Compile Include="Converters\TreeDepthLeftMarginConverter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridViewSortParameter.cs" />
     <Compile Include="ListViewUI.cs" />

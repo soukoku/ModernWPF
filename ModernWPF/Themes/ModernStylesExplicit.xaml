@@ -1771,7 +1771,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style x:Key="ModernListBox" TargetType="ListBox">
         <Setter Property="Foreground" Value="{DynamicResource ListBoxForegroundThemeBrush}" />
         <Setter Property="Background" Value="{DynamicResource ListBoxBackgroundThemeBrush}" />
@@ -3269,7 +3269,7 @@
         <Setter Property="Padding" Value="4" />
         <Setter Property="Background" Value="#01000000" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground5}" />
         <Setter Property="BorderThickness" Value="0 0 0 1" />
         <Setter Property="Template">
             <Setter.Value>
@@ -3294,6 +3294,13 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true"/>
+                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource ModernBackground3}"/>
+            </MultiTrigger>
         </Style.Triggers>
     </Style>
 
@@ -3326,7 +3333,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground5}" />
         <Setter Property="BorderThickness" Value="0 0 0 2" />
         <Setter Property="Padding" Value="8 4" />
         <Setter Property="Margin" Value="0"/>
@@ -3427,7 +3434,7 @@
 
     <Style x:Key="ModernDataGridSelectAllButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground5}" />
         <Setter Property="BorderThickness" Value="0 0 1 2" />
         <Setter Property="Padding" Value="4" />
         <Setter Property="Margin" Value="0"/>
@@ -3489,7 +3496,7 @@
 
     <Style x:Key="ModernDataGridColumnHeader" TargetType="DataGridColumnHeader">
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground5}" />
         <Setter Property="BorderThickness" Value="0 0 0 2" />
         <Setter Property="Padding" Value="8 4" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
@@ -3500,7 +3507,7 @@
 
                         <Rectangle Name="Highlighter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{DynamicResource ModernBackground2}" Margin="1 0 0 0"
                                    Visibility="Collapsed"></Rectangle>
-                        
+
                         <Border Name="HeaderBorder" BorderThickness="{TemplateBinding BorderThickness}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 Background="{TemplateBinding Background}">
@@ -3562,7 +3569,7 @@
 
     <Style x:Key="ModernDataGridRowHeader" TargetType="DataGridRowHeader">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground5}" />
         <Setter Property="BorderThickness" Value="0 0 1 1" />
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
@@ -3674,6 +3681,13 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="true"/>
+                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource ModernBackground3}"/>
+            </MultiTrigger>
             <!--<Trigger Property="IsNewItem" Value="True">
                 <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=NewItemMargin}"/>
             </Trigger>-->
@@ -3685,7 +3699,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource ModernForeground4}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource ModernForeground5}" />
         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
@@ -4022,5 +4036,200 @@
     </Style>
 
 
+    <!--trees-->
+    <PathGeometry x:Key="TreeArrow">
+        <PathGeometry.Figures>
+            <PathFigureCollection>
+                <PathFigure IsFilled="True" StartPoint="0 0" IsClosed="True">
+                    <PathFigure.Segments>
+                        <PathSegmentCollection>
+                            <LineSegment Point="0 6"/>
+                            <LineSegment Point="6 0"/>
+                        </PathSegmentCollection>
+                    </PathFigure.Segments>
+                </PathFigure>
+            </PathFigureCollection>
+        </PathGeometry.Figures>
+    </PathGeometry>
+
+    <Style x:Key="TreeExpandCollapseToggleStyle" TargetType="ToggleButton">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Width="16" Height="16"
+                            Background="Transparent"
+                            Padding="4 6 4 2">
+                        <Path x:Name="ExpandPath"
+                              Fill="{TemplateBinding Background}"
+                              Stroke="{TemplateBinding BorderBrush}"
+                              Data="{StaticResource TreeArrow}">
+                            <Path.RenderTransform>
+                                <RotateTransform Angle="135" CenterX="3" CenterY="3"/>
+                            </Path.RenderTransform>
+                        </Path>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="ExpandPath" Property="RenderTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="180" CenterX="3" CenterY="3"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Background" Value="{DynamicResource ModernForeground}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"  Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource ModernAccent}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <conv:TreeDepthLeftMarginConverter Length="19" x:Key="ModernTreeDepthCalc"/>
+
+    <Style x:Key="ModernTreeViewItem" TargetType="TreeViewItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Padding" Value="4 2"/>
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
+        <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TreeViewItem">
+                    <StackPanel>
+                        <Border Name="Bd"
+                                Grid.Column="1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <Grid Margin="{Binding Converter={StaticResource ModernTreeDepthCalc}, RelativeSource={RelativeSource TemplatedParent}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MinWidth="19" Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton x:Name="Expander"
+                                      Style="{StaticResource TreeExpandCollapseToggleStyle}"
+                                      IsChecked="{Binding Path=IsExpanded,RelativeSource={RelativeSource TemplatedParent}}"
+                                      ClickMode="Press"/>
+                                <ContentPresenter x:Name="PART_Header"
+                                              Grid.Column="1"
+                                              ContentSource="Header"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Grid>
+                        </Border>
+                        <ItemsPresenter x:Name="ItemsHost" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="false">
+                            <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger SourceName="Bd" Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                        </Trigger>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="Expander" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="IsSelectionActive" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource ModernBackground3}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource ModernForeground4}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingStackPanel.IsVirtualizing" Value="true">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ModernTreeView" TargetType="TreeView">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="0"/>
+        <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>-->
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ModernTreeViewItem}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TreeView">
+                    <Border Name="Bd"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="true">
+                        <ScrollViewer Name="_tv_scrollviewer_"
+                                      Background="{TemplateBinding Background}"
+                                      Focusable="false"
+                                      CanContentScroll="false"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                      Padding="{TemplateBinding Padding}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource ModernBackground3}"/>
+                        </Trigger>
+                        <Trigger Property="VirtualizingStackPanel.IsVirtualizing" Value="true">
+                            <Setter TargetName="_tv_scrollviewer_" Property="CanContentScroll" Value="true"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingStackPanel.IsVirtualizing" Value="true">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>

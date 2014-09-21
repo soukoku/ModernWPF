@@ -217,7 +217,7 @@
                     </StackPanel>
                 </modern:ModernContentControl>
             </TabItem>
-            <TabItem Header="lists" Style="{StaticResource ModernTabItem}">
+            <TabItem Header="simple lists" Style="{StaticResource ModernTabItem}">
                 <modern:ModernContentControl>
                     <StackPanel Orientation="Horizontal">
                         <ListBox Margin="2" DockPanel.Dock="Top">
@@ -240,7 +240,7 @@
                 </modern:ModernContentControl>
             </TabItem>
 
-            <TabItem Header="grid lists" Style="{StaticResource ModernTabItem}" IsSelected="True">
+            <TabItem Header="complex lists" Style="{StaticResource ModernTabItem}" IsSelected="True">
                 <modern:ModernContentControl>
 
                     <Grid>
@@ -249,6 +249,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
@@ -274,6 +275,15 @@
                         <DataGrid Grid.Row="1" Grid.Column="1" x:Name="dgSample" CanUserAddRows="True"
                                   HorizontalScrollBarVisibility="Auto" RowHeaderWidth="30" ItemsSource="{Binding Items}">
                         </DataGrid>
+
+                        <TextBlock Text="TreeView" Grid.Column="2"></TextBlock>
+                        <TreeView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding TreeItems}">
+                            <TreeView.ItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
                     </Grid>
                 </modern:ModernContentControl>
             </TabItem>

@@ -103,6 +103,7 @@
     </ApplicationDefinition>
     <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="VM\AccentVM.cs" />
+    <Compile Include="VM\HierarchyVM.cs" />
     <Compile Include="VM\ItemVM.cs" />
     <Compile Include="VM\CultureInfoVM.cs" />
     <Compile Include="VM\SampleAppVM.cs" />

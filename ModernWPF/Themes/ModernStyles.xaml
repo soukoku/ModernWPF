@@ -59,6 +59,7 @@
 
     <Style TargetType="DataGrid" BasedOn="{StaticResource ModernDataGrid}" />
 
+    <Style TargetType="TreeView" BasedOn="{StaticResource ModernTreeView}"/>
 
     <Style TargetType="DatePicker" BasedOn="{StaticResource ModernDatePicker}" />
     <Style TargetType="DatePickerTextBox" BasedOn="{StaticResource ModernDatePickerTextBox}" />

@@ -27,6 +27,7 @@
     <SolidColorBrush x:Key="ModernForeground2" Color="#535353"></SolidColorBrush>
     <SolidColorBrush x:Key="ModernForeground3" Color="#838383"></SolidColorBrush>
     <SolidColorBrush x:Key="ModernForeground4" Color="#999999"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernForeground5" Color="#cccccc"></SolidColorBrush>
 
     <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF"></SolidColorBrush>
     <SolidColorBrush x:Key="AccentForeground2" Color="#eeeeee"></SolidColorBrush>
