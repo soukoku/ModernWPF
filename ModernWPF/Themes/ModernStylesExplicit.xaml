@@ -3305,6 +3305,13 @@
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True"></Condition>
+                    <Condition Property="IsMouseOver" Value="True"></Condition>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha7}"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="true"/>
                     <Condition Property="Selector.IsSelectionActive" Value="false"/>
                 </MultiTrigger.Conditions>
@@ -3331,7 +3338,8 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             Background="{TemplateBinding Background}"
                             SnapsToDevicePixels="true">
-                        <ScrollViewer Padding="{TemplateBinding Padding}">
+                        <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}" Padding="{TemplateBinding Padding}"
+                                      local:ScrollViewerUI.HandleHWheel="True">
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </ScrollViewer>
                     </Border>
@@ -3719,6 +3727,13 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True"></Condition>
+                    <Condition Property="IsMouseOver" Value="True"></Condition>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha7}"/>
+            </MultiTrigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="true"/>
@@ -4189,6 +4204,13 @@
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}"/>
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True"></Condition>
+                                <Condition Property="IsMouseOver" Value="True"></Condition>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha7}"/>
+                        </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="true"/>

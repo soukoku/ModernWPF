@@ -1,10 +1,20 @@
-﻿using System.Reflection;
+﻿using ModernWPF;
+using System.Reflection;
 
 [assembly: AssemblyCompany("Yin-Chun Wang")]
 [assembly: AssemblyCopyright("Copyright © Yin-Chun Wang 2014")]
 
-// keep this same in major releases
-[assembly: AssemblyVersion("1.0.0.0")]
-// change this for each nuget release
-[assembly: AssemblyFileVersion("1.2.0")]
-[assembly: AssemblyInformationalVersion("1.2.0")]
+[assembly: AssemblyVersion(VersionInfo.MajorVersion)]
+[assembly: AssemblyFileVersion(VersionInfo.BuildVersion)]
+[assembly: AssemblyInformationalVersion(VersionInfo.BuildVersion)]
+
+namespace ModernWPF
+{
+    public static class VersionInfo
+    {
+        // keep this same in major releases
+        public const string MajorVersion = "1.0.0.0";
+        // change this for each nuget release
+        public const string BuildVersion = "1.2.1";
+    }
+}
