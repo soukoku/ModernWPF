@@ -3350,6 +3350,10 @@
                                             RecognizesAccessKey="True"
                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                 </Border>
+                                <TextBlock Style="{StaticResource MarlettGlyph}" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                           Text="t" x:Name="SortAsc" Visibility="Collapsed" Margin="0 -2 0 0"></TextBlock>
+                                <TextBlock Style="{StaticResource MarlettGlyph}" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                           Text="u" x:Name="SortDesc" Visibility="Collapsed" Margin="0 -4 0 0"></TextBlock>
                             </Grid>
                         </Border>
                         <Canvas>
@@ -3358,6 +3362,12 @@
                         </Canvas>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="local:ListViewUI.SortDirection" Value="Ascending">
+                            <Setter TargetName="SortAsc" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="local:ListViewUI.SortDirection" Value="Descending">
+                            <Setter TargetName="SortDesc" Property="Visibility" Value="Visible"/>
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="PART_HeaderGripper" Property="Background" Value="{DynamicResource ModernForeground}" />
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
@@ -3412,8 +3422,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
 
     <!--datagrid-->
 

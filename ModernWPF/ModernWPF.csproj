@@ -24,7 +24,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\ModernWPF.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -92,6 +93,8 @@
     <Compile Include="Converters\TextCaseConverter.cs" />
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="GridViewSortParameter.cs" />
+    <Compile Include="ListViewUI.cs" />
     <Compile Include="HSLColor.cs" />
     <Compile Include="MenuItemUI.cs" />
     <Compile Include="ModernExtensions.cs" />

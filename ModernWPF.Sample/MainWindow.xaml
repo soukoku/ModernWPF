@@ -254,7 +254,8 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="ListView" ></TextBlock>
-                        <ListView Grid.Row="1" x:Name="lvSample" ItemsSource="{Binding Items}">
+                        <ListView Grid.Row="1" x:Name="lvSample" ItemsSource="{Binding Items}"
+                                  modern:ListViewUI.SortCommand="{Binding SortItemsCommand}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Boolean}" 

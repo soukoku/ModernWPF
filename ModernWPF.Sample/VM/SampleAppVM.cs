@@ -6,11 +6,15 @@ using ModernWPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace ModernWPF.Sample.VM
@@ -48,6 +52,48 @@ namespace ModernWPF.Sample.VM
         public ObservableCollection<CultureInfoVM> Languages { get; private set; }
 
         public List<ItemVM> Items { get; private set; }
+
+        private ICommand _sortItemsCommand;
+
+        public ICommand SortItemsCommand
+        {
+            get
+            {
+                return _sortItemsCommand ?? (
+                    _sortItemsCommand = new RelayCommand<GridViewSortParameter>(e =>
+                    {
+                        var head = e.Header;
+                        if (head != null)
+                        {
+                            string field = null;
+                            var bind = head.Column.DisplayMemberBinding as Binding;
+                            if (bind != null)
+                            {
+                                field = bind.Path.Path;
+                            }
+
+                            if (!string.IsNullOrEmpty(field))
+                            {
+                                Debug.WriteLine("Sort command exec on " + field);
+
+                                var view = CollectionViewSource.GetDefaultView(Items);
+                                if (view.CanSort)
+                                {
+                                    //view.DeferRefresh();
+                                 
+                                    view.SortDescriptions.Clear();
+                                    if (e.NewSortDirection.HasValue)
+                                    {
+                                        view.SortDescriptions.Add(new System.ComponentModel.SortDescription(field, e.NewSortDirection.Value));
+                                    }
+                                }
+                            }
+                        }
+                    })
+                );
+            }
+        }
+
 
         public List<string> Strings { get; private set; }
 
