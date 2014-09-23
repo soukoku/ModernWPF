@@ -2,17 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
 
+    <!--this is has a smaller/thinners versions of the sizes for desktop use-->
+
     <!--old metro wpf-->
 
     <s:Double x:Key="WindowTitleFontSize">24</s:Double>
     <s:Double x:Key="TopTitleFontSize">20</s:Double>
     <s:Double x:Key="SubTitleFontSize">14</s:Double>
-    <s:Double x:Key="ContentFontSize">13</s:Double>
-    <s:Double x:Key="SmallFontSize">12</s:Double>
+    <s:Double x:Key="ContentFontSize">12</s:Double>
+    <s:Double x:Key="SmallFontSize">11</s:Double>
     <s:Double x:Key="TinyFontSize">10.5</s:Double>
     <Thickness x:Key="ContentThemePadding">8 4</Thickness>
 
-    <Thickness x:Key="MenuBorderThickness">2</Thickness>
+    <Thickness x:Key="MenuBorderThickness">1</Thickness>
 
     <!--modified from windows app-->
 
@@ -20,15 +22,14 @@
     <!--<FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>-->
     <FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Arial, Verdana</FontFamily>
     <!--<s:Double x:Key="ControlContentThemeFontSize">14.667</s:Double>-->
-    <s:Double x:Key="ControlContentThemeFontSize">13</s:Double>
+    <s:Double x:Key="ControlContentThemeFontSize">12</s:Double>
     <SolidColorBrush x:Key="FocusVisualBlackStrokeThemeBrush" Color="Black" />
     <SolidColorBrush x:Key="FocusVisualWhiteStrokeThemeBrush" Color="White" />
 
-    
     <s:Double x:Key="TextControlThemeMinHeight">32</s:Double>
     <s:Double x:Key="TextControlThemeMinWidth">64</s:Double>
-    <Thickness x:Key="TextControlBorderThemeThickness">2</Thickness>
-    <Thickness x:Key="TextControlThemePadding">4</Thickness>
+    <Thickness x:Key="TextControlBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="TextControlThemePadding">3</Thickness>
 
     <s:Double x:Key="AppBarThemeMinHeight">68</s:Double>
     <Thickness x:Key="AppBarBottomBorderThemeThickness">0,2,0,0</Thickness>
@@ -36,20 +37,20 @@
     <Thickness x:Key="AppBarTopBorderThemeThickness">0,0,0,2</Thickness>
     <Thickness x:Key="AppBarTopThemePadding">0,2,0,0</Thickness>
 
-    <Thickness x:Key="ButtonBorderThemeThickness">2</Thickness>
-    <Thickness x:Key="HyperlinkButtonBorderThemeThickness">2</Thickness>
-    <Thickness x:Key="RepeatButtonBorderThemeThickness">2</Thickness>
-    <Thickness x:Key="ToggleButtonBorderThemeThickness">2</Thickness>
+    <Thickness x:Key="ButtonBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="HyperlinkButtonBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="RepeatButtonBorderThemeThickness">1</Thickness>
+    <Thickness x:Key="ToggleButtonBorderThemeThickness">1</Thickness>
 
-    <s:Double x:Key="CheckBoxBorderThemeThickness">2</s:Double>
+    <s:Double x:Key="CheckBoxBorderThemeThickness">1</s:Double>
 
-    <s:Double x:Key="RadioButtonBorderThemeThickness">2</s:Double>
+    <s:Double x:Key="RadioButtonBorderThemeThickness">1</s:Double>
 
-    <Thickness x:Key="ComboBoxPadding">8 6</Thickness>
-    <Thickness x:Key="ComboBoxBorderThickness">2</Thickness>
-    <Thickness x:Key="ComboBoxPopupBorderThickness">2</Thickness>
-
-    <Thickness x:Key="ListBoxBorderThemeThickness">2</Thickness>
+    <Thickness x:Key="ComboBoxPadding">6 5</Thickness>
+    <Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
+    <Thickness x:Key="ComboBoxPopupBorderThickness">1</Thickness>
+    
+    <Thickness x:Key="ListBoxBorderThemeThickness">1</Thickness>
 
     <s:Double x:Key="SliderOutsideTickBarThemeHeight">6</s:Double>
     <s:Double x:Key="SliderTrackThemeHeight">11</s:Double>
@@ -59,7 +60,7 @@
     <Thickness x:Key="ProgressBarBorderThemeThickness">0</Thickness>
 
     <s:Double x:Key="ToolTipContentThemeFontSize">12</s:Double>
-    <Thickness x:Key="ToolTipBorderThemeThickness">2</Thickness>
+    <Thickness x:Key="ToolTipBorderThemeThickness">1</Thickness>
 
     <s:Double x:Key="ScrollBarTrackBorderThemeThickness">0</s:Double>
     <Thickness x:Key="ScrollBarPanningBorderThemeThickness">1</Thickness>

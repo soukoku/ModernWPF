@@ -10,7 +10,9 @@
             <!--<Style TargetType="{x:Type Rectangle}" />-->
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ModernWPF;component/Themes/ModernBase.xaml" />
+                <!--could use one or other-->
+                <!--<ResourceDictionary Source="/ModernWPF;component/Themes/ModernBase.xaml" />-->
+                <ResourceDictionary Source="/ModernWPF;component/Themes/ModernBaseDesktop.xaml" />
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernLight.xaml" />
                 <ResourceDictionary Source="/ModernWPF;component/Themes/ModernStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>

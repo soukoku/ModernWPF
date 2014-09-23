@@ -1073,7 +1073,8 @@
     </Style>
 
     <!--textbox-->
-    <!--re-implement contextmenu to override textbox contextmenu style not applied bug-->
+    <!--re-implement contextmenu to override textbox contextmenu style not applied bug
+    plus some additional items-->
     <ContextMenu x:Key="TextBoxContextMenu">
         <MenuItem
                 Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdUndo], Mode=OneWay}"
@@ -1106,9 +1107,9 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{DynamicResource TextBoxButtonForegroundThemeBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxButtonBorderThemeBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource TextBoxButtonBackgroundThemeBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBoxButtonForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxButtonBorder}"/>
+        <Setter Property="Background" Value="{DynamicResource TextBoxButtonBackground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -1127,14 +1128,14 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource TextBoxButtonPointerOverBackgroundThemeBrush}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxButtonPointerOverBorderThemeBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource TextBoxButtonPointerOverForegroundThemeBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource TextBoxButtonHoverBackground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxButtonHoverBorder}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxButtonHoverForeground}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="{DynamicResource TextBoxButtonPressedBackgroundThemeBrush}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxButtonPressedBorderThemeBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource TextBoxButtonPressedForegroundThemeBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource TextBoxButtonPressedBackground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxButtonPressedBorder}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxButtonPressedForeground}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -1544,12 +1545,12 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="8 6" />
+        <Setter Property="Padding" Value="{DynamicResource ComboBoxPadding}" />
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Foreground" Value="{DynamicResource ComboBoxForegroundThemeBrush}" />
         <Setter Property="Background" Value="{DynamicResource ComboBoxBackgroundThemeBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxBorderThemeBrush}" />
-        <Setter Property="BorderThickness" Value="{DynamicResource ComboBoxBorderThemeThickness}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ComboBoxBorderThickness}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
@@ -1568,7 +1569,8 @@
                                 <Setter Property="AllowDrop" Value="true" />
                                 <Setter Property="MinWidth" Value="0" />
                                 <Setter Property="MinHeight" Value="0" />
-                                <Setter Property="Margin" Value="-2 0"/>
+                                <Setter Property="Margin" Value="-2 -1"/>
+                                <Setter Property="Padding" Value="0"/>
                                 <Setter Property="ContextMenu" Value="{DynamicResource TextBoxContextMenu}" />
                                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                 <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
@@ -1622,8 +1624,8 @@
                               Grid.Column="1"
                               Data="M0.062734604,0 L5.4720101,5.5553346 L10.881266,0 L10.944,4.1183305 L5.4776478,9.6730003 L0,4.1183305 z"
                               Fill="{DynamicResource ComboBoxArrowForegroundThemeBrush}" HorizontalAlignment="Center"
-                              Height="8" Margin="-3 0 0 0" Stretch="Fill" StrokeThickness="0"
-                              UseLayoutRounding="False" VerticalAlignment="Center" Width="10" />
+                              Height="7" Margin="-3 0 0 0" Stretch="Fill" StrokeThickness="0"
+                              UseLayoutRounding="False" VerticalAlignment="Center" Width="8" />
 
 
                         <ToggleButton Grid.ColumnSpan="2" 
@@ -1654,7 +1656,7 @@
                                     MinWidth="{Binding ActualWidth, ElementName=MainGrid}"
                                     Background="{DynamicResource ComboBoxPopupBackgroundThemeBrush}"
                                     BorderBrush="{DynamicResource ComboBoxPopupBorderThemeBrush}"
-                                    BorderThickness="{DynamicResource ComboBoxPopupBorderThemeThickness}"
+                                    BorderThickness="{DynamicResource ComboBoxPopupBorderThickness}"
                                     HorizontalAlignment="Stretch">
                                 <ctrl:AnimatedScrollViewer x:Name="ScrollViewer" Foreground="{DynamicResource ComboBoxPopupForegroundThemeBrush}"
                                                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -2853,14 +2855,14 @@
     </Style>
     <Style x:Key="ContextMenuBorder" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
-        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="BorderThickness" Value="{DynamicResource MenuBorderThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Padding" Value="0 4" />
     </Style>
 
     <Style x:Key="ModernContextMenu" TargetType="ContextMenu">
         <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
-        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="BorderThickness" Value="{DynamicResource MenuBorderThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
         <Setter Property="Padding" Value="0 4" />
         <Setter Property="Template">

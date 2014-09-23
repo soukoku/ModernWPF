@@ -163,7 +163,8 @@
 
                                 <Image x:Name="PART_iconQuest" Source="/ModernWPF;component/Assets/question.png"></Image>
 
-                                <TextBlock x:Name="PART_txtTitle" TextTrimming="CharacterEllipsis" FontSize="24" Margin="2 0"
+                                <TextBlock x:Name="PART_txtTitle" TextTrimming="CharacterEllipsis" 
+                                           FontSize="{DynamicResource WindowTitleFontSize}" Margin="2 0"
                                            FontWeight="Light"
                                            VerticalAlignment="Center"></TextBlock>
                             </DockPanel>
@@ -250,7 +251,7 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="10.5" />
+        <Setter Property="FontSize" Value="{DynamicResource TinyFontSize}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:AppButton">

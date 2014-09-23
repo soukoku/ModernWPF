@@ -94,40 +94,61 @@
                         </StackPanel>
 
                         <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Orientation="Horizontal">
-
-                            <StackPanel Orientation="Vertical" Width="180">
-                                <TextBox Text="normal textbox" Margin="2"></TextBox>
-                                <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
-                                <TextBox Text="with leading content" Margin="2">
-                                    <modern:TextBoxUI.LeadingElement>
-                                        <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
-                                            <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
+                            <ScrollViewer>
+                                <StackPanel Orientation="Vertical" Width="180">
+                                    <TextBox Text="normal textbox" Margin="2"></TextBox>
+                                    <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
+                                    <TextBox Text="with leading content" Margin="2">
+                                        <modern:TextBoxUI.LeadingElement>
+                                            <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
+                                                <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
                                                VerticalAlignment="Center"/>
-                                        </Border>
-                                    </modern:TextBoxUI.LeadingElement>
-                                </TextBox>
-                                <TextBox Text="with trailing content" Margin="2">
-                                    <modern:TextBoxUI.TrailingElement>
-                                        <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
-                                            <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
+                                            </Border>
+                                        </modern:TextBoxUI.LeadingElement>
+                                    </TextBox>
+                                    <TextBox Text="with trailing content" Margin="2">
+                                        <modern:TextBoxUI.TrailingElement>
+                                            <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
+                                                <TextBlock Foreground="{DynamicResource AccentForeground}" Style="{StaticResource MarlettGlyph}" Text="s" Margin="4 0"
                                                VerticalAlignment="Center"/>
-                                        </Border>
-                                    </modern:TextBoxUI.TrailingElement>
-                                </TextBox>
-                                <TextBox Text="" modern:TextBoxUI.WatermarkText="with watermark" Margin="2"></TextBox>
-                                <TextBox Text="disabled textbox" Margin="2" IsEnabled="False"></TextBox>
+                                            </Border>
+                                        </modern:TextBoxUI.TrailingElement>
+                                    </TextBox>
+                                    <TextBox Text="" modern:TextBoxUI.WatermarkText="with watermark" Margin="2"></TextBox>
+                                    <TextBox Text="disabled textbox" Margin="2" IsEnabled="False"></TextBox>
 
-                                <PasswordBox Password="password" Margin="2"></PasswordBox>
-                                <PasswordBox modern:TextBoxUI.WatermarkText="password with watermark" Margin="2"></PasswordBox>
+                                    <ComboBox SelectedIndex="0" Margin="2">
+                                        <ComboBoxItem Content="normal combo 1"></ComboBoxItem>
+                                        <ComboBoxItem Content="normal combo 2" IsEnabled="False"></ComboBoxItem>
+                                        <ComboBoxItem Content="normal combo 3"></ComboBoxItem>
+                                        <ComboBoxItem Content="normal combo 4"></ComboBoxItem>
+                                        <ComboBoxItem Content="normal combo 5"></ComboBoxItem>
+                                        <ComboBoxItem Content="normal combo 6"></ComboBoxItem>
+                                    </ComboBox>
+                                    <ComboBox SelectedIndex="1" Margin="2" IsEditable="True">
+                                        <ComboBoxItem Content="edit combo 1"></ComboBoxItem>
+                                        <ComboBoxItem Content="edit combo 2" IsEnabled="False"></ComboBoxItem>
+                                        <ComboBoxItem Content="edit combo 3"></ComboBoxItem>
+                                        <ComboBoxItem Content="edit combo 4"></ComboBoxItem>
+                                        <ComboBoxItem Content="edit combo 5"></ComboBoxItem>
+                                        <ComboBoxItem Content="edit combo 6"></ComboBoxItem>
+                                    </ComboBox>
+                                    <ComboBox SelectedIndex="0" Margin="2" IsEnabled="False">
+                                        <ComboBoxItem Content="disabled combo"></ComboBoxItem>
+                                    </ComboBox>
 
-                                <DatePicker Margin="2"></DatePicker>
-                            </StackPanel>
+                                    <PasswordBox Password="password" Margin="2"></PasswordBox>
+                                    <PasswordBox modern:TextBoxUI.WatermarkText="password with watermark" Margin="2"></PasswordBox>
+
+                                    <DatePicker Margin="2"></DatePicker>
+                                </StackPanel>
+                            </ScrollViewer>
                             <StackPanel>
 
 
                                 <Label Content="a label"></Label>
 
-                                <RichTextBox Height="140" Width="140" Margin="2">
+                                <RichTextBox Height="240" Width="140" Margin="2">
                                     <FlowDocument>
                                         <Paragraph>Rich Text Box</Paragraph>
                                         <Paragraph>
@@ -145,25 +166,7 @@
                                         </Paragraph>
                                     </FlowDocument>
                                 </RichTextBox>
-                                <ComboBox SelectedIndex="0" Margin="2">
-                                    <ComboBoxItem Content="normal combo 1"></ComboBoxItem>
-                                    <ComboBoxItem Content="normal combo 2" IsEnabled="False"></ComboBoxItem>
-                                    <ComboBoxItem Content="normal combo 3"></ComboBoxItem>
-                                    <ComboBoxItem Content="normal combo 4"></ComboBoxItem>
-                                    <ComboBoxItem Content="normal combo 5"></ComboBoxItem>
-                                    <ComboBoxItem Content="normal combo 6"></ComboBoxItem>
-                                </ComboBox>
-                                <ComboBox SelectedIndex="1" Margin="2" IsEditable="True">
-                                    <ComboBoxItem Content="edit combo 1"></ComboBoxItem>
-                                    <ComboBoxItem Content="edit combo 2" IsEnabled="False"></ComboBoxItem>
-                                    <ComboBoxItem Content="edit combo 3"></ComboBoxItem>
-                                    <ComboBoxItem Content="edit combo 4"></ComboBoxItem>
-                                    <ComboBoxItem Content="edit combo 5"></ComboBoxItem>
-                                    <ComboBoxItem Content="edit combo 6"></ComboBoxItem>
-                                </ComboBox>
-                                <ComboBox SelectedIndex="0" Margin="2" IsEnabled="False">
-                                    <ComboBoxItem Content="disabled combo"></ComboBoxItem>
-                                </ComboBox>
+
 
                             </StackPanel>
                             <StackPanel>
@@ -270,7 +273,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        
+
                         <TextBlock Text="DataGrid" Grid.Column="1"></TextBlock>
                         <DataGrid Grid.Row="1" Grid.Column="1" x:Name="dgSample" CanUserAddRows="True" 
                                   HorizontalScrollBarVisibility="Auto" RowHeaderWidth="30" ItemsSource="{Binding Items}">
@@ -287,7 +290,7 @@
                     </Grid>
                 </modern:ModernContentControl>
             </TabItem>
-            
+
             <TabItem Header="misc" Style="{StaticResource ModernTabItem}">
                 <modern:ModernContentControl>
 
@@ -299,7 +302,7 @@
                                 <TextBlock Text="Scrollbar can also be over content"></TextBlock>
                             </Border>
                         </modern:AnimatedScrollViewer>
-                        
+
                     </Grid>
                 </modern:ModernContentControl>
             </TabItem>
@@ -386,7 +389,7 @@
                         </ContextMenu>
                     </modern:AppButton.ContextMenu>
                 </modern:AppButton>
-                
+
                 <modern:AppButton Text="msg window" x:Name="btnMsgWindow" Click="btnMsgWindow_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="msg box" x:Name="btnMsgBox" Click="btnMsgBox_Click" Content="{StaticResource IconWindow}"></modern:AppButton>
                 <modern:AppButton Text="msg box lang" x:Name="btnLang" Click="btnLang_Click" Content="{StaticResource IconBook}">
