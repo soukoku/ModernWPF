@@ -45,13 +45,33 @@
     <SolidColorBrush x:Key="ActiveCaptionBackground" Color="Transparent"></SolidColorBrush>
     <SolidColorBrush x:Key="InactiveCaptionForeground" Color="#6e6e6e"></SolidColorBrush>
     <SolidColorBrush x:Key="InactiveCaptionBackground" Color="Transparent"></SolidColorBrush>
-    
-    
-    <!--these are from windows app themes-->
-    
+
+
+    <!--simplified versions-->
+    <SolidColorBrush x:Key="TextBoxForeground" Color="#000000" />
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#DDFFFFFF" />
+    <SolidColorBrush x:Key="TextBoxBorder" Color="#DDFFFFFF" />
+
+    <SolidColorBrush x:Key="TextBoxHoverBackground" Color="#EEFFFFFF" />
+    <SolidColorBrush x:Key="TextBoxHoverBorder" Color="#EEFFFFFF" />
+
+    <SolidColorBrush x:Key="TextBoxActiveBackground" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="TextBoxActiveBorder" Color="#EEFFFFFF" />
+
+    <SolidColorBrush x:Key="TextBoxDisabledForeground" Color="#FF666666" />
+    <SolidColorBrush x:Key="TextBoxDisabledBackground" Color="Transparent" />
+    <SolidColorBrush x:Key="TextBoxDisabledBorder" Color="#66FFFFFF" />
+
+
+    <!--these are from windows app themes, may be phased out-->
+
     <!--textbox-->
     <SolidColorBrush x:Key="TextBoxBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="TextBoxBorderThemeBrush" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="TextBoxForegroundThemeBrush" Color="#FF000000" />
+    <SolidColorBrush x:Key="TextBoxDisabledBackgroundThemeBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="TextBoxDisabledBorderThemeBrush" Color="#66FFFFFF" />
+    
     <SolidColorBrush x:Key="TextBoxButtonBackgroundThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="TextBoxButtonBorderThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="TextBoxButtonForegroundThemeBrush" Color="#FF000000" />
@@ -61,10 +81,6 @@
     <SolidColorBrush x:Key="TextBoxButtonPressedBackgroundThemeBrush" Color="#FF000000" />
     <SolidColorBrush x:Key="TextBoxButtonPressedBorderThemeBrush" Color="Transparent" />
     <SolidColorBrush x:Key="TextBoxButtonPressedForegroundThemeBrush" Color="#FFFFFFFF" />
-    <SolidColorBrush x:Key="TextBoxDisabledBackgroundThemeBrush" Color="Transparent" />
-    <SolidColorBrush x:Key="TextBoxDisabledBorderThemeBrush" Color="#66FFFFFF" />
-    <SolidColorBrush x:Key="TextBoxDisabledForegroundThemeBrush" Color="#FF666666" />
-    <SolidColorBrush x:Key="TextBoxForegroundThemeBrush" Color="#FF000000" />
     
     <!--appbar-->
     <SolidColorBrush x:Key="AppBarBackgroundThemeBrush" Color="#E5000000" />

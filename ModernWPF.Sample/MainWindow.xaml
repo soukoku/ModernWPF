@@ -240,7 +240,7 @@
                 </modern:ModernContentControl>
             </TabItem>
 
-            <TabItem Header="complex lists" Style="{StaticResource ModernTabItem}" IsSelected="True">
+            <TabItem Header="complex lists" Style="{StaticResource ModernTabItem}">
                 <modern:ModernContentControl>
 
                     <Grid>

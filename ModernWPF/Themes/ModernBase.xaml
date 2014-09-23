@@ -4,10 +4,10 @@
 
     <!--old metro wpf-->
 
-    <s:Double x:Key="WindowTitleFontSize">28</s:Double>
-    <s:Double x:Key="TopTitleFontSize">22</s:Double>
-    <s:Double x:Key="SubTitleFontSize">18</s:Double>
-    <s:Double x:Key="ContentFontSize">13</s:Double>
+    <s:Double x:Key="WindowTitleFontSize">24</s:Double>
+    <s:Double x:Key="TopTitleFontSize">20</s:Double>
+    <s:Double x:Key="SubTitleFontSize">14</s:Double>
+    <s:Double x:Key="ContentFontSize">12</s:Double>
     <s:Double x:Key="SmallFontSize">12</s:Double>
     <s:Double x:Key="TinyFontSize">10.5</s:Double>
     <Thickness x:Key="ContentThemePadding">8 4</Thickness>
@@ -19,7 +19,7 @@
     <!--<FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Lucida Sans Unicode, Arial, Verdana</FontFamily>-->
     <FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI, Arial, Verdana</FontFamily>
     <!--<s:Double x:Key="ControlContentThemeFontSize">14.667</s:Double>-->
-    <s:Double x:Key="ControlContentThemeFontSize">13</s:Double>
+    <s:Double x:Key="ControlContentThemeFontSize">12</s:Double>
     <SolidColorBrush x:Key="FocusVisualBlackStrokeThemeBrush" Color="Black" />
     <SolidColorBrush x:Key="FocusVisualWhiteStrokeThemeBrush" Color="White" />
 
