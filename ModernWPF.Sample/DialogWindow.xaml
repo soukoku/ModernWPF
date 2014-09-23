@@ -6,17 +6,8 @@
         Title="Dialog Window" Height="300" Width="400"
         ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
         modern:Chrome.CaptionHeight="40"
-        Style="{StaticResource ModernWindowFull}">
-    <modern:Chrome.Chrome>
-        <modern:Chrome ActiveBorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
-                       ActiveCaptionBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" 
-                       ActiveCaptionForeground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" 
-                       InactiveBorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}" 
-                       InactiveCaptionBrush="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}"
-                       InactiveCaptionForeground="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}"/>
-    </modern:Chrome.Chrome>
-    <Border Margin="{Binding ElementName=theWindow, Path=(modern:Chrome.CaptionHeight), Converter={x:Static modern:ThicknessZeroSideConverter.Instance}, ConverterParameter='left right bottom'}"
-            Padding="8">
+        Style="{StaticResource ModernWindowV2}">
+    <Border Padding="8">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -24,7 +15,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock TextWrapping="Wrap" VerticalAlignment="Top">Just a dialog showing different chrome color than ModernWindow style</TextBlock>
+            <TextBlock TextWrapping="Wrap" VerticalAlignment="Top">Just a dialog showing a different ModernWindow style</TextBlock>
 
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Auto"
                      ScrollViewer.VerticalScrollBarVisibility="Disabled"

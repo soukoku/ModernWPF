@@ -38,7 +38,6 @@
 
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
-        <!--<Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>-->
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Style.Triggers>
@@ -71,7 +70,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -130,7 +128,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Opacity" Value=".8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -176,7 +173,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -257,7 +253,6 @@
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="MinHeight" Value="29"/>
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
@@ -357,7 +352,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
@@ -407,7 +401,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -457,7 +450,6 @@
         <Setter Property="Padding" Value="8 6" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Opacity" Value=".85"/>
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -523,17 +515,10 @@
         <Setter Property="IsTabStop" Value="False" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <!--<Setter Property="Background" Value="{DynamicResource ToolHoverBackground}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ToolHoverBorder}"/>
-                <Setter Property="Foreground" Value="{DynamicResource ToolHoverForeground}"/>-->
                 <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ModernAccentAlpha8}"/>
-                <!--<Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>-->
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <!--<Setter Property="Background" Value="{DynamicResource ToolActiveBackground}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ToolActiveBorder}"/>
-                <Setter Property="Foreground" Value="{DynamicResource ToolActiveForeground}"/>-->
                 <Setter Property="Background" Value="{DynamicResource ModernAccent}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}"/>
                 <Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>
@@ -542,6 +527,9 @@
                 <Setter Property="Visibility" Value="Collapsed" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+    <Style x:Key="ModernControlButtonV2" TargetType="Button" BasedOn="{StaticResource ModernControlButton}">
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
     </Style>
 
     <!--window-->
@@ -568,82 +556,71 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <Rectangle x:Name="PART_Caption" 
-                                           HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                                           Grid.ColumnSpan="2" 
-                                           Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}"
-                                           ></Rectangle>
+                            <Grid x:Name="PART_Caption" VerticalAlignment="Top"
+                                      Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}">
+                                <Grid.Resources>
+                                    <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
 
-                                <Grid x:Name="PART_Control" VerticalAlignment="Top">
-                                    <Grid.Resources>
-                                        <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
-                                    </Grid.Resources>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="auto" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <DockPanel>
-                                        <Image Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="24" Height="24"
+                                <DockPanel VerticalAlignment="Top">
+                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="22" Height="22"
                                                Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                                Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                                DockPanel.Dock="Left"></Image>
 
-                                        <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
+                                    <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
                                                    VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
                                                    HorizontalAlignment="Left"
-                                                   FontSize="15" Margin="{DynamicResource ContentThemePadding}"
+                                                   FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" Margin="{DynamicResource ContentThemePadding}"
                                                    Style="{StaticResource ModernTextBlock}"
                                                    Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
-                                    </DockPanel>
+                                </DockPanel>
 
-
-                                    <!--<ContentControl Content="{TemplateBinding Content}" Grid.Column="1" />-->
-
-                                    <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
+                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="1"
                                                 VerticalAlignment="Top"  
                                                 DataContext="{Binding Source={StaticResource WindowCommands}}"
                                                 Margin="0 -1 -1 0"
                                                 Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                                 >
-                                        <Button x:Name="ButtonMin"
+                                    <Button x:Name="ButtonMin"
                                                 Command="{Binding Path=MinimizeCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                 ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
                                                 Style="{StaticResource ModernControlButton}">
-                                            <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+                                        <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
-                                        </Button>
-                                        <Button x:Name="ButtonMax"
+                                    </Button>
+                                    <Button x:Name="ButtonMax"
                                                 Command="{Binding Path=MaximizeCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                 ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
                                                 Style="{StaticResource ModernControlButton}">
-                                            <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+                                        <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
-                                        </Button>
+                                    </Button>
 
-                                        <Button x:Name="ButtonRestore"
+                                    <Button x:Name="ButtonRestore"
                                                 Command="{Binding Path=RestoreCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                 ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
                                                 Style="{StaticResource ModernControlButton}">
-                                            <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+                                        <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
-                                        </Button>
+                                    </Button>
 
-                                        <Button x:Name="ButtonClose"
+                                    <Button x:Name="ButtonClose"
                                                 Command="{Binding Path=CloseCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                 ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
                                                 Style="{StaticResource ModernControlButton}">
-                                            <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+                                        <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
-                                        </Button>
-                                    </StackPanel>
-                                </Grid>
+                                    </Button>
+                                </StackPanel>
                             </Grid>
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
                                                        x:Name="MainContent"
@@ -661,12 +638,13 @@
                     </AdornerDecorator>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="True">
-                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_Caption" Property="Background" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsActive" Value="False">
-                            <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_Caption" Property="Background" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_Icon" Property="Opacity" Value=".6"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -718,11 +696,10 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <DockPanel>
-                                    <Image Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="24" Height="24"
+                                <DockPanel VerticalAlignment="Top">
+                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="22" Height="22"
                                            Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                            Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                            DockPanel.Dock="Left"></Image>
@@ -730,7 +707,7 @@
                                     <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
                                                VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
                                                HorizontalAlignment="Left"
-                                               FontSize="15" Margin="{DynamicResource ContentThemePadding}"
+                                               FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" Margin="{DynamicResource ContentThemePadding}"
                                                Style="{StaticResource ModernTextBlock}"
                                                Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
                                 </DockPanel>
@@ -738,7 +715,7 @@
 
                                 <!--<ContentControl Content="{TemplateBinding Content}" Grid.Column="1" />-->
 
-                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
+                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="1"
                                             VerticalAlignment="Top"  
                                             DataContext="{Binding Source={StaticResource WindowCommands}}"
                                             Margin="0 -1 -1 0"
@@ -795,6 +772,7 @@
                         <Trigger Property="IsActive" Value="False">
                             <Setter TargetName="PART_Caption" Property="Fill" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
                             <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_Icon" Property="Opacity" Value=".6"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -809,6 +787,137 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ModernWindowV2" TargetType="Window">
+        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ModernBackground}"/>
+        <Setter Property="local:Chrome.Chrome">
+            <Setter.Value>
+                <local:Chrome x:Name="chrome" 
+                              ActiveBorderBrush="{DynamicResource ModernAccent}"
+                              InactiveBorderBrush="{DynamicResource ModernForeground4}"
+                              ActiveCaptionBrush="{DynamicResource ModernAccent}"
+                              InactiveCaptionBrush="{DynamicResource ModernBackground2}"
+                              ActiveCaptionForeground="{DynamicResource AccentForeground}"
+                              InactiveCaptionForeground="{DynamicResource ModernForeground2}"
+                              />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Window">
+                    <AdornerDecorator>
+                        <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="PART_Caption" VerticalAlignment="Top"
+                                      Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}">
+                                <Grid.Resources>
+                                    <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <DockPanel VerticalAlignment="Top">
+                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="22" Height="22"
+                                               Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
+                                               Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
+                                               DockPanel.Dock="Left"></Image>
+
+                                    <TextBlock x:Name="PART_WindowTitle" Text="{TemplateBinding Title}" 
+                                                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                                   HorizontalAlignment="Left"
+                                                   FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" Margin="{DynamicResource ContentThemePadding}"
+                                                   Style="{StaticResource ModernTextBlock}"
+                                                   Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
+                                </DockPanel>
+
+                                <Border Grid.Column="1" Background="{DynamicResource ModernBackground2}"
+                                        Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
+                                        Padding="10 0 0 0">
+                                    <StackPanel x:Name="ControlBox" Orientation="Horizontal" 
+                                                VerticalAlignment="Top"
+                                                DataContext="{Binding Source={StaticResource WindowCommands}}"
+                                                Margin="0 -1 -1 0"
+                                                >
+                                        <Button x:Name="ButtonMin"
+                                                Command="{Binding Path=MinimizeCommand}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
+                                                Style="{StaticResource ModernControlButtonV2}">
+                                            <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                                        </Button>
+                                        <Button x:Name="ButtonMax"
+                                                Command="{Binding Path=MaximizeCommand}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
+                                                Style="{StaticResource ModernControlButtonV2}">
+                                            <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                                        </Button>
+
+                                        <Button x:Name="ButtonRestore"
+                                                Command="{Binding Path=RestoreCommand}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
+                                                Style="{StaticResource ModernControlButtonV2}">
+                                            <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                                        </Button>
+
+                                        <Button x:Name="ButtonClose"
+                                                Command="{Binding Path=CloseCommand}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
+                                                Style="{StaticResource ModernControlButtonV2}">
+                                            <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                            <ctrl:ModernContentControl Content="{TemplateBinding Content}"
+                                                       x:Name="MainContent"
+                                                       Grid.Row="1"
+                                                       ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:ModernContentControl>
+
+                            <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"
+                                                         Grid.RowSpan="2"></ctrl:DialogControlContainer>
+
+                            <ResizeGrip x:Name="PART_ResizeGrip" HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom" Visibility="Collapsed" IsTabStop="False" 
+                                        Grid.RowSpan="2"/>
+
+                        </Grid>
+                    </AdornerDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="True">
+                            <Setter TargetName="PART_Caption" Property="Background" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter TargetName="PART_Caption" Property="Background" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_WindowTitle" Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).InactiveCaptionForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="PART_Icon" Property="Opacity" Value=".6"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResizeWithGrip" />
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_ResizeGrip" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--status-->
     <Style x:Key="ModernStatusBar" TargetType="StatusBar">
         <Setter Property="Padding" Value="4 1"/>
@@ -858,7 +967,6 @@
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="MinHeight" Value="27"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -1039,7 +1147,6 @@
         <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
@@ -1157,7 +1264,6 @@
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
@@ -1226,7 +1332,6 @@
         <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
@@ -1287,7 +1392,6 @@
         <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
@@ -1460,22 +1564,18 @@
                 <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemPointerOverForegroundThemeBrush}"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <!--<Setter Property="Background" Value="{DynamicResource ComboBoxItemSelectedBackgroundThemeBrush}"/>-->
-                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha1}"/>
-                <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemSelectedForegroundThemeBrush}"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemDisabledForegroundThemeBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}"/>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="True" />
-                    <Condition Property="IsMouseOver" Value="False" />
+                    <Condition Property="IsMouseOver" Value="True" />
                 </MultiTrigger.Conditions>
-                <!--<Setter Property="Background" Value="{DynamicResource ComboBoxItemSelectedPointerOverBackgroundThemeBrush}"/>-->
-                <Setter Property="Background" Value="{DynamicResource ModernAccent}"/>
-                <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemSelectedForegroundThemeBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha7}"/>
             </MultiTrigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemDisabledForegroundThemeBrush}"/>
+            </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="True" />
@@ -1506,7 +1606,6 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="ItemContainerStyle" Value="{DynamicResource ModernComboBoxItem}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -1553,14 +1652,9 @@
                                 BorderBrush="{DynamicResource ComboBoxFocusedBorderThemeBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Opacity="0" />
-                        <!--<Rectangle x:Name="Highlight" 
-                                   SnapsToDevicePixels="True"
-                                   Fill="{DynamicResource ComboBoxSelectedBackgroundThemeBrush}"
-                                   Margin="{TemplateBinding BorderThickness}"
-                                   Opacity="0" />-->
                         <Rectangle x:Name="Highlight" 
                                    SnapsToDevicePixels="True"
-                                   Fill="{DynamicResource ModernAccent}"
+                                   Fill="{DynamicResource ModernAccentAlpha8}"
                                    Margin="{TemplateBinding BorderThickness}"
                                    Opacity="0" />
                         <ContentPresenter x:Name="ContentPresenter" 
@@ -1573,17 +1667,6 @@
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-
-                        <!--<TextBlock x:Name="DropDownGlyph"
-                                       Text="&#57361;"
-                                       Grid.Column="1"
-                                       IsHitTestVisible="False"
-                                       Foreground="{DynamicResource ComboBoxArrowForegroundThemeBrush}"
-                                       FontWeight="Bold"
-                                       FontSize="{DynamicResource ComboBoxArrowThemeFontSize}"
-                                       FontFamily="{DynamicResource SymbolThemeFontFamily}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center" />-->
                         <Path x:Name="DropDownGlyph"
                               Grid.Column="1"
                               Data="M0.062734604,0 L5.4720101,5.5553346 L10.881266,0 L10.944,4.1183305 L5.4776478,9.6730003 L0,4.1183305 z"
@@ -1608,7 +1691,7 @@
                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                      IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                     CaretBrush="{DynamicResource ComboBoxFocusedForegroundThemeBrush}"/>
+                                     />
                         </Border>
 
                         <Popup x:Name="PART_Popup" AllowsTransparency="true" 
@@ -1638,12 +1721,20 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <!--<Setter TargetName="Highlight" Property="Fill" Value="{DynamicResource ComboBoxSelectedPointerOverBackgroundThemeBrush}"/>-->
-                            <Setter TargetName="Highlight" Property="Fill" Value="{DynamicResource ModernAccent}"/>
+                            <!--<Setter TargetName="Highlight" Property="Fill" Value="{DynamicResource ModernAccent}"/>-->
                         </Trigger>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <!--<Setter TargetName="Highlight" Property="Opacity" Value="1"/>-->
                             <Setter TargetName="HighlightBackground" Property="Opacity" Value="1"/>
-                            <Setter TargetName="Highlight" Property="Opacity" Value="1"/>
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEditable" Value="False"/>
+                                <Condition Property="IsKeyboardFocusWithin" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Highlight" Property="Opacity" Value="1"/>
+                            <Setter TargetName="HighlightBackground" Property="Opacity" Value="1"/>
+                        </MultiTrigger>
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="PopupBorder" Property="Visibility" Value="Visible"/>
                         </Trigger>
@@ -1675,7 +1766,8 @@
                 <Setter Property="Foreground" Value="{DynamicResource ComboBoxDisabledForegroundThemeBrush}"/>
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter Property="Foreground" Value="{DynamicResource ComboBoxFocusedForegroundThemeBrush}"/>
+                <!--<Setter Property="Foreground" Value="{DynamicResource ComboBoxFocusedForegroundThemeBrush}"/>-->
+                <!--<Setter Property="Background" Value="{DynamicResource ComboBoxFocusedBackgroundThemeBrush}"/>-->
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -1712,9 +1804,7 @@
                 <Setter Property="Foreground" Value="{DynamicResource ListBoxItemPointerOverForegroundThemeBrush}"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <!--<Setter Property="Background" Value="{DynamicResource ListBoxItemSelectedBackgroundThemeBrush}"/>-->
                 <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}"/>
-                <!--<Setter Property="Foreground" Value="{DynamicResource ListBoxItemSelectedForegroundThemeBrush}"/>-->
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -1723,18 +1813,17 @@
                 </MultiTrigger.Conditions>
                 <Setter Property="Background" Value="{DynamicResource ModernBackground3}"/>
             </MultiTrigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Foreground" Value="{DynamicResource ListBoxItemDisabledForegroundThemeBrush}"/>
-            </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="True"></Condition>
                     <Condition Property="IsMouseOver" Value="True"></Condition>
                 </MultiTrigger.Conditions>
-                <!--<Setter Property="Background" Value="{DynamicResource ListBoxItemSelectedPointerOverBackgroundThemeBrush}"/>-->
                 <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha7}"/>
             </MultiTrigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{DynamicResource ListBoxItemDisabledForegroundThemeBrush}"/>
+            </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="True"></Condition>
@@ -1788,7 +1877,6 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="ItemContainerStyle" Value="{DynamicResource ModernListBoxItem}" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
@@ -1845,8 +1933,9 @@
                 <ControlTemplate TargetType="CalendarItem">
                     <ControlTemplate.Resources>
                         <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
-                            <TextBlock FontWeight="Bold" FontFamily="{DynamicResource ContentControlThemeFontFamily}" FontSize="{DynamicResource ControlContentThemeFontSize}" Foreground="{DynamicResource ModernForeground}"  
-                                           HorizontalAlignment="Center" Text="{Binding}" Margin="6" VerticalAlignment="Center"/>
+                            <TextBlock FontWeight="Bold" FontFamily="{DynamicResource ContentControlThemeFontFamily}" 
+                                       Foreground="{DynamicResource ModernForeground}"  
+                                       HorizontalAlignment="Center" Text="{Binding}" Margin="6" VerticalAlignment="Center"/>
                         </DataTemplate>
                     </ControlTemplate.Resources>
                     <Grid Name="PART_Root" >
@@ -2265,7 +2354,6 @@
         <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -3222,11 +3310,11 @@
         <Setter Property="Padding" Value="0 4 0 5" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
-                <Setter Property="Padding" Value="10 3 10 4" />
+                <Setter Property="Padding" Value="10 4 10 5" />
                 <Setter Property="Template" Value="{DynamicResource ModernTopLevelHeaderTemplate}" />
             </Trigger>
             <Trigger Property="Role" Value="TopLevelItem">
-                <Setter Property="Padding" Value="10 3 10 4" />
+                <Setter Property="Padding" Value="10 4 10 5" />
                 <Setter Property="Template" Value="{DynamicResource ModernTopLevelItemTemplate}" />
             </Trigger>
             <Trigger Property="Role" Value="SubmenuHeader">
@@ -3298,7 +3386,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha9}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
@@ -3722,7 +3810,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha9}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
@@ -4196,7 +4284,7 @@
                             <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger SourceName="Bd" Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                            <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha9}" />
                         </Trigger>
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="Expander" Property="Visibility" Value="Hidden"/>
