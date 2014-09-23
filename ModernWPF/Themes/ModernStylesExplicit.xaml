@@ -54,8 +54,32 @@
     </Style>
 
     <Style x:Key="ModernLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!--buttons-->
@@ -567,7 +591,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel VerticalAlignment="Top">
-                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="22" Height="22"
+                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="20" Height="20"
                                                Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                                Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                                DockPanel.Dock="Left"></Image>
@@ -699,7 +723,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel VerticalAlignment="Top">
-                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="22" Height="22"
+                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="20" Height="20"
                                            Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                            Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                            DockPanel.Dock="Left"></Image>
@@ -823,7 +847,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel VerticalAlignment="Top">
-                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="22" Height="22"
+                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="20" Height="20"
                                                Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                                Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                                DockPanel.Dock="Left"></Image>
@@ -1230,7 +1254,7 @@
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="Background" Value="{DynamicResource TextBoxActiveBackground}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxActiveBorder}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}" />
             </Trigger>
             <Trigger Property="IsReadOnly" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorder}" />
@@ -1333,7 +1357,7 @@
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="Background" Value="{DynamicResource TextBoxActiveBackground}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxActiveBorder}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}" />
             </Trigger>
             <Trigger Property="IsReadOnly" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorder}" />
@@ -1383,7 +1407,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            
+
                             <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
                                           Grid.Column="0" VerticalAlignment="Stretch" Margin="{TemplateBinding BorderThickness, Converter={x:Static conv:ThicknessZeroSideConverter.Instance}, ConverterParameter=right}"
                                           Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}}"></ContentPresenter>
@@ -1423,7 +1447,7 @@
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="Background" Value="{DynamicResource TextBoxActiveBackground}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxActiveBorder}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource TextBoxDisabledForeground}"/>
@@ -1547,9 +1571,9 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="{DynamicResource ComboBoxPadding}" />
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="Foreground" Value="{DynamicResource ComboBoxForegroundThemeBrush}" />
-        <Setter Property="Background" Value="{DynamicResource ComboBoxBackgroundThemeBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxBorderThemeBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}" />
+        <Setter Property="Background" Value="{DynamicResource TextBoxBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorder}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ComboBoxBorderThickness}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -1562,55 +1586,40 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
-                    <Grid x:Name="MainGrid">
-                        <Grid.Resources>
-                            <Style x:Key="ComboBoxEditableTextBox" TargetType="TextBox">
-                                <Setter Property="OverridesDefaultStyle" Value="true" />
-                                <Setter Property="AllowDrop" Value="true" />
-                                <Setter Property="MinWidth" Value="0" />
-                                <Setter Property="MinHeight" Value="0" />
-                                <Setter Property="Margin" Value="-2 -1"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="ContextMenu" Value="{DynamicResource TextBoxContextMenu}" />
-                                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
-                                <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="TextBox">
-                                            <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Background="Transparent"
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            >
+                        <Grid x:Name="MainGrid">
+                            <Grid.Resources>
+                                <Style x:Key="ComboBoxEditableTextBox" TargetType="TextBox">
+                                    <Setter Property="OverridesDefaultStyle" Value="true" />
+                                    <Setter Property="AllowDrop" Value="true" />
+                                    <Setter Property="MinWidth" Value="0" />
+                                    <Setter Property="MinHeight" Value="0" />
+                                    <Setter Property="Margin" Value="-2 -1"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="ContextMenu" Value="{DynamicResource TextBoxContextMenu}" />
+                                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                    <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+                                    <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="TextBox">
+                                                <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Background="Transparent"
                                                                        Focusable="false" HorizontalScrollBarVisibility="Hidden"
                                                                        VerticalScrollBarVisibility="Hidden" />
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Grid.Resources>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="24" />
-                        </Grid.ColumnDefinitions>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="24" />
+                            </Grid.ColumnDefinitions>
 
-
-                        <Border x:Name="Background" 
-                                SnapsToDevicePixels="True"
-                                Grid.ColumnSpan="2"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" />
-                        <Border x:Name="HighlightBackground" 
-                                SnapsToDevicePixels="True"
-                                Grid.ColumnSpan="2"
-                                Background="{DynamicResource ComboBoxFocusedBackgroundThemeBrush}"
-                                BorderBrush="{DynamicResource ComboBoxFocusedBorderThemeBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Opacity="0" />
-                        <Rectangle x:Name="Highlight" 
-                                   SnapsToDevicePixels="True"
-                                   Fill="{DynamicResource ModernAccentAlpha8}"
-                                   Margin="{TemplateBinding BorderThickness}"
-                                   Opacity="0" />
-                        <ContentPresenter x:Name="ContentPresenter" 
+                            <ContentPresenter x:Name="ContentPresenter" 
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                           Content="{TemplateBinding SelectionBoxItem}"
@@ -1619,74 +1628,71 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Path x:Name="DropDownGlyph"
+                                  Grid.Column="1"
+                                  Data="M0.062734604,0 L5.4720101,5.5553346 L10.881266,0 L10.944,4.1183305 L5.4776478,9.6730003 L0,4.1183305 z"
+                                  Fill="{DynamicResource ComboBoxArrowForegroundThemeBrush}" HorizontalAlignment="Center"
+                                  Height="7" Margin="0" Stretch="Fill" StrokeThickness="0"
+                                  UseLayoutRounding="False" VerticalAlignment="Center" Width="8" />
 
-                        <Path x:Name="DropDownGlyph"
-                              Grid.Column="1"
-                              Data="M0.062734604,0 L5.4720101,5.5553346 L10.881266,0 L10.944,4.1183305 L5.4776478,9.6730003 L0,4.1183305 z"
-                              Fill="{DynamicResource ComboBoxArrowForegroundThemeBrush}" HorizontalAlignment="Center"
-                              Height="7" Margin="-3 0 0 0" Stretch="Fill" StrokeThickness="0"
-                              UseLayoutRounding="False" VerticalAlignment="Center" Width="8" />
 
-
-                        <ToggleButton Grid.ColumnSpan="2" 
+                            <ToggleButton Grid.ColumnSpan="2" 
                                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                       IsTabStop="False" Focusable="False" ClickMode="Press"
                                       IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
-                            <ToggleButton.Template>
-                                <ControlTemplate TargetType="ToggleButton">
-                                    <Border Background="#01000000"/>
-                                </ControlTemplate>
-                            </ToggleButton.Template>
-                        </ToggleButton>
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border Background="#01000000"/>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
 
-                        <Border x:Name="EditPart" Padding="{TemplateBinding Padding}" Visibility="Collapsed">
-                            <TextBox x:Name="PART_EditableTextBox" Style="{StaticResource ComboBoxEditableTextBox}"
+                            <Border x:Name="EditPart" Padding="{TemplateBinding Padding}" Visibility="Collapsed">
+                                <TextBox x:Name="PART_EditableTextBox" Style="{StaticResource ComboBoxEditableTextBox}"
                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                      IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                      />
-                        </Border>
+                            </Border>
 
-                        <Popup x:Name="PART_Popup" AllowsTransparency="true" 
+                            <Popup x:Name="PART_Popup" AllowsTransparency="true" 
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}"
                                Placement="Bottom">
-                            <Border x:Name="PopupBorder"
+                                <theme:SystemDropShadowChrome Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
+                                    <Border x:Name="PopupBorder"
                                     MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                     MinWidth="{Binding ActualWidth, ElementName=MainGrid}"
                                     Background="{DynamicResource ComboBoxPopupBackgroundThemeBrush}"
                                     BorderBrush="{DynamicResource ComboBoxPopupBorderThemeBrush}"
                                     BorderThickness="{DynamicResource ComboBoxPopupBorderThickness}"
                                     HorizontalAlignment="Stretch">
-                                <ctrl:AnimatedScrollViewer x:Name="ScrollViewer" Foreground="{DynamicResource ComboBoxPopupForegroundThemeBrush}"
+                                        <ctrl:AnimatedScrollViewer x:Name="ScrollViewer" Foreground="{DynamicResource ComboBoxPopupForegroundThemeBrush}"
                                                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                                            IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                                                            >
-                                    <ItemsPresenter x:Name="ItemsPresenter"
+                                            <ItemsPresenter x:Name="ItemsPresenter"
                                                     KeyboardNavigation.DirectionalNavigation="Contained"
                                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                    </ItemsPresenter>
-                                </ctrl:AnimatedScrollViewer>
-                            </Border>
-                        </Popup>
-                    </Grid>
+                                            </ItemsPresenter>
+                                        </ctrl:AnimatedScrollViewer>
+                                    </Border>
+                                </theme:SystemDropShadowChrome>
+                            </Popup>
+                        </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <!--<Setter TargetName="Highlight" Property="Fill" Value="{DynamicResource ComboBoxSelectedPointerOverBackgroundThemeBrush}"/>-->
-                            <!--<Setter TargetName="Highlight" Property="Fill" Value="{DynamicResource ModernAccent}"/>-->
-                        </Trigger>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                            <!--<Setter TargetName="Highlight" Property="Opacity" Value="1"/>-->
-                            <Setter TargetName="HighlightBackground" Property="Opacity" Value="1"/>
+                            <Setter TargetName="DropDownGlyph" Property="Fill" Value="{DynamicResource ModernAccent}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsEditable" Value="False"/>
                                 <Condition Property="IsKeyboardFocusWithin" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Highlight" Property="Opacity" Value="1"/>
-                            <Setter TargetName="HighlightBackground" Property="Opacity" Value="1"/>
+                            <!--<Setter TargetName="Highlight" Property="Opacity" Value="1"/>
+                            <Setter TargetName="HighlightBackground" Property="Opacity" Value="1"/>-->
                         </MultiTrigger>
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="PopupBorder" Property="Visibility" Value="Visible"/>
@@ -1702,7 +1708,7 @@
                         <Trigger Property="ScrollViewer.CanContentScroll" Value="false">
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="DropDownGlyph" Property="Fill" Value="{DynamicResource ComboBoxArrowDisabledForegroundThemeBrush}"/>
+                            <Setter TargetName="DropDownGlyph" Property="Fill" Value="{DynamicResource TextBoxDisabledForeground}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1710,17 +1716,20 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ComboBoxPointerOverBackgroundThemeBrush}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxPointerOverBorderThemeBrush}"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{DynamicResource ComboBoxDisabledBackgroundThemeBrush}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxDisabledBorderThemeBrush}"/>
-                <Setter Property="Foreground" Value="{DynamicResource ComboBoxDisabledForegroundThemeBrush}"/>
+                <Setter Property="Background" Value="{DynamicResource TextBoxHoverBackground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxHoverBorder}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <!--<Setter Property="Foreground" Value="{DynamicResource ComboBoxFocusedForegroundThemeBrush}"/>-->
-                <!--<Setter Property="Background" Value="{DynamicResource ComboBoxFocusedBackgroundThemeBrush}"/>-->
+                <Setter Property="Background" Value="{DynamicResource TextBoxActiveBackground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}" />
+            </Trigger>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorder}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource TextBoxDisabledForeground}"/>
+                <Setter Property="Background" Value="{DynamicResource TextBoxDisabledBackground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxDisabledBorder}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -2367,7 +2376,7 @@
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="Background" Value="{DynamicResource TextBoxActiveBackground}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxActiveBorder}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{DynamicResource TextBoxDisabledForeground}"/>
@@ -2868,16 +2877,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}">
-                        <ScrollViewer CanContentScroll="True"
+                    <theme:SystemDropShadowChrome Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer CanContentScroll="True"
                                 Style="{DynamicResource ModernMenuScrollViewer}">
-                            <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"
+                                <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"
                                     Margin="{TemplateBinding Padding}"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        </ScrollViewer>
-                    </Border>
+                            </ScrollViewer>
+                        </Border>
+                    </theme:SystemDropShadowChrome>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -3034,23 +3045,25 @@
                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                        Placement="Bottom" VerticalOffset="-2"
                        PlacementTarget="{Binding ElementName=Root}">
-                    <Border Style="{StaticResource ContextMenuBorder}" Padding="0">
-                        <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
+                    <theme:SystemDropShadowChrome Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
+                        <Border Style="{StaticResource ContextMenuBorder}" Padding="0">
+                            <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
                                       Style="{DynamicResource ModernMenuScrollViewer}">
-                            <!--<Grid>-->
-                            <!--<Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top"
+                                <!--<Grid>-->
+                                <!--<Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top"
                                     Width="0">
                                 <Rectangle Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
                                            Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
                             </Canvas>-->
-                            <ItemsPresenter x:Name="ItemsPresenter"
+                                <ItemsPresenter x:Name="ItemsPresenter"
                                             KeyboardNavigation.DirectionalNavigation="Cycle"
                                             Grid.IsSharedSizeScope="true" 
                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                             KeyboardNavigation.TabNavigation="Cycle" />
-                            <!--</Grid>-->
-                        </ScrollViewer>
-                    </Border>
+                                <!--</Grid>-->
+                            </ScrollViewer>
+                        </Border>
+                    </theme:SystemDropShadowChrome>
                 </Popup>
             </Grid>
         </Border>
@@ -3155,24 +3168,26 @@
                     IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
                     PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                     Placement="Right" VerticalOffset="-3">
-                <Border Style="{StaticResource ContextMenuBorder}" Padding="0">
-                    <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
+                <theme:SystemDropShadowChrome Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
+                    <Border Style="{StaticResource ContextMenuBorder}" Padding="0">
+                        <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
                             Style="{DynamicResource ModernMenuScrollViewer}">
-                        <!--<Grid>-->
-                        <!--<Canvas HorizontalAlignment="Left" Height="0"
+                            <!--<Grid>-->
+                            <!--<Canvas HorizontalAlignment="Left" Height="0"
                                         VerticalAlignment="Top" Width="0">
                                     <Rectangle
                                             Height="{Binding ActualHeight, ElementName=SubMenuBorder}"
                                             Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
                                 </Canvas>-->
-                        <ItemsPresenter x:Name="ItemsPresenter"
+                            <ItemsPresenter x:Name="ItemsPresenter"
                                     KeyboardNavigation.DirectionalNavigation="Cycle"
                                     Grid.IsSharedSizeScope="true"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                     KeyboardNavigation.TabNavigation="Cycle" />
-                        <!--</Grid>-->
-                    </ScrollViewer>
-                </Border>
+                            <!--</Grid>-->
+                        </ScrollViewer>
+                    </Border>
+                </theme:SystemDropShadowChrome>
             </Popup>
         </Grid>
         <ControlTemplate.Triggers>
