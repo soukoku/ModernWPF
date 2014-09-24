@@ -89,7 +89,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ButtonBorderThemeThickness}" />
-        <Setter Property="Padding" Value="12,4,12,4" />
+        <Setter Property="Padding" Value="{DynamicResource ButtonControlPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
@@ -192,7 +192,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ToggleButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ToggleButtonBorderThemeThickness}" />
-        <Setter Property="Padding" Value="12,4,12,4" />
+        <Setter Property="Padding" Value="{DynamicResource ButtonControlPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
@@ -371,7 +371,7 @@
         <Setter Property="Foreground" Value="{DynamicResource RepeatButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource RepeatButtonBorderThemeBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource RepeatButtonBorderThemeThickness}" />
-        <Setter Property="Padding" Value="12,4,12,5" />
+        <Setter Property="Padding" Value="{DynamicResource ButtonControlPadding}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
@@ -1515,7 +1515,6 @@
 
     <Style x:Key="ModernComboBoxItem" TargetType="ComboBoxItem">
         <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ComboBoxForegroundThemeBrush}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="6" />
         <Setter Property="Margin" Value="0"/>
@@ -1665,12 +1664,12 @@
                                Placement="Bottom">
                                 <theme:SystemDropShadowChrome x:Name="Shadow" Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
                                     <Border x:Name="PopupBorder"
-                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                    MinWidth="{Binding ActualWidth, ElementName=MainGrid}"
-                                    Background="{DynamicResource ComboBoxPopupBackgroundThemeBrush}"
-                                    BorderBrush="{DynamicResource ComboBoxPopupBorderThemeBrush}"
-                                    BorderThickness="{DynamicResource ComboBoxPopupBorderThickness}"
-                                    HorizontalAlignment="Stretch">
+                                            MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                            MinWidth="{Binding ActualWidth, ElementName=MainGrid}"
+                                            Background="{DynamicResource ComboBoxPopupBackgroundThemeBrush}"
+                                            BorderBrush="{DynamicResource ComboBoxPopupBorderThemeBrush}"
+                                            BorderThickness="{DynamicResource ComboBoxPopupBorderThickness}"
+                                            HorizontalAlignment="Stretch">
                                         <ctrl:AnimatedScrollViewer x:Name="ScrollViewer" Foreground="{DynamicResource ComboBoxPopupForegroundThemeBrush}"
                                                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
@@ -1687,7 +1686,7 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Popup.HasDropShadow" Value="False">
+                        <Trigger SourceName="PART_Popup" Property="Popup.HasDropShadow" Value="False">
                             <Setter TargetName="Shadow" Property="Color" Value="Transparent"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
@@ -3033,7 +3032,7 @@
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
-            <Trigger Property="Popup.HasDropShadow" Value="False">
+            <Trigger SourceName="PART_Popup" Property="Popup.HasDropShadow" Value="False">
                 <Setter TargetName="Shadow" Property="Color" Value="Transparent"/>
             </Trigger>
             <Trigger Property="IsSuspendingPopupAnimation" Value="true">
@@ -3174,7 +3173,7 @@
             </Popup>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="Popup.HasDropShadow" Value="False">
+            <Trigger SourceName="PART_Popup" Property="Popup.HasDropShadow" Value="False">
                 <Setter TargetName="Shadow" Property="Color" Value="Transparent"/>
             </Trigger>
             <Trigger Property="IsSuspendingPopupAnimation" Value="true">

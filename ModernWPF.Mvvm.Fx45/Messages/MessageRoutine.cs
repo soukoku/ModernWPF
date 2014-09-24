@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ModernWPF.Messages
 {
@@ -108,6 +109,21 @@ namespace ModernWPF.Messages
                         message.DoCallback(dialog.FileNames);
                     }));
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="RefreshCommandsMessage"/>.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public static void HandleRefreshCommands(this RefreshCommandsMessage message)
+        {
+            if (Application.Current != null)
+            {
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    CommandManager.InvalidateRequerySuggested();
+                }));
             }
         }
 

@@ -95,9 +95,9 @@
 
                         <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Orientation="Horizontal">
                             <ScrollViewer>
-                                <StackPanel Orientation="Vertical" Width="180">
-                                    <TextBox Text="normal textbox" Margin="2" TextAlignment="Right"></TextBox>
-                                    <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
+                                <StackPanel Orientation="Vertical" Width="180" Background="{DynamicResource ModernBackground2}">
+                                    <TextBox Text="normal textbox" Margin="2"></TextBox>
+                                    <TextBox Text="readonly textbox (right)" TextAlignment="Right" Margin="2" IsReadOnly="True"></TextBox>
                                     <TextBox Text="with leading content" Margin="2">
                                         <modern:TextBoxUI.LeadingElement>
                                             <Border Background="{DynamicResource ModernAccent}" VerticalAlignment="Stretch">
@@ -215,7 +215,7 @@
                             <ProgressBar IsIndeterminate="True" Margin="0 10"></ProgressBar>
                             <ProgressBar DataContext="{Binding Progress}" Maximum="{Binding Maximum, Mode=OneWay}" Value="{Binding Value, Mode=OneWay}" Margin="0 10"></ProgressBar>
                             <TextBlock Text="{Binding Progress.Info}"></TextBlock>
-                            <Button Content="Test Progress" Command="{Binding TestProgressCommand}"></Button>
+                            <Button Content="Test Progress (also taskbar on win7+)" Command="{Binding TestProgressCommand}"></Button>
                         </StackPanel>
                     </StackPanel>
                 </modern:ModernContentControl>
@@ -415,4 +415,7 @@
             <StatusBarItem Content="status 2"></StatusBarItem>
         </StatusBar>
     </Grid>
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo ProgressState="{Binding Progress.State}" ProgressValue="{Binding Progress.Value}"></TaskbarItemInfo>
+    </Window.TaskbarItemInfo>
 </Window>

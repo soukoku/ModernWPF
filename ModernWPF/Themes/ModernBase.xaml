@@ -39,6 +39,7 @@
     <Thickness x:Key="AppBarTopBorderThemeThickness">0,0,0,2</Thickness>
     <Thickness x:Key="AppBarTopThemePadding">0,2,0,0</Thickness>
 
+    <Thickness x:Key="ButtonControlPadding">12 4 12 5</Thickness>
     <Thickness x:Key="ButtonBorderThemeThickness">2</Thickness>
     <Thickness x:Key="HyperlinkButtonBorderThemeThickness">2</Thickness>
     <Thickness x:Key="RepeatButtonBorderThemeThickness">2</Thickness>

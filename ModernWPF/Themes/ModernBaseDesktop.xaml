@@ -41,14 +41,15 @@
     <Thickness x:Key="AppBarTopBorderThemeThickness">0,0,0,2</Thickness>
     <Thickness x:Key="AppBarTopThemePadding">0,2,0,0</Thickness>
 
+    <Thickness x:Key="ButtonControlPadding">12 4</Thickness>
     <Thickness x:Key="ButtonBorderThemeThickness">1</Thickness>
     <Thickness x:Key="HyperlinkButtonBorderThemeThickness">1</Thickness>
     <Thickness x:Key="RepeatButtonBorderThemeThickness">1</Thickness>
     <Thickness x:Key="ToggleButtonBorderThemeThickness">1</Thickness>
 
-    <s:Double x:Key="CheckBoxBorderThemeThickness">1</s:Double>
+    <s:Double x:Key="CheckBoxBorderThemeThickness">2</s:Double>
 
-    <s:Double x:Key="RadioButtonBorderThemeThickness">1</s:Double>
+    <s:Double x:Key="RadioButtonBorderThemeThickness">2</s:Double>
 
     <Thickness x:Key="ComboBoxPadding">6 4</Thickness>
     <Thickness x:Key="ComboBoxBorderThickness">1</Thickness>

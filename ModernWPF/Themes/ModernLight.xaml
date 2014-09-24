@@ -49,10 +49,10 @@
 
     <!--simplified versions-->
     <SolidColorBrush x:Key="TextBoxForeground" Color="#000000" />
-    <SolidColorBrush x:Key="TextBoxBackground" Color="#55FFFFFF" />
-    <SolidColorBrush x:Key="TextBoxBorder" Color="#55000000" />
-    <SolidColorBrush x:Key="TextBoxHoverBackground" Color="#88FFFFFF" />
-    <SolidColorBrush x:Key="TextBoxHoverBorder" Color="#88000000" />
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#99FFFFFF" />
+    <SolidColorBrush x:Key="TextBoxBorder" Color="#66000000" />
+    <SolidColorBrush x:Key="TextBoxHoverBackground" Color="#DDFFFFFF" />
+    <SolidColorBrush x:Key="TextBoxHoverBorder" Color="#99000000" />
     <SolidColorBrush x:Key="TextBoxActiveBackground" Color="#FFFFFFFF" />
     <!--<SolidColorBrush x:Key="TextBoxActiveBorder" Color="#A3000000" />-->
     <SolidColorBrush x:Key="TextBoxDisabledForeground" Color="#FF666666" />
@@ -167,7 +167,6 @@
 
     <!--combobox-->
     <SolidColorBrush x:Key="ComboBoxArrowForegroundThemeBrush" Color="#FF000000" />
-    <SolidColorBrush x:Key="ComboBoxForegroundThemeBrush" Color="#FF000000" />
     <SolidColorBrush x:Key="ComboBoxPopupBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ComboBoxPopupBorderThemeBrush" Color="#FF212121" />
     <SolidColorBrush x:Key="ComboBoxPopupForegroundThemeBrush" Color="#FF000000" />

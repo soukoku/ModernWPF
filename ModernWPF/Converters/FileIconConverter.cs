@@ -15,6 +15,16 @@ namespace ModernWPF.Converters
     [ValueConversion(typeof(object), typeof(ImageSource))]
     public class FileIconConverter : IValueConverter
     {
+        static readonly FileIconConverter _instance = new FileIconConverter();
+
+        /// <summary>
+        /// Gets the singleton instance for this converter.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static FileIconConverter Instance { get { return _instance; } }
+
         #region IValueConverter Members
 
         /// <summary>

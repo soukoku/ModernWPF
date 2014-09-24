@@ -167,7 +167,6 @@
     
     <!--combobox-->
     <SolidColorBrush x:Key="ComboBoxArrowForegroundThemeBrush" Color="#FF000000" />
-    <SolidColorBrush x:Key="ComboBoxForegroundThemeBrush" Color="#FF000000" />
     <SolidColorBrush x:Key="ComboBoxPopupBackgroundThemeBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="ComboBoxPopupBorderThemeBrush" Color="#FF212121" />
     <SolidColorBrush x:Key="ComboBoxPopupForegroundThemeBrush" Color="#FF000000" />

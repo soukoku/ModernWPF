@@ -15,6 +15,16 @@ namespace ModernWPF.Converters
     [ValueConversion(typeof(bool), typeof(bool))]
     public class BoolNotConverter : IValueConverter
     {
+        static readonly BoolNotConverter _instance = new BoolNotConverter();
+
+        /// <summary>
+        /// Gets the singleton instance for this converter.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static BoolNotConverter Instance { get { return _instance; } }
+
         #region IValueConverter Members
 
         /// <summary>

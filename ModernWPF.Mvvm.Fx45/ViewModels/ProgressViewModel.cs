@@ -9,7 +9,8 @@ using System.Windows.Shell;
 namespace ModernWPF.ViewModels
 {
     /// <summary>
-    /// A view-model for reporting progress.
+    /// A view-model for reporting progress. This is also suitable for databinding to <see cref="TaskbarItemInfo"/>
+    /// in a wpf window.
     /// </summary>
     public class ProgressViewModel : ViewModelBase
     {
@@ -21,12 +22,14 @@ namespace ModernWPF.ViewModels
             Info = new StatusViewModel();
         }
 
+
         /// <summary>
         /// Updates the progress state.
         /// </summary>
         /// <param name="state">The state.</param>
         /// <param name="progressPercent">The progress percent (0 to 1).</param>
         /// <param name="info">The extra information.</param>
+        /// <param name="infoType">Type of the information.</param>
         public void UpdateState(TaskbarItemProgressState state, double progressPercent = 0, string info = null, StatusType infoType = StatusType.Info)
         {
             Info.Update(info, infoType);
@@ -83,7 +86,7 @@ namespace ModernWPF.ViewModels
         /// <value>
         /// The maximum.
         /// </value>
-        public static double Maximum { get { return 100; } }
+        public static double Maximum { get { return 1; } }
         /// <summary>
         /// Gets the minimum for data-binding purposes.
         /// </summary>
