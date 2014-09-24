@@ -15,6 +15,7 @@ namespace ModernWPF.Converters
     /// <summary>
     /// Used to calculate left margin of a tree node to achieve full row select.
     /// </summary>
+    [ValueConversion(typeof(TreeViewItem), typeof(Thickness))]
     public class TreeDepthLeftMarginConverter : IValueConverter
     {
         public double Length { get; set; }
@@ -30,7 +31,7 @@ namespace ModernWPF.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new System.NotImplementedException();
+            throw new System.NotSupportedException();
         }
 
         static int GetDepth(TreeViewItem item)

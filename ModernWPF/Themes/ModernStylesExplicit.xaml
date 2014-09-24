@@ -581,7 +581,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid x:Name="PART_Caption" VerticalAlignment="Top"
-                                      Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}">
+                                      Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:WindowCaptionHeightConverter.Instance}}">
                                 <Grid.Resources>
                                     <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
                                 </Grid.Resources>
@@ -706,7 +706,7 @@
                             <Rectangle x:Name="PART_Caption" 
                                        HorizontalAlignment="Stretch" VerticalAlignment="Top"
                                        Grid.ColumnSpan="2" 
-                                       Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}"
+                                       Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:WindowCaptionHeightConverter.Instance}}"
                                        ></Rectangle>
 
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
@@ -837,7 +837,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid x:Name="PART_Caption" VerticalAlignment="Top"
-                                      Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}}">
+                                  Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:WindowCaptionHeightConverter.Instance}}">
                                 <Grid.Resources>
                                     <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
                                 </Grid.Resources>
@@ -1099,7 +1099,7 @@
     <!--textbox-->
     <!--re-implement contextmenu to override textbox contextmenu style not applied bug
     plus some additional items-->
-    <ContextMenu x:Key="TextBoxContextMenu" x:Shared="False">
+    <ContextMenu x:Key="TextBoxContextMenu">
         <MenuItem
                 Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdUndo], Mode=OneWay}"
                 Command="ApplicationCommands.Undo" />
@@ -1663,7 +1663,7 @@
                                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}"
                                Placement="Bottom">
-                                <theme:SystemDropShadowChrome Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
+                                <theme:SystemDropShadowChrome x:Name="Shadow" Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
                                     <Border x:Name="PopupBorder"
                                     MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                     MinWidth="{Binding ActualWidth, ElementName=MainGrid}"
@@ -1687,6 +1687,9 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="Popup.HasDropShadow" Value="False">
+                            <Setter TargetName="Shadow" Property="Color" Value="Transparent"/>
+                        </Trigger>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
                             <Setter TargetName="DropDownGlyph" Property="Fill" Value="{DynamicResource ModernAccent}"/>
                         </Trigger>
@@ -2824,22 +2827,31 @@
         <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
         <Setter Property="BorderThickness" Value="{DynamicResource MenuBorderThickness}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground3}" />
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="HasDropShadow" Value="{DynamicResource {x:Static SystemParameters.DropShadowKey}}"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="Padding" Value="0 4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
-                    <theme:SystemDropShadowChrome Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
+                    <theme:SystemDropShadowChrome x:Name="Shadow" Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
                         <Border BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}">
-                            <ScrollViewer CanContentScroll="True"
-                                Style="{DynamicResource ModernMenuScrollViewer}">
+                            <ScrollViewer CanContentScroll="True" Style="{DynamicResource ModernMenuScrollViewer}">
                                 <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle"
-                                    Margin="{TemplateBinding Padding}"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                Margin="{TemplateBinding Padding}"
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             </ScrollViewer>
                         </Border>
                     </theme:SystemDropShadowChrome>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasDropShadow" Value="False">
+                            <Setter TargetName="Shadow" Property="Color" Value="Transparent"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -2981,8 +2993,10 @@
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="0 0 2 0"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                  VerticalAlignment="Center" />
-                <Border x:Name="GlyphPanel" Visibility="Collapsed" Width="15">
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center"/>
+                <Border x:Name="GlyphPanel" Visibility="Collapsed" Width="15"
+                        VerticalAlignment="Center">
                     <Path x:Name="Glyph" Data="{StaticResource Checkmark}"
                           Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
                           Height="11" Width="9" HorizontalAlignment="Left" />
@@ -2996,7 +3010,7 @@
                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                        Placement="Bottom" VerticalOffset="-2"
                        PlacementTarget="{Binding ElementName=Root}">
-                    <theme:SystemDropShadowChrome Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
+                    <theme:SystemDropShadowChrome x:Name="Shadow" Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
                         <Border Style="{StaticResource ContextMenuBorder}" Padding="0">
                             <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
                                       Style="{DynamicResource ModernMenuScrollViewer}">
@@ -3019,6 +3033,9 @@
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
+            <Trigger Property="Popup.HasDropShadow" Value="False">
+                <Setter TargetName="Shadow" Property="Color" Value="Transparent"/>
+            </Trigger>
             <Trigger Property="IsSuspendingPopupAnimation" Value="true">
                 <Setter Property="PopupAnimation" TargetName="PART_Popup" Value="None" />
             </Trigger>
@@ -3103,28 +3120,38 @@
                     <ColumnDefinition Width="17" />
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="1"
-                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                        VerticalAlignment="Center" />
-                <Border x:Name="GlyphPanel" Height="22" Margin="1" Visibility="Hidden" Width="22">
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                <Border x:Name="GlyphPanel" Height="22" Margin="1" Visibility="Hidden" Width="22"
+                        VerticalAlignment="Center">
                     <Path x:Name="Glyph" Data="{StaticResource Checkmark}"
                             Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
                             Height="11" Width="9" />
                 </Border>
                 <ContentPresenter Grid.Column="2" ContentSource="Header"
-                        Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                  Margin="{TemplateBinding Padding}" 
+                                  RecognizesAccessKey="True"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Left" 
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  
+                                  />
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}"
-                        Text="{TemplateBinding InputGestureText}" Visibility="Collapsed" />
+                           VerticalAlignment="Center"
+                           Text="{TemplateBinding InputGestureText}" Visibility="Collapsed" 
+                           Opacity="0.7"/>
                 <Path Grid.Column="5" Data="{StaticResource RightArrow}"
-                        Fill="{TemplateBinding Foreground}" Margin="4,0,0,0"
-                        VerticalAlignment="Center" />
+                      Fill="{TemplateBinding Foreground}" Margin="4,0,0,0"
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Left"/>
             </Grid>
             <Popup x:Name="PART_Popup" AllowsTransparency="true" Focusable="false"
                     HorizontalOffset="-2"
                     IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
                     PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                     Placement="Right" VerticalOffset="-3">
-                <theme:SystemDropShadowChrome Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
+                <theme:SystemDropShadowChrome x:Name="Shadow" Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
                     <Border Style="{StaticResource ContextMenuBorder}" Padding="0">
                         <ScrollViewer x:Name="SubMenuScrollViewer" CanContentScroll="true"
                             Style="{DynamicResource ModernMenuScrollViewer}">
@@ -3147,6 +3174,9 @@
             </Popup>
         </Grid>
         <ControlTemplate.Triggers>
+            <Trigger Property="Popup.HasDropShadow" Value="False">
+                <Setter TargetName="Shadow" Property="Color" Value="Transparent"/>
+            </Trigger>
             <Trigger Property="IsSuspendingPopupAnimation" Value="true">
                 <Setter Property="PopupAnimation" TargetName="PART_Popup" Value="None" />
             </Trigger>
@@ -3179,17 +3209,25 @@
             </Grid.ColumnDefinitions>
             <ContentPresenter x:Name="Icon" ContentSource="Icon" Margin="1"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                VerticalAlignment="Center" />
-            <Border x:Name="GlyphPanel" Height="22" Margin="1" Visibility="Hidden" Width="22">
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+            <Border x:Name="GlyphPanel" Height="22" Margin="1" Visibility="Hidden" Width="22"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
                 <Path x:Name="Glyph" Data="{StaticResource Checkmark}"
                         Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight"
                         Height="11" Width="9" />
             </Border>
             <ContentPresenter Grid.Column="2" ContentSource="Header"
-                                Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-            <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}"
-                        Text="{TemplateBinding InputGestureText}" />
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+            <TextBlock Grid.Column="4" 
+                       Margin="{TemplateBinding Padding}"
+                       VerticalAlignment="Center"
+                       Text="{TemplateBinding InputGestureText}"
+                       Opacity="0.7"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="Icon" Value="{x:Null}">

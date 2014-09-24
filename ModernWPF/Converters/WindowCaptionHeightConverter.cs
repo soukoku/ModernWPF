@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace ModernWPF.Converters
 {
     /// <summary>
-    /// Convert <see cref="Thickness"/> in a property to single double value for those pesky shape bindings.
+    /// Converts invalid caption height to system caption height for modern windows.
     /// </summary>
-    [ValueConversion(typeof(Thickness), typeof(bool))]
-    public class ThicknessToDoubleConverter : IValueConverter
+    [ValueConversion(typeof(double), typeof(double))]
+    public class WindowCaptionHeightConverter : IValueConverter
     {
-        static readonly ThicknessToDoubleConverter _instance = new ThicknessToDoubleConverter();
+        static readonly WindowCaptionHeightConverter _instance = new WindowCaptionHeightConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -22,7 +21,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static ThicknessToDoubleConverter Instance { get { return _instance; } }
+        public static WindowCaptionHeightConverter Instance { get { return _instance; } }
 
         #region IValueConverter Members
 
@@ -38,12 +37,17 @@ namespace ModernWPF.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is Thickness)
+            if (value is double)
             {
-                var t = ((Thickness)value);
-                return (t.Left + t.Right + t.Bottom + t.Top) / 4;
+                var pendingH = (double)value;
+                if (pendingH < 0)
+                {
+                    // use system current
+                    return SystemParameters.WindowCaptionHeight + SystemParameters.ResizeFrameHorizontalBorderHeight;
+                }
+                return pendingH;
             }
-            return 0;
+            return 0d;
         }
 
         /// <summary>

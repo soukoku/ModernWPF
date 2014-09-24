@@ -4,10 +4,12 @@ using CommonWin32.Monitors;
 using CommonWin32.Rectangles;
 using CommonWin32.Windows;
 using ModernWPF.Controls;
+using ModernWPF.Converters;
 using ModernWPF.Native;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -168,7 +170,7 @@ namespace ModernWPF
         /// The dependency property for CaptionHeight.
         /// </summary>
         public static readonly DependencyProperty CaptionHeightProperty =
-            DependencyProperty.RegisterAttached("CaptionHeight", typeof(double), typeof(Chrome), new PropertyMetadata(32d));
+            DependencyProperty.RegisterAttached("CaptionHeight", typeof(double), typeof(Chrome), new UIPropertyMetadata(-1d)); //new PropertyMetadata(32d));
 
 
         /// <summary>
@@ -826,8 +828,8 @@ namespace ModernWPF
             NcHitTest HandleNcHitTest(Point screenPoint)
             {
                 var windowPoint = _contentWindow.PointFromScreen(screenPoint);
-                var windowCapH = GetCaptionHeight(_contentWindow);
-                double capH = (windowCapH > -1 ? windowCapH : _contentWindow.ActualHeight);
+                var capH = (double)WindowCaptionHeightConverter.Instance.Convert(GetCaptionHeight(_contentWindow), typeof(Double), null, CultureInfo.CurrentCulture);
+                //double capH = (windowCapH > -1 ? windowCapH : _contentWindow.ActualHeight);
 
                 NcHitTest location = NcHitTest.HTCLIENT;
 

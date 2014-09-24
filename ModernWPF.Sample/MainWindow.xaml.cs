@@ -28,8 +28,8 @@ namespace ModernWPF.Sample
     {
         public MainWindow()
         {
-            InitializeComponent();
-
+            InitializeComponent(); 
+            //TextBox.TextAlignmentProperty
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
                 Messenger.Default.Register<DialogMessage>(this, m => { if (m.Sender == this) { this.HandleDialogMessageModern(m); } });

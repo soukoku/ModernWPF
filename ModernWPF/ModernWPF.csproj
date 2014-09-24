@@ -94,6 +94,7 @@
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
     <Compile Include="Converters\TreeDepthLeftMarginConverter.cs" />
+    <Compile Include="Converters\WindowCaptionHeightConverter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridViewSortParameter.cs" />
     <Compile Include="ListViewUI.cs" />

@@ -96,7 +96,7 @@
                         <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Orientation="Horizontal">
                             <ScrollViewer>
                                 <StackPanel Orientation="Vertical" Width="180">
-                                    <TextBox Text="normal textbox" Margin="2"></TextBox>
+                                    <TextBox Text="normal textbox" Margin="2" TextAlignment="Right"></TextBox>
                                     <TextBox Text="readonly textbox" Margin="2" IsReadOnly="True"></TextBox>
                                     <TextBox Text="with leading content" Margin="2">
                                         <modern:TextBoxUI.LeadingElement>
