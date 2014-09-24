@@ -74,7 +74,7 @@
             <MenuItem Header="No items" IsChecked="True"></MenuItem>
         </Menu>
 
-        <TabControl Style="{StaticResource ModernTabControl}" Grid.Row="2" Margin="8">
+        <TabControl Style="{StaticResource ModernTabControl}" Grid.Row="2" Margin="8 0 8 8" Padding="0 0 0 4">
             <TabItem Header="text controls" Style="{StaticResource ModernTabItem}">
                 <modern:ModernContentControl>
                     <StackPanel Orientation="Horizontal">

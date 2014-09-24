@@ -591,7 +591,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel VerticalAlignment="Top">
-                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="20" Height="20"
+                                    <Image x:Name="PART_Icon" Source="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="20" Height="20"
                                                Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                                Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                                DockPanel.Dock="Left"></Image>
@@ -723,7 +723,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel VerticalAlignment="Top">
-                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="20" Height="20"
+                                    <Image x:Name="PART_Icon" Source="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="20" Height="20"
                                            Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                            Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                            DockPanel.Dock="Left"></Image>
@@ -847,7 +847,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel VerticalAlignment="Top">
-                                    <Image x:Name="PART_Icon" Source="{TemplateBinding Icon, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="20" Height="20"
+                                    <Image x:Name="PART_Icon" Source="{Binding Path=Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:AppIconImageConverter.Instance}}" Width="20" Height="20"
                                                Margin="8 4 0 4" VerticalAlignment="Center" Stretch="Uniform"
                                                Visibility="{Binding Path=(local:Chrome.ShowCaptionIcon), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                                DockPanel.Dock="Left"></Image>
@@ -1099,7 +1099,7 @@
     <!--textbox-->
     <!--re-implement contextmenu to override textbox contextmenu style not applied bug
     plus some additional items-->
-    <ContextMenu x:Key="TextBoxContextMenu">
+    <ContextMenu x:Key="TextBoxContextMenu" x:Shared="False">
         <MenuItem
                 Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdUndo], Mode=OneWay}"
                 Command="ApplicationCommands.Undo" />
@@ -1293,7 +1293,8 @@
                         </Grid.ColumnDefinitions>
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="0" VerticalAlignment="Stretch" Margin="{TemplateBinding BorderThickness, Converter={x:Static conv:ThicknessZeroSideConverter.Instance}, ConverterParameter=right}"
+                                          Grid.Column="0" VerticalAlignment="Stretch" 
+                                          Margin="{Binding Path=BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:ThicknessZeroSideConverter.Instance}, ConverterParameter=right}"
                                           Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}}"></ContentPresenter>
 
                         <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
@@ -1305,7 +1306,8 @@
                                           IsTabStop="False" />
 
                         <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="2" VerticalAlignment="Stretch" Margin="{TemplateBinding BorderThickness, Converter={x:Static conv:ThicknessZeroSideConverter.Instance}, ConverterParameter=left}"
+                                          Grid.Column="2" VerticalAlignment="Stretch" 
+                                          Margin="{Binding Path=BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:ThicknessZeroSideConverter.Instance}, ConverterParameter=left}"
                                           Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}}"></ContentPresenter>
                     </Grid>
                 </ControlTemplate>
@@ -1409,8 +1411,9 @@
                             </Grid.ColumnDefinitions>
 
                             <ContentPresenter Content="{Binding Path=(local:TextBoxUI.LeadingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="0" VerticalAlignment="Stretch" Margin="{TemplateBinding BorderThickness, Converter={x:Static conv:ThicknessZeroSideConverter.Instance}, ConverterParameter=right}"
-                                          Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}}"></ContentPresenter>
+                                              Grid.Column="0" VerticalAlignment="Stretch" 
+                                              Margin="{Binding Path=BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:ThicknessZeroSideConverter.Instance}, ConverterParameter=right}"
+                                              Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}}"></ContentPresenter>
 
                             <ctrl:AnimatedScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
                                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -1432,8 +1435,9 @@
                             </Border>
 
                             <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
-                                          Grid.Column="2" VerticalAlignment="Stretch" Margin="{TemplateBinding BorderThickness, Converter={x:Static conv:ThicknessZeroSideConverter.Instance}, ConverterParameter=left}"
-                                          Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}}"></ContentPresenter>
+                                              Grid.Column="2" VerticalAlignment="Stretch" 
+                                              Margin="{Binding Path=BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:ThicknessZeroSideConverter.Instance}, ConverterParameter=left}"
+                                              Visibility="{Binding Path=Content, RelativeSource={RelativeSource Self}, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}}"></ContentPresenter>
 
                         </Grid>
                     </Border>
@@ -1700,7 +1704,8 @@
                         <Trigger Property="IsEditable" Value="true">
                             <Setter TargetName="EditPart" Property="Visibility" Value="Visible"/>
                         </Trigger>
-                        <Trigger Property="HasItems" Value="true">
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="PopupBorder" Property="Height" Value="95"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
@@ -2091,78 +2096,6 @@
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
-                            <VisualStateGroup Name="SelectionStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0" />
-                                </VisualStateGroup.Transitions>
-                                <VisualState Name="Unselected" />
-                                <VisualState Name="Selected">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="SelectedBackground" Storyboard.TargetProperty="Opacity" To=".75" Duration="0" />
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup Name="CalendarButtonFocusStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0" />
-                                </VisualStateGroup.Transitions>
-                                <VisualState Name="CalendarButtonFocused">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DayButtonFocusVisual" Storyboard.TargetProperty="Visibility" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0">
-                                                <DiscreteObjectKeyFrame.Value>
-                                                    <Visibility>Visible</Visibility>
-                                                </DiscreteObjectKeyFrame.Value>
-                                            </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState Name="CalendarButtonUnfocused">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DayButtonFocusVisual" Storyboard.TargetProperty="Visibility" Duration="0">
-                                            <DiscreteObjectKeyFrame KeyTime="0">
-                                                <DiscreteObjectKeyFrame.Value>
-                                                    <Visibility>Collapsed</Visibility>
-                                                </DiscreteObjectKeyFrame.Value>
-                                            </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup Name="ActiveStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0" />
-                                </VisualStateGroup.Transitions>
-                                <VisualState Name="Active" />
-                                <VisualState Name="Inactive">
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0" Storyboard.TargetName="NormalText" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" To="#FF777777"></ColorAnimation>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup Name="DayStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0" />
-                                </VisualStateGroup.Transitions>
-                                <VisualState Name="RegularDay" />
-                                <VisualState Name="Today">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="TodayBackground" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
-                                        <ColorAnimation Duration="0" Storyboard.TargetName="NormalText" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" To="#FFFFFFFF"></ColorAnimation>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup Name="BlackoutDayStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0" />
-                                </VisualStateGroup.Transitions>
-                                <VisualState Name="NormalDay" />
-                                <VisualState Name="BlackoutDay">
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0" Storyboard.TargetName="Blackout" Storyboard.TargetProperty="Opacity" To=".2"/>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Rectangle x:Name="TodayBackground" Opacity="0" Fill="{DynamicResource ModernAccent}"/>
                         <Rectangle x:Name="SelectedBackground" Opacity="0" Fill="{DynamicResource ModernBackground4}"/>
@@ -2177,6 +2110,24 @@
                         <Path x:Name="Blackout" Opacity="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5" Fill="#FF000000" Stretch="Fill" Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z"/>
                         <Rectangle x:Name="DayButtonFocusVisual" Visibility="Collapsed" IsHitTestVisible="false" Stroke="{DynamicResource ModernAccent}"/>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsBlackedOut" Value="True">
+                            <Setter TargetName="Blackout" Property="Opacity" Value=".2"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="DayButtonFocusVisual" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsInactive" Value="True">
+                            <Setter Property="Foreground" Value="#FF777777"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="SelectedBackground" Property="Opacity" Value=".75"/>
+                        </Trigger>
+                        <Trigger Property="IsToday" Value="True">
+                            <Setter TargetName="TodayBackground" Property="Opacity" Value="1"/>
+                            <Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -3079,14 +3030,17 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ModernBackground3}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="true">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ModernBackground3}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
             <Trigger Property="IsSubmenuOpen" Value="true">
-                <Setter Property="Background" Value="{DynamicResource ModernForeground3}" />
-                <Setter Property="Foreground" Value="{DynamicResource ModernBackground}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ModernBackground3}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
+                <!--<Setter Property="Foreground" Value="{DynamicResource ModernBackground}" />-->
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
@@ -3123,10 +3077,12 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ModernBackground3}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="true">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ModernBackground3}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
@@ -3202,7 +3158,8 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ModernBackground3}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
@@ -3243,7 +3200,8 @@
                 <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground3}" />
+                <!--<Setter Property="Background" Value="{DynamicResource ModernBackground3}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
@@ -3969,7 +3927,7 @@
 
     <Style x:Key="ModernTabItem" TargetType="TabItem">
         <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ModernForeground3}" />
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="8 6 8 2"/>
         <Setter Property="BorderThickness" Value="0 0 0 2"/>
@@ -3992,7 +3950,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <!--<Setter Property="Panel.ZIndex" Value="1" />-->

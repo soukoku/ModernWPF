@@ -245,6 +245,7 @@
         <Setter Property="local:Chrome.IsHitTestVisible" Value="true"/>
         <Setter Property="Background" Value="{DynamicResource AppBarItemBackgroundThemeBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource AppBarItemForegroundThemeBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AppBarItemForegroundThemeBrush}"/>
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="2 0" />
@@ -259,8 +260,8 @@
                         <StackPanel Orientation="{TemplateBinding Orientation}"
                                     Margin="{TemplateBinding Padding}">
                             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Ellipse StrokeThickness="2" 
-                                         Stroke="{DynamicResource AppBarItemForegroundThemeBrush}"
+                                <Ellipse StrokeThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:ThicknessToDoubleConverter.Instance}}" 
+                                         Stroke="{TemplateBinding BorderBrush}"
                                          Fill="{TemplateBinding Background}"
                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                          x:Name="Circle"/>
@@ -310,7 +311,9 @@
                 <Setter Property="Foreground" Value="{DynamicResource AppBarItemPointerOverForegroundThemeBrush}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="{DynamicResource AppBarItemForegroundThemeBrush}" />
+                <!--<Setter Property="Background" Value="{DynamicResource AppBarItemForegroundThemeBrush}" />-->
+                <Setter Property="Background" Value="{DynamicResource ModernAccent}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}" />
                 <Setter Property="Foreground" Value="{DynamicResource AppBarItemPressedForegroundThemeBrush}" />
             </Trigger>
             <MultiTrigger>
