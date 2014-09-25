@@ -12,8 +12,8 @@ namespace ModernWPF.Mvvm
     static class Version
     {
         // change this only for major releases
-        public const string Release = "0.5.0.0";
+        public const string Release = "0.6.0.0";
         // change this for each nuget release
-        public const string Build = "0.5.9";
+        public const string Build = "0.6.0";
     }
 }

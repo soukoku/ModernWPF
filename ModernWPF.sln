@@ -16,9 +16,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWPF.Sample", "ModernW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWPF.Tests", "ModernWPF.Tests\ModernWPF.Tests.csproj", "{312EC5C2-E085-4434-AFD2-86EADBC5DD32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWPF.Mvvm", "ModernWPF.Mvvm\ModernWPF.Mvvm.csproj", "{71FFB214-7239-48E1-BF7C-986E9EE870D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWPF.Mvvm.Tests", "ModernWPF.Mvvm.Tests\ModernWPF.Mvvm.Tests.csproj", "{6B588EFA-5231-4312-B50C-5E5EC0A5B1CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWPF.Mvvm.Fx45", "ModernWPF.Mvvm.Fx45\ModernWPF.Mvvm.Fx45.csproj", "{92496A6F-31C4-4EFA-B64D-688C1EF32B6B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0278F598-E288-4CF9-80FC-E1EBA2891A5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWPF.Mvvm.Net4", "ModernWPF.Mvvm.Net4\ModernWPF.Mvvm.Net4.csproj", "{71FFB214-7239-48E1-BF7C-986E9EE870D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernWPF.Mvvm", "ModernWPF.Mvvm\ModernWPF.Mvvm.csproj", "{92496A6F-31C4-4EFA-B64D-688C1EF32B6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +42,10 @@ Global
 		{312EC5C2-E085-4434-AFD2-86EADBC5DD32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{312EC5C2-E085-4434-AFD2-86EADBC5DD32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{312EC5C2-E085-4434-AFD2-86EADBC5DD32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B588EFA-5231-4312-B50C-5E5EC0A5B1CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B588EFA-5231-4312-B50C-5E5EC0A5B1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B588EFA-5231-4312-B50C-5E5EC0A5B1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B588EFA-5231-4312-B50C-5E5EC0A5B1CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71FFB214-7239-48E1-BF7C-986E9EE870D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{71FFB214-7239-48E1-BF7C-986E9EE870D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71FFB214-7239-48E1-BF7C-986E9EE870D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,5 +57,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{312EC5C2-E085-4434-AFD2-86EADBC5DD32} = {0278F598-E288-4CF9-80FC-E1EBA2891A5E}
+		{6B588EFA-5231-4312-B50C-5E5EC0A5B1CA} = {0278F598-E288-4CF9-80FC-E1EBA2891A5E}
 	EndGlobalSection
 EndGlobal

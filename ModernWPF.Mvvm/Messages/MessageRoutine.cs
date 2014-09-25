@@ -120,10 +120,17 @@ namespace ModernWPF.Messages
         {
             if (Application.Current != null)
             {
-                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                if (Application.Current.Dispatcher.CheckAccess())
                 {
                     CommandManager.InvalidateRequerySuggested();
-                }));
+                }
+                else
+                {
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        CommandManager.InvalidateRequerySuggested();
+                    }));
+                }
             }
         }
 

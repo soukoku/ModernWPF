@@ -28,8 +28,8 @@
   </metadata>
   <files>
     <file src="bin\$configuration$\$id$.pdb" target="lib\net45"/>
-    <file src="bin\$configuration$\fx4\$id$.dll" target="lib\net40-Client"/>
-    <file src="bin\$configuration$\fx4\$id$.xml" target="lib\net40-Client"/>
-    <file src="bin\$configuration$\fx4\$id$.pdb" target="lib\net40-Client"/>
+    <file src="bin\$configuration$\Net4\$id$.dll" target="lib\net40-Client"/>
+    <file src="bin\$configuration$\Net4\$id$.xml" target="lib\net40-Client"/>
+    <file src="bin\$configuration$\Net4\$id$.pdb" target="lib\net40-Client"/>
   </files>
 </package>

@@ -10,7 +10,7 @@ using System.Windows.Markup;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ModernWPF.Mvvm")]
-[assembly: AssemblyDescription("Contains some useful controls/view-models using ModernWPF and MvvmLight.")]
+[assembly: AssemblyDescription("Contains some useful view models, messages, and handler routines using ModernWPF and MvvmLight.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("ModernWPF.Mvvm")]
 [assembly: AssemblyTrademark("")]
@@ -39,5 +39,5 @@ using System.Windows.Markup;
 )]
 
 //[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF")]
-[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.ViewModels")]
+[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF")]
 //[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Controls")]
