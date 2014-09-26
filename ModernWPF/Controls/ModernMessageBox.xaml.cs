@@ -36,7 +36,7 @@ namespace ModernWPF.Controls
         /// <exception cref="System.ArgumentNullException">owner</exception>
         public static MessageBoxResult Show(Window owner, string messageBoxText, string caption = null, MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.None, MessageBoxResult defaultResult = MessageBoxResult.None)
         {
-            return Show(owner.FindInVisualTree<DialogControlContainer>(), messageBoxText, caption, button, icon, defaultResult);
+            return Show(owner.FindChildInVisualTree<DialogControlContainer>(), messageBoxText, caption, button, icon, defaultResult);
         }
         /// <summary>
         /// Displays a message box in front of the specified <see cref="DialogControlContainer" />.

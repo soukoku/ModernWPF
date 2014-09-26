@@ -61,7 +61,7 @@ namespace ModernWPF
             if (scroller == null)// dpo is ItemsControl)
             {
                 //scroller = ((ItemsControl)dpo).TryGetScrollerViewer();
-                scroller = d.FindInVisualTree<ScrollViewer>();
+                scroller = d.FindChildInVisualTree<ScrollViewer>();
             }
 
             if (scroller != null)
@@ -148,7 +148,7 @@ namespace ModernWPF
             if (scroller == null)// dpo is ItemsControl)
             {
                 //scroller = ((ItemsControl)dpo).TryGetScrollerViewer();
-                scroller = d.FindInVisualTree<ScrollViewer>();
+                scroller = d.FindChildInVisualTree<ScrollViewer>();
             }
 
             // animated scroll viewer handles this already so do nothing

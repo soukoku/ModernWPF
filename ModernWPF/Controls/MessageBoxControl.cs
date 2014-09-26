@@ -209,7 +209,7 @@ namespace ModernWPF.Controls
         /// <returns></returns>
         public virtual MessageBoxResult ShowDialogModal(Window owner, string caption, MessageBoxButton button, MessageBoxImage icon, MessageBoxResult defaultResult)
         {
-            return ShowDialogModal(owner.FindInVisualTree<DialogControlContainer>(), caption, button, icon, defaultResult);
+            return ShowDialogModal(owner.FindChildInVisualTree<DialogControlContainer>(), caption, button, icon, defaultResult);
         }
 
         /// <summary>

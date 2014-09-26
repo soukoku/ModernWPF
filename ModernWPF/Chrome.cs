@@ -526,7 +526,7 @@ namespace ModernWPF
 
             void _contentWindow_ContentRendered(object sender, EventArgs e)
             {
-                _resizeGrip = _contentWindow.FindInVisualTree<ResizeGrip>();
+                _resizeGrip = _contentWindow.FindChildInVisualTree<ResizeGrip>();
                 // hack to make sure the border is shown after content is shown
                 _contentShown = true;
                 if (_borderWindow != null)
