@@ -2497,6 +2497,8 @@
     </ControlTemplate>
 
     <Style x:Key="ModernScrollBar" TargetType="ScrollBar">
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
         <Setter Property="MinWidth" Value="17" />
         <Setter Property="MinHeight" Value="17" />
         <Setter Property="Background" Value="Transparent"/>
@@ -2519,9 +2521,11 @@
                                    StrokeThickness="{DynamicResource ScrollBarTrackBorderThemeThickness}" 
                                    Fill="{DynamicResource ScrollBarTrackBackgroundThemeBrush}" 
                                    Stroke="{DynamicResource ScrollBarTrackBorderThemeBrush}" />
-                        <RepeatButton x:Name="VerticalSmallDecrease" Height="33" MinWidth="17" IsTabStop="False" 
+                        <RepeatButton x:Name="VerticalSmallDecrease" Height="33" MinWidth="17" 
+                                      IsTabStop="False" Focusable="False"
                                       Interval="50" Margin="0" Grid.Row="0" Command="{x:Static ScrollBar.LineUpCommand}"
-                                      Template="{DynamicResource ScrollbarVerticalDecrementTemplate}" HorizontalAlignment="Center"/>
+                                      Template="{DynamicResource ScrollbarVerticalDecrementTemplate}" 
+                                      HorizontalAlignment="Center"/>
 
                         <Track x:Name="PART_Track" IsDirectionReversed="true"
                                 IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
@@ -2541,9 +2545,13 @@
                             </Track.Thumb>
                         </Track>
 
-                        <RepeatButton x:Name="VerticalSmallIncrease" Grid.Row="2" Command="{x:Static ScrollBar.LineDownCommand}"
-                                      Height="33" MinWidth="17" IsTabStop="False" Interval="50" Margin="0" 
-                                      Template="{DynamicResource ScrollbarVerticalIncrementTemplate}" HorizontalAlignment="Center"/>
+                        <RepeatButton x:Name="VerticalSmallIncrease" Grid.Row="2" 
+                                      Command="{x:Static ScrollBar.LineDownCommand}"
+                                      Height="33" MinWidth="17" 
+                                      IsTabStop="False" Focusable="False"
+                                      Interval="50" Margin="0" 
+                                      Template="{DynamicResource ScrollbarVerticalIncrementTemplate}" 
+                                      HorizontalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -2567,7 +2575,7 @@
                                            Stroke="{DynamicResource ScrollBarTrackBorderThemeBrush}" />
 
                                 <RepeatButton x:Name="HorizontalSmallDecrease" Command="{x:Static ScrollBar.LineLeftCommand}"
-                                          Grid.Column="0" MinHeight="17" IsTabStop="False" 
+                                          Grid.Column="0" MinHeight="17" IsTabStop="False" Focusable="False"
                                           Interval="50" Margin="0" Template="{DynamicResource ScrollbarHorizontalDecrementTemplate}" 
                                           Width="33" VerticalAlignment="Center"/>
 
@@ -2591,7 +2599,8 @@
 
                                 <RepeatButton x:Name="HorizontalSmallIncrease" Command="{x:Static ScrollBar.LineRightCommand}"
                                               Grid.Column="2" MinHeight="17" 
-                                              IsTabStop="False" Interval="50" Margin="0" 
+                                              IsTabStop="False" Focusable="False"
+                                              Interval="50" Margin="0" 
                                               Template="{DynamicResource ScrollbarHorizontalIncrementTemplate}" Width="33" VerticalAlignment="Center"/>
                             </Grid>
                         </ControlTemplate>
