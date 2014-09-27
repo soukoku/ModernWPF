@@ -57,7 +57,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="ctrl:BorderWindow">
+    <!--<Style TargetType="ctrl:BorderWindow">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:BorderWindow">
@@ -71,7 +71,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsContentActive" Value="True">
-                            <!--use 2 borders to make it darker on active-->
+                            --><!--use 2 borders to make it darker on active--><!--
                             <Setter TargetName="lineBorder" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}"/>
                             <Setter TargetName="lineBorder" Property="Effect" >
                                 <Setter.Value>
@@ -98,7 +98,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <Style TargetType="ctrl:DialogControl">
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />

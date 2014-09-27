@@ -74,7 +74,6 @@
     </Compile>
     <Compile Include="Controls\AppButton.cs" />
     <Compile Include="Controls\BorderWindow.cs" />
-    <Compile Include="Controls\BorderWindow2.cs" />
     <Compile Include="Controls\DialogControl.cs" />
     <Compile Include="Controls\DialogControlContainer.cs" />
     <Compile Include="Controls\MessageBoxControl.cs" />
