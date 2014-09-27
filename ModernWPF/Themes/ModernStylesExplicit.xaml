@@ -3434,7 +3434,7 @@
     <Style x:Key="ModernGridViewColumnHeader" TargetType="GridViewColumnHeader">
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground5}" />
         <Setter Property="BorderThickness" Value="0 0 0 2" />
         <Setter Property="Padding" Value="8 4" />
@@ -3480,12 +3480,12 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="PART_HeaderGripper" Property="Background" Value="{DynamicResource ModernForeground}" />
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
-                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}"/>
+                            <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="PART_HeaderGripper" Property="Background" Value="{DynamicResource ModernForeground}" />
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
-                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}"/>
+                            <Setter Property="Background" Value="{DynamicResource ModernBackground4}"/>
                             <Setter TargetName="HeaderContent" Property="Margin" Value="1,1,0,0" />
                         </Trigger>
                         <Trigger Property="Height" Value="Auto">
@@ -3541,6 +3541,7 @@
         <Setter Property="Padding" Value="4" />
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
+        <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -3553,11 +3554,11 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                            <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                            <Setter Property="Background" Value="{DynamicResource ModernBackground4}" />
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -3602,6 +3603,7 @@
         <Setter Property="BorderThickness" Value="0 0 0 2" />
         <Setter Property="Padding" Value="8 4" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
+        <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGridColumnHeader">
@@ -3646,11 +3648,13 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="Separator" Property="Background" Value="{DynamicResource ModernForeground}" />
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                            <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
                             <Setter TargetName="Highlighter" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="Separator" Property="Background" Value="{DynamicResource ModernForeground}" />
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
+                            <Setter Property="Background" Value="{DynamicResource ModernBackground4}" />
                             <Setter TargetName="HeaderContent" Property="Margin" Value="1,1,0,0" />
                         </Trigger>
                         <Trigger Property="SortDirection" Value="Ascending">
@@ -3670,18 +3674,18 @@
     </Style>
 
     <Style x:Key="ModernDataGridRowHeader" TargetType="DataGridRowHeader">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground5}" />
         <Setter Property="BorderThickness" Value="0 0 1 1" />
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha8}" />
                 <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ModernBackground2}" />
+                <Setter Property="Background" Value="{DynamicResource ModernBackground4}" />
                 <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
             </Trigger>
         </Style.Triggers>
