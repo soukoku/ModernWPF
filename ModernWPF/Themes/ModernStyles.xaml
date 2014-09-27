@@ -6,6 +6,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ModernStylesExplicit.xaml"></ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="ItemsControl" BasedOn="{StaticResource ModernItemsControl}"/>
     
     <Style TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}"/>
 

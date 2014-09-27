@@ -35,6 +35,24 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--testing-->
+    <Style x:Key="ModernItemsControl" TargetType="ItemsControl">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ItemsControl">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="true">
+                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
@@ -3265,9 +3283,9 @@
 
     <Style x:Key="ModernMenuItem" TargetType="MenuItem">
         <Setter Property="HorizontalContentAlignment"
-                Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
         <Setter Property="VerticalContentAlignment"
-                Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
@@ -3330,6 +3348,7 @@
     <!--listview-->
 
     <Style x:Key="ModernListViewItem" TargetType="ListViewItem">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="4" />
         <Setter Property="Background" Value="#01000000" />
@@ -4218,13 +4237,12 @@
     <conv:TreeDepthLeftMarginConverter Length="19" x:Key="ModernTreeDepthCalc"/>
 
     <Style x:Key="ModernTreeViewItem" TargetType="TreeViewItem">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-        <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment,RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
         <Setter Property="Padding" Value="4 2"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
-        <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}"/>-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TreeViewItem">
@@ -4277,7 +4295,7 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"></Condition>
-                                <Condition Property="IsMouseOver" Value="True"></Condition>
+                                <Condition SourceName="Bd" Property="IsMouseOver" Value="True"></Condition>
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha7}"/>
                         </MultiTrigger>
