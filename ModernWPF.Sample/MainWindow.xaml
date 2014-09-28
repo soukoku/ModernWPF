@@ -281,6 +281,68 @@
 
                         <TextBlock Text="TreeView" Grid.Column="2"></TextBlock>
                         <TreeView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding TreeItems}">
+                            <TreeView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                    <MenuItem Header="long menu test"></MenuItem>
+                                </ContextMenu>
+                            </TreeView.ContextMenu>
                             <TreeView.ItemTemplate>
                                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                                     <TextBlock Text="{Binding Name}"/>

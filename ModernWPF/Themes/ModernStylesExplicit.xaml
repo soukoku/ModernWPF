@@ -2866,11 +2866,12 @@
         <Setter Property="HasDropShadow" Value="{DynamicResource {x:Static SystemParameters.DropShadowKey}}"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Grid.IsSharedSizeScope" Value="true"/>
         <Setter Property="Padding" Value="0 4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
-                    <theme:SystemDropShadowChrome x:Name="Shadow" Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}">
+                    <theme:SystemDropShadowChrome x:Name="Shadow" Color="{DynamicResource PopupShadowColor}" Margin="{DynamicResource PopUpShadowMargin}" SnapsToDevicePixels="True">
                         <Border BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}">
@@ -3457,7 +3458,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ModernForeground5}" />
         <Setter Property="BorderThickness" Value="0 0 0 2" />
         <Setter Property="Padding" Value="8 4" />
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="-2 0 0 0"/>
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground2}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -4237,7 +4238,8 @@
     <conv:TreeDepthLeftMarginConverter Length="19" x:Key="ModernTreeDepthCalc"/>
 
     <Style x:Key="ModernTreeViewItem" TargetType="TreeViewItem">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
+        <!--no focus visual since it doesn't display right (it includes child nodes)-->
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment,RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>

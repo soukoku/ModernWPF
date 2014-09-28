@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace ModernWPF
 {
+    /// <summary>
+    /// Contains attached properties for a <see cref="ListView"/>.
+    /// </summary>
     public static class ListViewUI
     {
         #region sort cmd
@@ -26,11 +29,23 @@ namespace ModernWPF
                 typeof(ListViewUI),
                 new PropertyMetadata(null, OnSortCommandPropertyChanged)
             );
+        /// <summary>
+        /// Gets the sort command.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">obj</exception>
         public static ICommand GetSortCommand(DependencyObject obj)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
             return (ICommand)obj.GetValue(SortCommandProperty);
         }
+        /// <summary>
+        /// Sets the sort command.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <param name="value">The value.</param>
+        /// <exception cref="System.ArgumentNullException">obj</exception>
         public static void SetSortCommand(DependencyObject obj, ICommand value)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
@@ -147,5 +162,20 @@ namespace ModernWPF
 
 
         #endregion
+
+        /// <summary>
+        /// Used to manually clears any sort indicators in the <see cref="GridView"/> columns 
+        /// if it is set by this class.
+        /// </summary>
+        /// <param name="listView">The list view.</param>
+        public static void ClearSorts(ListView listView)
+        {
+            if (_lastSortTracker.ContainsKey(listView))
+            {
+                var head = _lastSortTracker[listView];
+                if (head != null) { head.ClearValue(SortDirectionProperty); }
+                _lastSortTracker.Remove(listView);
+            }
+        }
     }
 }
