@@ -104,6 +104,7 @@
     <Compile Include="ModernTheme.cs" />
     <Compile Include="MouseEvents.cs" />
     <Compile Include="Native\User32Ex.cs" />
+    <Compile Include="PlatformInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
