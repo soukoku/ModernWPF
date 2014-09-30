@@ -405,6 +405,36 @@ namespace ModernWPF
 
         #endregion
 
+
+        /// <summary>
+        /// Gets the extra content on the caption area.
+        /// </summary>
+        /// <param name="window">The object.</param>
+        /// <returns></returns>
+        public static object GetCaptionExtraContent(Window window)
+        {
+            return (object)window.GetValue(CaptionExtraContentProperty);
+        }
+
+        /// <summary>
+        /// Sets the extra content on the caption area.
+        /// </summary>
+        /// <param name="window">The object.</param>
+        /// <param name="value">The value.</param>
+        public static void SetCaptionExtraContent(Window window, object value)
+        {
+            window.SetValue(CaptionExtraContentProperty, value);
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="CaptionExtraContent"/>.
+        /// </summary>
+        public static readonly DependencyProperty CaptionExtraContentProperty =
+            DependencyProperty.RegisterAttached("CaptionExtraContent", typeof(object), typeof(Chrome), new PropertyMetadata(null));
+
+
+
+
         #endregion
 
         /// <summary>

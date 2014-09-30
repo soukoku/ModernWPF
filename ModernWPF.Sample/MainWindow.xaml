@@ -8,12 +8,18 @@
         x:Name="theWindow"
         Title="ModernWPF - Test" Height="610" Width="880"
         ResizeMode="CanResizeWithGrip" 
-        Style="{StaticResource ModernWindowFull}"
+        Style="{StaticResource ModernWindow}"
         DataContext="{StaticResource appVM}"
         modern:MouseEvents.MouseHWheel="theWindow_MouseHWheel">
     <Window.Resources>
         <sys:String x:Key="shortString">Lorem ipsum dolor sit amet</sys:String>
     </Window.Resources>
+    <modern:Chrome.CaptionExtraContent>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+            <Button Style="{StaticResource ModernCaptionButton}" Content="caption button 1"></Button>
+            <Button Style="{StaticResource ModernCaptionButton}" Content="caption button disabled" IsEnabled="False"></Button>
+        </StackPanel>
+    </modern:Chrome.CaptionExtraContent>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -22,12 +28,6 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 110 0">
-            <Button Style="{StaticResource ModernCaptionButton}" Content="caption button 1"></Button>
-            <Button Style="{StaticResource ModernCaptionButton}" Content="caption button disabled" IsEnabled="False"></Button>
-        </StackPanel>
 
         <Menu Grid.Row="1">
             <MenuItem Header="_FILE">

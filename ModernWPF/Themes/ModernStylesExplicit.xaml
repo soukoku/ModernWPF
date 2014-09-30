@@ -607,6 +607,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel VerticalAlignment="Top">
@@ -622,13 +623,18 @@
                                                    Style="{StaticResource ModernTextBlock}"
                                                    Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
                                 </DockPanel>
+                                
+                                <ContentPresenter Grid.Row="1" VerticalAlignment="Top"
+                                                  UseLayoutRounding="True"
+                                                  Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
+                                                  local:Chrome.IsHitTestVisible="True"></ContentPresenter>
 
-                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="1"
-                                                VerticalAlignment="Top"  
-                                                DataContext="{Binding Source={StaticResource WindowCommands}}"
-                                                Margin="0 -1 -1 0"
-                                                Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
-                                                >
+                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
+                                            VerticalAlignment="Top"  
+                                            DataContext="{Binding Source={StaticResource WindowCommands}}"
+                                            Margin="0 -1 -1 0"
+                                            Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
+                                            >
                                     <Button x:Name="ButtonMin"
                                                 Command="{Binding Path=MinimizeCommand}"
                                                 CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
@@ -739,6 +745,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel VerticalAlignment="Top">
@@ -755,10 +762,12 @@
                                                Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
                                 </DockPanel>
 
+                                <ContentPresenter Grid.Row="1" VerticalAlignment="Top"
+                                                  UseLayoutRounding="True"
+                                                  Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
+                                                  local:Chrome.IsHitTestVisible="true"></ContentPresenter>
 
-                                <!--<ContentControl Content="{TemplateBinding Content}" Grid.Column="1" />-->
-
-                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="1"
+                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
                                             VerticalAlignment="Top"  
                                             DataContext="{Binding Source={StaticResource WindowCommands}}"
                                             Margin="0 -1 -1 0"
@@ -863,6 +872,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <DockPanel VerticalAlignment="Top">
@@ -879,7 +889,12 @@
                                                    Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
                                 </DockPanel>
 
-                                <Border Grid.Column="1" Background="{DynamicResource ModernBackground2}"
+                                <ContentPresenter Grid.Row="1" VerticalAlignment="Top"
+                                                  UseLayoutRounding="True"
+                                                  Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
+                                                  local:Chrome.IsHitTestVisible="True"></ContentPresenter>
+
+                                <Border Grid.Column="2" Background="{DynamicResource ModernBackground2}"
                                         Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                                         Padding="10 0 0 0">
                                     <StackPanel x:Name="ControlBox" Orientation="Horizontal" 
