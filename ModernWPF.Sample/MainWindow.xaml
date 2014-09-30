@@ -467,7 +467,16 @@
                         </ContextMenu>
                     </modern:AppButton.ContextMenu>
                 </modern:AppButton>
-                <modern:AppButton Text="toggle theme" x:Name="btnTheme" Command="{Binding ToggleThemeCommand}" Content="{StaticResource IconCrown}"></modern:AppButton>
+                <modern:AppButton Text="themes" x:Name="btnTheme" Content="{StaticResource IconCrown}" Click="btnTheme_Click">
+                    <modern:AppButton.ContextMenu>
+                        <ContextMenu VerticalOffset="-4">
+                            <MenuItem Header="Dark" Command="{Binding ToggleThemeCommand}" CommandParameter="dark"></MenuItem>
+                            <MenuItem Header="Light" Command="{Binding ToggleThemeCommand}" CommandParameter="light"></MenuItem>
+                            <Separator/>
+                            <MenuItem Header="Modern size" Command="{Binding ToggleThemeCommand}" CommandParameter="modern"></MenuItem>
+                            <MenuItem Header="Desktop size" Command="{Binding ToggleThemeCommand}" CommandParameter="desktop"></MenuItem>
+                        </ContextMenu>
+                    </modern:AppButton.ContextMenu></modern:AppButton>
                 <modern:AppButton Text="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click" Content="{StaticResource IconBaby}"></modern:AppButton>
             </StackPanel>
         </StackPanel>

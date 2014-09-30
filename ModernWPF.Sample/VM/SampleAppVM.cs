@@ -139,6 +139,25 @@ namespace ModernWPF.Sample.VM
             }
         }
 
+
+        static readonly ResourceDictionary desktopSize = GetResource("/ModernWPF;component/themes/ModernBaseDesktop.xaml");
+        static readonly ResourceDictionary modernSize = GetResource("/ModernWPF;component/themes/ModernBase.xaml");
+        internal static ResourceDictionary GetResource(string url)
+        {
+            var style = new ResourceDictionary();
+            style.Source = new Uri(url, UriKind.Relative);
+            return style;
+        }
+        private static void ApplyResources(ResourceDictionary resources)
+        {
+            foreach (var k in resources.Keys)
+            {
+                Application.Current.Resources[k] = resources[k];
+            }
+        }
+
+
+
         private ICommand _toggleThemeCmd;
         public ICommand ToggleThemeCommand
         {
@@ -146,15 +165,22 @@ namespace ModernWPF.Sample.VM
             {
                 if (_toggleThemeCmd == null)
                 {
-                    _toggleThemeCmd = new RelayCommand(() =>
+                    _toggleThemeCmd = new RelayCommand<string>(param =>
                     {
-                        if (ModernTheme.CurrentTheme.GetValueOrDefault() == ModernTheme.Theme.Dark)
+                        switch (param)
                         {
-                            ModernTheme.ApplyTheme(ModernTheme.Theme.Light, ModernTheme.CurrentAccent);
-                        }
-                        else
-                        {
-                            ModernTheme.ApplyTheme(ModernTheme.Theme.Dark, ModernTheme.CurrentAccent);
+                            case "dark":
+                                ModernTheme.ApplyTheme(ModernTheme.Theme.Dark, ModernTheme.CurrentAccent);
+                                break;
+                            case "light":
+                                ModernTheme.ApplyTheme(ModernTheme.Theme.Light, ModernTheme.CurrentAccent);
+                                break;
+                            case "modern":
+                                ApplyResources(modernSize);
+                                break;
+                            case "desktop":
+                                ApplyResources(desktopSize);
+                                break;
                         }
                     });
                 }

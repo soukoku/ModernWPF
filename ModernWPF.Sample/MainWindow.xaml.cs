@@ -109,6 +109,13 @@ namespace ModernWPF.Sample
             btnSysDiag.ContextMenu.IsOpen = true;
         }
 
+        private void btnTheme_Click(object sender, RoutedEventArgs e)
+        {
+            btnTheme.ContextMenu.Placement = PlacementMode.Top;
+            btnTheme.ContextMenu.PlacementTarget = btnTheme;
+            btnTheme.ContextMenu.IsOpen = true;
+        }
+
         private void theWindow_MouseHWheel(object sender, MouseWheelEventArgs e)
         {
             Debug.WriteLine("Got h-wheel with delta = " + e.Delta);

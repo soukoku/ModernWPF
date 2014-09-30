@@ -6,7 +6,7 @@
 
     <s:Double x:Key="WindowTitleFontSize">24</s:Double>
     <s:Double x:Key="TopTitleFontSize">20</s:Double>
-    <s:Double x:Key="SubTitleFontSize">14</s:Double>
+    <s:Double x:Key="SubTitleFontSize">16</s:Double>
     <s:Double x:Key="ContentFontSize">13</s:Double>
     <s:Double x:Key="SmallFontSize">12</s:Double>
     <s:Double x:Key="TinyFontSize">10.5</s:Double>
