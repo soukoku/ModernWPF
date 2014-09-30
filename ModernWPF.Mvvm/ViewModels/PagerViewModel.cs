@@ -16,7 +16,14 @@ namespace ModernWPF.ViewModels
     {
         const int DEFAULT_PG_SZ = 100;
 
-        Action<PagerViewModel, int> _callback;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PagerViewModel"/> class.
+        /// </summary>
+        public PagerViewModel()
+            : this(null, DEFAULT_PG_SZ)
+        {
+
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PagerViewModel" /> class.
@@ -25,7 +32,7 @@ namespace ModernWPF.ViewModels
         /// <param name="pageSize">Initial size of the page.</param>
         public PagerViewModel(Action<PagerViewModel, int> pageChangedCallback, int pageSize = DEFAULT_PG_SZ)
         {
-            _callback = pageChangedCallback;
+            PageChangedCallback = pageChangedCallback;
             _currentPage = 1;
             _totalPages = 1;
             _pageSize = pageSize > 0 ? pageSize : DEFAULT_PG_SZ;
@@ -33,15 +40,17 @@ namespace ModernWPF.ViewModels
 
         void TryGoToPage(int page)
         {
-            if (_callback != null) { _callback(this, page); }
+            if (PageChangedCallback != null) { PageChangedCallback(this, page); }
         }
+
+        public Action<PagerViewModel, int> PageChangedCallback { get; set; }
 
         /// <summary>
         /// To be called by consumers when paged data result changes.
         /// </summary>
         /// <param name="currentPage"></param>
         /// <param name="totalCount"></param>
-        public void Update(int currentPage, int totalCount)
+        public void UpdateStat(int currentPage, int totalCount)
         {
             var newTotalPgs = ((totalCount - 1) / PageSize) + 1;
 

@@ -132,7 +132,7 @@ namespace ModernWPF.ViewModels
                         _items.Add(it);
                     }
                 }
-                Pager.Update(page, data.Total);
+                Pager.UpdateStat(page, data.Total);
             }
 
             IsLoading = false;
