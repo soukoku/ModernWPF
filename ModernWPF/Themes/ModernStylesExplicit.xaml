@@ -199,7 +199,8 @@
                 <Setter Property="Opacity" Value="1" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{DynamicResource ButtonDisabledForegroundThemeBrush}" />
+                <!--<Setter Property="Foreground" Value="{DynamicResource ButtonDisabledForegroundThemeBrush}" />-->
+                <Setter Property="Opacity" Value=".4" />
             </Trigger>
         </Style.Triggers>
     </Style>
