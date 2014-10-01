@@ -6,6 +6,7 @@
     xmlns:ctrl="clr-namespace:ModernWPF.Controls"
     xmlns:conv="clr-namespace:ModernWPF.Converters"
     xmlns:resx="clr-namespace:ModernWPF.Resources"
+    xmlns:test="clr-namespace:System.Windows.Documents;assembly=PresentationCore"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
 
     <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -35,7 +36,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--testing-->
     <Style x:Key="ModernItemsControl" TargetType="ItemsControl">
         <Setter Property="Focusable" Value="False"/>
@@ -99,6 +100,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 
     <!--buttons-->
     <Style x:Key="ModernButton" TargetType="Button">
@@ -451,17 +453,26 @@
                 <ControlTemplate TargetType="ButtonBase">
                     <Grid>
                         <Border x:Name="Border"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                >
                             <TextBlock x:Name="MainContent"
                                        Margin="{TemplateBinding Padding}" 
-                                       Text="{TemplateBinding Content}"
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                       TextDecorations="Underline"/>
+                                       Text="{TemplateBinding Content}">
+                            </TextBlock>
                         </Border>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainContent" Property="TextDecorations" Value="Underline"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="MainContent" Property="TextDecorations" Value="Underline"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -624,7 +635,7 @@
                                                    Style="{StaticResource ModernTextBlock}"
                                                    Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
                                 </DockPanel>
-                                
+
                                 <ContentPresenter Grid.Row="1" VerticalAlignment="Top"
                                                   UseLayoutRounding="True"
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
