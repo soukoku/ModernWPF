@@ -11,7 +11,7 @@
     <iconUrl>http://i.imgur.com/WAYKszr.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>If using this under Framework 4.0 you will need to get the Microsoft.Bcl.Async package and the updated versions of its dependencies (Microsoft.Bcl and Microsoft.Bcl.Build).</releaseNotes>
+    <!--<releaseNotes>If using this under Framework 4.0 you will need to get the Microsoft.Bcl.Async package and the updated versions of its dependencies (Microsoft.Bcl and Microsoft.Bcl.Build).</releaseNotes>-->
     <copyright>$copyright$</copyright>
     <tags>metro modern wpf mvvm</tags>
     <!--addl cmd to pack -IncludeReferencedProjects-->
