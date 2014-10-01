@@ -295,6 +295,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="MinHeight" Value="29"/>
+        <!--<Setter Property="Margin" Value="0 0 0 2"/>-->
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -304,21 +305,21 @@
                         BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="29" />
+                                <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Grid VerticalAlignment="Center">
+                            <Grid Margin="0 2 4 2">
                                 <Ellipse x:Name="BackgroundEllipse"
-                                         Width="23"
-                                         Height="23"
+                                         Width="{DynamicResource RadioButtonBorderSize}"
+                                         Height="{DynamicResource RadioButtonBorderSize}"
                                          UseLayoutRounding="False"
                                          SnapsToDevicePixels="True"
                                          Fill="{DynamicResource RadioButtonBackgroundThemeBrush}"
                                          Stroke="{DynamicResource RadioButtonBorderThemeBrush}"
                                          StrokeThickness="{DynamicResource RadioButtonBorderThemeThickness}" />
                                 <Ellipse x:Name="CheckGlyph"
-                                         Width="13"
-                                         Height="13"
+                                         Width="{DynamicResource RadioButtonGlyphSize}"
+                                         Height="{DynamicResource RadioButtonGlyphSize}"
                                          UseLayoutRounding="False"
                                          SnapsToDevicePixels="True"
                                          Opacity="0"
@@ -1053,8 +1054,8 @@
                                            StrokeThickness="{DynamicResource CheckBoxBorderThemeThickness}"
                                            UseLayoutRounding="False"
                                            SnapsToDevicePixels="True"
-                                           Height="21"
-                                           Width="21" />
+                                           Height="{DynamicResource CheckBoxBorderSize}"
+                                           Width="{DynamicResource CheckBoxBorderSize}" />
                                 <Path x:Name="CheckGlyph"
                                       Data="F1 M 0,58 L 2,56 L 6,60 L 13,51 L 15,53 L 6,64 z"
                                       Fill="{DynamicResource ModernAccent}"

@@ -48,8 +48,11 @@
     <Thickness x:Key="ToggleButtonBorderThemeThickness">1</Thickness>
 
     <s:Double x:Key="CheckBoxBorderThemeThickness">2</s:Double>
+    <s:Double x:Key="CheckBoxBorderSize">19</s:Double>
 
     <s:Double x:Key="RadioButtonBorderThemeThickness">2</s:Double>
+    <s:Double x:Key="RadioButtonBorderSize">21</s:Double>
+    <s:Double x:Key="RadioButtonGlyphSize">11</s:Double>
 
     <Thickness x:Key="ComboBoxPadding">6 4</Thickness>
     <Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
