@@ -89,6 +89,7 @@
     <Compile Include="Converters\BoolVisibleConverter.cs" />
     <Compile Include="Converters\MultiBoolVisibleConverter.cs" />
     <Compile Include="Converters\NullEmptyCollapsedConverter.cs" />
+    <Compile Include="Converters\SingleToEnumerableConverter.cs" />
     <Compile Include="Converters\TextCaseConverter.cs" />
     <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />

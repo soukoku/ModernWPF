@@ -46,7 +46,7 @@ namespace ModernWPF.Converters
         }
 
         /// <summary>
-        /// Converts a value.
+        /// Not supported.
         /// </summary>
         /// <param name="value">The value that is produced by the binding target.</param>
         /// <param name="targetType">The type to convert to.</param>
@@ -58,7 +58,7 @@ namespace ModernWPF.Converters
         /// <exception cref="System.NotSupportedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new System.NotSupportedException();
+            return DependencyProperty.UnsetValue;
         }
 
         static int GetDepth(TreeViewItem item)

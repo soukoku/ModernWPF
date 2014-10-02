@@ -1,21 +1,21 @@
-﻿using CommonWin32.API;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace ModernWPF.Converters
 {
     /// <summary>
-    /// Parse databound value as file path and converts to file icon image.
+    /// Converts a single object to an <see cref="IEnumerable"/> for list binding purposes when you only have one.
+    /// Useful for <see cref="TreeView"/>'s ItemsSources binding.
     /// </summary>
-    [ValueConversion(typeof(object), typeof(ImageSource))]
-    public class FileIconConverter : IValueConverter
+    [ValueConversion(typeof(object), typeof(IEnumerable))]
+    public class SingleToEnumerableConverter : IValueConverter
     {
-        static readonly FileIconConverter _instance = new FileIconConverter();
+        static readonly SingleToEnumerableConverter _instance = new SingleToEnumerableConverter();
 
         /// <summary>
         /// Gets the singleton instance for this converter.
@@ -23,7 +23,7 @@ namespace ModernWPF.Converters
         /// <value>
         /// The instance.
         /// </value>
-        public static FileIconConverter Instance { get { return _instance; } }
+        public static SingleToEnumerableConverter Instance { get { return _instance; } }
 
         #region IValueConverter Members
 
@@ -41,12 +41,9 @@ namespace ModernWPF.Converters
         {
             if (value != null)
             {
-                var para = parameter == null ? string.Empty : parameter.ToString();
-                bool large = para.IndexOf("large", StringComparison.OrdinalIgnoreCase) > -1;
-
-                return GetFileIconCore(value, large);
+                return AsEnumerable(value);
             }
-            return null;
+            return value;
         }
 
         /// <summary>
@@ -66,15 +63,9 @@ namespace ModernWPF.Converters
 
         #endregion
 
-        /// <summary>
-        /// Real method to get the file icon after parsing the parameter.
-        /// </summary>
-        /// <param name="value">The databound value.</param>
-        /// <param name="large">if set to <c>true</c> return large icon.</param>
-        /// <returns></returns>
-        protected virtual ImageSource GetFileIconCore(object value, bool large)
+        private IEnumerable AsEnumerable(object value)
         {
-            return IconReader.GetFileIconWpf(value.ToString(), large ? IconReader.IconSize.Large : IconReader.IconSize.Small, false);
+            yield return value;
         }
     }
 }
