@@ -1,5 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
+#if NET4
 using GalaSoft.MvvmLight.Command;
+#else
+using GalaSoft.MvvmLight.CommandWpf;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +63,8 @@ namespace ModernWPF.ViewModels
             TotalItemCount = totalCount;
             RaisePropertyChanged(() => this.CurrentPage);
             RaisePropertyChanged(() => this.TotalPages);
+            RaisePropertyChanged(() => this.CanGoPrevPage);
+            RaisePropertyChanged(() => this.CanGoNextPage);
 
             if (_firstPageCommand != null) { _firstPageCommand.RaiseCanExecuteChanged(); }
             if (_prevPageCommand != null) { _prevPageCommand.RaiseCanExecuteChanged(); }
@@ -161,6 +167,20 @@ namespace ModernWPF.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether previous page is allow.
+        /// </summary>
+        /// <value>
+        /// </value
+        public bool CanGoPrevPage { get { return CurrentPage > 1 && TotalPages > 1; } }
+
+        /// <summary>
+        /// Gets a value indicating whether next page is allow.
+        /// </summary>
+        /// <value>
+        /// </value>
+        public bool CanGoNextPage { get { return CurrentPage < TotalPages; } }
+
         private RelayCommand _firstPageCommand;
         /// <summary>
         /// Gets the command to go to the first page
@@ -176,10 +196,7 @@ namespace ModernWPF.ViewModels
                     _firstPageCommand = new RelayCommand(() =>
                     {
                         TryGoToPage(1);
-                    }, () =>
-                    {
-                        return CurrentPage > 1;
-                    })
+                    }, () => CanGoPrevPage)
                 );
             }
         }
@@ -200,14 +217,10 @@ namespace ModernWPF.ViewModels
                     _prevPageCommand = new RelayCommand(() =>
                     {
                         TryGoToPage(CurrentPage - 1);
-                    }, () =>
-                    {
-                        return CurrentPage > 1;
-                    })
+                    }, () => CanGoPrevPage)
                 );
             }
         }
-
 
         private RelayCommand _nextPageCommand;
         /// <summary>
@@ -224,10 +237,7 @@ namespace ModernWPF.ViewModels
                     _nextPageCommand = new RelayCommand(() =>
                     {
                         TryGoToPage(CurrentPage + 1);
-                    }, () =>
-                    {
-                        return CurrentPage < TotalPages;
-                    })
+                    }, () => CanGoNextPage)
                 );
             }
         }
@@ -248,10 +258,7 @@ namespace ModernWPF.ViewModels
                     _lastPageCommand = new RelayCommand(() =>
                     {
                         TryGoToPage(TotalPages);
-                    }, () =>
-                    {
-                        return CurrentPage < TotalPages;
-                    })
+                    }, () => CanGoNextPage)
                 );
             }
         }

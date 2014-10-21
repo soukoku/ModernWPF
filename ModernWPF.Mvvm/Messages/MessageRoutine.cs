@@ -19,6 +19,7 @@ namespace ModernWPF.Messages
     /// </summary>
     public static class MessageRoutine
     {
+#if NET4
         /// <summary>
         /// Handles a basic <see cref="DialogMessage" /> on a window by showing a <see cref="ModernMessageBox" />.
         /// </summary>
@@ -56,7 +57,8 @@ namespace ModernWPF.Messages
 
             return MessageBox.Show(owner, message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult, message.Options);
         }
-
+        
+#endif
 
         /// <summary>
         /// Handles the <see cref="ChooseFileMessage" /> on a window by showing a <see cref="FileDialog" /> based on the message options.
