@@ -52,12 +52,15 @@ namespace ModernWPF.Messages
         /// </exception>
         public static MessageBoxResult HandleDialogMessagePlatform(this Window owner, DialogMessage message)
         {
-            if (owner == null) { throw new ArgumentNullException("owner"); }
             if (message == null) { throw new ArgumentNullException("message"); }
 
+            if (owner == null)
+            {
+                return MessageBox.Show(message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult, message.Options);
+            }
             return MessageBox.Show(owner, message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult, message.Options);
         }
-        
+
 #endif
 
         /// <summary>
@@ -72,7 +75,7 @@ namespace ModernWPF.Messages
         /// </exception>
         public static void HandleChooseFile(this Window owner, ChooseFileMessage message)
         {
-            if (owner == null) { throw new ArgumentNullException("owner"); }
+            //if (owner == null) { throw new ArgumentNullException("owner"); }
             if (message == null) { throw new ArgumentNullException("message"); }
 
             FileDialog dialog = null;
@@ -103,13 +106,20 @@ namespace ModernWPF.Messages
                 if (!string.IsNullOrEmpty(message.Filters))
                     dialog.Filter = message.Filters;
 
-
-                if (dialog.ShowDialog(owner).GetValueOrDefault())
+                var result = owner == null ? dialog.ShowDialog().GetValueOrDefault() : dialog.ShowDialog(owner).GetValueOrDefault();
+                if (result)
                 {
-                    owner.Dispatcher.BeginInvoke(new Action(() =>
+                    if (owner == null || owner.CheckAccess())
                     {
                         message.DoCallback(dialog.FileNames);
-                    }));
+                    }
+                    else
+                    {
+                        owner.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            message.DoCallback(dialog.FileNames);
+                        }));
+                    }
                 }
             }
         }
@@ -171,7 +181,7 @@ namespace ModernWPF.Messages
         /// </exception>
         public static void HandleChooseFolder(this Window owner, ChooseFolderMessage message)
         {
-            if (owner == null) { throw new ArgumentNullException("owner"); }
+            //if (owner == null) { throw new ArgumentNullException("owner"); }
             if (message == null) { throw new ArgumentNullException("message"); }
 
             if (CommonOpenFileDialog.IsPlatformSupported)
@@ -186,7 +196,10 @@ namespace ModernWPF.Messages
                     diag.AllowNonFileSystemItems = true;
 
                 REOPEN:
-                    if (diag.ShowDialog(owner) == CommonFileDialogResult.Ok)
+
+                    var result = owner == null ? diag.ShowDialog() : diag.ShowDialog(owner);
+
+                    if (result == CommonFileDialogResult.Ok)
                     {
                         ShellObject selectedSO = null;
 
@@ -217,8 +230,7 @@ namespace ModernWPF.Messages
                                 }
                                 else
                                 {
-                                    if (MessageBox.Show(owner,
-                                        string.Format("The location \"{0}\" is not valid, please select another.", name),
+                                    if (MessageBox.Show(string.Format("The location \"{0}\" is not valid, please select another.", name),
                                         "Invalid Location", MessageBoxButton.OKCancel, MessageBoxImage.Information) == MessageBoxResult.OK)
                                     {
                                         goto REOPEN;
@@ -230,10 +242,17 @@ namespace ModernWPF.Messages
                                 }
                             }
 
-                            owner.Dispatcher.BeginInvoke(new Action(() =>
+                            if (owner == null || owner.Dispatcher.CheckAccess())
                             {
                                 message.DoCallback(path);
-                            }));
+                            }
+                            else
+                            {
+                                owner.Dispatcher.BeginInvoke(new Action(() =>
+                                {
+                                    message.DoCallback(path);
+                                }));
+                            }
                         }
                     }
                 }
@@ -244,12 +263,20 @@ namespace ModernWPF.Messages
                 {
                     diag.ShowNewFolderButton = true;
                     diag.SelectedPath = message.InitialFolder;
+                    
                     if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        owner.Dispatcher.BeginInvoke(new Action(() =>
+                        if (owner == null || owner.Dispatcher.CheckAccess())
                         {
                             message.DoCallback(diag.SelectedPath);
-                        }));
+                        }
+                        else
+                        {
+                            owner.Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                message.DoCallback(diag.SelectedPath);
+                            }));
+                        }
                     }
                 }
             }
