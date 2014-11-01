@@ -445,8 +445,9 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
-        <Setter Property="FontWeight" Value="SemiBold" />
+        <!--<Setter Property="FontWeight" Value="SemiBold" />-->
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -461,7 +462,8 @@
                                        Margin="{TemplateBinding Padding}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                       Text="{TemplateBinding Content}">
+                                       Text="{TemplateBinding Content}" 
+                                       TextTrimming="CharacterEllipsis">
                             </TextBlock>
                         </Border>
                     </Grid>
@@ -1724,7 +1726,7 @@
                                             BorderBrush="{DynamicResource ComboBoxPopupBorderThemeBrush}"
                                             BorderThickness="{DynamicResource ComboBoxPopupBorderThickness}"
                                             HorizontalAlignment="Stretch">
-                                        <ctrl:AnimatedScrollViewer x:Name="ScrollViewer" Foreground="{DynamicResource ComboBoxPopupForegroundThemeBrush}"
+                                        <ScrollViewer x:Name="ScrollViewer" Foreground="{DynamicResource ComboBoxPopupForegroundThemeBrush}"
                                                            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                                            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                                            IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
@@ -1733,7 +1735,7 @@
                                                     KeyboardNavigation.DirectionalNavigation="Contained"
                                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                             </ItemsPresenter>
-                                        </ctrl:AnimatedScrollViewer>
+                                        </ScrollViewer>
                                     </Border>
                                 </theme:SystemDropShadowChrome>
                             </Popup>
