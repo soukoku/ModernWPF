@@ -61,5 +61,10 @@ namespace ModernWPF.Sample
         {
             VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
         }
+
+        private void mybox_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.Key == Key.Escape) { e.Handled = true; }
+        }
     }
 }

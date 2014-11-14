@@ -24,15 +24,10 @@ namespace ModernWPF.ViewModels
         /// <param name="pageSize">Size of a page.</param>
         protected PagedCollectionViewModel(int pageSize = 100)
         {
-            Pager = new PagerViewModel(HandlePagerCallback, pageSize);
+            Pager = new PagerViewModel(async (pager, newPage) => await GoToPageAsync(newPage), pageSize);
             _items = new ObservableCollection<TItem>();
             Items = new ReadOnlyObservableCollection<TItem>(_items);
             View = CollectionViewSource.GetDefaultView(Items);
-        }
-
-        private void HandlePagerCallback(PagerViewModel pager, int newPage)
-        {
-            GoToPageAsync(newPage);
         }
 
         #region properties
@@ -93,7 +88,7 @@ namespace ModernWPF.ViewModels
             Pager.CurrentPage = 1;
         }
 
-        private async void GoToPageAsync(int page)
+        private async Task GoToPageAsync(int page)
         {
             if (IsLoading) { return; }
             IsLoading = true;

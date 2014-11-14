@@ -1783,9 +1783,16 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource TextBoxHoverBorder}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter Property="Background" Value="{DynamicResource TextBoxActiveBackground}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource ModernAccent}" />
+                <Setter Property="Background" Value="{DynamicResource TextBoxActiveBackground}"/>
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEditable" Value="False"/>
+                    <Condition Property="IsKeyboardFocusWithin" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="{DynamicResource ModernAccentAlpha9}"/>
+            </MultiTrigger>
             <Trigger Property="IsReadOnly" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorder}" />
             </Trigger>

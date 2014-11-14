@@ -107,17 +107,18 @@ namespace ModernWPF.Controls
         #region methods
 
         /// <summary>
-        /// Invoked when an unhandled <see cref="E:System.Windows.Input.Keyboard.PreviewKeyDown" /> attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+        /// Invoked when an unhandled <see cref="E:System.Windows.Input.Keyboard.KeyDown" /> attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
         /// </summary>
         /// <param name="e">The <see cref="T:System.Windows.Input.KeyEventArgs" /> that contains the event data.</param>
-        protected override void OnPreviewKeyDown(System.Windows.Input.KeyEventArgs e)
+        protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
         {
-            if (e != null && !e.Handled && CloseOnEscapeKey && e.Key == System.Windows.Input.Key.Escape)
+            if (e != null && CloseOnEscapeKey && e.Key == System.Windows.Input.Key.Escape)
             {
                 e.Handled = true;
                 DialogResult = false;
             }
-            base.OnPreviewKeyDown(e);
+            
+            base.OnKeyDown(e);
         }
 
         internal void TryFocus()

@@ -18,7 +18,7 @@
 
         <StackPanel Grid.Row="1">
             <TextBlock x:Name="infolabel" TextWrapping="Wrap" VerticalAlignment="Top" Margin="8">TBD</TextBlock>
-            <TextBox x:Name="mybox" modern:TextBoxUI.WatermarkText="a textbox!"></TextBox>
+            <TextBox x:Name="mybox" modern:TextBoxUI.WatermarkText="a textbox!" KeyDown="mybox_KeyDown"></TextBox>
             <StackPanel Margin="8">
                 <RadioButton x:Name="btnTop" Content="Top" Click="btnTop_Click"></RadioButton>
                 <RadioButton x:Name="btnCenter" Content="Center" Click="btnCenter_Click" IsChecked="True"></RadioButton>
