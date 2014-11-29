@@ -1178,6 +1178,14 @@
                 Command="ApplicationCommands.SelectAll" />
     </ContextMenu>
 
+    <ContextMenu x:Key="PasswordBoxContextMenu">
+        <MenuItem Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdPaste], Mode=OneWay}"
+                  Command="ApplicationCommands.Paste" />
+        <Separator />
+        <MenuItem Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdSelectAll], Mode=OneWay}"
+                  Command="ApplicationCommands.SelectAll" />
+    </ContextMenu>
+
 
     <Style x:Key="TextBoxButtonStyle" TargetType="Button">
         <Setter Property="Focusable" Value="False"/>
@@ -1439,19 +1447,7 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
         <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
-        <Setter Property="ContextMenu">
-            <Setter.Value>
-                <ContextMenu>
-                    <MenuItem
-                            Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdPaste], Mode=OneWay}"
-                            Command="ApplicationCommands.Paste" />
-                    <Separator />
-                    <MenuItem
-                            Header="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdSelectAll], Mode=OneWay}"
-                            Command="ApplicationCommands.SelectAll" />
-                </ContextMenu>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="ContextMenu" Value="{StaticResource PasswordBoxContextMenu}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="PasswordBox">
