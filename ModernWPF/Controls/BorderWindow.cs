@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using System.Diagnostics;
 using CommonWin32.Monitors;
+using CommonWin32.Rectangles;
 
 namespace ModernWPF.Controls
 {
@@ -210,7 +211,6 @@ namespace ModernWPF.Controls
             }
             else
             {
-                var thick = TranslateToPixels(BorderThickness);
                 var wpl = default(WINDOWPLACEMENT);
                 wpl.length = (uint)Marshal.SizeOf(typeof(WINDOWPLACEMENT));
 
@@ -233,14 +233,18 @@ namespace ModernWPF.Controls
                                 User32.SetWindowPos(_hwnd, contentHwnd, 0, 0, 0, 0,
                                     SetWindowPosOptions.SWP_NOACTIVATE | SetWindowPosOptions.SWP_NOSIZE | SetWindowPosOptions.SWP_NOMOVE);
 
+                                Debug.WriteLine("raw content window x={0}, y={1}, w={2}, h={3}", r.left, r.top, r.Width, r.Height);
+                                var r2 = TranslateToWpf(r);
+                                Debug.WriteLine("wpf content window x={0}, y={1}, w={2}, h={3}", r2.Left, r2.Top, r2.Width, r2.Height);
 
-                                this.Left = r.left - thick.Left;
-                                this.Top = r.top - thick.Top;
-                                this.Width = r.Width + thick.Left + thick.Right;
-                                this.Height = r.Height + thick.Top + thick.Bottom;
+                                var thick = BorderThickness;
+                                this.Left = r2.Left - thick.Left;
+                                this.Top = r2.Top - thick.Top;
+                                this.Width = r2.Width + thick.Left + thick.Right;
+                                this.Height = r2.Height + thick.Top + thick.Bottom;
 
                                 ToggleVisible(true);
-                                //Debug.WriteLine("reposned");
+                                Debug.WriteLine("reposned to x={0}, y={1}, w={2}, h={3}", this.Left, this.Top, this.Width, this.Height);
                             }
                             break;
                         case ShowWindowOption.SW_MAXIMIZE:
@@ -258,10 +262,41 @@ namespace ModernWPF.Controls
             }
         }
 
+        /// <summary>
+        /// translate screen pixels to wpf units for high-dpi scaling.
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        private Rect TranslateToWpf(RECT r)
+        {
+            var source = PresentationSource.FromVisual(
+                this.Visibility == Visibility.Visible ?
+                this : _contentWindow);
+            if (source != null)
+            {
+                var transform = source.CompositionTarget.TransformToDevice;
+                if (!transform.IsIdentity)
+                {
+                    var xScale = transform.M11;
+                    var yScale = transform.M22;
+
+
+                    return new Rect(r.left / xScale, r.top / yScale, r.Width / xScale, r.Height / yScale);
+                }
+            }
+            return new Rect(r.left, r.top, r.Width, r.Height);
+        }
+
+        /// <summary>
+        /// Translate wpf units to actual pixels for high-dpi scaling.
+        /// </summary>
+        /// <param name="wpfThickness"></param>
+        /// <returns></returns>
         private Thickness TranslateToPixels(Thickness wpfThickness)
         {
-            // translate wpf units to actual pixels for high-dpi scaling
-            var source = PresentationSource.FromVisual(this);
+            var source = PresentationSource.FromVisual(
+                this.Visibility == Visibility.Visible ?
+                this : _contentWindow);
             if (source != null)
             {
                 var transform = source.CompositionTarget.TransformToDevice;
