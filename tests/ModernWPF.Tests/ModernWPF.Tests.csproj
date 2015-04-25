@@ -67,7 +67,7 @@
     <Compile Include="BoolVisibleConverterTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModernWPF\ModernWPF.csproj">
+    <ProjectReference Include="..\..\src\ModernWPF\ModernWPF.csproj">
       <Project>{77d86b3d-ee36-4e4f-951d-a220de7fbccb}</Project>
       <Name>ModernWPF</Name>
     </ProjectReference>

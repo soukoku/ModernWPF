@@ -9,8 +9,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ModernWPF;component/Themes/ModernStylesExplicit.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
-    
+
+
     <Style x:Key="ModernFocusVisualDashed">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -57,6 +57,67 @@
         </Setter>
     </Style>
 
+
+    <Style TargetType="ctrl:ControlBox">
+        <Setter Property="ButtonStyle" Value="{StaticResource ModernControlButton}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ctrl:ControlBox">
+                    <ControlTemplate.Resources>
+                        <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
+                    </ControlTemplate.Resources>
+                    <Border VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
+                            >
+                        <StackPanel Orientation="Horizontal" DataContext="{Binding Source={StaticResource WindowCommands}}"
+                            >
+                            <!--<TextBlock Text="some text"></TextBlock>-->
+                            <Button x:Name="ButtonMin"
+                                Command="{Binding Path=MinimizeCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
+                                Style="{TemplateBinding ButtonStyle}">
+                                <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                            </Button>
+                            <Button x:Name="ButtonMax"
+                                Command="{Binding Path=MaximizeCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
+                                Style="{TemplateBinding ButtonStyle}">
+                                <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                            </Button>
+
+                            <Button x:Name="ButtonRestore"
+                                Command="{Binding Path=RestoreCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
+                                Style="{TemplateBinding ButtonStyle}">
+                                <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                            </Button>
+
+                            <Button x:Name="ButtonClose"
+                                Command="{Binding Path=CloseCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
+                                Style="{TemplateBinding ButtonStyle}">
+                                <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+
+                                </Button>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--<Style TargetType="ctrl:BorderWindow">
         <Setter Property="Template">
             <Setter.Value>
@@ -71,7 +132,9 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsContentActive" Value="True">
-                            --><!--use 2 borders to make it darker on active--><!--
+                            -->
+    <!--use 2 borders to make it darker on active-->
+    <!--
                             <Setter TargetName="lineBorder" Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}"/>
                             <Setter TargetName="lineBorder" Property="Effect" >
                                 <Setter.Value>
@@ -118,7 +181,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="ctrl:MessageBoxControl">
         <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
@@ -185,7 +248,7 @@
                                 <Button Content="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdCancel], Mode=OneWay}" x:Name="PART_btnCancel" IsCancel="True" ></Button>
                             </StackPanel>
                         </Grid>
-                        
+
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

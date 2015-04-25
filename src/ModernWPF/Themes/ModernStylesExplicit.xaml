@@ -541,7 +541,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{Binding Path=(local:Chrome.Chrome).ActiveCaptionForeground, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Control}}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Top" />
@@ -549,7 +549,7 @@
         <Setter Property="local:Chrome.IsHitTestVisible" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Margin" Value="0 0 0 0" />
-        <Setter Property="Padding" Value="9 6" />
+        <Setter Property="Padding" Value="9 5 9 6" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -584,9 +584,6 @@
                 <Setter Property="Visibility" Value="Collapsed" />
             </Trigger>
         </Style.Triggers>
-    </Style>
-    <Style x:Key="ModernControlButtonV2" TargetType="Button" BasedOn="{StaticResource ModernControlButton}">
-        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}"/>
     </Style>
 
     <!--window-->
@@ -643,47 +640,7 @@
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="True"></ContentPresenter>
 
-                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
-                                            VerticalAlignment="Top"  
-                                            DataContext="{Binding Source={StaticResource WindowCommands}}"
-                                            Margin="0 -1 -1 0"
-                                            Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
-                                            >
-                                    <Button x:Name="ButtonMin"
-                                                Command="{Binding Path=MinimizeCommand}"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
-                                                Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-                                    <Button x:Name="ButtonMax"
-                                                Command="{Binding Path=MaximizeCommand}"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
-                                                Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-
-                                    <Button x:Name="ButtonRestore"
-                                                Command="{Binding Path=RestoreCommand}"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
-                                                Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-
-                                    <Button x:Name="ButtonClose"
-                                                Command="{Binding Path=CloseCommand}"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
-                                                Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-                                </StackPanel>
+                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2"/>
                             </Grid>
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
                                                        x:Name="MainContent"
@@ -781,47 +738,7 @@
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="true"></ContentPresenter>
 
-                                <StackPanel x:Name="ControlBox" Orientation="Horizontal" Grid.Column="2"
-                                            VerticalAlignment="Top"  
-                                            DataContext="{Binding Source={StaticResource WindowCommands}}"
-                                            Margin="0 -1 -1 0"
-                                            Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
-                                            >
-                                    <Button x:Name="ButtonMin"
-                                            Command="{Binding Path=MinimizeCommand}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                            ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
-                                            Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-                                    <Button x:Name="ButtonMax"
-                                            Command="{Binding Path=MaximizeCommand}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                            ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
-                                            Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-
-                                    <Button x:Name="ButtonRestore"
-                                            Command="{Binding Path=RestoreCommand}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                            ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
-                                            Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-
-                                    <Button x:Name="ButtonClose"
-                                            Command="{Binding Path=CloseCommand}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                            ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
-                                            Style="{StaticResource ModernControlButton}">
-                                        <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                    </Button>
-                                </StackPanel>
+                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2"/>
                             </Grid>
 
                             <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"></ctrl:DialogControlContainer>
@@ -908,50 +825,8 @@
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="True"></ContentPresenter>
 
-                                <Border Grid.Column="2" Background="{DynamicResource ModernBackground2}"
-                                        Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
-                                        Padding="10 0 0 0">
-                                    <StackPanel x:Name="ControlBox" Orientation="Horizontal" 
-                                                VerticalAlignment="Top"
-                                                DataContext="{Binding Source={StaticResource WindowCommands}}"
-                                                Margin="0 -1 -1 0"
-                                                >
-                                        <Button x:Name="ButtonMin"
-                                                Command="{Binding Path=MinimizeCommand}"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
-                                                Style="{StaticResource ModernControlButtonV2}">
-                                            <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                        </Button>
-                                        <Button x:Name="ButtonMax"
-                                                Command="{Binding Path=MaximizeCommand}"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
-                                                Style="{StaticResource ModernControlButtonV2}">
-                                            <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                        </Button>
-
-                                        <Button x:Name="ButtonRestore"
-                                                Command="{Binding Path=RestoreCommand}"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
-                                                Style="{StaticResource ModernControlButtonV2}">
-                                            <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                        </Button>
-
-                                        <Button x:Name="ButtonClose"
-                                                Command="{Binding Path=CloseCommand}"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
-                                                Style="{StaticResource ModernControlButtonV2}">
-                                            <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                        </Button>
-                                    </StackPanel>
-                                </Border>
+                                <ctrl:ControlBox Grid.Column="2" Background="{DynamicResource ModernBackground2}" Padding="10 0 0 0"
+                                                 Foreground="{DynamicResource ModernForeground}"/>
                             </Grid>
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
                                                        x:Name="MainContent"
