@@ -73,7 +73,7 @@
     <Compile Include="PagerViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModernWPF.Mvvm\ModernWPF.Mvvm.csproj">
+    <ProjectReference Include="..\..\src\ModernWPF.Mvvm\ModernWPF.Mvvm.csproj">
       <Project>{92496a6f-31c4-4efa-b64d-688c1ef32b6b}</Project>
       <Name>ModernWPF.Mvvm</Name>
     </ProjectReference>

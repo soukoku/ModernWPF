@@ -635,7 +635,7 @@
                                                    Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
                                 </DockPanel>
 
-                                <ContentPresenter Grid.Row="1" VerticalAlignment="Top"
+                                <ContentPresenter Grid.Column="1" VerticalAlignment="Top"
                                                   UseLayoutRounding="True"
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="True"></ContentPresenter>
@@ -733,7 +733,7 @@
                                                Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
                                 </DockPanel>
 
-                                <ContentPresenter Grid.Row="1" VerticalAlignment="Top"
+                                <ContentPresenter Grid.Column="1" VerticalAlignment="Top"
                                                   UseLayoutRounding="True"
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="true"></ContentPresenter>
@@ -820,7 +820,7 @@
                                                    Visibility="{Binding Path=(local:Chrome.ShowCaptionText), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"></TextBlock>
                                 </DockPanel>
 
-                                <ContentPresenter Grid.Row="1" VerticalAlignment="Top"
+                                <ContentPresenter Grid.Column="1" VerticalAlignment="Top"
                                                   UseLayoutRounding="True"
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="True"></ContentPresenter>
