@@ -38,6 +38,12 @@ namespace ModernWPF.Controls
         {
             return Show(owner.FindChildInVisualTree<DialogControlContainer>(), messageBoxText, caption, button, icon, defaultResult);
         }
+
+        internal static MessageBoxResult Show(Window owner, object content, object caption, object button, object icon, object defaultResult)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Displays a message box in front of the specified <see cref="DialogControlContainer" />.
         /// </summary>

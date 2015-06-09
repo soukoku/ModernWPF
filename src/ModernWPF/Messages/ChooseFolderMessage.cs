@@ -1,9 +1,9 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ModernWPF.Messages
 {
@@ -66,6 +66,37 @@ namespace ModernWPF.Messages
             if (_callback != null)
             {
                 _callback(folder);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Handles the <see cref="ChooseFolderMessage" /> on a window by showing a folder dialog based on the message options.
+        /// </summary>
+        /// <param name="owner">The owner.</param>
+        /// </exception>
+        public virtual void HandleWithPlatform(Window owner)
+        {
+            using (var diag = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                diag.ShowNewFolderButton = true;
+                diag.SelectedPath = InitialFolder;
+
+                if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (owner == null || owner.Dispatcher.CheckAccess())
+                    {
+                        DoCallback(diag.SelectedPath);
+                    }
+                    else
+                    {
+                        owner.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            DoCallback(diag.SelectedPath);
+                        }));
+                    }
+                }
             }
         }
     }

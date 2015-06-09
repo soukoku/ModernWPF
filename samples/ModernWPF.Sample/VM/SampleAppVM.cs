@@ -201,11 +201,11 @@ namespace ModernWPF.Sample.VM
                         {
                             if (files.Count() > 1)
                             {
-                                Messenger.Default.Send(new DialogMessage(obj, string.Format("Selected {0} files.", files.Count()), null) { Caption = "Open file result" });
+                                Messenger.Default.Send(new Messages.MessageBoxMessage(obj, string.Format("Selected {0} files.", files.Count()), null) { Caption = "Open file result" });
                             }
                             else
                             {
-                                Messenger.Default.Send(new DialogMessage(obj, "Selected " + files.FirstOrDefault(), null) { Caption = "Open file result" });
+                                Messenger.Default.Send(new Messages.MessageBoxMessage(obj, "Selected " + files.FirstOrDefault(), null) { Caption = "Open file result" });
                             }
                         })
                         {
@@ -229,7 +229,7 @@ namespace ModernWPF.Sample.VM
                     {
                         Messenger.Default.Send(new ChooseFileMessage(obj, files =>
                         {
-                            Messenger.Default.Send(new DialogMessage(obj, "Selected " + files.FirstOrDefault(), null) { Caption = "Save file result" });
+                            Messenger.Default.Send(new Messages.MessageBoxMessage(obj, "Selected " + files.FirstOrDefault(), null) { Caption = "Save file result" });
                         })
                         {
                             Caption = "Save File Dialog",
@@ -252,7 +252,7 @@ namespace ModernWPF.Sample.VM
                     {
                         Messenger.Default.Send(new ChooseFolderMessage(obj, folder =>
                         {
-                            Messenger.Default.Send(new DialogMessage(obj, string.Format("Selected {0}.", folder), null) { Caption = "Folder result" });
+                            Messenger.Default.Send(new Messages.MessageBoxMessage(obj, string.Format("Selected {0}.", folder), null) { Caption = "Folder result" });
                         })
                         {
                             Caption = "Choose Folder Dialog"

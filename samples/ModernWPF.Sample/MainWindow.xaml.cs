@@ -32,9 +32,9 @@ namespace ModernWPF.Sample
             //TextBox.TextAlignmentProperty
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                Messenger.Default.Register<DialogMessage>(this, m => { if (m.Sender == this) { this.HandleDialogMessageModern(m); } });
-                Messenger.Default.Register<ChooseFileMessage>(this, m => { if (m.Sender == this) { this.HandleChooseFile(m); } });
-                Messenger.Default.Register<ChooseFolderMessage>(this, m => { if (m.Sender == this) { this.HandleChooseFolder(m); } });
+                Messenger.Default.Register<Messages.MessageBoxMessage>(this, m => { if (m.Sender == this) { m.HandleWithModern(this); } });
+                Messenger.Default.Register<ChooseFileMessage>(this, m => { if (m.Sender == this) { m.HandleWithPlatform(this); } });
+                Messenger.Default.Register<ChooseFolderMessage>(this, m => { if (m.Sender == this) { m.HandleWithPlatform(this); } });
             }
         }
 

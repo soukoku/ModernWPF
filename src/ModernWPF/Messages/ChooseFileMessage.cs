@@ -1,9 +1,10 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ModernWPF.Messages
 {
@@ -111,5 +112,59 @@ namespace ModernWPF.Messages
                 _callback(files);
             }
         }
+
+
+        /// <summary>
+        /// Handles the <see cref="ChooseFileMessage" /> on a window by showing a <see cref="FileDialog" /> based on the message options.
+        /// </summary>
+        /// <param name="owner">The owner.</param>
+        public virtual void HandleWithPlatform(Window owner)
+        {
+            FileDialog dialog = null;
+
+            switch (Purpose)
+            {
+                case FilePurpose.OpenMultiple:
+                    var d = new OpenFileDialog();
+                    d.Multiselect = true;
+                    dialog = d;
+                    break;
+                case FilePurpose.OpenSingle:
+                    dialog = new OpenFileDialog();
+                    break;
+                case FilePurpose.Save:
+                    dialog = new SaveFileDialog();
+                    break;
+            }
+
+            if (dialog != null)
+            {
+                dialog.Title = Caption;
+
+                if (!string.IsNullOrEmpty(InitialFolder))
+                    dialog.InitialDirectory = InitialFolder;
+                if (!string.IsNullOrEmpty(InitialFileName))
+                    dialog.FileName = InitialFileName;
+                if (!string.IsNullOrEmpty(Filters))
+                    dialog.Filter = Filters;
+
+                var result = owner == null ? dialog.ShowDialog().GetValueOrDefault() : dialog.ShowDialog(owner).GetValueOrDefault();
+                if (result)
+                {
+                    if (owner == null || owner.CheckAccess())
+                    {
+                        DoCallback(dialog.FileNames);
+                    }
+                    else
+                    {
+                        owner.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            DoCallback(dialog.FileNames);
+                        }));
+                    }
+                }
+            }
+        }
+
     }
 }

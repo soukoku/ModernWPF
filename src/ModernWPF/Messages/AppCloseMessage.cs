@@ -6,9 +6,8 @@ using System.Text;
 namespace ModernWPF.Messages
 {
     /// <summary>
-    /// Message to update UI elements bound to <see cref="ICommand"/>s.
+    /// Message for notifying the app is about to be closed.
     /// </summary>
-    public class RefreshCommandsMessage
-    {
-    }
+    public class AppCloseMessage : MessageBase
+    { }
 }

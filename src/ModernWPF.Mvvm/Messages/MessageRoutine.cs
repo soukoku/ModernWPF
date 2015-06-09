@@ -19,164 +19,12 @@ namespace ModernWPF.Messages
     /// </summary>
     public static class MessageRoutine
     {
-#if NET4
-        /// <summary>
-        /// Handles a basic <see cref="DialogMessage" /> on a window by showing a <see cref="ModernMessageBox" />.
-        /// </summary>
-        /// <param name="owner">The owner.</param>
-        /// <param name="message">The message.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">
-        /// owner
-        /// or
-        /// message
-        /// </exception>
-        public static MessageBoxResult HandleDialogMessageModern(this Window owner, DialogMessage message)
-        {
-            if (owner == null) { throw new ArgumentNullException("owner"); }
-            if (message == null) { throw new ArgumentNullException("message"); }
-
-            return ModernMessageBox.Show(owner, message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult);
-        }
-
-        /// <summary>
-        /// Handles a basic <see cref="DialogMessage" /> on a window by showing built-in <see cref="MessageBox"/>.
-        /// </summary>
-        /// <param name="owner">The owner.</param>
-        /// <param name="message">The message.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">
-        /// owner
-        /// or
-        /// message
-        /// </exception>
-        public static MessageBoxResult HandleDialogMessagePlatform(this Window owner, DialogMessage message)
-        {
-            if (message == null) { throw new ArgumentNullException("message"); }
-
-            if (owner == null)
-            {
-                return MessageBox.Show(message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult, message.Options);
-            }
-            return MessageBox.Show(owner, message.Content, message.Caption, message.Button, message.Icon, message.DefaultResult, message.Options);
-        }
-
-#endif
-
-        /// <summary>
-        /// Handles the <see cref="ChooseFileMessage" /> on a window by showing a <see cref="FileDialog" /> based on the message options.
-        /// </summary>
-        /// <param name="owner">The owner.</param>
-        /// <param name="message">The message.</param>
-        /// <exception cref="System.ArgumentNullException">
-        /// owner
-        /// or
-        /// message
-        /// </exception>
-        public static void HandleChooseFile(this Window owner, ChooseFileMessage message)
-        {
-            //if (owner == null) { throw new ArgumentNullException("owner"); }
-            if (message == null) { throw new ArgumentNullException("message"); }
-
-            FileDialog dialog = null;
-
-            switch (message.Purpose)
-            {
-                case ChooseFileMessage.FilePurpose.OpenMultiple:
-                    var d = new OpenFileDialog();
-                    d.Multiselect = true;
-                    dialog = d;
-                    break;
-                case ChooseFileMessage.FilePurpose.OpenSingle:
-                    dialog = new OpenFileDialog();
-                    break;
-                case ChooseFileMessage.FilePurpose.Save:
-                    dialog = new SaveFileDialog();
-                    break;
-            }
-
-            if (dialog != null)
-            {
-                dialog.Title = message.Caption;
-
-                if (!string.IsNullOrEmpty(message.InitialFolder))
-                    dialog.InitialDirectory = message.InitialFolder;
-                if (!string.IsNullOrEmpty(message.InitialFileName))
-                    dialog.FileName = message.InitialFileName;
-                if (!string.IsNullOrEmpty(message.Filters))
-                    dialog.Filter = message.Filters;
-
-                var result = owner == null ? dialog.ShowDialog().GetValueOrDefault() : dialog.ShowDialog(owner).GetValueOrDefault();
-                if (result)
-                {
-                    if (owner == null || owner.CheckAccess())
-                    {
-                        message.DoCallback(dialog.FileNames);
-                    }
-                    else
-                    {
-                        owner.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            message.DoCallback(dialog.FileNames);
-                        }));
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Handles the <see cref="RefreshCommandsMessage"/>.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        public static void HandleRefreshCommands(this RefreshCommandsMessage message)
-        {
-            if (Application.Current != null)
-            {
-                if (Application.Current.Dispatcher.CheckAccess())
-                {
-                    CommandManager.InvalidateRequerySuggested();
-                }
-                else
-                {
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        CommandManager.InvalidateRequerySuggested();
-                    }));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Handles the <see cref="ChooseFileMessage"/>.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        public static void HandleOpenExplorer(this OpenExplorerMessage message)
-        {
-            if (message == null) { throw new ArgumentNullException("message"); }
-
-            if (!string.IsNullOrEmpty(message.SelectedPath))
-            {
-                using (Process.Start("explorer", string.Format("/select,{0}", message.SelectedPath))) { }
-            }
-            else if (!string.IsNullOrEmpty(message.FolderPath))
-            {
-                using (Process.Start("explorer", message.FolderPath)) { }
-            }
-            else
-            {
-                using (Process.Start("explorer")) { }
-            }
-        }
-
-
         /// <summary>
         /// Handles the <see cref="ChooseFolderMessage" /> on a window by showing a folder dialog based on the message options.
         /// </summary>
         /// <param name="owner">The owner.</param>
         /// <param name="message">The message.</param>
         /// <exception cref="System.ArgumentNullException">
-        /// owner
-        /// or
         /// message
         /// </exception>
         public static void HandleChooseFolder(this Window owner, ChooseFolderMessage message)
@@ -259,26 +107,7 @@ namespace ModernWPF.Messages
             }
             else
             {
-                using (var diag = new System.Windows.Forms.FolderBrowserDialog())
-                {
-                    diag.ShowNewFolderButton = true;
-                    diag.SelectedPath = message.InitialFolder;
-                    
-                    if (diag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        if (owner == null || owner.Dispatcher.CheckAccess())
-                        {
-                            message.DoCallback(diag.SelectedPath);
-                        }
-                        else
-                        {
-                            owner.Dispatcher.BeginInvoke(new Action(() =>
-                            {
-                                message.DoCallback(diag.SelectedPath);
-                            }));
-                        }
-                    }
-                }
+                message.HandleWithPlatform(owner);
             }
         }
     }

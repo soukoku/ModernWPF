@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,5 +29,27 @@ namespace ModernWPF.Messages
         /// The selected path.
         /// </value>
         public string SelectedPath { get; set; }
+
+
+
+        /// <summary>
+        /// Handles the <see cref="ChooseFileMessage"/>.
+        /// </summary>
+        public void HandleWithPlatform()
+        {
+            if (!string.IsNullOrWhiteSpace(SelectedPath))
+            {
+                using (Process.Start("explorer", string.Format("/select,{0}", SelectedPath))) { }
+            }
+            else if (!string.IsNullOrWhiteSpace(FolderPath))
+            {
+                using (Process.Start("explorer", FolderPath)) { }
+            }
+            else
+            {
+                using (Process.Start("explorer")) { }
+            }
+        }
+
     }
 }
