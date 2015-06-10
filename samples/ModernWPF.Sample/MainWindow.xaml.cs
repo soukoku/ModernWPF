@@ -28,13 +28,13 @@ namespace ModernWPF.Sample
     {
         public MainWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             //TextBox.TextAlignmentProperty
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
                 Messenger.Default.Register<Messages.MessageBoxMessage>(this, m => { if (m.Sender == this) { m.HandleWithModern(this); } });
                 Messenger.Default.Register<ChooseFileMessage>(this, m => { if (m.Sender == this) { m.HandleWithPlatform(this); } });
-                Messenger.Default.Register<ChooseFolderMessage>(this, m => { if (m.Sender == this) { m.HandleWithPlatform(this); } });
+                Messenger.Default.Register<ChooseFolderMessage>(this, m => { if (m.Sender == this) { this.HandleChooseFolder(m); } });
             }
         }
 
@@ -69,7 +69,7 @@ namespace ModernWPF.Sample
         private void btnDialog2_Click(object sender, RoutedEventArgs e)
         {
             bool? lastResult = null;
-            for (int i = 0; i < 3; )
+            for (int i = 0; i < 3;)
             {
                 var diag = new InWindowDialog();
                 diag.Message = string.Format("This is modal dialog {0}/3 with last result = {1}, close it until the stack goes away!", ++i, lastResult);
