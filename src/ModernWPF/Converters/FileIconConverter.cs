@@ -39,14 +39,10 @@ namespace ModernWPF.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value != null)
-            {
-                var para = parameter == null ? string.Empty : parameter.ToString();
-                bool large = para.IndexOf("large", StringComparison.OrdinalIgnoreCase) > -1;
+            var para = parameter == null ? string.Empty : parameter.ToString();
+            bool large = para.IndexOf("large", StringComparison.OrdinalIgnoreCase) > -1;
 
-                return GetFileIconCore(value, large);
-            }
-            return null;
+            return GetFileIconCore(value, large);
         }
 
         /// <summary>
@@ -74,6 +70,7 @@ namespace ModernWPF.Converters
         /// <returns></returns>
         protected virtual ImageSource GetFileIconCore(object value, bool large)
         {
+            if (value == null) { return null; }
             return IconReader.GetFileIconWpf(value.ToString(), large ? IconReader.IconSize.Large : IconReader.IconSize.Small, false);
         }
     }

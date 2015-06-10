@@ -6,6 +6,7 @@ using ModernWPF.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace ModernWPF.Messages
                     // allow this for desktop, but now opens other locations up so need to check those
                     diag.AllowNonFileSystemItems = true;
 
-                REOPEN:
+                    REOPEN:
 
                     var result = owner == null ? diag.ShowDialog() : diag.ShowDialog(owner);
 
@@ -56,9 +57,9 @@ namespace ModernWPF.Messages
                             // Try to get a valid selected item
                             selectedSO = diag.FileAsShellObject as ShellObject;
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Could not create a ShellObject from the selected item");
+                            MessageBox.Show("Could not create a ShellObject from the selected item: " + ex.Message);
                         }
                         if (selectedSO != null)
                         {
@@ -78,7 +79,7 @@ namespace ModernWPF.Messages
                                 }
                                 else
                                 {
-                                    if (MessageBox.Show(string.Format("The location \"{0}\" is not valid, please select another.", name),
+                                    if (MessageBox.Show(string.Format(CultureInfo.InvariantCulture, "The location \"{0}\" is not valid, please select another.", name),
                                         "Invalid Location", MessageBoxButton.OKCancel, MessageBoxImage.Information) == MessageBoxResult.OK)
                                     {
                                         goto REOPEN;

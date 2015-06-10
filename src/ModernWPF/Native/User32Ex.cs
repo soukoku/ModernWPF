@@ -12,16 +12,16 @@ namespace ModernWPF.Native
 {
     static class User32Ex
     {
-        public static bool ModifyStyle(IntPtr hwnd, WindowStyles removeStyle, WindowStyles addStyle)
-        {
-            var oldStyle = User32.GetWindowLong(hwnd, CommonWin32.WindowClasses.WindowLong.GWL_STYLE).ToInt32();
-            var newStyle = oldStyle & (int)(~removeStyle | addStyle);
-            if (oldStyle != newStyle)
-            {
-                return User32.SetWindowLong(hwnd, CommonWin32.WindowClasses.WindowLong.GWL_STYLE, new IntPtr(newStyle)) != IntPtr.Zero;
-            }
-            return false;
-        }
+        //public static bool ModifyStyle(IntPtr hwnd, WindowStyles removeStyle, WindowStyles addStyle)
+        //{
+        //    var oldStyle = User32.GetWindowLong(hwnd, CommonWin32.WindowClasses.WindowLong.GWL_STYLE).ToInt32();
+        //    var newStyle = oldStyle & (int)(~removeStyle | addStyle);
+        //    if (oldStyle != newStyle)
+        //    {
+        //        return User32.SetWindowLong(hwnd, CommonWin32.WindowClasses.WindowLong.GWL_STYLE, new IntPtr(newStyle)) != IntPtr.Zero;
+        //    }
+        //    return false;
+        //}
 
 
         // autohide taskbar fix from http://codekong.wordpress.com/2010/11/10/custom-window-style-and-accounting-for-the-taskbar/

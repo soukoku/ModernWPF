@@ -16,13 +16,22 @@ namespace ModernWPF.ViewModels
         /// Updates status with the specified text.
         /// </summary>
         /// <param name="text">The text.</param>
+        public void Update(string text)
+        {
+            Update(text, StatusType.Info);
+        }
+
+        /// <summary>
+        /// Updates status with the specified text.
+        /// </summary>
+        /// <param name="text">The text.</param>
         /// <param name="type">The type.</param>
-        public void Update(string text, StatusType type = StatusType.Info)
+        public void Update(string text, StatusType type)
         {
             Text = text;
-            Type = type;
+            StatusType = type;
             RaisePropertyChanged(() => Text);
-            RaisePropertyChanged(() => Type);
+            RaisePropertyChanged(() => StatusType);
             RaisePropertyChanged(() => IsError);
             RaisePropertyChanged(() => IsWarning);
             RaisePropertyChanged(() => IsSuccess);
@@ -35,7 +44,7 @@ namespace ModernWPF.ViewModels
         /// <value>
         /// The type.
         /// </value>
-        public StatusType Type { get; private set; }
+        public StatusType StatusType { get; private set; }
 
         /// <summary>
         /// Gets the status text.
@@ -51,28 +60,28 @@ namespace ModernWPF.ViewModels
         /// <value>
         ///   <c>true</c> if current status is error; otherwise, <c>false</c>.
         /// </value>
-        public bool IsError { get { return Type == StatusType.Error; } }
+        public bool IsError { get { return StatusType == StatusType.Error; } }
         /// <summary>
         /// Gets a value indicating whether current status is warning.
         /// </summary>
         /// <value>
         ///   <c>true</c> if current status is warning; otherwise, <c>false</c>.
         /// </value>
-        public bool IsWarning { get { return Type == StatusType.Warning; } }
+        public bool IsWarning { get { return StatusType == StatusType.Warning; } }
         /// <summary>
         /// Gets a value indicating whether current status is success.
         /// </summary>
         /// <value>
         ///   <c>true</c> if current status is success; otherwise, <c>false</c>.
         /// </value>
-        public bool IsSuccess { get { return Type == StatusType.Success; } }
+        public bool IsSuccess { get { return StatusType == StatusType.Success; } }
         /// <summary>
         /// Gets a value indicating whether current status is info.
         /// </summary>
         /// <value>
         ///   <c>true</c> if current status is info; otherwise, <c>false</c>.
         /// </value>
-        public bool IsInfo { get { return Type == StatusType.Info; } }
+        public bool IsInfo { get { return StatusType == StatusType.Info; } }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.

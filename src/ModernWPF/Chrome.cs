@@ -413,6 +413,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static object GetCaptionExtraContent(Window window)
         {
+            if (window == null) { throw new ArgumentNullException("window"); }
             return (object)window.GetValue(CaptionExtraContentProperty);
         }
 
@@ -423,6 +424,7 @@ namespace ModernWPF
         /// <param name="value">The value.</param>
         public static void SetCaptionExtraContent(Window window, object value)
         {
+            if (window == null) { throw new ArgumentNullException("window"); }
             window.SetValue(CaptionExtraContentProperty, value);
         }
 

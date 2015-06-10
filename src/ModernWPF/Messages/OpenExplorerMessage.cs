@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace ModernWPF.Messages
         {
             if (!string.IsNullOrWhiteSpace(SelectedPath))
             {
-                using (Process.Start("explorer", string.Format("/select,{0}", SelectedPath))) { }
+                using (Process.Start("explorer", string.Format(CultureInfo.InvariantCulture, "/select,{0}", SelectedPath))) { }
             }
             else if (!string.IsNullOrWhiteSpace(FolderPath))
             {

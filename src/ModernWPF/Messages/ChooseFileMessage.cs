@@ -17,14 +17,14 @@ namespace ModernWPF.Messages
         /// Initializes a new instance of the <see cref="ChooseFileMessage"/> class.
         /// </summary>
         /// <param name="callback">The callback when files are selected.</param>
-        public ChooseFileMessage(Action<IEnumerable<string>> callback) : this(null, null, callback) { }
+        public ChooseFileMessage(FileSelected callback) : this(null, null, callback) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChooseFileMessage"/> class.
         /// </summary>
         /// <param name="sender">The message's original sender.</param>
         /// <param name="callback">The callback when files are selected.</param>
-        public ChooseFileMessage(object sender, Action<IEnumerable<string>> callback)
+        public ChooseFileMessage(object sender, FileSelected callback)
             : this(sender, null, callback) { }
 
         /// <summary>
@@ -33,13 +33,13 @@ namespace ModernWPF.Messages
         /// <param name="sender">The message's original sender.</param>
         /// <param name="target">The message's intended target.</param>
         /// <param name="callback">The callback when files are selected.</param>
-        public ChooseFileMessage(object sender, object target, Action<IEnumerable<string>> callback)
+        public ChooseFileMessage(object sender, object target, FileSelected callback)
             : base(sender, target)
         {
             _callback = callback;
         }
 
-        Action<IEnumerable<string>> _callback;
+        FileSelected _callback;
 
         /// <summary>
         /// Gets or sets the UI caption.
@@ -167,4 +167,10 @@ namespace ModernWPF.Messages
         }
 
     }
+
+    /// <summary>
+    /// Delegate for file selected callback.
+    /// </summary>
+    /// <param name="filePaths">The file paths.</param>
+    public delegate void FileSelected(IEnumerable<string> filePaths);
 }

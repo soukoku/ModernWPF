@@ -22,6 +22,33 @@ namespace ModernWPF.ViewModels
             Info = new StatusViewModel();
         }
 
+        /// <summary>
+        /// Updates the progress state.
+        /// </summary>
+        /// <param name="state">The state.</param>
+        public void UpdateState(TaskbarItemProgressState state)
+        {
+            UpdateState(state, 0, null, StatusType.Info);
+        }
+        /// <summary>
+        /// Updates the progress state.
+        /// </summary>
+        /// <param name="state">The state.</param>
+        /// <param name="progressPercent">The progress percent (0 to 1).</param>
+        public void UpdateState(TaskbarItemProgressState state, double progressPercent)
+        {
+            UpdateState(state, progressPercent, null, StatusType.Info);
+        }
+        /// <summary>
+        /// Updates the progress state.
+        /// </summary>
+        /// <param name="state">The state.</param>
+        /// <param name="progressPercent">The progress percent (0 to 1).</param>
+        /// <param name="info">The extra information.</param>
+        public void UpdateState(TaskbarItemProgressState state, double progressPercent, string info)
+        {
+            UpdateState(state, progressPercent, info, StatusType.Info);
+        }
 
         /// <summary>
         /// Updates the progress state.
@@ -30,7 +57,7 @@ namespace ModernWPF.ViewModels
         /// <param name="progressPercent">The progress percent (0 to 1).</param>
         /// <param name="info">The extra information.</param>
         /// <param name="infoType">Type of the information.</param>
-        public void UpdateState(TaskbarItemProgressState state, double progressPercent = 0, string info = null, StatusType infoType = StatusType.Info)
+        public void UpdateState(TaskbarItemProgressState state, double progressPercent, string info, StatusType infoType)
         {
             Info.Update(info, infoType);
             State = state;

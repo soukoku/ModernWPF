@@ -38,7 +38,7 @@ namespace ModernWPF
         /// </summary>
         /// <param name="element">The element.</param>
         /// <returns></returns>
-        public static bool IsFullyInScrollViewer(this UIElement element)
+        public static bool IsFullyInsideScrollViewer(this UIElement element)
         {
             // modified from http://blogs.msdn.com/b/llobo/archive/2007/01/18/elements-visibility-inside-scrollviewer.aspx
 
@@ -70,11 +70,14 @@ namespace ModernWPF
         /// <returns></returns>
         public static T FindParentInVisualTree<T>(this DependencyObject control) where T : DependencyObject
         {
-            while (control != null && !(control is T))
+            while (control != null)
             {
+                var test = control as T;
+                if(test != null) { return test; }
+
                 control = VisualTreeHelper.GetParent(control);
             }
-            return control as T;
+            return (T)control;
         }
 
 
@@ -83,9 +86,19 @@ namespace ModernWPF
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="control">The control.</param>
+        /// <returns></returns>
+        public static T FindChildInVisualTree<T>(this DependencyObject control) where T : DependencyObject
+        {
+            return FindChildInVisualTree<T>(control, false);
+        }
+        /// <summary>
+        /// Finds the first specified object type in visual tree.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="control">The control.</param>
         /// <param name="reverse">if set to <c>true</c> then find in reverse order (last child first).</param>
         /// <returns></returns>
-        public static T FindChildInVisualTree<T>(this DependencyObject control, bool reverse = false) where T : DependencyObject
+        public static T FindChildInVisualTree<T>(this DependencyObject control, bool reverse) where T : DependencyObject
         {
             if (control != null)
             {

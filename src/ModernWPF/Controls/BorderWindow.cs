@@ -471,72 +471,74 @@ namespace ModernWPF.Controls
         protected override void OnRender(DrawingContext ctx)
         {
             base.OnRender(ctx);
-
-            // only solid brush is supported now
-            var brush = (IsContentActive ? ActiveBorderBrush : InactiveBorderBrush) as SolidColorBrush;
-            if (brush != null)
+            if (ctx != null)
             {
-                Rect rClient = new Rect(0, 0, this.ActualWidth, this.ActualHeight);
-
-                var thick = BorderThickness;
-                var clientW = rClient.Width - thick.Right - thick.Left;// -1;
-                var clientH = rClient.Height - thick.Top - thick.Bottom;// -1;
-
-                if (clientW > 1 && clientH > 1)
+                // only solid brush is supported now
+                var brush = (IsContentActive ? ActiveBorderBrush : InactiveBorderBrush) as SolidColorBrush;
+                if (brush != null)
                 {
-                    rClient.X += thick.Left;
-                    rClient.Y += thick.Top;
-                    rClient.Width = clientW;
-                    rClient.Height = clientH;
+                    Rect rClient = new Rect(0, 0, this.ActualWidth, this.ActualHeight);
 
-                    var rTop = new Rect(rClient.Left, 0, rClient.Width, thick.Top);
-                    var rTopLeft = new Rect(0, 0, thick.Left, thick.Top);
-                    var rTopRight = new Rect(rClient.Right, 0, thick.Right, thick.Top);
+                    var thick = BorderThickness;
+                    var clientW = rClient.Width - thick.Right - thick.Left;// -1;
+                    var clientH = rClient.Height - thick.Top - thick.Bottom;// -1;
 
-                    var rBottom = new Rect(rClient.Left, rClient.Bottom, rClient.Width, thick.Bottom);
-                    var rBottomLeft = new Rect(0, rClient.Bottom, thick.Left, thick.Bottom);
-                    var rBottomRight = new Rect(rClient.Right, rClient.Bottom, thick.Right, thick.Bottom);
+                    if (clientW > 1 && clientH > 1)
+                    {
+                        rClient.X += thick.Left;
+                        rClient.Y += thick.Top;
+                        rClient.Width = clientW;
+                        rClient.Height = clientH;
 
-                    var rLeft = new Rect(0, rClient.Top, thick.Left, rClient.Height);
-                    var rRight = new Rect(rClient.Right, rClient.Top, thick.Right, rClient.Height);
+                        var rTop = new Rect(rClient.Left, 0, rClient.Width, thick.Top);
+                        var rTopLeft = new Rect(0, 0, thick.Left, thick.Top);
+                        var rTopRight = new Rect(rClient.Right, 0, thick.Right, thick.Top);
 
-                    var brushes = GetShadowBrushes(brush.Color, (thick.Top + thick.Bottom + thick.Right + thick.Left) / 4);
-                    ctx.DrawRectangle(brushes[(int)BorderSide.TopLeft], null, rTopLeft);
-                    ctx.DrawRectangle(brushes[(int)BorderSide.TopRight], null, rTopRight);
-                    ctx.DrawRectangle(brushes[(int)BorderSide.Top], null, rTop);
-                    ctx.DrawRectangle(brushes[(int)BorderSide.BottomLeft], null, rBottomLeft);
-                    ctx.DrawRectangle(brushes[(int)BorderSide.BottomRight], null, rBottomRight);
-                    ctx.DrawRectangle(brushes[(int)BorderSide.Bottom], null, rBottom);
-                    ctx.DrawRectangle(brushes[(int)BorderSide.Left], null, rLeft);
-                    ctx.DrawRectangle(brushes[(int)BorderSide.Right], null, rRight);
+                        var rBottom = new Rect(rClient.Left, rClient.Bottom, rClient.Width, thick.Bottom);
+                        var rBottomLeft = new Rect(0, rClient.Bottom, thick.Left, thick.Bottom);
+                        var rBottomRight = new Rect(rClient.Right, rClient.Bottom, thick.Right, thick.Bottom);
+
+                        var rLeft = new Rect(0, rClient.Top, thick.Left, rClient.Height);
+                        var rRight = new Rect(rClient.Right, rClient.Top, thick.Right, rClient.Height);
+
+                        var brushes = GetShadowBrushes(brush.Color);//, (thick.Top + thick.Bottom + thick.Right + thick.Left) / 4);
+                        ctx.DrawRectangle(brushes[(int)BorderSide.TopLeft], null, rTopLeft);
+                        ctx.DrawRectangle(brushes[(int)BorderSide.TopRight], null, rTopRight);
+                        ctx.DrawRectangle(brushes[(int)BorderSide.Top], null, rTop);
+                        ctx.DrawRectangle(brushes[(int)BorderSide.BottomLeft], null, rBottomLeft);
+                        ctx.DrawRectangle(brushes[(int)BorderSide.BottomRight], null, rBottomRight);
+                        ctx.DrawRectangle(brushes[(int)BorderSide.Bottom], null, rBottom);
+                        ctx.DrawRectangle(brushes[(int)BorderSide.Left], null, rLeft);
+                        ctx.DrawRectangle(brushes[(int)BorderSide.Right], null, rRight);
 
 
-                    Pen borderPen = new Pen(brush, 1);
+                        Pen borderPen = new Pen(brush, 1);
 
-                    // from http://wpftutorial.net/DrawOnPhysicalDevicePixels.html
-                    double halfPenWidth = borderPen.Thickness / 2;
+                        // from http://wpftutorial.net/DrawOnPhysicalDevicePixels.html
+                        double halfPenWidth = borderPen.Thickness / 2;
 
-                    // Create a guidelines set
-                    GuidelineSet guidelines = new GuidelineSet();
-                    guidelines.GuidelinesX.Add(rClient.Left + halfPenWidth);
-                    guidelines.GuidelinesX.Add(rClient.Right + halfPenWidth);
-                    guidelines.GuidelinesY.Add(rClient.Top + halfPenWidth);
-                    guidelines.GuidelinesY.Add(rClient.Bottom + halfPenWidth);
+                        // Create a guidelines set
+                        GuidelineSet guidelines = new GuidelineSet();
+                        guidelines.GuidelinesX.Add(rClient.Left + halfPenWidth);
+                        guidelines.GuidelinesX.Add(rClient.Right + halfPenWidth);
+                        guidelines.GuidelinesY.Add(rClient.Top + halfPenWidth);
+                        guidelines.GuidelinesY.Add(rClient.Bottom + halfPenWidth);
 
-                    ctx.PushGuidelineSet(guidelines);
+                        ctx.PushGuidelineSet(guidelines);
 
-                    rClient.X -= 1;
-                    rClient.Y -= 1;
-                    rClient.Width += 1;
-                    rClient.Height += 1;
-                    ctx.DrawRectangle(null, borderPen, rClient);
-                    //ctx.DrawRectangle(null, new Pen(Brushes.Red, 1), rect);
+                        rClient.X -= 1;
+                        rClient.Y -= 1;
+                        rClient.Width += 1;
+                        rClient.Height += 1;
+                        ctx.DrawRectangle(null, borderPen, rClient);
+                        //ctx.DrawRectangle(null, new Pen(Brushes.Red, 1), rect);
+                    }
                 }
             }
         }
 
 
-        static Brush[] GetShadowBrushes(Color color, double pad)
+        static Brush[] GetShadowBrushes(Color color)//, double pad)
         {
             var brushes = new Brush[(int)BorderSide.Last];
             var stops = CreateStops(color);

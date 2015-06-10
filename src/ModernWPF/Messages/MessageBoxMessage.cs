@@ -37,11 +37,52 @@ namespace ModernWPF.Messages
             : base(sender, target)
         { Content = content; }
 
+        /// <summary>
+        /// Gets or sets the available buttons.
+        /// </summary>
+        /// <value>
+        /// The button.
+        /// </value>
         public MessageBoxButton Button { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the caption.
+        /// </summary>
+        /// <value>
+        /// The caption.
+        /// </value>
         public string Caption { get; set; }
+        
+        /// <summary>
+        /// Gets the content.
+        /// </summary>
+        /// <value>
+        /// The content.
+        /// </value>
         public string Content { get; private set; }
+        
+        /// <summary>
+        /// Gets or sets the default result.
+        /// </summary>
+        /// <value>
+        /// The default result.
+        /// </value>
         public MessageBoxResult DefaultResult { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the icon.
+        /// </summary>
+        /// <value>
+        /// The icon.
+        /// </value>
         public MessageBoxImage Icon { get; set; }
+
+        /// <summary>
+        /// Gets or sets the options.
+        /// </summary>
+        /// <value>
+        /// The options.
+        /// </value>
         public MessageBoxOptions Options { get; set; }
 
 

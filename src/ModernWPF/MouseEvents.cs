@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -88,7 +89,7 @@ namespace ModernWPF
                     if (u3d != null)
                         u3d.AddHandler(routedEvent, handler);
                     else
-                        throw new ArgumentException(string.Format("Invalid element {0}.", element.GetType()));
+                        throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Invalid element {0}.", element.GetType()));
                 }
             }
         }
@@ -114,7 +115,7 @@ namespace ModernWPF
                     if (u3d != null)
                         u3d.RemoveHandler(routedEvent, handler);
                     else
-                        throw new ArgumentException(string.Format("Invalid element {0}.", element.GetType()));
+                        throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Invalid element {0}.", element.GetType()));
                 }
             }
         }

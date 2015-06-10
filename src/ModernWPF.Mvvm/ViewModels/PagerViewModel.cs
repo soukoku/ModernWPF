@@ -33,8 +33,17 @@ namespace ModernWPF.ViewModels
         /// Initializes a new instance of the <see cref="PagerViewModel" /> class.
         /// </summary>
         /// <param name="pageChangedCallback">The page changed callback.</param>
+        public PagerViewModel(Action<PagerViewModel, int> pageChangedCallback) : this(pageChangedCallback, DEFAULT_PG_SZ)
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PagerViewModel" /> class.
+        /// </summary>
+        /// <param name="pageChangedCallback">The page changed callback.</param>
         /// <param name="pageSize">Initial size of the page.</param>
-        public PagerViewModel(Action<PagerViewModel, int> pageChangedCallback, int pageSize = DEFAULT_PG_SZ)
+        public PagerViewModel(Action<PagerViewModel, int> pageChangedCallback, int pageSize)
         {
             PageChangedCallback = pageChangedCallback;
             _currentPage = 1;
@@ -56,6 +65,7 @@ namespace ModernWPF.ViewModels
         /// <param name="totalCount"></param>
         public void UpdateStat(int currentPage, int totalCount)
         {
+            if (totalCount < 0) { totalCount = 0; }
             var newTotalPgs = ((totalCount - 1) / PageSize) + 1;
 
             _currentPage = currentPage;

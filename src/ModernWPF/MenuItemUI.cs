@@ -35,6 +35,7 @@ namespace ModernWPF
         /// <param name="value">The value.</param>
         public static void SetGroupName(MenuItem element, String value)
         {
+            if (element == null) { throw new ArgumentNullException("element"); }
             element.SetValue(GroupNameProperty, value);
         }
 
@@ -45,6 +46,7 @@ namespace ModernWPF
         /// <returns></returns>
         public static String GetGroupName(MenuItem element)
         {
+            if (element == null) { throw new ArgumentNullException("element"); }
             return element.GetValue(GroupNameProperty).ToString();
         }
 

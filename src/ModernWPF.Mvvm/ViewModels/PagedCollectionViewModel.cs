@@ -19,10 +19,18 @@ namespace ModernWPF.ViewModels
     public abstract class PagedCollectionViewModel<TItem> : ViewModelBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="PagedCollectionViewModel{TItem}"/> class
+        /// with a default page size of 100.
+        /// </summary>
+        protected PagedCollectionViewModel() : this(100)
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="PagedCollectionViewModel{TItem}"/> class.
         /// </summary>
         /// <param name="pageSize">Size of a page.</param>
-        protected PagedCollectionViewModel(int pageSize = 100)
+        protected PagedCollectionViewModel(int pageSize)
         {
             Pager = new PagerViewModel(async (pager, newPage) => await GoToPageAsync(newPage), pageSize);
             _items = new ObservableCollection<TItem>();
@@ -93,7 +101,7 @@ namespace ModernWPF.ViewModels
             if (IsLoading) { return; }
             IsLoading = true;
 
-        RETRY:
+            RETRY:
 
             NewPageData<TItem> data = null;
 

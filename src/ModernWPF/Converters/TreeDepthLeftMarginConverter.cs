@@ -73,11 +73,15 @@ namespace ModernWPF.Converters
         static TreeViewItem GetParent(TreeViewItem item)
         {
             var parent = VisualTreeHelper.GetParent(item);
-            while (!(parent is TreeViewItem || parent is TreeView))
+            while (parent != null)
             {
+                var test = parent as TreeViewItem;
+                if (test != null) { return test; }
+
                 parent = VisualTreeHelper.GetParent(parent);
             }
-            return parent as TreeViewItem;
+
+            return (TreeViewItem)parent;
         }
     }
 }
