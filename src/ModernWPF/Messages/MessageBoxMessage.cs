@@ -18,14 +18,14 @@ namespace ModernWPF.Messages
         /// Initializes a new instance of the <see cref="MessageBoxMessage" /> class.
         /// </summary>
         /// <param name="content">The content.</param>
-        public MessageBoxMessage(string content) : this(null, null, content) { }
+        public MessageBoxMessage(string content, Action<MessageBoxResult> callback) : this(null, null, content, callback) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBoxMessage" /> class.
         /// </summary>
         /// <param name="sender">The message's original sender.</param>
         /// <param name="content">The content.</param>
-        public MessageBoxMessage(object sender, string content) : this(sender, null, content) { }
+        public MessageBoxMessage(object sender, string content, Action<MessageBoxResult> callback) : this(sender, null, content, callback) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MessageBoxMessage" /> class.
@@ -33,9 +33,12 @@ namespace ModernWPF.Messages
         /// <param name="sender">The message's original sender.</param>
         /// <param name="target">The message's intended target.</param>
         /// <param name="content">The content.</param>
-        public MessageBoxMessage(object sender, object target, string content)
+        public MessageBoxMessage(object sender, object target, string content, Action<MessageBoxResult> callback)
             : base(sender, target)
-        { Content = content; }
+        {
+            Content = content;
+            Callback = callback;
+        }
 
         /// <summary>
         /// Gets or sets the available buttons.
@@ -44,7 +47,7 @@ namespace ModernWPF.Messages
         /// The button.
         /// </value>
         public MessageBoxButton Button { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the caption.
         /// </summary>
@@ -52,7 +55,7 @@ namespace ModernWPF.Messages
         /// The caption.
         /// </value>
         public string Caption { get; set; }
-        
+
         /// <summary>
         /// Gets the content.
         /// </summary>
@@ -60,7 +63,7 @@ namespace ModernWPF.Messages
         /// The content.
         /// </value>
         public string Content { get; private set; }
-        
+
         /// <summary>
         /// Gets or sets the default result.
         /// </summary>
@@ -68,7 +71,7 @@ namespace ModernWPF.Messages
         /// The default result.
         /// </value>
         public MessageBoxResult DefaultResult { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the icon.
         /// </summary>
@@ -85,6 +88,10 @@ namespace ModernWPF.Messages
         /// </value>
         public MessageBoxOptions Options { get; set; }
 
+        /// <summary>
+        /// Gets the callback.
+        /// </summary>
+        public Action<MessageBoxResult> Callback { get; private set; }
 
 
         /// <summary>
