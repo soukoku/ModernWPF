@@ -43,15 +43,12 @@ namespace ModernWPF
         /// </summary>
         /// <param name="inputElement">The input element.</param>
         /// <returns></returns>
-        /// <exception cref="System.ArgumentException"></exception>
         public static bool GetIsHitTestVisible(IInputElement inputElement)
         {
-            if (inputElement == null) { return false; }
-
             DependencyObject obj2 = inputElement as DependencyObject;
             if (obj2 == null)
             {
-                throw new ArgumentException("The element must be a DependencyObject", "inputElement");
+                return false;
             }
             return (bool)obj2.GetValue(IsHitTestVisibleProperty);
         }
@@ -66,7 +63,7 @@ namespace ModernWPF
         public static void SetIsHitTestVisible(IInputElement inputElement, bool hitTestVisible)
         {
             if (inputElement == null) { throw new ArgumentNullException("inputElement"); }
-
+            
             DependencyObject obj2 = inputElement as DependencyObject;
             if (obj2 == null)
             {
@@ -74,6 +71,50 @@ namespace ModernWPF
             }
             obj2.SetValue(IsHitTestVisibleProperty, hitTestVisible);
         }
+
+
+
+
+        /// <summary>
+        /// Gets the IsCaption value.
+        /// </summary>
+        /// <param name="inputElement">The input element.</param>
+        /// <returns></returns>
+        public static bool GetIsCaption(IInputElement inputElement)
+        {
+            DependencyObject obj2 = inputElement as DependencyObject;
+            if (obj2 == null)
+            {
+                return false;
+            }
+            return (bool)obj2.GetValue(IsCaptionProperty);
+        }
+        /// <summary>
+        /// Sets the IsCaption value.
+        /// </summary>
+        /// <param name="inputElement">The input element.</param>
+        /// <param name="isCaption">if set to <c>true</c> then the element is hit test visible as caption.</param>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
+        public static void SetIsCaption(IInputElement inputElement, bool isCaption)
+        {
+            if (inputElement == null) { throw new ArgumentNullException("inputElement"); }
+
+            DependencyObject obj2 = inputElement as DependencyObject;
+            if (obj2 == null)
+            {
+                throw new ArgumentException("The element must be a DependencyObject", "inputElement");
+            }
+            obj2.SetValue(IsCaptionProperty, isCaption);
+        }
+
+        /// <summary>
+        /// Attached property to mark a UI element as caption during hit-tests.
+        /// </summary>
+        public static readonly DependencyProperty IsCaptionProperty =
+            DependencyProperty.RegisterAttached("IsCaption", typeof(bool), typeof(Chrome),
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
+        
 
 
         #endregion
@@ -864,26 +905,24 @@ namespace ModernWPF
                 //double capH = (windowCapH > -1 ? windowCapH : _contentWindow.ActualHeight);
 
                 NcHitTest location = NcHitTest.HTCLIENT;
+                var hitTest = _contentWindow.InputHitTest(windowPoint);
 
-                if (windowPoint.Y <= capH)
+                if (hitTest != null && (windowPoint.Y <= capH || GetIsCaption(hitTest)) &&
+                    !GetIsHitTestVisible(hitTest))
                 {
-                    var hitTest = _contentWindow.InputHitTest(windowPoint);
-                    if (hitTest != null && !GetIsHitTestVisible(hitTest))
+                    location = NcHitTest.HTCAPTION;
+                    if (windowPoint.Y <= 40)
                     {
-                        location = NcHitTest.HTCAPTION;
-                        if (windowPoint.Y <= 40)
+                        if (_contentWindow.FlowDirection == System.Windows.FlowDirection.LeftToRight)
                         {
-                            if (_contentWindow.FlowDirection == System.Windows.FlowDirection.LeftToRight)
-                            {
-                                if (windowPoint.X <= 40)
-                                {
-                                    location = NcHitTest.HTSYSMENU;
-                                }
-                            }
-                            else if (windowPoint.X >= (_contentWindow.ActualWidth - 40))
+                            if (windowPoint.X <= 40)
                             {
                                 location = NcHitTest.HTSYSMENU;
                             }
+                        }
+                        else if (windowPoint.X >= (_contentWindow.ActualWidth - 40))
+                        {
+                            location = NcHitTest.HTSYSMENU;
                         }
                     }
                 }

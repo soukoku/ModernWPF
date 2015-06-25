@@ -17,6 +17,7 @@ namespace ModernWPF.Controls
         static ControlBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ControlBox), new FrameworkPropertyMetadata(typeof(ControlBox)));
+            IsTabStopProperty.OverrideMetadata(typeof(ControlBox), new FrameworkPropertyMetadata(false));
         }
 
 

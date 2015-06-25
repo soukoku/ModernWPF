@@ -481,7 +481,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StatusBar Grid.Row="4">
+        <StatusBar Grid.Row="4" modern:Chrome.IsCaption="true">
             <StatusBarItem Content="status 1"></StatusBarItem>
             <StatusBarItem Content="status 2"></StatusBarItem>
         </StatusBar>
