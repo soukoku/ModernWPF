@@ -25,45 +25,45 @@ namespace ModernWPF.Controls
     /// </summary>
     sealed class LegacyBorderManager : DependencyObject
     {
-        public static LegacyBorderManager GetWorker(DependencyObject obj)
+        public static LegacyBorderManager GetManager(DependencyObject obj)
         {
-            return (LegacyBorderManager)obj.GetValue(WorkerProperty);
+            return (LegacyBorderManager)obj.GetValue(ManagerProperty);
         }
 
-        public static void SetWorker(DependencyObject obj, LegacyBorderManager value)
+        public static void SetManager(DependencyObject obj, LegacyBorderManager value)
         {
-            obj.SetValue(WorkerProperty, value);
+            obj.SetValue(ManagerProperty, value);
         }
 
-        public static readonly DependencyProperty WorkerProperty =
-            DependencyProperty.RegisterAttached("Worker", typeof(LegacyBorderManager), typeof(LegacyBorderManager), new PropertyMetadata(null, ChromeWorkerChanged));
+        public static readonly DependencyProperty ManagerProperty =
+            DependencyProperty.RegisterAttached("Manager", typeof(LegacyBorderManager), typeof(LegacyBorderManager), new PropertyMetadata(null, ManagerChanged));
 
-        private static void ChromeWorkerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void ManagerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var window = d as Window;
             if (d != null)
             {
-                var oldChrome = e.OldValue as LegacyBorderManager;
-                var newChrome = e.NewValue as LegacyBorderManager;
+                var oldManager = e.OldValue as LegacyBorderManager;
+                var newManager = e.NewValue as LegacyBorderManager;
 
-                if (oldChrome != newChrome)
+                if (oldManager != newManager)
                 {
-                    if (oldChrome != null)
+                    if (oldManager != null)
                     {
-                        oldChrome.DetatchWindow();
+                        oldManager.DetatchWindow();
                     }
 
-                    if (newChrome != null)
+                    if (newManager != null)
                     {
-                        newChrome.AttachWindow(window);
+                        newManager.AttachWindow(window);
                     }
                 }
             }
         }
 
-        public void ChangeChrome(Chrome chrome)
+        public void UpdateChrome(Chrome chrome)
         {
-            Debug.WriteLine("ChromeWorker changing chrome.");
+            Debug.WriteLine("ChromeWorker updating chrome.");
             if (_borderWindow != null)
                 _borderWindow.UpdateChromeBindings(chrome);
         }
@@ -122,7 +122,7 @@ namespace ModernWPF.Controls
 
         void _contentWindow_Closed(object sender, EventArgs e)
         {
-            LegacyBorderManager.SetWorker(_contentWindow, null);
+            LegacyBorderManager.SetManager(_contentWindow, null);
         }
 
         void _contentWindow_ContentRendered(object sender, EventArgs e)
@@ -441,6 +441,7 @@ namespace ModernWPF.Controls
                 location = NcHitTest.HTCAPTION;
                 if (windowPoint.Y <= 40)
                 {
+                    // TODO: check for sysmenu style
                     if (_contentWindow.FlowDirection == System.Windows.FlowDirection.LeftToRight)
                     {
                         if (windowPoint.X <= 40)

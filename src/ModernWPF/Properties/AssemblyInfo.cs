@@ -40,6 +40,7 @@ using System.Windows.Markup;
 )]
 
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWPF")]
+//[assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Behaviors")]
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Controls")]
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Converters")]
 [assembly: XmlnsDefinition("http://modernwpf", "ModernWPF.Resources")]

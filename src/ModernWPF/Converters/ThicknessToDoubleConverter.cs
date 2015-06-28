@@ -11,7 +11,7 @@ namespace ModernWPF.Converters
     /// <summary>
     /// Convert <see cref="Thickness"/> in a property to single double value for those pesky shape bindings.
     /// </summary>
-    [ValueConversion(typeof(Thickness), typeof(bool))]
+    [ValueConversion(typeof(Thickness), typeof(double))]
     public class ThicknessToDoubleConverter : IValueConverter
     {
         static readonly ThicknessToDoubleConverter _instance = new ThicknessToDoubleConverter();
@@ -41,7 +41,22 @@ namespace ModernWPF.Converters
             if (value is Thickness)
             {
                 var t = ((Thickness)value);
-                return (t.Left + t.Right + t.Bottom + t.Top) / 4;
+
+                string para = parameter == null ? string.Empty : parameter.ToString().ToLowerInvariant();
+                switch (para)
+                {
+                    case "left":
+                        return t.Left;
+                    case "top":
+                        return t.Top;
+                    case "right":
+                        return t.Right;
+                    case "bottom":
+                        return t.Bottom;
+                    default:
+                        // default is avg
+                        return (t.Left + t.Right + t.Bottom + t.Top) / 4;
+                }
             }
             return 0;
         }

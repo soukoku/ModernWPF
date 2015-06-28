@@ -233,9 +233,9 @@ namespace ModernWPF.Controls
                                 User32.SetWindowPos(_hwnd, contentHwnd, 0, 0, 0, 0,
                                     SetWindowPosOptions.SWP_NOACTIVATE | SetWindowPosOptions.SWP_NOSIZE | SetWindowPosOptions.SWP_NOMOVE);
 
-                                Debug.WriteLine("raw content window x={0}, y={1}, w={2}, h={3}", r.left, r.top, r.Width, r.Height);
+                                //Debug.WriteLine("raw content window x={0}, y={1}, w={2}, h={3}", r.left, r.top, r.Width, r.Height);
                                 var r2 = TranslateToWpf(r);
-                                Debug.WriteLine("wpf content window x={0}, y={1}, w={2}, h={3}", r2.Left, r2.Top, r2.Width, r2.Height);
+                                //Debug.WriteLine("wpf content window x={0}, y={1}, w={2}, h={3}", r2.Left, r2.Top, r2.Width, r2.Height);
 
                                 var thick = BorderThickness;
                                 this.Left = r2.Left - thick.Left;
@@ -244,7 +244,7 @@ namespace ModernWPF.Controls
                                 this.Height = r2.Height + thick.Top + thick.Bottom;
 
                                 ToggleVisible(true);
-                                Debug.WriteLine("reposned to x={0}, y={1}, w={2}, h={3}", this.Left, this.Top, this.Width, this.Height);
+                                //Debug.WriteLine("reposned to x={0}, y={1}, w={2}, h={3}", this.Left, this.Top, this.Width, this.Height);
                             }
                             break;
                         case ShowWindowOption.SW_MAXIMIZE:

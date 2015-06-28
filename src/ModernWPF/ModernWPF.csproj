@@ -74,6 +74,9 @@
     <Compile Include="Controls\AnimatedScrollViewer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\BorderManager.cs" />
+    <Compile Include="Controls\BorderSide.cs" />
+    <Compile Include="Controls\BorderWindow.cs" />
     <Compile Include="Controls\ControlBox.cs" />
     <Compile Include="Controls\AppButton.cs" />
     <Compile Include="Controls\LegacyBorderManager.cs" />
@@ -225,6 +228,9 @@
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="CustomDictionary.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Behaviors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

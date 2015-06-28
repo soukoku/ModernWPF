@@ -164,19 +164,20 @@ namespace ModernWPF
                 Chrome newChrome = e.NewValue as Chrome;
                 if (newChrome == null)
                 {
-                    LegacyBorderManager.SetWorker(window, null);
+                    //LegacyBorderManager.SetManager(window, null);
+                    BorderManager.SetManager(window, null);
                 }
                 else if (e.NewValue != e.OldValue)
                 {
-                    var worker = LegacyBorderManager.GetWorker(window);
+                    var worker = BorderManager.GetManager(window); //LegacyBorderManager.GetManager(window);
                     if (worker == null)
                     {
-                        worker = new LegacyBorderManager();
-                        LegacyBorderManager.SetWorker(window, worker);
+                        worker = new BorderManager();// new LegacyBorderManager();
+                        BorderManager.SetManager(window, worker); //LegacyBorderManager.SetManager(window, worker);
                     }
                     else
                     {
-                        worker.ChangeChrome(newChrome);
+                        worker.UpdateChrome(newChrome);
                     }
                 }
             }
