@@ -1,6 +1,7 @@
 ﻿using CommonWin32;
 using CommonWin32.API;
 using CommonWin32.MouseInput;
+using CommonWin32.Rectangles;
 using CommonWin32.WindowClasses;
 using CommonWin32.Windows;
 using ModernWPF.Converters;
@@ -137,21 +138,23 @@ namespace ModernWPF.Controls
             base.OnClosed(e);
         }
 
-        internal void UpdatePosn(int left, int top, int width, int height, int pad = 8)
+        internal void UpdatePosn(double left, double top, double width, double height)
         {
-            User32.SetWindowPos(_hwnd, _manager.hWndContent, left, top, width, height, SetWindowPosOptions.SWP_NOACTIVATE);
+            //User32.SetWindowPos(_hwnd, _manager.hWndContent, left, top, width, height, SetWindowPosOptions.SWP_NOACTIVATE);
+            this.Left = left;
+            this.Top = top;
             this.Width = width;
             this.Height = height;
-            this.PadSize = 8;
+            var pad = 2 * PadSize;
             switch (Side)
             {
                 case BorderSide.Left:
                 case BorderSide.Right:
-                    BorderLength = Math.Max(0, height - 2 * pad);
+                    BorderLength = Math.Max(0, height - pad);
                     break;
                 case BorderSide.Top:
                 case BorderSide.Bottom:
-                    BorderLength = Math.Max(0, width - 2 * pad);
+                    BorderLength = Math.Max(0, width - pad);
                     break;
             }
             Show();

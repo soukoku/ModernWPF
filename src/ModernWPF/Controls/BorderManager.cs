@@ -167,16 +167,39 @@ namespace ModernWPF.Controls
         {
             // use GetWindowRect to work correctly with aero snap
             // since GetWindowPlacement doesn't change
-            var cr = default(RECT);
-            if (User32.GetWindowRect(hWndContent, ref cr))
+            var rcNative = default(RECT);
+            if (User32.GetWindowRect(hWndContent, ref rcNative))
             {
-                var pad = 8;
+                Rect rcWpf = TranslateToWpf(ref rcNative);
 
-                _left.UpdatePosn(cr.left - pad, cr.top - pad, pad, cr.Height + 2 * pad);
-                _top.UpdatePosn(cr.left - pad, cr.top - pad, cr.Width + 2 * pad, pad);
-                _right.UpdatePosn(cr.right, cr.top - pad, pad, cr.Height + 2 * pad);
-                _bottom.UpdatePosn(cr.left - pad, cr.bottom, cr.Width + 2 * pad, pad);
+                _left.UpdatePosn(rcWpf.Left - _left.PadSize, rcWpf.Top - _left.PadSize, _left.PadSize, rcWpf.Height + 2 * _left.PadSize);
+                _top.UpdatePosn(rcWpf.Left -  _top.PadSize, rcWpf.Top - _top.PadSize, rcWpf.Width + 2 * _top.PadSize, _top.PadSize);
+                _right.UpdatePosn(rcWpf.Right, rcWpf.Top - _right.PadSize, _right.PadSize, rcWpf.Height + 2 * _right.PadSize);
+                _bottom.UpdatePosn(rcWpf.Left - _bottom.PadSize, rcWpf.Bottom, rcWpf.Width + 2 * _bottom.PadSize, _bottom.PadSize);
             }
+        }
+
+
+        /// <summary>
+        /// translate screen pixels to wpf units for high-dpi scaling.
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        private Rect TranslateToWpf(ref RECT r)
+        {
+            var source = PresentationSource.FromVisual(ContentWindow);
+            if (source != null)
+            {
+                var transform = source.CompositionTarget.TransformToDevice;
+                if (!transform.IsIdentity)
+                {
+                    var xScale = transform.M11;
+                    var yScale = transform.M22;
+                    
+                    return new Rect(r.left / xScale, r.top / yScale, r.Width / xScale, r.Height / yScale);
+                }
+            }
+            return new Rect(r.left, r.top, r.Width, r.Height);
         }
 
 
