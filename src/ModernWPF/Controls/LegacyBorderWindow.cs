@@ -21,24 +21,24 @@ using CommonWin32.Rectangles;
 namespace ModernWPF.Controls
 {
     /// <summary>
-    /// Provides sizing border and drop shadow for a window.
+    /// Old method of providing sizing glow border using a single window.
     /// </summary>
-    class BorderWindow : Window
+    class LegacyBorderWindow : Window
     {
         #region DPs
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "Only way to override style key DP.")]
-        static BorderWindow()
+        static LegacyBorderWindow()
         {
             //DefaultStyleKeyProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(typeof(BorderWindow)));
-            WindowStyleProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(WindowStyle.None));
-            ShowInTaskbarProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(false));
-            AllowsTransparencyProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(true));
-            ShowActivatedProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(false));
+            WindowStyleProperty.OverrideMetadata(typeof(LegacyBorderWindow), new FrameworkPropertyMetadata(WindowStyle.None));
+            ShowInTaskbarProperty.OverrideMetadata(typeof(LegacyBorderWindow), new FrameworkPropertyMetadata(false));
+            AllowsTransparencyProperty.OverrideMetadata(typeof(LegacyBorderWindow), new FrameworkPropertyMetadata(true));
+            ShowActivatedProperty.OverrideMetadata(typeof(LegacyBorderWindow), new FrameworkPropertyMetadata(false));
             // override to make border less visible initially for slow machines
             //WindowStateProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(WindowState.Minimized));
-            WidthProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(1d));
-            HeightProperty.OverrideMetadata(typeof(BorderWindow), new FrameworkPropertyMetadata(1d));
+            WidthProperty.OverrideMetadata(typeof(LegacyBorderWindow), new FrameworkPropertyMetadata(1d));
+            HeightProperty.OverrideMetadata(typeof(LegacyBorderWindow), new FrameworkPropertyMetadata(1d));
         }
 
         public bool IsContentActive
@@ -48,7 +48,7 @@ namespace ModernWPF.Controls
         }
 
         public static readonly DependencyProperty IsContentActiveProperty =
-            DependencyProperty.Register("IsContentActive", typeof(bool), typeof(BorderWindow), new PropertyMetadata(false, HandleDPChanged));
+            DependencyProperty.Register("IsContentActive", typeof(bool), typeof(LegacyBorderWindow), new PropertyMetadata(false, HandleDPChanged));
 
 
 
@@ -60,7 +60,7 @@ namespace ModernWPF.Controls
 
         // Using a DependencyProperty as the backing store for ActiveBorderBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ActiveBorderBrushProperty =
-            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(BorderWindow), new PropertyMetadata(null, HandleDPChanged));
+            DependencyProperty.Register("ActiveBorderBrush", typeof(Brush), typeof(LegacyBorderWindow), new PropertyMetadata(null, HandleDPChanged));
 
 
 
@@ -72,7 +72,7 @@ namespace ModernWPF.Controls
 
         // Using a DependencyProperty as the backing store for InactiveBorderBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty InactiveBorderBrushProperty =
-            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(BorderWindow), new PropertyMetadata(null, HandleDPChanged));
+            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(LegacyBorderWindow), new PropertyMetadata(null, HandleDPChanged));
 
         private static void HandleDPChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -86,7 +86,7 @@ namespace ModernWPF.Controls
         Window _contentWindow;
         DispatcherTimer _showTimer;
 
-        public BorderWindow(Window contentWindow)
+        public LegacyBorderWindow(Window contentWindow)
         {
             // only works if set directly, no in override
             this.Background = Brushes.Transparent;

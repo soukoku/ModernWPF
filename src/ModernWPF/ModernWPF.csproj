@@ -48,8 +48,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonWin32, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a0a4edcfe233918d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\CommonWin32.2.0.5.5\lib\net35-Client\CommonWin32.dll</HintPath>
+      <HintPath>..\..\packages\CommonWin32.2.0.5.6\lib\net35-Client\CommonWin32.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
@@ -76,7 +76,8 @@
     </Compile>
     <Compile Include="Controls\ControlBox.cs" />
     <Compile Include="Controls\AppButton.cs" />
-    <Compile Include="Controls\BorderWindow.cs" />
+    <Compile Include="Controls\LegacyBorderManager.cs" />
+    <Compile Include="Controls\LegacyBorderWindow.cs" />
     <Compile Include="Controls\DialogControl.cs" />
     <Compile Include="Controls\DialogControlContainer.cs" />
     <Compile Include="Controls\MessageBoxControl.cs" />
@@ -155,9 +156,7 @@
     <Resource Include="Assets\error.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
     <None Include="Sign.snk" />
     <Page Include="Controls\ModernMessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
