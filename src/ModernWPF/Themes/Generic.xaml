@@ -175,12 +175,12 @@
                               Stroke="{TemplateBinding BorderBrush}" 
                               SnapsToDevicePixels="True">
                         </Line>
-                        <Line x:Name="Line2" Opacity=".8"
+                        <!--<Line x:Name="Line2" Opacity="0"
                               RenderOptions.EdgeMode="Unspecified" 
                               StrokeThickness="1" 
                               Stroke="{TemplateBinding BorderBrush}" 
                               SnapsToDevicePixels="True">
-                        </Line>
+                        </Line>-->
                     </Canvas>
                     <ControlTemplate.Triggers>
                         <!--active states-->
@@ -194,14 +194,14 @@
                                 </Setter.Value>
                             </Setter>
 
-                            <Setter TargetName="Line2" Property="Y2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <!--<Setter TargetName="Line2" Property="Y2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Canvas.Left" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Canvas.Top" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Effect">
                                 <Setter.Value>
                                     <DropShadowEffect Direction="180" ShadowDepth="1.5" BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush.Color}"></DropShadowEffect>
                                 </Setter.Value>
-                            </Setter>
+                            </Setter>-->
                         </Trigger>
 
                         <Trigger Property="Side" Value="Top">
@@ -214,14 +214,14 @@
                                 </Setter.Value>
                             </Setter>
 
-                            <Setter TargetName="Line2" Property="X2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <!--<Setter TargetName="Line2" Property="X2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Canvas.Top" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Canvas.Left" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Effect">
                                 <Setter.Value>
                                     <DropShadowEffect Direction="90" ShadowDepth="1.5" BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush.Color}"></DropShadowEffect>
                                 </Setter.Value>
-                            </Setter>
+                            </Setter>-->
                         </Trigger>
 
                         <Trigger Property="Side" Value="Right">
@@ -233,13 +233,13 @@
                                 </Setter.Value>
                             </Setter>
 
-                            <Setter TargetName="Line2" Property="Y2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <!--<Setter TargetName="Line2" Property="Y2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Canvas.Top" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Effect">
                                 <Setter.Value>
                                     <DropShadowEffect Direction="0" ShadowDepth="1.5" BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush.Color}"></DropShadowEffect>
                                 </Setter.Value>
-                            </Setter>
+                            </Setter>-->
                         </Trigger>
 
                         <Trigger Property="Side" Value="Bottom">
@@ -251,13 +251,13 @@
                                 </Setter.Value>
                             </Setter>
 
-                            <Setter TargetName="Line2" Property="X2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
+                            <!--<Setter TargetName="Line2" Property="X2" Value="{Binding BorderLength, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Canvas.Left" Value="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}"></Setter>
                             <Setter TargetName="Line2" Property="Effect">
                                 <Setter.Value>
                                     <DropShadowEffect Direction="270" ShadowDepth="1.5" BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush.Color}"></DropShadowEffect>
                                 </Setter.Value>
-                            </Setter>
+                            </Setter>-->
                         </Trigger>
 
                         <!--inactive states-->
@@ -274,7 +274,8 @@
                                     <DropShadowEffect Direction="180" ShadowDepth="1.5" BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveBorderBrush.Color}"></DropShadowEffect>
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="Line2" Property="Visibility" Value="Collapsed"></Setter>
+                            <Setter TargetName="Line1" Property="Opacity" Value=".6"></Setter>
+                            <!--<Setter TargetName="Line2" Property="Visibility" Value="Collapsed"></Setter>-->
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -286,7 +287,8 @@
                                     <DropShadowEffect Direction="90" ShadowDepth="1.5" BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveBorderBrush.Color}"></DropShadowEffect>
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="Line2" Property="Visibility" Value="Collapsed"></Setter>
+                            <Setter TargetName="Line1" Property="Opacity" Value=".6"></Setter>
+                            <!--<Setter TargetName="Line2" Property="Visibility" Value="Collapsed"></Setter>-->
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -298,7 +300,8 @@
                                     <DropShadowEffect Direction="0" ShadowDepth="1.5" BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveBorderBrush.Color}"></DropShadowEffect>
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="Line2" Property="Visibility" Value="Collapsed"></Setter>
+                            <Setter TargetName="Line1" Property="Opacity" Value=".6"></Setter>
+                            <!--<Setter TargetName="Line2" Property="Visibility" Value="Collapsed"></Setter>-->
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -310,7 +313,8 @@
                                     <DropShadowEffect Direction="270" ShadowDepth="1.5" BlurRadius="{Binding PadSize, RelativeSource={RelativeSource TemplatedParent}}" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveBorderBrush.Color}"></DropShadowEffect>
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="Line2" Property="Visibility" Value="Collapsed"></Setter>
+                            <Setter TargetName="Line1" Property="Opacity" Value=".6"></Setter>
+                            <!--<Setter TargetName="Line2" Property="Visibility" Value="Collapsed"></Setter>-->
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
