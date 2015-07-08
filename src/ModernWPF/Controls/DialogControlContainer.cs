@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
@@ -94,7 +95,16 @@ namespace ModernWPF.Controls
             base.OnApplyTemplate();
             _presenter = GetTemplateChild(PARTContent) as ContentPresenter;
         }
-
+        
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            var diag = this.Content as DialogControl;
+            if(diag != null && diag.CloseOnContainerClick)
+            {
+                diag.DialogResult = false;
+            }
+            base.OnMouseLeftButtonDown(e);
+        }
 
         object _openLock = new object();
         List<DialogControl> _openDialogs = new List<DialogControl>();

@@ -80,6 +80,27 @@ namespace ModernWPF.Controls
 
 
         /// <summary>
+        /// Gets or sets a value indicating whether dialog closes when mouse clicks on the container.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> to close when mouse clicks on container; otherwise, <c>false</c>.
+        /// </value>
+        public bool CloseOnContainerClick
+        {
+            get { return (bool)GetValue(CloseOnContainerClickProperty); }
+            set { SetValue(CloseOnContainerClickProperty, value); }
+        }
+
+        /// <summary>
+        /// The dependency property for <see cref="CloseOnContainerClick"/>.
+        /// </summary>
+        public static readonly DependencyProperty CloseOnContainerClickProperty =
+            DependencyProperty.Register("CloseOnContainerClick", typeof(bool), typeof(DialogControl), new PropertyMetadata(true));
+
+
+
+
+        /// <summary>
         /// Gets or sets a value indicating whether the disable target specified in the <see cref="DialogControlContainer"/> is disabled when this is shown.
         /// </summary>
         /// <value>

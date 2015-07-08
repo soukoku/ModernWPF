@@ -6,8 +6,8 @@
 		<title>$title$</title>
 		<authors>$author$</authors>
 		<owners>$author$</owners>
-		<projectUrl>https://bitbucket.org/soukoku/modernwpf</projectUrl>
-		<licenseUrl>https://bitbucket.org/soukoku/modernwpf/raw/225b7a43c3b161d145007fd8c7a619ef89fbd540/LICENSE.txt</licenseUrl>    
+		<projectUrl>https://github.com/soukoku/ModernWPF</projectUrl>
+		<licenseUrl>https://github.com/soukoku/ModernWPF/blob/master/LICENSE.txt</licenseUrl>    
 		<iconUrl>http://i.imgur.com/WAYKszr.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
