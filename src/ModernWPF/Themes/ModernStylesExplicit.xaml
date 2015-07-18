@@ -166,13 +166,14 @@
         <Setter Property="Foreground" Value="{DynamicResource ButtonForegroundThemeBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="2 1"></Setter>
         <Setter Property="Margin" Value="0" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Opacity" Value=".8"/>
+        <Setter Property="Opacity" Value=".75"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ButtonBase">
@@ -195,10 +196,15 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Opacity" Value=".9" />
+                <Setter Property="Opacity" Value="1"></Setter>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Opacity" Value="1" />
+                <Setter Property="Opacity" Value="1"></Setter>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform X="1" Y="1"></TranslateTransform>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <!--<Setter Property="Foreground" Value="{DynamicResource ButtonDisabledForegroundThemeBrush}" />-->
