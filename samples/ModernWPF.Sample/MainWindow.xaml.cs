@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -119,6 +120,19 @@ namespace ModernWPF.Sample
         private void theWindow_MouseHWheel(object sender, MouseWheelEventArgs e)
         {
             Debug.WriteLine("Got h-wheel with delta = " + e.Delta);
+        }
+
+        private void hideButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            ThreadPool.QueueUserWorkItem(o =>
+            {
+                Thread.Sleep(3000);
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    this.Show();
+                }));
+            });
         }
     }
 }

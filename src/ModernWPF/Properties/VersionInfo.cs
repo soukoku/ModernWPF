@@ -15,6 +15,6 @@ namespace ModernWPF
         // keep this same in major releases
         public const string MajorVersion = "1.0.0.0";
         // change this for each nuget release
-        public const string BuildVersion = "1.3.0";
+        public const string BuildVersion = "1.3.1";
     }
 }

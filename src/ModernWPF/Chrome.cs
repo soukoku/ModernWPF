@@ -63,7 +63,7 @@ namespace ModernWPF
         public static void SetIsHitTestVisible(IInputElement inputElement, bool hitTestVisible)
         {
             if (inputElement == null) { throw new ArgumentNullException("inputElement"); }
-            
+
             DependencyObject obj2 = inputElement as DependencyObject;
             if (obj2 == null)
             {
@@ -114,7 +114,7 @@ namespace ModernWPF
         public static readonly DependencyProperty IsCaptionProperty =
             DependencyProperty.RegisterAttached("IsCaption", typeof(bool), typeof(Chrome),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
-        
+
 
 
         #endregion
@@ -147,6 +147,9 @@ namespace ModernWPF
             window.SetValue(Chrome.ChromeProperty, chrome);
         }
 
+        static bool __legacyBorder = false;
+
+
         /// <summary>
         /// The modern chrome attached property.
         /// </summary>
@@ -162,22 +165,45 @@ namespace ModernWPF
             {
                 // don't care about old chrome since it has no state
                 Chrome newChrome = e.NewValue as Chrome;
-                if (newChrome == null)
+
+                if (__legacyBorder)
                 {
-                    //LegacyBorderManager.SetManager(window, null);
-                    BorderManager.SetManager(window, null);
-                }
-                else if (e.NewValue != e.OldValue)
-                {
-                    var worker = BorderManager.GetManager(window); //LegacyBorderManager.GetManager(window);
-                    if (worker == null)
+                    if (newChrome == null)
                     {
-                        worker = new BorderManager();// new LegacyBorderManager();
-                        BorderManager.SetManager(window, worker); //LegacyBorderManager.SetManager(window, worker);
+                        LegacyBorderManager.SetManager(window, null);
                     }
-                    else
+                    else if (e.NewValue != e.OldValue)
                     {
-                        worker.UpdateChrome(newChrome);
+                        var worker = LegacyBorderManager.GetManager(window);
+                        if (worker == null)
+                        {
+                            worker = new LegacyBorderManager();
+                            LegacyBorderManager.SetManager(window, worker);
+                        }
+                        else
+                        {
+                            worker.UpdateChrome(newChrome);
+                        }
+                    }
+                }
+                else
+                {
+                    if (newChrome == null)
+                    {
+                        BorderManager.SetManager(window, null);
+                    }
+                    else if (e.NewValue != e.OldValue)
+                    {
+                        var worker = BorderManager.GetManager(window);
+                        if (worker == null)
+                        {
+                            worker = new BorderManager();
+                            BorderManager.SetManager(window, worker);
+                        }
+                        else
+                        {
+                            worker.UpdateChrome(newChrome);
+                        }
                     }
                 }
             }

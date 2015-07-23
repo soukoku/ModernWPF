@@ -16,8 +16,9 @@
     </Window.Resources>
     <modern:Chrome.CaptionExtraContent>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
-            <Button Style="{StaticResource ModernCaptionButton}" Content="caption button 1"></Button>
-            <Button Style="{StaticResource ModernCaptionButton}" Content="caption button disabled" IsEnabled="False"></Button>
+            <Button Style="{StaticResource ModernCaptionButton}" Content="Hide" x:Name="hideButton" Click="hideButton_Click"></Button>
+            <Button Style="{StaticResource ModernCaptionButton}" Content="Caption button 1"></Button>
+            <Button Style="{StaticResource ModernCaptionButton}" Content="Caption button disabled" IsEnabled="False"></Button>
         </StackPanel>
     </modern:Chrome.CaptionExtraContent>
     <Grid>

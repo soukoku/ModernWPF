@@ -155,53 +155,6 @@ namespace ModernWPF.Controls
                 SetWindowPosOptions.SWP_NOSIZE);
         }
 
-        void Hide()
-        {
-            _left.Hide();
-            _top.Hide();
-            _right.Hide();
-            _bottom.Hide();
-        }
-
-        void UpdatePosn()
-        {
-            // use GetWindowRect to work correctly with aero snap
-            // since GetWindowPlacement doesn't change
-            var rcNative = default(RECT);
-            if (User32.GetWindowRect(hWndContent, ref rcNative))
-            {
-                Rect rcWpf = TranslateToWpf(ref rcNative);
-
-                _left.UpdatePosn(rcWpf.Left - _left.PadSize, rcWpf.Top - _left.PadSize, _left.PadSize, rcWpf.Height + 2 * _left.PadSize);
-                _top.UpdatePosn(rcWpf.Left -  _top.PadSize, rcWpf.Top - _top.PadSize, rcWpf.Width + 2 * _top.PadSize, _top.PadSize);
-                _right.UpdatePosn(rcWpf.Right, rcWpf.Top - _right.PadSize, _right.PadSize, rcWpf.Height + 2 * _right.PadSize);
-                _bottom.UpdatePosn(rcWpf.Left - _bottom.PadSize, rcWpf.Bottom, rcWpf.Width + 2 * _bottom.PadSize, _bottom.PadSize);
-            }
-        }
-
-
-        /// <summary>
-        /// translate screen pixels to wpf units for high-dpi scaling.
-        /// </summary>
-        /// <param name="r"></param>
-        /// <returns></returns>
-        private Rect TranslateToWpf(ref RECT r)
-        {
-            var source = PresentationSource.FromVisual(ContentWindow);
-            if (source != null)
-            {
-                var transform = source.CompositionTarget.TransformToDevice;
-                if (!transform.IsIdentity)
-                {
-                    var xScale = transform.M11;
-                    var yScale = transform.M22;
-                    
-                    return new Rect(r.left / xScale, r.top / yScale, r.Width / xScale, r.Height / yScale);
-                }
-            }
-            return new Rect(r.left, r.top, r.Width, r.Height);
-        }
-
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
@@ -340,10 +293,10 @@ namespace ModernWPF.Controls
                                 var workArea = lpmi.rcWork;
                                 User32Ex.AdjustForAutoHideTaskbar(hMonitor, ref workArea);
                                 //Debug.WriteLine("NCCalc original = {0}x{1} @ {2}x{3}, new ={4}x{5} @ {6}x{7}",
-                                    //para.rectProposed.Width, para.rectProposed.Height,
-                                    //para.rectProposed.left, para.rectProposed.top,
-                                    //workArea.Width, workArea.Height,
-                                    //workArea.left, workArea.top);
+                                //para.rectProposed.Width, para.rectProposed.Height,
+                                //para.rectProposed.left, para.rectProposed.top,
+                                //workArea.Width, workArea.Height,
+                                //workArea.left, workArea.top);
                                 para.rectProposed = workArea;
                                 Marshal.StructureToPtr(para, lParam, true);
 
@@ -353,6 +306,9 @@ namespace ModernWPF.Controls
                 }
             }
         }
+
+
+        bool _inHiding = false;
 
         private void HandleWindowPosChanged(IntPtr hwnd, IntPtr lParam)
         {
@@ -365,6 +321,17 @@ namespace ModernWPF.Controls
 
 
             if (windowpos.flags.HasFlag(SetWindowPosOptions.SWP_HIDEWINDOW))
+            {
+                // necessary to keep track on whether window is hidden
+                // since this msg is received again after being hidden.
+                _inHiding = true;
+            }
+            if (windowpos.flags.HasFlag(SetWindowPosOptions.SWP_SHOWWINDOW))
+            {
+                _inHiding = false;
+            }
+
+            if (_inHiding)
             {
                 Hide();
             }
@@ -391,6 +358,53 @@ namespace ModernWPF.Controls
                     }
                 }
             }
+        }
+
+        void Hide()
+        {
+            _left.Hide();
+            _top.Hide();
+            _right.Hide();
+            _bottom.Hide();
+        }
+
+        void UpdatePosn()
+        {
+            // use GetWindowRect to work correctly with aero snap
+            // since GetWindowPlacement doesn't change
+            var rcNative = default(RECT);
+            if (User32.GetWindowRect(hWndContent, ref rcNative))
+            {
+                Rect rcWpf = TranslateToWpf(ref rcNative);
+
+                _left.UpdatePosn(rcWpf.Left - _left.PadSize, rcWpf.Top - _left.PadSize, _left.PadSize, rcWpf.Height + 2 * _left.PadSize);
+                _top.UpdatePosn(rcWpf.Left - _top.PadSize, rcWpf.Top - _top.PadSize, rcWpf.Width + 2 * _top.PadSize, _top.PadSize);
+                _right.UpdatePosn(rcWpf.Right, rcWpf.Top - _right.PadSize, _right.PadSize, rcWpf.Height + 2 * _right.PadSize);
+                _bottom.UpdatePosn(rcWpf.Left - _bottom.PadSize, rcWpf.Bottom, rcWpf.Width + 2 * _bottom.PadSize, _bottom.PadSize);
+            }
+        }
+
+
+        /// <summary>
+        /// translate screen pixels to wpf units for high-dpi scaling.
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        private Rect TranslateToWpf(ref RECT r)
+        {
+            var source = PresentationSource.FromVisual(ContentWindow);
+            if (source != null)
+            {
+                var transform = source.CompositionTarget.TransformToDevice;
+                if (!transform.IsIdentity)
+                {
+                    var xScale = transform.M11;
+                    var yScale = transform.M22;
+
+                    return new Rect(r.left / xScale, r.top / yScale, r.Width / xScale, r.Height / yScale);
+                }
+            }
+            return new Rect(r.left, r.top, r.Width, r.Height);
         }
 
         private IntPtr HandleNcActivate(IntPtr hwnd, int msg, IntPtr wParam, IntPtr retVal)
