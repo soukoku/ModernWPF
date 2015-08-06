@@ -88,7 +88,8 @@ namespace ModernWPF
         /// <param name="duration">The duration.</param>
         /// <param name="startOffset">The start offset.</param>
         /// <param name="easing">The easing.</param>
-        public static void SlideIn(UIElement element, SlideFromDirection direction, TimeSpan duration, double startOffset, IEasingFunction easing)
+        /// <param name="completedCallback">The completed callback.</param>
+        public static void SlideIn(UIElement element, SlideFromDirection direction, TimeSpan duration, double startOffset, IEasingFunction easing, Action completedCallback = null)
         {
             if (element == null) { return; }
 
@@ -96,6 +97,13 @@ namespace ModernWPF
             da.Duration = duration;
             da.EasingFunction = easing;
             da.To = 0;
+            if (completedCallback != null)
+            {
+                da.Completed += (s, e) =>
+                {
+                    completedCallback();
+                };
+            }
 
             TranslateTransform transform = FindOrCreateRenderXform(element);
             switch (direction)
@@ -150,7 +158,8 @@ namespace ModernWPF
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="duration">The duration.</param>
-        public static void FadeIn(UIElement element, TimeSpan duration)
+        /// <param name="completedCallback">The completed callback.</param>
+        public static void FadeIn(UIElement element, TimeSpan duration, Action completedCallback = null)
         {
             if (element != null)
             {
@@ -160,6 +169,13 @@ namespace ModernWPF
                     To = 1,
                     Duration = duration
                 };
+                if (completedCallback != null)
+                {
+                    da.Completed += (s, e) =>
+                    {
+                        completedCallback();
+                    };
+                }
                 element.BeginAnimation(UIElement.OpacityProperty, da, HandoffBehavior.SnapshotAndReplace);
             }
         }
@@ -169,7 +185,8 @@ namespace ModernWPF
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="duration">The duration.</param>
-        public static void FadeOut(UIElement element, TimeSpan duration)
+        /// <param name="completedCallback">The completed callback.</param>
+        public static void FadeOut(UIElement element, TimeSpan duration, Action completedCallback = null)
         {
             if (element != null)
             {
@@ -178,6 +195,13 @@ namespace ModernWPF
                     To = 0,
                     Duration = duration
                 };
+                if (completedCallback != null)
+                {
+                    da.Completed += (s, e) =>
+                    {
+                        completedCallback();
+                    };
+                }
                 element.BeginAnimation(UIElement.OpacityProperty, da, HandoffBehavior.SnapshotAndReplace);
             }
         }
