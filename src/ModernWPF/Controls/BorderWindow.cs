@@ -109,7 +109,6 @@ namespace ModernWPF.Controls
             this.Background = Brushes.Transparent;
 
             _manager = manager;
-            Owner = _manager.ContentWindow;
 
             BindingTo(IsActiveProperty.Name, _manager.ContentWindow, IsContentActiveProperty);
             UpdateChromeBindings(Chrome.GetChrome(_manager.ContentWindow));
@@ -157,7 +156,7 @@ namespace ModernWPF.Controls
                     BorderLength = Math.Max(0, width - pad);
                     break;
             }
-            Show();
+            //Show();
 
             //Debug.WriteLine("Side {0} W={1}, actual W={2}", Side, Width, ActualWidth);
         }

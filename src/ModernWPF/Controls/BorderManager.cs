@@ -17,6 +17,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace ModernWPF.Controls
 {
@@ -72,6 +73,73 @@ namespace ModernWPF.Controls
         BorderWindow _top;
         BorderWindow _right;
         BorderWindow _bottom;
+        DispatcherTimer _showTimer;
+
+        public BorderManager()
+        {
+            _showTimer = new DispatcherTimer();
+            // Magic # for windows animation duration.
+            // This is used to not show border before content window 
+            // is fully restored from min/max states
+            _showTimer.Interval = Animation.TypicalDuration;
+            _showTimer.Tick += (s, e) =>
+            {
+                ShowBorders();
+            };
+        }
+        
+        void ShowBorders()
+        {
+            _showTimer.Stop();
+            _left.Owner =ContentWindow;
+            _left.Show();
+            _top.Owner = ContentWindow;
+            _top.Show();
+            _right.Owner = ContentWindow;
+            _right.Show();
+            _bottom.Owner = ContentWindow;
+            _bottom.Show();
+        }
+        void HideBorders()
+        {
+            _showTimer.Stop();
+            _left.Hide();
+            _left.Owner = null;
+            _top.Hide();
+            _top.Owner = null;
+            _right.Hide();
+            _right.Owner = null;
+            _bottom.Hide();
+            _bottom.Owner = null;
+        }
+
+        void UpdatePosn()
+        {
+            // use GetWindowRect to work correctly with aero snap
+            // since GetWindowPlacement doesn't change
+            var rcNative = default(RECT);
+            if (User32.GetWindowRect(hWndContent, ref rcNative))
+            {
+                Rect rcWpf = TranslateToWpf(ref rcNative);
+
+                _left.UpdatePosn(rcWpf.Left - _left.PadSize, rcWpf.Top - _left.PadSize, _left.PadSize, rcWpf.Height + 2 * _left.PadSize);
+                _top.UpdatePosn(rcWpf.Left - _top.PadSize, rcWpf.Top - _top.PadSize, rcWpf.Width + 2 * _top.PadSize, _top.PadSize);
+                _right.UpdatePosn(rcWpf.Right, rcWpf.Top - _right.PadSize, _right.PadSize, rcWpf.Height + 2 * _right.PadSize);
+                _bottom.UpdatePosn(rcWpf.Left - _bottom.PadSize, rcWpf.Bottom, rcWpf.Width + 2 * _bottom.PadSize, _bottom.PadSize);
+
+                if (SystemParameters.MinimizeAnimation)
+                {
+                    _showTimer.Start();
+                }
+                else
+                {
+                    ShowBorders();
+                }
+            }
+
+        }
+
+
 
         internal void UpdateChrome(Chrome chrome)
         {
@@ -333,7 +401,7 @@ namespace ModernWPF.Controls
 
             if (_inHiding)
             {
-                Hide();
+                HideBorders();
             }
             else
             {
@@ -353,37 +421,12 @@ namespace ModernWPF.Controls
                         case ShowWindowOption.SW_MAXIMIZE:
                         case ShowWindowOption.SW_MINIMIZE:
                         case ShowWindowOption.SW_SHOWMINIMIZED:
-                            Hide();
+                            HideBorders();
                             break;
                     }
                 }
             }
         }
-
-        void Hide()
-        {
-            _left.Hide();
-            _top.Hide();
-            _right.Hide();
-            _bottom.Hide();
-        }
-
-        void UpdatePosn()
-        {
-            // use GetWindowRect to work correctly with aero snap
-            // since GetWindowPlacement doesn't change
-            var rcNative = default(RECT);
-            if (User32.GetWindowRect(hWndContent, ref rcNative))
-            {
-                Rect rcWpf = TranslateToWpf(ref rcNative);
-
-                _left.UpdatePosn(rcWpf.Left - _left.PadSize, rcWpf.Top - _left.PadSize, _left.PadSize, rcWpf.Height + 2 * _left.PadSize);
-                _top.UpdatePosn(rcWpf.Left - _top.PadSize, rcWpf.Top - _top.PadSize, rcWpf.Width + 2 * _top.PadSize, _top.PadSize);
-                _right.UpdatePosn(rcWpf.Right, rcWpf.Top - _right.PadSize, _right.PadSize, rcWpf.Height + 2 * _right.PadSize);
-                _bottom.UpdatePosn(rcWpf.Left - _bottom.PadSize, rcWpf.Bottom, rcWpf.Width + 2 * _bottom.PadSize, _bottom.PadSize);
-            }
-        }
-
 
         /// <summary>
         /// translate screen pixels to wpf units for high-dpi scaling.
