@@ -59,12 +59,12 @@
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <!--<Style.Triggers>
+        <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=FontSize, Converter={x:Static conv:IsSmallFontConverter.Instance}}"
                          Value="True">
                 <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
             </DataTrigger>
-        </Style.Triggers>-->
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="MarlettGlyph" TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}">
