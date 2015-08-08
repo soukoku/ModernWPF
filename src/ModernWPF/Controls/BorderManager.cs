@@ -87,22 +87,28 @@ namespace ModernWPF.Controls
                 ShowBorders();
             };
         }
-        
+
+        bool _visible;
         void ShowBorders()
         {
             _showTimer.Stop();
-            _left.Owner =ContentWindow;
-            _left.Show();
-            _top.Owner = ContentWindow;
-            _top.Show();
-            _right.Owner = ContentWindow;
-            _right.Show();
-            _bottom.Owner = ContentWindow;
-            _bottom.Show();
+            if (!_visible)
+            {
+                _visible = true;
+                _left.Owner = ContentWindow;
+                _left.ShowNoActivate();
+                _top.Owner = ContentWindow;
+                _top.ShowNoActivate();
+                _right.Owner = ContentWindow;
+                _right.ShowNoActivate();
+                _bottom.Owner = ContentWindow;
+                _bottom.ShowNoActivate();
+            }
         }
         void HideBorders()
         {
             _showTimer.Stop();
+
             _left.Hide();
             _left.Owner = null;
             _top.Hide();
@@ -111,6 +117,7 @@ namespace ModernWPF.Controls
             _right.Owner = null;
             _bottom.Hide();
             _bottom.Owner = null;
+            _visible = false;
         }
 
         void UpdatePosn()

@@ -73,8 +73,6 @@ namespace ModernWPF.Controls
         public static readonly DependencyProperty BorderLengthProperty =
             DependencyProperty.Register("BorderLength", typeof(double), typeof(BorderWindow), new FrameworkPropertyMetadata(1d));
 
-
-
         public double PadSize
         {
             get { return (double)GetValue(PadSizeProperty); }
@@ -156,9 +154,19 @@ namespace ModernWPF.Controls
                     BorderLength = Math.Max(0, width - pad);
                     break;
             }
-            //Show();
 
             //Debug.WriteLine("Side {0} W={1}, actual W={2}", Side, Width, ActualWidth);
+        }
+
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern bool ShowWindow(IntPtr hWnd, ShowWindowOption nCmdShow);
+
+        internal void ShowNoActivate()
+        {
+            Show();
+            User32.SetWindowPos(_hwnd, _manager.hWndContent, 0, 0, 0, 0, 
+                SetWindowPosOptions.SWP_NOMOVE | SetWindowPosOptions.SWP_NOSIZE | SetWindowPosOptions.SWP_NOACTIVATE);
         }
 
 
