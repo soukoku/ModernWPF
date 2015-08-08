@@ -618,9 +618,6 @@
                             </Grid.RowDefinitions>
                             <Grid x:Name="PART_Caption" VerticalAlignment="Top"
                                       Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:WindowCaptionHeightConverter.Instance}}">
-                                <Grid.Resources>
-                                    <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
-                                </Grid.Resources>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
@@ -646,7 +643,7 @@
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="True"></ContentPresenter>
 
-                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2"/>
+                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2" Window="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Grid>
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
                                                        x:Name="MainContent"
@@ -716,9 +713,6 @@
                                                        ContentTemplate="{TemplateBinding ContentTemplate}"></ctrl:ModernContentControl>
 
                             <Grid x:Name="PART_Control" VerticalAlignment="Top">
-                                <Grid.Resources>
-                                    <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
-                                </Grid.Resources>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
@@ -744,7 +738,7 @@
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="true"></ContentPresenter>
 
-                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2"/>
+                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2" Window="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Grid>
 
                             <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"></ctrl:DialogControlContainer>
@@ -803,9 +797,6 @@
                             </Grid.RowDefinitions>
                             <Grid x:Name="PART_Caption" VerticalAlignment="Top"
                                   Height="{Binding Path=(local:Chrome.CaptionHeight), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static conv:WindowCaptionHeightConverter.Instance}}">
-                                <Grid.Resources>
-                                    <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
-                                </Grid.Resources>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
                                     <ColumnDefinition Width="*" />
@@ -832,7 +823,8 @@
                                                   local:Chrome.IsHitTestVisible="True"></ContentPresenter>
 
                                 <ctrl:ControlBox Grid.Column="2" Background="{DynamicResource ModernBackground2}" Padding="10 0 0 0"
-                                                 Foreground="{DynamicResource ModernForeground}"/>
+                                                 Foreground="{DynamicResource ModernForeground}"
+                                                 Window="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
                             </Grid>
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
                                                        x:Name="MainContent"

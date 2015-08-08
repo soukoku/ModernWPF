@@ -63,9 +63,6 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:ControlBox">
-                    <ControlTemplate.Resources>
-                        <local:WindowCommands x:Key="WindowCommands"></local:WindowCommands>
-                    </ControlTemplate.Resources>
                     <Border VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             Padding="{TemplateBinding Padding}"
@@ -74,41 +71,32 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                             >
-                        <StackPanel Orientation="Horizontal" DataContext="{Binding Source={StaticResource WindowCommands}}"
-                            >
+                        <StackPanel Orientation="Horizontal">
                             <!--<TextBlock Text="some text"></TextBlock>-->
-                            <Button x:Name="ButtonMin"
-                                Command="{Binding Path=MinimizeCommand}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
-                                Style="{TemplateBinding ButtonStyle}">
+                            <Button x:Name="PART_MinButton"
+                                    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
+                                    Style="{TemplateBinding ButtonStyle}">
                                 <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
                             </Button>
-                            <Button x:Name="ButtonMax"
-                                Command="{Binding Path=MaximizeCommand}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
-                                Style="{TemplateBinding ButtonStyle}">
+                            <Button x:Name="PART_MaxButton"
+                                    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
+                                    Style="{TemplateBinding ButtonStyle}">
                                 <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
                             </Button>
 
-                            <Button x:Name="ButtonRestore"
-                                Command="{Binding Path=RestoreCommand}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
-                                Style="{TemplateBinding ButtonStyle}">
+                            <Button x:Name="PART_RestoreButton"
+                                    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
+                                    Style="{TemplateBinding ButtonStyle}">
                                 <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
                             </Button>
 
-                            <Button x:Name="ButtonClose"
-                                Command="{Binding Path=CloseCommand}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
-                                Style="{TemplateBinding ButtonStyle}">
-                                <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+                            <Button x:Name="PART_CloseButton"
+                                    ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
+                                    Style="{TemplateBinding ButtonStyle}">
+                                    <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
 
                                 </Button>
                         </StackPanel>
