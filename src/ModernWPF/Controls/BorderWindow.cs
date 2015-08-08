@@ -157,11 +157,7 @@ namespace ModernWPF.Controls
 
             //Debug.WriteLine("Side {0} W={1}, actual W={2}", Side, Width, ActualWidth);
         }
-
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern bool ShowWindow(IntPtr hWnd, ShowWindowOption nCmdShow);
-
+        
         internal void ShowNoActivate()
         {
             Show();
