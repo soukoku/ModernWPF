@@ -67,7 +67,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="MarlettGlyph" TargetType="TextBlock" BasedOn="{StaticResource ModernTextBlock}">
+    <Style x:Key="MarlettGlyph" TargetType="TextBlock"><!--BasedOn="{StaticResource ModernTextBlock}">-->
         <Setter Property="FontFamily" Value="Marlett"/>
         <Setter Property="FontSize" Value="14"/>
     </Style>
@@ -643,7 +643,7 @@
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="True"></ContentPresenter>
 
-                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2" Window="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2"/>
                             </Grid>
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
                                                        x:Name="MainContent"
@@ -738,7 +738,7 @@
                                                   Content="{Binding Path=(local:Chrome.CaptionExtraContent), RelativeSource={RelativeSource TemplatedParent}}"
                                                   local:Chrome.IsHitTestVisible="true"></ContentPresenter>
 
-                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2" Window="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <ctrl:ControlBox x:Name="ControlBox" Grid.Column="2"/>
                             </Grid>
 
                             <ctrl:DialogControlContainer x:Name="dialogContainer" DisableTarget="{Binding ElementName=MainContent}"></ctrl:DialogControlContainer>
@@ -824,7 +824,7 @@
 
                                 <ctrl:ControlBox Grid.Column="2" Background="{DynamicResource ModernBackground2}" Padding="10 0 0 0"
                                                  Foreground="{DynamicResource ModernForeground}"
-                                                 Window="{Binding RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                />
                             </Grid>
                             <ctrl:ModernContentControl Content="{TemplateBinding Content}"
                                                        x:Name="MainContent"
@@ -1176,7 +1176,7 @@
                                     </MultiBinding>
                                 </Button.Visibility>
 
-                                <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}" Margin="1 0" FontSize="{TemplateBinding FontSize}" />
+                                <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}" Margin="1 0" />
                             </Button>
                         </Grid>
 

@@ -72,33 +72,52 @@
                             Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                             >
                         <StackPanel Orientation="Horizontal">
-                            <!--<TextBlock Text="some text"></TextBlock>-->
                             <Button x:Name="PART_MinButton"
                                     ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
                                     Style="{TemplateBinding ButtonStyle}">
                                 <TextBlock Text="0" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
+                                <!--<Viewbox Width="16" Height="12">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M20,14H4V10H20"
+                                              Fill="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ButtonBase}}" />
+                                    </Canvas>
+                                </Viewbox>-->
                             </Button>
                             <Button x:Name="PART_MaxButton"
                                     ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMaximize], Mode=OneWay}"
                                     Style="{TemplateBinding ButtonStyle}">
                                 <TextBlock Text="1" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
+                                <!--<Viewbox Width="12" Height="12">
+                                    <Canvas Width="24" Height="24" Background="Red">
+                                        <Path Data="M4,4H20V20H4V4M6,8V18H18V8H6Z" 
+                                              Fill="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ButtonBase}}" />
+                                    </Canvas>
+                                </Viewbox>-->
                             </Button>
 
                             <Button x:Name="PART_RestoreButton"
                                     ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdRestore], Mode=OneWay}"
                                     Style="{TemplateBinding ButtonStyle}">
                                 <TextBlock Text="2" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
+                                <!--<Viewbox Width="12" Height="12">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M4,8H8V4H20V16H16V20H4V8M16,8V14H18V6H10V8H16M6,12V18H14V12H6Z" 
+                                              Fill="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ButtonBase}}" />
+                                    </Canvas>
+                                </Viewbox>-->
                             </Button>
 
                             <Button x:Name="PART_CloseButton"
                                     ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdClose], Mode=OneWay}"
                                     Style="{TemplateBinding ButtonStyle}">
-                                    <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
-
-                                </Button>
+                                <TextBlock Text="r" Style="{DynamicResource MarlettGlyph}"></TextBlock>
+                                <!--<Viewbox Width="12" Height="12">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Data="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" 
+                                              Fill="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ButtonBase}}" />
+                                    </Canvas>
+                                </Viewbox>-->
+                            </Button>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>
