@@ -60,9 +60,32 @@ namespace ModernWPF.Controls
         }
 
         public static readonly DependencyProperty IsContentActiveProperty =
-            DependencyProperty.Register("IsContentActive", typeof(bool), typeof(BorderWindow), new FrameworkPropertyMetadata(false));
+            DependencyProperty.Register("IsContentActive", typeof(bool), typeof(BorderWindow), new FrameworkPropertyMetadata(false, ActiveChanged));
 
+        private static void ActiveChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((BorderWindow)d).UpdateBorderBrush();
+        }
 
+        /// <summary>
+        /// Updates the border brush based on content window's active state.
+        /// </summary>
+        private void UpdateBorderBrush()
+        {
+            if (_chrome != null)
+            {
+                if (IsContentActive)
+                {
+                    BorderBrush = _chrome.ActiveBorderBrush;
+                    GlowOpacity = .9;
+                }
+                else
+                {
+                    BorderBrush = _chrome.InactiveBorderBrush;
+                    GlowOpacity = .5;
+                }
+            }
+        }
 
         public double BorderLength
         {
@@ -84,15 +107,14 @@ namespace ModernWPF.Controls
 
 
 
-        public Brush InactiveBorderBrush
+        public double GlowOpacity
         {
-            get { return (Brush)GetValue(InactiveBorderBrushProperty); }
-            set { SetValue(InactiveBorderBrushProperty, value); }
+            get { return (double)GetValue(GlowOpacityProperty); }
+            set { SetValue(GlowOpacityProperty, value); }
         }
 
-        public static readonly DependencyProperty InactiveBorderBrushProperty =
-            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(BorderWindow), new FrameworkPropertyMetadata(Brushes.Silver));
-
+        public static readonly DependencyProperty GlowOpacityProperty =
+            DependencyProperty.Register("GlowOpacity", typeof(double), typeof(BorderWindow), new FrameworkPropertyMetadata(0.9d));
 
 
 
@@ -101,6 +123,7 @@ namespace ModernWPF.Controls
 
         IntPtr _hwnd;
         BorderManager _manager;
+        Chrome _chrome;
         public BorderWindow(BorderManager manager)
         {
             // only works if set directly, no in override
@@ -114,9 +137,8 @@ namespace ModernWPF.Controls
 
         internal void UpdateChromeBindings(Chrome chrome)
         {
-            BindingTo(Chrome.ResizeBorderThicknessProperty.Name, chrome, PadSizeProperty, ThicknessToDoubleConverter.Instance, Side);
-            BindingTo(Chrome.ActiveBorderBrushProperty.Name, chrome, BorderBrushProperty);
-            BindingTo(Chrome.InactiveBorderBrushProperty.Name, chrome, InactiveBorderBrushProperty);
+            _chrome = chrome;
+            BindingTo(Chrome.ResizeBorderThicknessProperty.Name, _chrome, PadSizeProperty, ThicknessToDoubleConverter.Instance, Side);
         }
 
         private void BindingTo(string sourcePath, object source, DependencyProperty bindToProperty, IValueConverter converter = null, object converterParameter = null)
@@ -157,11 +179,11 @@ namespace ModernWPF.Controls
 
             //Debug.WriteLine("Side {0} W={1}, actual W={2}", Side, Width, ActualWidth);
         }
-        
+
         internal void ShowNoActivate()
         {
             Show();
-            User32.SetWindowPos(_hwnd, _manager.hWndContent, 0, 0, 0, 0, 
+            User32.SetWindowPos(_hwnd, _manager.hWndContent, 0, 0, 0, 0,
                 SetWindowPosOptions.SWP_NOMOVE | SetWindowPosOptions.SWP_NOSIZE | SetWindowPosOptions.SWP_NOACTIVATE);
         }
 

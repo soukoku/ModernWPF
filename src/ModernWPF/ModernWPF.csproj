@@ -91,6 +91,7 @@
     <Compile Include="Controls\TileView.cs" />
     <Compile Include="Converters\AppIconImageConverter.cs" />
     <Compile Include="Converters\BoolNotConverter.cs" />
+    <Compile Include="Converters\EnumValueConverter.cs" />
     <Compile Include="Converters\FileIconConverter.cs" />
     <Compile Include="Converters\IsSmallFontConverter.cs" />
     <Compile Include="Converters\BoolVisibleConverter.cs" />
