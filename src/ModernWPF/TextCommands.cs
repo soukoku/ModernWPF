@@ -10,16 +10,16 @@ namespace ModernWPF
     /// <summary>
     /// Contains commands for text box types.
     /// </summary>
-    public class TextCommands
+    public static class TextCommands
     {
-        private ICommand _clearTextBoxCommand;
+        private static ICommand _clearTextBoxCommand;
         /// <summary>
         /// Gets the command that clears a <see cref="TextBox"/>.
         /// </summary>
         /// <value>
         /// The clear text command.
         /// </value>
-        public ICommand ClearTextBoxCommand
+        public static ICommand ClearTextBoxCommand
         {
             get
             {
@@ -41,14 +41,14 @@ namespace ModernWPF
             }
         }
 
-        private ICommand _clearPasswordBoxCommand;
+        private static ICommand _clearPasswordBoxCommand;
         /// <summary>
         /// Gets the command that clears a <see cref="PasswordBox"/>.
         /// </summary>
         /// <value>
         /// The clear text command.
         /// </value>
-        public ICommand ClearPasswordBoxCommand
+        public static ICommand ClearPasswordBoxCommand
         {
             get
             {

@@ -1122,9 +1122,6 @@
                             Background="{TemplateBinding Background}"
                             >
                         <Grid>
-                            <Grid.Resources>
-                                <local:TextCommands x:Key="txtCmd"/>
-                            </Grid.Resources>
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -1165,8 +1162,7 @@
                                     Style="{DynamicResource TextBoxButtonStyle}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     Grid.Column="2"
-                                    DataContext="{StaticResource txtCmd}"
-                                    Command="{Binding ClearTextBoxCommand}"
+                                    Command="{x:Static local:TextCommands.ClearTextBoxCommand}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                     >
                                 <Button.Visibility>
