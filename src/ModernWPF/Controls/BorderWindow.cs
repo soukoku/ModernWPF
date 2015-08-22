@@ -248,7 +248,7 @@ namespace ModernWPF.Controls
                             {
                                 case BorderSide.Left:
                                     if (pt.Y <= diagSize) { res = NcHitTest.HTTOPLEFT; }
-                                    else if (pt.Y >= Height - diagSize) { res = NcHitTest.HTTOPLEFT; }
+                                    else if (pt.Y >= Height - diagSize) { res = NcHitTest.HTBOTTOMLEFT; }
                                     else { res = NcHitTest.HTLEFT; }
                                     break;
                                 case BorderSide.Top:
@@ -262,7 +262,7 @@ namespace ModernWPF.Controls
                                     else { res = NcHitTest.HTRIGHT; }
                                     break;
                                 case BorderSide.Bottom:
-                                    if (pt.X <= diagSize) { res = NcHitTest.HTTOPRIGHT; }
+                                    if (pt.X <= diagSize) { res = NcHitTest.HTBOTTOMLEFT; }
                                     else if (pt.X >= Width - diagSize) { res = NcHitTest.HTBOTTOMRIGHT; }
                                     else { res = NcHitTest.HTBOTTOM; }
                                     break;
