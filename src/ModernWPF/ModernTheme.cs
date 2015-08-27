@@ -124,6 +124,12 @@ namespace ModernWPF
 
             ApplyResources(theme == Theme.Light ? LIGHT_THEME : DARK_THEME);
             Application.Current.Resources["ModernAccent"] = accent.MainBrush;
+
+            Application.Current.Resources["ModernAccentDark1"] = accent.DarkBrush1;
+            Application.Current.Resources["ModernAccentDark2"] = accent.DarkBrush2;
+            Application.Current.Resources["ModernAccentDark3"] = accent.DarkBrush3;
+            Application.Current.Resources["ModernAccentDark4"] = accent.DarkBrush4;
+
             Application.Current.Resources["ModernAccentLight1"] = accent.LightBrush1;
             Application.Current.Resources["ModernAccentLight2"] = accent.LightBrush2;
             Application.Current.Resources["ModernAccentLight3"] = accent.LightBrush3;

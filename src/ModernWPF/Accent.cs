@@ -86,6 +86,25 @@ namespace ModernWPF
             //}
 
             MainBrush = GetBrush(0xff, color);
+            var origLumi = hsl.Luminosity;
+
+            hsl.Luminosity -= lumiStep;
+            //hsl.Saturation -= satStep;
+            DarkBrush1 = GetBrush(0xff, hsl);
+
+            hsl.Luminosity -= lumiStep;
+            //hsl.Saturation -= satStep;
+            DarkBrush2 = GetBrush(0xff, hsl);
+
+            hsl.Luminosity -= lumiStep;
+            //hsl.Saturation -= satStep;
+            DarkBrush3 = GetBrush(0xff, hsl);
+
+            hsl.Luminosity -= lumiStep;
+            //hsl.Saturation -= satStep;
+            DarkBrush4 = GetBrush(0xff, hsl);
+
+            hsl.Luminosity = origLumi;
 
             hsl.Luminosity += lumiStep;
             //hsl.Saturation -= satStep;
@@ -145,6 +164,35 @@ namespace ModernWPF
         /// The main brush.
         /// </value>
         public Brush MainBrush { get; private set; }
+
+        /// <summary>
+        /// Gets the brush darker than <see cref="MainBrush" />.
+        /// </summary>
+        /// <value>
+        /// The dark brush.
+        /// </value>
+        public Brush DarkBrush1 { get; private set; }
+        /// <summary>
+        /// Gets the brush darker than <see cref="DarkBrush1" />.
+        /// </summary>
+        /// <value>
+        /// The dark brush2.
+        /// </value>
+        public Brush DarkBrush2 { get; private set; }
+        /// <summary>
+        /// Gets the brush darker than <see cref="DarkBrush2" />.
+        /// </summary>
+        /// <value>
+        /// The dark brush3.
+        /// </value>
+        public Brush DarkBrush3 { get; private set; }
+        /// <summary>
+        /// Gets the brush darker than <see cref="DarkBrush3" />.
+        /// </summary>
+        /// <value>
+        /// The dark brush4.
+        /// </value>
+        public Brush DarkBrush4 { get; private set; }
 
         /// <summary>
         /// Gets the brush lighter than <see cref="MainBrush" />.

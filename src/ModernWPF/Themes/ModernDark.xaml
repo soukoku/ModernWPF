@@ -2,7 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="ModernAccent" Color="DodgerBlue"></SolidColorBrush>
-    
+
+    <SolidColorBrush x:Key="ModernAccentDark1" Color="#0078EE"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentDark2" Color="#0060BF"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentDark3" Color="#004990"></SolidColorBrush>
+    <SolidColorBrush x:Key="ModernAccentDark4" Color="#003161"></SolidColorBrush>
+
     <SolidColorBrush x:Key="ModernAccentLight1" Color="#4ca7ff"></SolidColorBrush>
     <SolidColorBrush x:Key="ModernAccentLight2" Color="#7bbeff"></SolidColorBrush>
     <SolidColorBrush x:Key="ModernAccentLight3" Color="#aad5fe"></SolidColorBrush>
