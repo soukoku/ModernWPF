@@ -18,6 +18,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace ModernWPF.Controls
 {
@@ -76,13 +77,16 @@ namespace ModernWPF.Controls
             {
                 if (IsContentActive)
                 {
-                    BorderBrush = _chrome.ActiveBorderBrush;
                     GlowOpacity = .9;
                 }
                 else
                 {
-                    BorderBrush = _chrome.InactiveBorderBrush;
                     GlowOpacity = .5;
+                }
+                var test = BindingOperations.GetMultiBindingExpression(this, BorderBrushProperty);
+                if (test != null)
+                {
+                    test.UpdateTarget();
                 }
             }
         }
@@ -131,24 +135,64 @@ namespace ModernWPF.Controls
 
             _manager = manager;
 
-            BindingTo(IsActiveProperty.Name, _manager.ContentWindow, IsContentActiveProperty);
+            CreateBinding(IsActiveProperty.Name, _manager.ContentWindow, IsContentActiveProperty);
             UpdateChromeBindings(Chrome.GetChrome(_manager.ContentWindow));
+        }
+
+        private Binding CreateBinding(string sourcePath, object source, DependencyProperty bindToProperty, IValueConverter converter = null, object converterParameter = null)
+        {
+            var bind = new Binding(sourcePath);
+            bind.Source = source;
+            bind.NotifyOnSourceUpdated = true;
+            bind.Mode = BindingMode.OneWay;
+            bind.Converter = converter;
+            bind.ConverterParameter = converterParameter;
+            BindingOperations.SetBinding(this, bindToProperty, bind);
+            return bind;
         }
 
         internal void UpdateChromeBindings(Chrome chrome)
         {
             _chrome = chrome;
-            BindingTo(Chrome.ResizeBorderThicknessProperty.Name, _chrome, PadSizeProperty, ThicknessToDoubleConverter.Instance, Side);
+            CreateBinding(Chrome.ResizeBorderThicknessProperty.Name, _chrome, PadSizeProperty, ThicknessToDoubleConverter.Instance, Side);
+
+            var brushBinding = new MultiBinding
+            {
+                Converter = new BorderBrushConverter(this),
+                Mode = BindingMode.OneWay,
+            };
+            brushBinding.Bindings.Add(new Binding(Chrome.ActiveBorderBrushProperty.Name)
+            {
+                Source = _chrome,
+            });
+            brushBinding.Bindings.Add(new Binding(Chrome.InactiveBorderBrushProperty.Name)
+            {
+                Source = _chrome,
+            });
+            BindingOperations.SetBinding(this, BorderBrushProperty, brushBinding);
+            UpdateBorderBrush();
         }
 
-        private void BindingTo(string sourcePath, object source, DependencyProperty bindToProperty, IValueConverter converter = null, object converterParameter = null)
+        /// <summary>
+        /// Simple converter to select border color.
+        /// </summary>
+        class BorderBrushConverter : IMultiValueConverter
         {
-            var bind = new Binding(sourcePath);
-            bind.Source = source;
-            bind.NotifyOnSourceUpdated = true;
-            bind.Converter = converter;
-            bind.ConverterParameter = converterParameter;
-            BindingOperations.SetBinding(this, bindToProperty, bind);
+            BorderWindow _border;
+            public BorderBrushConverter(BorderWindow border)
+            {
+                _border = border;
+            }
+
+            public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+            {
+                return _border.IsContentActive ? values[0] : values[1];
+            }
+
+            public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+            {
+                return null;
+            }
         }
 
         protected override void OnClosed(EventArgs e)
