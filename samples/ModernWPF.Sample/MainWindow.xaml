@@ -358,6 +358,10 @@
                 <modern:ModernContentControl>
 
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
                         <modern:AnimatedScrollViewer HorizontalAlignment="Left" Width="120"
                                                      VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"
                                                      modern:ScrollViewerUI.OverContent="True">
@@ -366,6 +370,52 @@
                             </Border>
                         </modern:AnimatedScrollViewer>
 
+                        <Grid Grid.Column="1" Background="#FFF58383">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TabControl Style="{StaticResource ModernTabControl}" 
+                                        ItemContainerStyle="{StaticResource ModernTabItem2}"
+                                        Margin="8" Background="White" 
+                                        BorderBrush="Green" BorderThickness="1">
+                                <TabItem Header="tab1"></TabItem>
+                                <TabItem Header="tab2"></TabItem>
+                            </TabControl>
+                            <TabControl Grid.Column="1" 
+                                        Style="{StaticResource ModernTabControl}" 
+                                        ItemContainerStyle="{StaticResource ModernTabItem2}"
+                                        Margin="8" Background="White" 
+                                        BorderBrush="Green" BorderThickness="1"
+                                        TabStripPlacement="Right">
+                                <TabItem Header="tab1"></TabItem>
+                                <TabItem Header="tab2"></TabItem>
+                            </TabControl>
+                            <TabControl Grid.Row="1" Grid.Column="0" 
+                                        Style="{StaticResource ModernTabControl}" 
+                                        ItemContainerStyle="{StaticResource ModernTabItem2}"
+                                        Margin="8" Background="White" 
+                                        BorderBrush="Green" BorderThickness="1"
+                                        TabStripPlacement="Bottom">
+                                <TabItem Header="tab1"></TabItem>
+                                <TabItem Header="tab2"></TabItem>
+                            </TabControl>
+                            <TabControl Grid.Row="1" Grid.Column="1" 
+                                        Style="{StaticResource ModernTabControl}" 
+                                        ItemContainerStyle="{StaticResource ModernTabItem2}"
+                                        Margin="8" Background="White" 
+                                        BorderBrush="Green" BorderThickness="1"
+                                        TabStripPlacement="Left">
+                                <TabItem Header="tab1"></TabItem>
+                                <TabItem Header="tab2">
+                                    <TextBlock Text="Some text here"></TextBlock>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
                     </Grid>
                 </modern:ModernContentControl>
             </TabItem>
@@ -377,6 +427,10 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
                     <Label Content="Light scale: "></Label>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentDark4}"></Rectangle>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentDark3}"></Rectangle>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentDark2}"></Rectangle>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentDark1}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccent}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight1}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight2}"></Rectangle>
@@ -477,7 +531,8 @@
                             <MenuItem Header="Modern size" Command="{Binding ToggleThemeCommand}" CommandParameter="modern"></MenuItem>
                             <MenuItem Header="Desktop size" Command="{Binding ToggleThemeCommand}" CommandParameter="desktop"></MenuItem>
                         </ContextMenu>
-                    </modern:AppButton.ContextMenu></modern:AppButton>
+                    </modern:AppButton.ContextMenu>
+                </modern:AppButton>
                 <modern:AppButton Text="toggle rtl" x:Name="btnRtl" Click="btnRtl_Click" Content="{StaticResource IconBaby}"></modern:AppButton>
             </StackPanel>
         </StackPanel>

@@ -67,7 +67,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="MarlettGlyph" TargetType="TextBlock"><!--BasedOn="{StaticResource ModernTextBlock}">-->
+    <Style x:Key="MarlettGlyph" TargetType="TextBlock">
+        <!--BasedOn="{StaticResource ModernTextBlock}">-->
         <Setter Property="FontFamily" Value="Marlett"/>
         <Setter Property="FontSize" Value="14"/>
     </Style>
@@ -4006,11 +4007,112 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ModernTabControl" TargetType="TabControl">
+    <Style x:Key="ModernTabItem2" TargetType="TabItem">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ModernFocusVisualDashed}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="10 4"/>
+        <Setter Property="BorderThickness" Value="1 1 1 0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Opacity" Value=".85"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Grid SnapsToDevicePixels="true">
+                        <Border x:Name="Bd" 
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter x:Name="Content" 
+                                              ContentSource="Header"
+                                              Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Panel.ZIndex" Value="1" />
+                            <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground}" />
+                            <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}"/>
+                            <Setter Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="false"/>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}"/>
+                            <!--<Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}"/>-->
+                        </MultiTrigger>
+                        <Trigger Property="TabStripPlacement" Value="Bottom">
+                            <Setter Property="BorderThickness" Value="1 0 1 1"/>
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Left">
+                            <Setter Property="BorderThickness" Value="1 1 0 1"/>
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter Property="BorderThickness" Value="0 1 1 1"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="TabStripPlacement" Value="Top"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Margin" Value="0 0 0 -1"/>
+                            <Setter Property="Margin" TargetName="Content" Value="0 0 0 1"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="TabStripPlacement" Value="Bottom"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Margin" Value="0 -1 0 0"/>
+                            <Setter Property="Margin" TargetName="Content" Value="0 1 0 0"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="TabStripPlacement" Value="Left"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Margin" Value="0 0 -1 0"/>
+                            <Setter Property="Margin" TargetName="Content" Value="0 0 1 0"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="TabStripPlacement" Value="Right"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Margin" Value="-1 0 0 0"/>
+                            <Setter Property="Margin" TargetName="Content" Value="1 0 0 0"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ModernTabControl" TargetType="TabControl">
+        <Setter Property="Background" Value="{DynamicResource ModernBackground}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource ModernTabItem}" />
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabControl">
@@ -4024,35 +4126,38 @@
                             <RowDefinition x:Name="RowDefinition0" Height="Auto" />
                             <RowDefinition x:Name="RowDefinition1" Height="*" />
                         </Grid.RowDefinitions>
-                        <Border x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0"
-                                IsHitTestVisible="True" Background="Transparent"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
-                            <TabPanel IsItemsHost="true" KeyboardNavigation.TabIndex="1"
-                                      Margin="{TemplateBinding Padding}"
-                                      Panel.ZIndex="1">
-                            </TabPanel>
-                        </Border>
-                        <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}"
-                                Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained"
-                                Grid.Row="1" Background="{TemplateBinding Background}"
+                        <TabPanel x:Name="HeaderPanel" 
+                                  Grid.Column="0" 
+                                  Grid.Row="0"
+                                  IsItemsHost="true" 
+                                  Margin="{TemplateBinding Padding}"
+                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                  KeyboardNavigation.TabIndex="1"
+                                  Panel.ZIndex="1">
+                        </TabPanel>
+                        <Border x:Name="ContentPanel" 
+                                Grid.Column="0" 
+                                Grid.Row="1" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2"
                                 KeyboardNavigation.TabNavigation="Local">
 
-                            <!--<ctrl:ModernContentControl x:Name="PART_SelectedContentHost"
-                                                       Content="{TemplateBinding SelectedContent}"
-                                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"></ctrl:ModernContentControl>-->
                             <ContentPresenter x:Name="PART_SelectedContentHost"
                                               ContentSource="SelectedContent"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <!--<Trigger Property="TabStripPlacement" Value="Bottom">
+                        <Trigger Property="TabStripPlacement" Value="Bottom">
                             <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="1"/>
                             <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
-                            <Setter Property="Margin" TargetName="HeaderPanel" Value="2,0,2,2"/>
+                            <!--<Setter Property="Margin" TargetName="HeaderPanel" Value="2,0,2,2"/>-->
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
@@ -4063,7 +4168,7 @@
                             <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            <Setter Property="Margin" TargetName="HeaderPanel" Value="2,2,0,2"/>
+                            <!--<Setter Property="Margin" TargetName="HeaderPanel" Value="2,2,0,2"/>-->
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
@@ -4074,8 +4179,8 @@
                             <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            <Setter Property="Margin" TargetName="HeaderPanel" Value="0,2,2,2"/>
-                        </Trigger>-->
+                            <!--<Setter Property="Margin" TargetName="HeaderPanel" Value="0,2,2,2"/>-->
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource ModernForeground4}" />
                         </Trigger>
