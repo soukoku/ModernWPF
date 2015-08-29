@@ -49,12 +49,26 @@ namespace ModernWPF.ViewModels
             _currentPage = 1;
             _totalPages = 1;
             _pageSize = pageSize > 0 ? pageSize : DEFAULT_PG_SZ;
+            LoadProgress = new ProgressViewModel();
         }
 
         void TryGoToPage(int page)
         {
-            if (PageChangedCallback != null) { PageChangedCallback(this, page); }
+            if (PageChangedCallback != null)
+            {
+                LoadProgress.UpdateState(System.Windows.Shell.TaskbarItemProgressState.Indeterminate);
+                try
+                {
+                    PageChangedCallback(this, page);
+                }
+                finally
+                {
+                    LoadProgress.UpdateState(System.Windows.Shell.TaskbarItemProgressState.None);
+                }
+            }
         }
+
+        public ProgressViewModel LoadProgress { get; private set; }
 
         public Action<PagerViewModel, int> PageChangedCallback { get; set; }
 
@@ -172,7 +186,7 @@ namespace ModernWPF.ViewModels
                     _reloadCommand = new RelayCommand(() =>
                     {
                         TryGoToPage(CurrentPage);
-                    })
+                    }, () => !LoadProgress.IsBusy)
                 );
             }
         }
@@ -206,7 +220,7 @@ namespace ModernWPF.ViewModels
                     _firstPageCommand = new RelayCommand(() =>
                     {
                         TryGoToPage(1);
-                    }, () => CanGoPrevPage)
+                    }, () => !LoadProgress.IsBusy && CanGoPrevPage)
                 );
             }
         }
@@ -227,7 +241,7 @@ namespace ModernWPF.ViewModels
                     _prevPageCommand = new RelayCommand(() =>
                     {
                         TryGoToPage(CurrentPage - 1);
-                    }, () => CanGoPrevPage)
+                    }, () => !LoadProgress.IsBusy && CanGoPrevPage)
                 );
             }
         }
@@ -247,7 +261,7 @@ namespace ModernWPF.ViewModels
                     _nextPageCommand = new RelayCommand(() =>
                     {
                         TryGoToPage(CurrentPage + 1);
-                    }, () => CanGoNextPage)
+                    }, () => !LoadProgress.IsBusy && CanGoNextPage)
                 );
             }
         }
@@ -268,7 +282,7 @@ namespace ModernWPF.ViewModels
                     _lastPageCommand = new RelayCommand(() =>
                     {
                         TryGoToPage(TotalPages);
-                    }, () => CanGoNextPage)
+                    }, () => !LoadProgress.IsBusy && CanGoNextPage)
                 );
             }
         }
