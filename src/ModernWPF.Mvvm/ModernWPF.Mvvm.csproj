@@ -93,6 +93,7 @@
     <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="ViewModels\DisposableViewModel.cs" />
     <Compile Include="ViewModels\PagedCollectionViewModel.cs" />
+    <Compile Include="ViewModels\AsyncPagerViewModel.cs" />
     <Compile Include="ViewModels\PagerViewModel.cs" />
     <Compile Include="ViewModels\ProgressViewModel.cs" />
     <Compile Include="ViewModels\SelectableViewModel.cs" />

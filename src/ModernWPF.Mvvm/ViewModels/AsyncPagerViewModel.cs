@@ -16,34 +16,34 @@ namespace ModernWPF.ViewModels
     /// <summary>
     /// View model for the typical paging logic when given paging size, current page, and total item count.
     /// </summary>
-    public class PagerViewModel : ViewModelBase
+    public class AsyncPagerViewModel : ViewModelBase
     {
         const int DEFAULT_PG_SZ = 100;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PagerViewModel"/> class.
+        /// Initializes a new instance of the <see cref="AsyncPagerViewModel"/> class.
         /// </summary>
-        public PagerViewModel()
+        public AsyncPagerViewModel()
             : this(null, DEFAULT_PG_SZ)
         {
 
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PagerViewModel" /> class.
+        /// Initializes a new instance of the <see cref="AsyncPagerViewModel" /> class.
         /// </summary>
         /// <param name="pageChangedCallback">The page changed callback.</param>
-        public PagerViewModel(Action<PagerViewModel, int> pageChangedCallback) : this(pageChangedCallback, DEFAULT_PG_SZ)
+        public AsyncPagerViewModel(Func<AsyncPagerViewModel, int, Task> pageChangedCallback) : this(pageChangedCallback, DEFAULT_PG_SZ)
         {
 
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PagerViewModel" /> class.
+        /// Initializes a new instance of the <see cref="AsyncPagerViewModel" /> class.
         /// </summary>
         /// <param name="pageChangedCallback">The page changed callback.</param>
         /// <param name="pageSize">Initial size of the page.</param>
-        public PagerViewModel(Action<PagerViewModel, int> pageChangedCallback, int pageSize)
+        public AsyncPagerViewModel(Func<AsyncPagerViewModel, int, Task> pageChangedCallback, int pageSize)
         {
             PageChangedCallback = pageChangedCallback;
             _currentPage = 1;
@@ -52,12 +52,13 @@ namespace ModernWPF.ViewModels
             LoadProgress = new ProgressViewModel();
         }
 
-        void TryGoToPage(int page)
+        Task TryGoToPageAsync(int page)
         {
             if (PageChangedCallback != null)
             {
-                PageChangedCallback(this, page);
+                return PageChangedCallback(this, page);
             }
+            return Task.FromResult(0);
         }
 
         /// <summary>
@@ -67,14 +68,14 @@ namespace ModernWPF.ViewModels
         /// The load progress.
         /// </value>
         public ProgressViewModel LoadProgress { get; private set; }
-        
+
         /// <summary>
         /// Gets or sets the page changed callback.
         /// </summary>
         /// <value>
         /// The page changed callback.
         /// </value>
-        public Action<PagerViewModel, int> PageChangedCallback { get; set; }
+        public Func<AsyncPagerViewModel, int, Task> PageChangedCallback { get; set; }
 
         /// <summary>
         /// To be called by consumers when paged data result changes.
@@ -110,7 +111,7 @@ namespace ModernWPF.ViewModels
             set
             {
                 if (value > 0)
-                    TryGoToPage(value);
+                    GoToPageCommand.Execute(value);
             }
         }
 
@@ -130,7 +131,7 @@ namespace ModernWPF.ViewModels
                 {
                     _pageSize = value;
                     RaisePropertyChanged(() => this.PageSize);
-                    TryGoToPage(CurrentPage);
+                    GoToPageCommand.Execute(CurrentPage);
                 }
             }
         }
@@ -171,6 +172,25 @@ namespace ModernWPF.ViewModels
         }
 
 
+        private RelayCommand<int> _goToPageCommand;
+        /// <summary>
+        /// Gets the reload command that reloads the current page.
+        /// </summary>
+        /// <value>
+        /// The reload command.
+        /// </value>
+        public RelayCommand<int> GoToPageCommand
+        {
+            get
+            {
+                return _goToPageCommand ?? (
+                    _goToPageCommand = new RelayCommand<int>(async page =>
+                    {
+                        await TryGoToPageAsync(page);
+                    }, page => !LoadProgress.IsBusy && page > 0 && page <= TotalPages)
+                );
+            }
+        }
 
         private RelayCommand _reloadCommand;
         /// <summary>
@@ -184,9 +204,9 @@ namespace ModernWPF.ViewModels
             get
             {
                 return _reloadCommand ?? (
-                    _reloadCommand = new RelayCommand(() =>
+                    _reloadCommand = new RelayCommand(async () =>
                     {
-                        TryGoToPage(CurrentPage);
+                        await TryGoToPageAsync(CurrentPage);
                     }, () => !LoadProgress.IsBusy)
                 );
             }
@@ -220,7 +240,7 @@ namespace ModernWPF.ViewModels
                 return _firstPageCommand ?? (
                     _firstPageCommand = new RelayCommand(() =>
                     {
-                        TryGoToPage(1);
+                        TryGoToPageAsync(1);
                     }, () => CanGoPrevPage)
                 );
             }
@@ -239,9 +259,9 @@ namespace ModernWPF.ViewModels
             get
             {
                 return _prevPageCommand ?? (
-                    _prevPageCommand = new RelayCommand(() =>
+                    _prevPageCommand = new RelayCommand(async () =>
                     {
-                        TryGoToPage(CurrentPage - 1);
+                        await TryGoToPageAsync(CurrentPage - 1);
                     }, () => CanGoPrevPage)
                 );
             }
@@ -259,9 +279,9 @@ namespace ModernWPF.ViewModels
             get
             {
                 return _nextPageCommand ?? (
-                    _nextPageCommand = new RelayCommand(() =>
+                    _nextPageCommand = new RelayCommand(async () =>
                     {
-                        TryGoToPage(CurrentPage + 1);
+                        await TryGoToPageAsync(CurrentPage + 1);
                     }, () => CanGoNextPage)
                 );
             }
@@ -280,9 +300,9 @@ namespace ModernWPF.ViewModels
             get
             {
                 return _lastPageCommand ?? (
-                    _lastPageCommand = new RelayCommand(() =>
+                    _lastPageCommand = new RelayCommand(async () =>
                     {
-                        TryGoToPage(TotalPages);
+                        await TryGoToPageAsync(TotalPages);
                     }, () => CanGoNextPage)
                 );
             }
