@@ -2454,12 +2454,14 @@
                             <Track.DecreaseRepeatButton>
                                 <RepeatButton x:Name="VerticalLargeDecrease" Command="{x:Static ScrollBar.PageUpCommand}"
                                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                              IsTabStop="False" Interval="50" Template="{DynamicResource ScrollbarRepeatButtonTemplate}"/>
+                                              IsTabStop="False" Interval="50" Template="{DynamicResource ScrollbarRepeatButtonTemplate}"
+                                              Focusable="False"/>
                             </Track.DecreaseRepeatButton>
                             <Track.IncreaseRepeatButton>
                                 <RepeatButton x:Name="VerticalLargeIncrease" Command="{x:Static ScrollBar.PageDownCommand}"
                                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                              IsTabStop="False" Interval="50" Template="{DynamicResource ScrollbarRepeatButtonTemplate}"/>
+                                              IsTabStop="False" Interval="50" Template="{DynamicResource ScrollbarRepeatButtonTemplate}"
+                                              Focusable="False"/>
                             </Track.IncreaseRepeatButton>
                             <Track.Thumb>
                                 <Thumb x:Name="VerticalThumb" Background="{TemplateBinding Background}" 
@@ -2506,12 +2508,14 @@
                                     <Track.DecreaseRepeatButton>
                                         <RepeatButton x:Name="HorizontalLargeDecrease" Command="{x:Static ScrollBar.PageLeftCommand}"
                                                       Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                                      IsTabStop="False" Interval="50" Template="{DynamicResource ScrollbarRepeatButtonTemplate}"/>
+                                                      IsTabStop="False" Interval="50" Template="{DynamicResource ScrollbarRepeatButtonTemplate}"
+                                                      Focusable="False"/>
                                     </Track.DecreaseRepeatButton>
                                     <Track.IncreaseRepeatButton>
                                         <RepeatButton x:Name="HorizontalLargeIncrease" Command="{x:Static ScrollBar.PageRightCommand}"
                                                       Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                                      IsTabStop="False" Interval="50" Template="{DynamicResource ScrollbarRepeatButtonTemplate}"/>
+                                                      IsTabStop="False" Interval="50" Template="{DynamicResource ScrollbarRepeatButtonTemplate}"
+                                                      Focusable="False"/>
                                     </Track.IncreaseRepeatButton>
                                     <Track.Thumb>
                                         <Thumb x:Name="HorizontalThumb" Grid.Column="2" Background="{TemplateBinding Background}" 
