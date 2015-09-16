@@ -1147,12 +1147,13 @@
                                     Padding="{TemplateBinding Padding}"
                                     Visibility="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={x:Static conv:NullEmptyCollapsedConverter.Instance}, ConverterParameter=not}">
                                 <TextBlock Text="{Binding Path=(local:TextBoxUI.WatermarkText), RelativeSource={RelativeSource TemplatedParent}}"
-                                               Foreground="{DynamicResource TextBoxDisabledForeground}"
-                                               FontSize="{TemplateBinding FontSize}"
-                                               FontFamily="{TemplateBinding FontFamily}"
-                                               VerticalAlignment="Center"
-                                               Margin="2 0"
-                                               ></TextBlock>
+                                           Foreground="{DynamicResource TextBoxDisabledForeground}"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           FontFamily="{TemplateBinding FontFamily}"
+                                           VerticalAlignment="Center"
+                                           Margin="2 0"
+                                           x:Name="WatermarkText"
+                                            ></TextBlock>
                             </Border>
 
                             <ContentPresenter Content="{Binding Path=(local:TextBoxUI.TrailingElement), RelativeSource={RelativeSource TemplatedParent}}" 
@@ -1178,6 +1179,11 @@
                         </Grid>
 
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="WatermarkText" Property="Visibility" Value="Collapsed"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -1348,11 +1354,12 @@
                                     x:Name="Watermark"
                                     Visibility="{Binding Path=(local:TextBoxUI.HasPassword), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={x:Static conv:BoolVisibleConverter.Instance}, ConverterParameter=not}">
                                 <TextBlock Text="{Binding Path=(local:TextBoxUI.WatermarkText), RelativeSource={RelativeSource TemplatedParent}}"
-                                       Foreground="{DynamicResource TextBoxDisabledForeground}"
-                                       FontSize="{TemplateBinding FontSize}"
-                                       FontFamily="{TemplateBinding FontFamily}"
-                                       VerticalAlignment="Center"
-                                       Margin="2 0"
+                                           Foreground="{DynamicResource TextBoxDisabledForeground}"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           FontFamily="{TemplateBinding FontFamily}"
+                                           VerticalAlignment="Center"
+                                           Margin="2 0"
+                                           x:Name="WatermarkText"
                                        ></TextBlock>
                             </Border>
 
@@ -1363,6 +1370,11 @@
 
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="WatermarkText" Property="Visibility" Value="Collapsed"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -2316,6 +2328,11 @@
                             </Grid>
                         </Border>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_Watermark" Property="Visibility" Value="Collapsed"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

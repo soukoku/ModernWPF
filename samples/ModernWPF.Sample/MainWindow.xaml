@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:vm="clr-namespace:ModernWPF.Sample.VM"
         x:Name="theWindow"
-        Title="ModernWPF - Test" Height="610" Width="880"
+        Title="ModernWPF - Test" Height="660" Width="880"
         ResizeMode="CanResizeWithGrip" 
         Style="{StaticResource ModernWindow}"
         DataContext="{StaticResource appVM}"
@@ -116,6 +116,7 @@
                                         </modern:TextBoxUI.TrailingElement>
                                     </TextBox>
                                     <TextBox Text="" modern:TextBoxUI.WatermarkText="with watermark" Margin="2"></TextBox>
+                                    <TextBox Text="" modern:TextBoxUI.WatermarkText="should not see it" Margin="2" IsEnabled="False"></TextBox>
                                     <TextBox Text="disabled textbox" Margin="2" IsEnabled="False"></TextBox>
 
                                     <ComboBox SelectedIndex="0" Margin="2">
@@ -142,6 +143,7 @@
                                     <PasswordBox modern:TextBoxUI.WatermarkText="password with watermark" Margin="2"></PasswordBox>
 
                                     <DatePicker Margin="2"></DatePicker>
+                                    <DatePicker Margin="2" IsEnabled="False"></DatePicker>
                                 </StackPanel>
                             </ScrollViewer>
                             <StackPanel>
