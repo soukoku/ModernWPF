@@ -16,6 +16,7 @@ namespace ModernWPF.Controls
     /// A container element for hosting <see cref="DialogControl"/>.
     /// </summary>
     [TemplatePart(Name = PARTContent, Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = PARTOverlay, Type = typeof(Border))]
     public class DialogControlContainer : ContentControl
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
@@ -25,6 +26,7 @@ namespace ModernWPF.Controls
 
         }
         const string PARTContent = "PART_Content";
+        const string PARTOverlay = "PART_Overlay";
 
         #region properties
 
@@ -87,6 +89,8 @@ namespace ModernWPF.Controls
         #endregion
 
         ContentPresenter _presenter;
+        Border _overlay;
+
         /// <summary>
         /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate" />.
         /// </summary>
@@ -94,6 +98,7 @@ namespace ModernWPF.Controls
         {
             base.OnApplyTemplate();
             _presenter = GetTemplateChild(PARTContent) as ContentPresenter;
+            _overlay = GetTemplateChild(PARTOverlay) as Border;
         }
         
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -101,7 +106,11 @@ namespace ModernWPF.Controls
             var diag = this.Content as DialogControl;
             if(diag != null && diag.CloseOnContainerClick)
             {
-                diag.DialogResult = false;
+                var hitRes = VisualTreeHelper.HitTest(this, e.GetPosition(this));
+                if (hitRes.VisualHit == _overlay)
+                {
+                    diag.DialogResult = false;
+                }
             }
             base.OnMouseLeftButtonDown(e);
         }

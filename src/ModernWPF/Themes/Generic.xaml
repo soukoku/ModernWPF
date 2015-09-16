@@ -325,7 +325,8 @@
                             KeyboardNavigation.TabNavigation="Cycle"
                             KeyboardNavigation.ControlTabNavigation="Cycle"
                             KeyboardNavigation.DirectionalNavigation="Cycle"
-                            Opacity="0">
+                            Opacity="0"
+                            x:Name="PART_Overlay">
                         <ContentPresenter x:Name="PART_Content" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="WhateverStates">
