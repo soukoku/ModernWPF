@@ -429,9 +429,9 @@
         <StackPanel Orientation="Vertical" Grid.Row="3">
 
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="100 0 0 0">
                 <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
-                    <Label Content="Light scale: "></Label>
+                    <Label Content="Accent light scale: "></Label>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentDark4}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentDark3}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentDark2}"></Rectangle>
@@ -442,9 +442,18 @@
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight3}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentLight4}"></Rectangle>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
+                    <Label Content="Foreground scale: "></Label>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernForeground}"></Rectangle>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernForeground2}"></Rectangle>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernForeground3}"></Rectangle>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernForeground4}"></Rectangle>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="100 0 0 0">
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Alpha scale: "></Label>
+                    <Label Content="Accent alpha scale: "></Label>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha1}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha2}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha3}"></Rectangle>
@@ -454,6 +463,14 @@
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha7}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha8}"></Rectangle>
                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernAccentAlpha9}"></Rectangle>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Background scale: "></Label>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernBackground}"></Rectangle>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernBackground2}"></Rectangle>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernBackground3}"></Rectangle>
+                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ModernBackground4}"></Rectangle>
                 </StackPanel>
             </StackPanel>
 
