@@ -135,6 +135,9 @@
                                         <ComboBoxItem Content="edit combo 5"></ComboBoxItem>
                                         <ComboBoxItem Content="edit combo 6"></ComboBoxItem>
                                     </ComboBox>
+                                    <ComboBox SelectedIndex="0" Margin="2" IsReadOnly="True" IsEditable="True">
+                                        <ComboBoxItem Content="readonly combo"></ComboBoxItem>
+                                    </ComboBox>
                                     <ComboBox SelectedIndex="0" Margin="2" IsEnabled="False">
                                         <ComboBoxItem Content="disabled combo"></ComboBoxItem>
                                     </ComboBox>

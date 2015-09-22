@@ -1574,6 +1574,7 @@
 
 
                             <ToggleButton Grid.ColumnSpan="2" 
+                                          x:Name="Toggler"
                                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                       IsTabStop="False" Focusable="False" ClickMode="Press"
                                       IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
@@ -1639,6 +1640,11 @@
                         </Trigger>
                         <Trigger Property="IsEditable" Value="true">
                             <Setter TargetName="EditPart" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="true">
+                            <Setter TargetName="DropDownGlyph" Property="Fill" Value="{DynamicResource TextBoxDisabledForeground}"/>
+                            <Setter TargetName="Toggler" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="DropDownGlyph" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="PopupBorder" Property="Height" Value="95"/>
