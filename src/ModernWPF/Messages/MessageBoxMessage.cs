@@ -95,29 +95,62 @@ namespace ModernWPF.Messages
 
 
         /// <summary>
-        /// Handles a basic <see cref="MessageBoxMessage" /> on a window by showing a <see cref="ModernMessageBox" />.
+        /// Handles a basic <see cref="MessageBoxMessage" /> on a window by showing a <see cref="ModernMessageBox" />
+        /// and invokes the callback.
         /// </summary>
         /// <param name="owner">The owner.</param>
-        /// <returns></returns>
-        public MessageBoxResult HandleWithModern(Window owner)
+        public void HandleWithModern(Window owner)
         {
             if (owner == null) { throw new ArgumentNullException("owner"); }
 
-            return ModernMessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult);
+            var res = ModernMessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult);
+            if (Callback != null)
+            {
+                if (owner == null || owner.CheckAccess())
+                {
+                    Callback(res);
+                }
+                else
+                {
+                    owner.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        Callback(res);
+                    }));
+                }
+            }
         }
 
         /// <summary>
-        /// Handles a basic <see cref="MessageBoxMessage" /> on a window by showing built-in <see cref="MessageBox"/>.
+        /// Handles a basic <see cref="MessageBoxMessage" /> on a window by showing built-in <see cref="MessageBox"/>
+        /// and invokes the callback.
         /// </summary>
         /// <param name="owner">The owner.</param>
-        /// <returns></returns>
-        public MessageBoxResult HandleWithPlatform(Window owner)
+        public void HandleWithPlatform(Window owner)
         {
+            MessageBoxResult res = MessageBoxResult.None;
             if (owner == null)
             {
-                return MessageBox.Show(Content, Caption, Button, Icon, DefaultResult, Options);
+                res = MessageBox.Show(Content, Caption, Button, Icon, DefaultResult, Options);
             }
-            return MessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult, Options);
+            else
+            {
+                res = MessageBox.Show(owner, Content, Caption, Button, Icon, DefaultResult, Options);
+            }
+
+            if (Callback != null)
+            {
+                if (owner == null || owner.CheckAccess())
+                {
+                    Callback(res);
+                }
+                else
+                {
+                    owner.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        Callback(res);
+                    }));
+                }
+            }
         }
 
     }
