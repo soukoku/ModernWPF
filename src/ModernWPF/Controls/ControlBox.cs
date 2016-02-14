@@ -19,7 +19,7 @@ namespace ModernWPF.Controls
     [TemplatePart(Name = PART_MinButton, Type = typeof(ControlBox))]
     [TemplatePart(Name = PART_MaxButton, Type = typeof(ControlBox))]
     [TemplatePart(Name = PART_RestoreButton, Type = typeof(ControlBox))]
-    public class ControlBox : Control
+    public class ControlBox : ContentControl
     {
         /// <summary>
         /// Name of the close button in template.

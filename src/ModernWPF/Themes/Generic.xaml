@@ -60,6 +60,7 @@
 
     <Style TargetType="ctrl:ControlBox">
         <Setter Property="ButtonStyle" Value="{StaticResource ModernControlButton}"/>
+        <Setter Property="local:Chrome.IsHitTestVisible" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ctrl:ControlBox">
@@ -72,6 +73,13 @@
                             Visibility="{Binding Path=(local:Chrome.ShowControlBoxes), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={x:Static conv:BoolVisibleConverter.Instance}}"
                             >
                         <StackPanel Orientation="Horizontal">
+                            <ContentPresenter x:Name="PART_Content" 
+                                          Cursor="{TemplateBinding Cursor}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  />
                             <Button x:Name="PART_MinButton"
                                     ToolTip="{Binding Source={x:Static resx:CommandTextBinder.Instance}, Path=[CmdMinimize], Mode=OneWay}"
                                     Style="{TemplateBinding ButtonStyle}">
