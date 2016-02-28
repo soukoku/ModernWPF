@@ -67,6 +67,12 @@ namespace ModernWPF.Controls
         internal Window ContentWindow { get; private set; }
         internal IntPtr hWndContent { get; private set; }
 
+        // dpi used by wpf
+        double _wpfDPI = 96.0;
+        double _monitorDPI = 96.0;
+        double _dpiScaleFactor = 1;
+
+
         ResizeGrip _resizeGrip;
 
         BorderWindow _left;
@@ -218,7 +224,19 @@ namespace ModernWPF.Controls
 
             SetRegion(hWndContent, 0, 0, true);
 
-            HwndSource.FromHwnd(hWndContent).AddHook(WndProc);
+            var hSrc = HwndSource.FromHwnd(hWndContent);
+            hSrc.AddHook(WndProc);
+
+
+            //Calculate the effective DPI used by WPF;
+            _wpfDPI = 96.0 * hSrc.CompositionTarget.TransformToDevice.M11;
+            //Get the Current DPI of the monitor of the window. 
+            _monitorDPI = Shcore.GetDpiForWindow(hSrc.Handle);
+            //Calculate the scale factor used to modify window size, graphics and text
+            _dpiScaleFactor = _monitorDPI / _wpfDPI;
+            ContentWindow.Width *= _dpiScaleFactor;
+            ContentWindow.Height *= _dpiScaleFactor;
+            RescaleForDpi();
 
             // SWP_DRAWFRAME makes window bg really transparent (visible during resize) and not black
             User32.SetWindowPos(hWndContent, IntPtr.Zero, 0, 0, 0, 0,
@@ -288,9 +306,51 @@ namespace ModernWPF.Controls
                         // prevent more flickers?
                         handled = true;
                         break;
+                    case WindowMessage.WM_DPICHANGED:
+                        HandleDpiChanged(hwnd, wParam, lParam);
+                        //handled = true;
+                        break;
                 }
             }
             return retVal;
+        }
+
+        private void HandleDpiChanged(IntPtr hwnd, IntPtr wParam, IntPtr lParam)
+        {
+            var newMonDpi = wParam.ToInt32() & 0xffff;
+            if (_monitorDPI != newMonDpi)
+            {
+                _monitorDPI = newMonDpi;
+                _dpiScaleFactor = _monitorDPI / _wpfDPI;
+                // update window size as well
+                RECT winRect = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
+                User32.SetWindowPos(hwnd, IntPtr.Zero, winRect.left, winRect.top, winRect.right - winRect.left, winRect.bottom - winRect.top,
+                     SetWindowPosOptions.SWP_NOZORDER |
+                     SetWindowPosOptions.SWP_NOOWNERZORDER |
+                     SetWindowPosOptions.SWP_NOACTIVATE);
+
+
+                RescaleForDpi();
+            }
+
+        }
+
+        private void RescaleForDpi()
+        {
+            var test = Shcore.ProcessDpiAwareness;
+            if (test == CommonWin32.HighDPI.PROCESS_DPI_AWARENESS.PROCESS_PER_MONITOR_DPI_AWARE)
+            {
+                var child = VisualTreeHelper.GetChild(ContentWindow, 0);
+                if (_dpiScaleFactor != 1.0)
+                {
+                    var dpiScale = new ScaleTransform(_dpiScaleFactor, _dpiScaleFactor);
+                    child.SetValue(Window.LayoutTransformProperty, dpiScale);
+                }
+                else
+                {
+                    child.SetValue(Window.LayoutTransformProperty, null);
+                }
+            }
         }
 
         private NcHitTest HandleNcHitTest(IntPtr hWnd, IntPtr lParam)

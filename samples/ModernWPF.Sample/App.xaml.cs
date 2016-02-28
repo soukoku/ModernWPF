@@ -1,9 +1,14 @@
-﻿using ModernWPF.Resources;
+﻿using CommonWin32;
+using CommonWin32.API;
+using CommonWin32.HighDPI;
+using ModernWPF.Resources;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 
@@ -26,8 +31,9 @@ namespace ModernWPF.Sample
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            Shcore.ProcessDpiAwareness = PROCESS_DPI_AWARENESS.PROCESS_PER_MONITOR_DPI_AWARE;
+
             base.OnStartup(e);
         }
-
     }
 }
