@@ -340,11 +340,17 @@
                             <VisualStateGroup x:Name="WhateverStates">
                                 <VisualState x:Name="IsClosed">
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0:0:0.25" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"></DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimation To="0" Storyboard.TargetProperty="Opacity" Duration="0"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="IsOpen">
                                     <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"></DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimation To="1" Storyboard.TargetProperty="Opacity" Duration="0"/>
                                     </Storyboard>
                                 </VisualState>

@@ -99,12 +99,20 @@ namespace ModernWPF.Controls
             base.OnApplyTemplate();
             _presenter = GetTemplateChild(PARTContent) as ContentPresenter;
             _overlay = GetTemplateChild(PARTOverlay) as Border;
+            if (HasDialogOpen)
+            {
+                var test = VisualStateManager.GoToState(this, "IsOpen", Animation.ShouldAnimate);
+            }
+            else
+            {
+                var test = VisualStateManager.GoToState(this, "IsClosed", Animation.ShouldAnimate);
+            }
         }
-        
+
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             var diag = this.Content as DialogControl;
-            if(diag != null && diag.CloseOnContainerClick)
+            if (diag != null && diag.CloseOnContainerClick)
             {
                 var hitRes = VisualTreeHelper.HitTest(this, e.GetPosition(this));
                 if (hitRes.VisualHit == _overlay)
