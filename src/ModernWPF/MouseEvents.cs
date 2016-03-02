@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernWPF.Internal;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace ModernWPF
         /// <param name="handler">The handler.</param>
         public static void AddPreviewMouseHWheelHandler(DependencyObject element, MouseWheelEventHandler handler)
         {
-            AddHandler(element, MouseEvents.PreviewMouseHWheelEvent, (Delegate)handler);
+            EventUtil.AddHandler(element, MouseEvents.PreviewMouseHWheelEvent, (Delegate)handler);
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace ModernWPF
         /// <param name="handler">The handler.</param>
         public static void RemovePreviewMouseHWheelHandler(DependencyObject element, MouseWheelEventHandler handler)
         {
-            RemoveHandler(element, MouseEvents.PreviewMouseHWheelEvent, (Delegate)handler);
+            EventUtil.RemoveHandler(element, MouseEvents.PreviewMouseHWheelEvent, (Delegate)handler);
         }
 
 
@@ -54,7 +55,7 @@ namespace ModernWPF
         /// <param name="handler">The handler.</param>
         public static void AddMouseHWheelHandler(DependencyObject element, MouseWheelEventHandler handler)
         {
-            AddHandler(element, MouseEvents.MouseHWheelEvent, (Delegate)handler);
+            EventUtil.AddHandler(element, MouseEvents.MouseHWheelEvent, (Delegate)handler);
         }
 
         /// <summary>
@@ -64,60 +65,7 @@ namespace ModernWPF
         /// <param name="handler">The handler.</param>
         public static void RemoveMouseHWheelHandler(DependencyObject element, MouseWheelEventHandler handler)
         {
-            RemoveHandler(element, MouseEvents.MouseHWheelEvent, (Delegate)handler);
-        }
-
-        static void AddHandler(DependencyObject element, RoutedEvent routedEvent, Delegate handler)
-        {
-            if (element == null) { throw new ArgumentNullException("element"); }
-
-            var uie = element as UIElement;
-            if (uie != null)
-            {
-                uie.AddHandler(routedEvent, handler);
-            }
-            else
-            {
-                var ce = element as ContentElement;
-                if (ce != null)
-                {
-                    ce.AddHandler(routedEvent, handler);
-                }
-                else
-                {
-                    var u3d = element as UIElement3D;
-                    if (u3d != null)
-                        u3d.AddHandler(routedEvent, handler);
-                    else
-                        throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Invalid element {0}.", element.GetType()));
-                }
-            }
-        }
-        static void RemoveHandler(DependencyObject element, RoutedEvent routedEvent, Delegate handler)
-        {
-            if (element == null) { throw new ArgumentNullException("element"); }
-
-            var uie = element as UIElement;
-            if (uie != null)
-            {
-                uie.RemoveHandler(routedEvent, handler);
-            }
-            else
-            {
-                var ce = element as ContentElement;
-                if (ce != null)
-                {
-                    ce.RemoveHandler(routedEvent, handler);
-                }
-                else
-                {
-                    var u3d = element as UIElement3D;
-                    if (u3d != null)
-                        u3d.RemoveHandler(routedEvent, handler);
-                    else
-                        throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Invalid element {0}.", element.GetType()));
-                }
-            }
+            EventUtil.RemoveHandler(element, MouseEvents.MouseHWheelEvent, (Delegate)handler);
         }
     }
 }

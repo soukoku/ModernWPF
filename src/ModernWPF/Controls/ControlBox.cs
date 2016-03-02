@@ -1,4 +1,5 @@
 ﻿using ModernWPF;
+using ModernWPF.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

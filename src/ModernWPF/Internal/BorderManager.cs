@@ -3,6 +3,7 @@ using CommonWin32.API;
 using CommonWin32.Monitors;
 using CommonWin32.Rectangles;
 using CommonWin32.Windows;
+using ModernWPF.Controls;
 using ModernWPF.Converters;
 using ModernWPF.Native;
 using System;
@@ -19,7 +20,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace ModernWPF.Controls
+namespace ModernWPF.Internal
 {
     sealed class BorderManager : DependencyObject
     {
@@ -69,7 +70,7 @@ namespace ModernWPF.Controls
 
         // dpi used by wpf
         double _wpfDPI = 96.0;
-        double _monitorDPI = 96.0;
+        int _monitorDPI = 96;
         double _dpiScaleFactor = 1;
 
 
@@ -351,6 +352,11 @@ namespace ModernWPF.Controls
                     child.SetValue(Window.LayoutTransformProperty, null);
                 }
             }
+
+            var dpiArgs = new DpiChangeEventArgs(ContentWindow, _monitorDPI) { RoutedEvent = DpiEvents.DpiChangeEvent,  };
+            ContentWindow.RaiseEvent(dpiArgs);
+            DpiEvents.WindowDpis[ContentWindow.GetHashCode()] = dpiArgs.NewDpi;
+            DpiEvents.Instance.BindingHack = dpiArgs;
         }
 
         private NcHitTest HandleNcHitTest(IntPtr hWnd, IntPtr lParam)

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
-namespace ModernWPF
+namespace ModernWPF.Internal
 {
     /// <summary>
     /// Simple relay command for internal use only.

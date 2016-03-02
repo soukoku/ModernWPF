@@ -31,7 +31,11 @@ namespace ModernWPF.Sample
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Shcore.ProcessDpiAwareness = PROCESS_DPI_AWARENESS.PROCESS_PER_MONITOR_DPI_AWARE;
+            var test = Shcore.SetProcessDpiAwareness(PROCESS_DPI_AWARENESS.PROCESS_PER_MONITOR_DPI_AWARE);
+            if (!test)
+            {
+                var err = new Win32Exception();
+            }
 
             base.OnStartup(e);
         }

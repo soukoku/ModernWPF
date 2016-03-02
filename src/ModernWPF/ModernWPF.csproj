@@ -48,7 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonWin32, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a0a4edcfe233918d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonWin32.2.1.0.2\lib\net35-Client\CommonWin32.dll</HintPath>
+      <HintPath>..\..\packages\CommonWin32.2.1.0.3\lib\net35-Client\CommonWin32.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
@@ -74,12 +74,12 @@
     <Compile Include="Controls\AnimatedScrollViewer.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\BorderManager.cs" />
+    <Compile Include="Internal\BorderManager.cs" />
     <Compile Include="Controls\BorderSide.cs" />
     <Compile Include="Controls\BorderWindow.cs" />
     <Compile Include="Controls\ControlBox.cs" />
     <Compile Include="Controls\AppButton.cs" />
-    <Compile Include="Controls\LegacyBorderManager.cs" />
+    <Compile Include="Internal\LegacyBorderManager.cs" />
     <Compile Include="Controls\LegacyBorderWindow.cs" />
     <Compile Include="Controls\DialogControl.cs" />
     <Compile Include="Controls\DialogControlContainer.cs" />
@@ -103,8 +103,10 @@
     <Compile Include="Converters\ThicknessZeroSideConverter.cs" />
     <Compile Include="Converters\TreeDepthLeftMarginConverter.cs" />
     <Compile Include="Converters\WindowCaptionHeightConverter.cs" />
+    <Compile Include="DpiEvents.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GridViewSortParameter.cs" />
+    <Compile Include="Internal\EventUtil.cs" />
     <Compile Include="ListViewUI.cs" />
     <Compile Include="HSLColor.cs" />
     <Compile Include="MenuItemUI.cs" />
@@ -126,7 +128,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\VersionInfo.cs" />
-    <Compile Include="RelayCommand.cs" />
+    <Compile Include="Internal\RelayCommand.cs" />
     <Compile Include="Resources\CommandText.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

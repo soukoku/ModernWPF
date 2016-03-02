@@ -3,6 +3,7 @@ using CommonWin32.API;
 using CommonWin32.Monitors;
 using CommonWin32.Rectangles;
 using CommonWin32.Windows;
+using ModernWPF.Controls;
 using ModernWPF.Converters;
 using ModernWPF.Native;
 using System;
@@ -18,7 +19,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
-namespace ModernWPF.Controls
+namespace ModernWPF.Internal
 {
     /// <summary>
     /// Used for actual processing since Chrome is freezable and don't want to keep states there.

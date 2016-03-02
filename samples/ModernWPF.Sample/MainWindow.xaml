@@ -10,7 +10,8 @@
         ResizeMode="CanResizeWithGrip" 
         Style="{StaticResource ModernWindow}"
         DataContext="{StaticResource appVM}"
-        modern:MouseEvents.MouseHWheel="theWindow_MouseHWheel">
+        modern:MouseEvents.MouseHWheel="theWindow_MouseHWheel"
+        modern:DpiEvents.DpiChange="theWindow_DpiChange">
     <Window.Resources>
         <sys:String x:Key="shortString">Lorem ipsum dolor sit amet</sys:String>
     </Window.Resources>
@@ -80,7 +81,8 @@
                 <modern:ModernContentControl>
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Width="250" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8">
-                            <TextBlock TextWrapping="Wrap" 
+                            <TextBlock Text="CommonWin32"></TextBlock>
+                            <TextBlock TextWrapping="Wrap"
                                Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." ></TextBlock>
 
                             <TextBlock Text="Lower case:" Margin="0 10 0 0"></TextBlock>

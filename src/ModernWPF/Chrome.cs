@@ -5,6 +5,7 @@ using CommonWin32.Rectangles;
 using CommonWin32.Windows;
 using ModernWPF.Controls;
 using ModernWPF.Converters;
+using ModernWPF.Internal;
 using ModernWPF.Native;
 using System;
 using System.ComponentModel;

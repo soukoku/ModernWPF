@@ -1,15 +1,17 @@
-﻿using System;
+﻿using CommonWin32.API;
+using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Interop;
+using System.Globalization;
 
 namespace ModernWPF.Converters
 {
     /// <summary>
-    /// A converter that tests if a double value considered a small font size to allow changing TextOptions.
-    /// This can be removed from the fonts style if using high dpi displays.
+    /// A converter that tests if a TextBlock's font size is considered a small font size to allow changing TextOptions.
     /// </summary>
-    [ValueConversion(typeof(double), typeof(bool))]
-    public class IsSmallFontConverter : IValueConverter
+    public class IsSmallFontConverter : IMultiValueConverter
     {
         static readonly IsSmallFontConverter _instance = new IsSmallFontConverter();
 
@@ -31,38 +33,57 @@ namespace ModernWPF.Converters
         /// </value>
         public static double Threshold { get { return _threshold; } set { _threshold = value; } }
 
+
         /// <summary>
-        /// Converts a double value to boolean true if too small.
+        /// Converts a TextBlock value to boolean true if too small.
         /// </summary>
-        /// <param name="value">The value produced by the binding source.</param>
-        /// <param name="targetType">The type of the binding target property.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        /// <param name="values">The values.</param>
+        /// <param name="targetType">Type of the target.</param>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="culture">The culture.</param>
+        /// <returns></returns>
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double)
+            var retVal = false;
+            if (values != null)
             {
-                return (double)value <= Threshold;
+                foreach (var value in values)
+                {
+                    var tb = value as TextBlock;
+                    if (tb != null)
+                    {
+                        retVal = tb.FontSize <= Threshold;
+                        if (retVal)
+                        {
+                            // but not on a high-DPI monitor (could be expensive?)
+                            var win = Window.GetWindow(tb);
+                            if (win != null)
+                            {
+                                var dpi = 0;
+                                DpiEvents.WindowDpis.TryGetValue(win.GetHashCode(), out dpi);
+                                if (dpi > 96)
+                                {
+                                    retVal = false;
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            return false;
+            return retVal;
         }
 
         /// <summary>
         /// Not supported.
         /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        /// <param name="value">The value.</param>
+        /// <param name="targetTypes">The target types.</param>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="culture">The culture.</param>
+        /// <returns></returns>
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            return DependencyProperty.UnsetValue;
+            return null;
         }
     }
 }

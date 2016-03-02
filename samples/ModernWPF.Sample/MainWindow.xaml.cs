@@ -36,6 +36,8 @@ namespace ModernWPF.Sample
                 Messenger.Default.Register<Messages.MessageBoxMessage>(this, m => { if (m.Sender == this) { m.HandleWithModern(this); } });
                 Messenger.Default.Register<ChooseFileMessage>(this, m => { if (m.Sender == this) { m.HandleWithPlatform(this); } });
                 Messenger.Default.Register<ChooseFolderMessage>(this, m => { if (m.Sender == this) { this.HandleChooseFolder(m); } });
+
+                
             }
         }
 
@@ -133,6 +135,11 @@ namespace ModernWPF.Sample
                     this.Show();
                 }));
             });
+        }
+
+        private void theWindow_DpiChange(object sender, DpiChangeEventArgs e)
+        {
+            Debug.WriteLine("Window got DPI change to " + e.NewDpi);
         }
     }
 }

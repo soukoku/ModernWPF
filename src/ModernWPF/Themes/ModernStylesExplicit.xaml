@@ -57,11 +57,20 @@
 
     <!--text-->
     <Style x:Key="ModernTextBlock" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style.Setters>
+            <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style.Setters>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=FontSize, Converter={x:Static conv:IsSmallFontConverter.Instance}}"
-                         Value="True">
+            <DataTrigger Value="True">
+                <DataTrigger.Binding>
+                    <MultiBinding Converter="{x:Static conv:IsSmallFontConverter.Instance}">
+                        <!--hack to handle dpi change-->
+                        <Binding Source="{x:Static local:DpiEvents.Instance}" Path="BindingHack"></Binding>
+                        <!--actual self-binding-->
+                        <Binding RelativeSource="{RelativeSource Self}"></Binding>
+                    </MultiBinding>
+                </DataTrigger.Binding>
                 <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
             </DataTrigger>
         </Style.Triggers>
