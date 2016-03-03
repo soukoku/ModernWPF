@@ -353,10 +353,9 @@ namespace ModernWPF.Internal
                 }
             }
 
-            var dpiArgs = new DpiChangeEventArgs(ContentWindow, _monitorDPI) { RoutedEvent = DpiEvents.DpiChangeEvent,  };
+            var dpiArgs = new DpiChangeEventArgs(ContentWindow, _monitorDPI);
             ContentWindow.RaiseEvent(dpiArgs);
-            DpiEvents.WindowDpis[ContentWindow.GetHashCode()] = dpiArgs.NewDpi;
-            DpiEvents.Instance.BindingHack = dpiArgs;
+            DpiEvents.SetWindowDpi(ContentWindow, dpiArgs.NewDpi);
         }
 
         private NcHitTest HandleNcHitTest(IntPtr hWnd, IntPtr lParam)

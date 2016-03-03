@@ -44,7 +44,7 @@ namespace ModernWPF.Converters
         /// <returns></returns>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var retVal = false;
+            var tooSmall = false;
             if (values != null)
             {
                 foreach (var value in values)
@@ -52,25 +52,14 @@ namespace ModernWPF.Converters
                     var tb = value as TextBlock;
                     if (tb != null)
                     {
-                        retVal = tb.FontSize <= Threshold;
-                        if (retVal)
-                        {
-                            // but not on a high-DPI monitor (could be expensive?)
-                            var win = Window.GetWindow(tb);
-                            if (win != null)
-                            {
-                                var dpi = 0;
-                                DpiEvents.WindowDpis.TryGetValue(win.GetHashCode(), out dpi);
-                                if (dpi > 96)
-                                {
-                                    retVal = false;
-                                }
-                            }
-                        }
+                        var dpi = DpiEvents.GetWindowDpi(tb);
+
+                        tooSmall = dpi <= 96 && tb.FontSize <= Threshold;
+                        break;
                     }
                 }
             }
-            return retVal;
+            return tooSmall;
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using ModernWPF.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ using System.Windows.Controls;
 
 namespace ModernWPF
 {
-    public class DpiEvents : DependencyObject
+    public class DpiEvents
     {
         /// <summary>
         /// Identifies the DpiChange event. This can only be listened to by a <see cref="Window"/>.
@@ -40,28 +41,33 @@ namespace ModernWPF
         }
 
 
-        internal static Dictionary<int, int> WindowDpis { get; } = new Dictionary<int, int>();
+        #region DPI attached prop
 
-        private DpiEvents()
-        { }
-        private static DpiEvents __instance = new DpiEvents();
+        const int DefaultDpi = 96;
 
-        public static DpiEvents Instance
+        /// <summary>
+        /// Attached property on a window to store its current DPI value.
+        /// </summary>
+        private static readonly DependencyProperty WindowDpiProperty =
+            DependencyProperty.RegisterAttached("WindowDpi", typeof(int), typeof(DpiEvents),
+            new FrameworkPropertyMetadata(DefaultDpi, FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Gets the dpi value for the object contained in a window using <see cref="Chrome"/>.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static int GetWindowDpi(DependencyObject obj)
         {
-            get { return __instance; }
+            return (int)obj.GetValue(WindowDpiProperty);
         }
 
-
-        public object BindingHack
+        internal static void SetWindowDpi(DependencyObject obj, int dpi)
         {
-            get { return GetValue(BindingHackProperty); }
-            set { SetValue(BindingHackProperty, value); }
+            obj.SetValue(WindowDpiProperty, dpi);
         }
 
-
-        public static readonly DependencyProperty BindingHackProperty =
-            DependencyProperty.Register("BindingHack", typeof(object), typeof(DpiEvents), new PropertyMetadata(null));
-
+        #endregion
 
 
     }
@@ -77,19 +83,10 @@ namespace ModernWPF
         /// </summary>
         /// <param name="window">The window.</param>
         /// <param name="newDpi">The new dpi.</param>
-        public DpiChangeEventArgs(Window window, int newDpi)
+        public DpiChangeEventArgs(Window window, int newDpi) : base(DpiEvents.DpiChangeEvent, window)
         {
-            Window = window;
             NewDpi = newDpi;
         }
-
-        /// <summary>
-        /// Gets the root window this DPI change affects.
-        /// </summary>
-        /// <value>
-        /// The window.
-        /// </value>
-        public Window Window { get; internal set; }
 
         /// <summary>
         /// Gets the new dpi value.

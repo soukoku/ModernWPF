@@ -65,10 +65,12 @@
             <DataTrigger Value="True">
                 <DataTrigger.Binding>
                     <MultiBinding Converter="{x:Static conv:IsSmallFontConverter.Instance}">
-                        <!--hack to handle dpi change-->
-                        <Binding Source="{x:Static local:DpiEvents.Instance}" Path="BindingHack"></Binding>
                         <!--actual self-binding-->
                         <Binding RelativeSource="{RelativeSource Self}"></Binding>
+                        <!--hack to listen to dpi change-->
+                        <Binding RelativeSource="{RelativeSource Self}" Path="(local:DpiEvents.WindowDpi)" Mode="OneWay"></Binding>
+                        <!--hack to listen to font size change-->
+                        <Binding RelativeSource="{RelativeSource Self}" Path="FontSize" Mode="OneWay"></Binding>
                     </MultiBinding>
                 </DataTrigger.Binding>
                 <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>

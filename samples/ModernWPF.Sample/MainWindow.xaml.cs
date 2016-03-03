@@ -141,5 +141,19 @@ namespace ModernWPF.Sample
         {
             Debug.WriteLine("Window got DPI change to " + e.NewDpi);
         }
+
+        private void btnFontSize_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Before change size, mode=" + TextOptions.GetTextFormattingMode(txtFontTest));
+            if (txtFontTest.FontSize == 12)
+            {
+                txtFontTest.FontSize = 30;
+            }
+            else
+            {
+                txtFontTest.FontSize = 12;
+            }
+            Debug.WriteLine("After change size, mode=" + TextOptions.GetTextFormattingMode(txtFontTest));
+        }
     }
 }

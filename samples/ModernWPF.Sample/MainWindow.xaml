@@ -81,7 +81,10 @@
                 <modern:ModernContentControl>
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Width="250" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8">
-                            <TextBlock Text="CommonWin32"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Font Test" x:Name="txtFontTest"></TextBlock>
+                                <Button Content="Size Test" x:Name="btnFontSize" Click="btnFontSize_Click"></Button>
+                            </StackPanel>
                             <TextBlock TextWrapping="Wrap"
                                Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at quam sit amet nisl vestibulum vehicula sed in metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam pellentesque congue ipsum id eleifend. Nulla a turpis vitae justo condimentum posuere. Cras volutpat nisi nunc, sed tincidunt diam sollicitudin a. Suspendisse nec dictum metus. Donec consectetur faucibus arcu ut ullamcorper. Fusce hendrerit aliquam erat." ></TextBlock>
 
