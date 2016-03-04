@@ -67,6 +67,27 @@ namespace ModernWPF
             obj.SetValue(WindowDpiProperty, dpi);
         }
 
+
+
+
+        
+        internal static bool GetIsDpiTransform(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsDpiTransformProperty);
+        }
+
+        internal static void SetIsDpiTransform(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsDpiTransformProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for IsDpiTransform.  This enables animation, styling, binding, etc...
+        static readonly DependencyProperty IsDpiTransformProperty =
+            DependencyProperty.RegisterAttached("IsDpiTransform", typeof(bool), typeof(DpiEvents), new PropertyMetadata(false));
+
+
+
+
         #endregion
 
 

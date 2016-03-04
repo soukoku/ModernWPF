@@ -22,7 +22,7 @@
             <Button Style="{StaticResource ModernCaptionButton}" Content="Caption button disabled" IsEnabled="False"></Button>
         </StackPanel>
     </modern:Chrome.CaptionExtraContent>
-    <Grid>
+    <Grid x:Name="layoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
