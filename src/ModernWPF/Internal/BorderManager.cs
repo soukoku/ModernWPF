@@ -360,60 +360,14 @@ namespace ModernWPF.Internal
                 var child = VisualTreeHelper.GetChild(ContentWindow, 0) as FrameworkElement;
                 if (child != null)
                 {
-                    var flow = child.FlowDirection;
-                    var origLayout = UnwrapDpiTransform((Transform)child.GetValue(FrameworkElement.LayoutTransformProperty));
-                    var origRender = UnwrapDpiTransform((Transform)child.GetValue(UIElement.RenderTransformProperty));
-
-                    if (_dpiScaleFactor != 1.0)
-                    {
-                        child.SetValue(FrameworkElement.LayoutTransformProperty, WrapDpiTransform(origLayout, _dpiScaleFactor));
-                        // weird wpf bug when using RTL so compensate again in render xform
-                        if (flow == FlowDirection.RightToLeft)
-                        {
-                            child.SetValue(UIElement.RenderTransformProperty, WrapDpiTransform(origRender, _dpiScaleFactor));
-                        }
-                        else
-                        {
-                            child.SetValue(UIElement.RenderTransformProperty, origRender);
-                        }
-                    }
-                    else
-                    {
-                        child.SetValue(FrameworkElement.LayoutTransformProperty, origLayout);
-                        child.SetValue(UIElement.RenderTransformProperty, origRender);
-                    }
+                  DpiEvents.ScaleElement(child, _dpiScaleFactor, true);
                 }
             }
 
-            var dpiArgs = new DpiChangeEventArgs(ContentWindow, _monitorDPI);
+            var dpiArgs = new DpiChangeEventArgs(ContentWindow, _monitorDPI, _dpiScaleFactor);
             ContentWindow.RaiseEvent(dpiArgs);
             DpiEvents.SetWindowDpi(ContentWindow, dpiArgs.NewDpi);
-        }
-
-        static Transform WrapDpiTransform(Transform origTransform, double dpiScaleFactor)
-        {
-            var group = new TransformGroup();
-            if (origTransform != null)
-            {
-                group.Children.Add(origTransform);
-            }
-            group.Children.Add(new ScaleTransform(dpiScaleFactor, dpiScaleFactor));
-            DpiEvents.SetIsDpiTransform(group, true);
-            return group;
-        }
-
-        static Transform UnwrapDpiTransform(Transform currentTransform)
-        {
-            if (currentTransform != null && DpiEvents.GetIsDpiTransform(currentTransform))
-            {
-                var group = currentTransform as TransformGroup;
-                if (group != null && group.Children.Count > 1)
-                {
-                    return group.Children[0];
-                }
-                return null;
-            }
-            return currentTransform;
+            DpiEvents.SetWindowDpiScale(ContentWindow, dpiArgs.Scale);
         }
 
         private NcHitTest HandleNcHitTest(IntPtr hWnd, IntPtr lParam)

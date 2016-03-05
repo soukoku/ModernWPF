@@ -7,7 +7,9 @@
     xmlns:conv="clr-namespace:ModernWPF.Converters"
     xmlns:resx="clr-namespace:ModernWPF.Resources"
     xmlns:test="clr-namespace:System.Windows.Documents;assembly=PresentationCore"
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+    x:Class="ModernWPF.Themes.ModernStylesExplicit"
+    x:ClassModifier="public">
 
     <!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"-->
@@ -918,6 +920,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <EventSetter Event="Opened" Handler="Handle_ToolTipOpened"></EventSetter>
     </Style>
 
     <!--checkbox-->
@@ -2835,6 +2838,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <EventSetter Event="Opened" Handler="Handle_ContextMenuOpened"></EventSetter>
     </Style>
 
     <Geometry x:Key="Checkmark">M 0,5.1 L 1.7,5.2 L 3.4,7.1 L 8,0.4 L 9.2,0 L 3.3,10.8 Z</Geometry>

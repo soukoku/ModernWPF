@@ -138,6 +138,7 @@
     <Compile Include="ScrollViewerUI.cs" />
     <Compile Include="TextBoxUI.cs" />
     <Compile Include="TextCommands.cs" />
+    <Compile Include="Themes\ModernStylesExplicit.cs" />
     <EmbeddedResource Include="Resources\CommandText.ja.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
