@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 /packages
 *.nupkg
 *.jtconfig
+/.vs/config

@@ -135,13 +135,22 @@ namespace ModernWPF.Internal
             var rcNative = default(RECT);
             if (User32.GetWindowRect(hWndContent, ref rcNative))
             {
-                Rect rcWpf = TranslateToWpf(ref rcNative);
-
-                _left.UpdatePosn(rcWpf.Left - _left.PadSize, rcWpf.Top - _left.PadSize, _left.PadSize, rcWpf.Height + 2 * _left.PadSize);
-                _top.UpdatePosn(rcWpf.Left - _top.PadSize, rcWpf.Top - _top.PadSize, rcWpf.Width + 2 * _top.PadSize, _top.PadSize);
-                _right.UpdatePosn(rcWpf.Right, rcWpf.Top - _right.PadSize, _right.PadSize, rcWpf.Height + 2 * _right.PadSize);
-                _bottom.UpdatePosn(rcWpf.Left - _bottom.PadSize, rcWpf.Bottom, rcWpf.Width + 2 * _bottom.PadSize, _bottom.PadSize);
-
+                if (false)
+                {
+                    // eventually should use this if I can get it working
+                    _left.UpdatePosnWin32(rcNative.left - _left.PadSize, rcNative.top - _left.PadSize, _left.PadSize, rcNative.Height + 2 * _left.PadSize);
+                    _top.UpdatePosnWin32(rcNative.left - _top.PadSize, rcNative.top - _top.PadSize, rcNative.Width + 2 * _top.PadSize, _top.PadSize);
+                    _right.UpdatePosnWin32(rcNative.right, rcNative.top - _right.PadSize, _right.PadSize, rcNative.Height + 2 * _right.PadSize);
+                    _bottom.UpdatePosnWin32(rcNative.left - _bottom.PadSize, rcNative.bottom, rcNative.Width + 2 * _bottom.PadSize, _bottom.PadSize);
+                }
+                else
+                {
+                    Rect rcWpf = TranslateToWpf(ref rcNative);
+                    _left.UpdatePosnWpf(rcWpf.Left - _left.PadSize, rcWpf.Top - _left.PadSize, _left.PadSize, rcWpf.Height + 2 * _left.PadSize);
+                    _top.UpdatePosnWpf(rcWpf.Left - _top.PadSize, rcWpf.Top - _top.PadSize, rcWpf.Width + 2 * _top.PadSize, _top.PadSize);
+                    _right.UpdatePosnWpf(rcWpf.Right, rcWpf.Top - _right.PadSize, _right.PadSize, rcWpf.Height + 2 * _right.PadSize);
+                    _bottom.UpdatePosnWpf(rcWpf.Left - _bottom.PadSize, rcWpf.Bottom, rcWpf.Width + 2 * _bottom.PadSize, _bottom.PadSize);
+                }
                 if (SystemParameters.MinimizeAnimation)
                 {
                     _showTimer.Start();
@@ -360,7 +369,7 @@ namespace ModernWPF.Internal
                 var child = VisualTreeHelper.GetChild(ContentWindow, 0) as FrameworkElement;
                 if (child != null)
                 {
-                  DpiEvents.ScaleElement(child, _dpiScaleFactor, true);
+                    DpiEvents.ScaleElement(child, _dpiScaleFactor, true);
                 }
             }
 

@@ -202,22 +202,46 @@ namespace ModernWPF.Controls
             base.OnClosed(e);
         }
 
-        internal void UpdatePosn(double left, double top, double width, double height)
+        internal void UpdatePosnWin32(double left, double top, double width, double height)
         {
-            //User32.SetWindowPos(_hwnd, _manager.hWndContent, left, top, width, height, SetWindowPosOptions.SWP_NOACTIVATE);
-            this.Left = left;
-            this.Top = top;
-            this.Width = width;
-            this.Height = height;
-            var pad = 2 * PadSize;
+            var pad = (2 * PadSize);
             switch (Side)
             {
                 case BorderSide.Left:
                 case BorderSide.Right:
-                    BorderLength = Math.Max(0, height - pad);
+                    User32.SetWindowPos(_hwnd, _manager.hWndContent, (int)left, (int)top - 1, (int)width, (int)height,
+                        SetWindowPosOptions.SWP_NOACTIVATE | SetWindowPosOptions.SWP_NOZORDER);
+                    BorderLength = Math.Max(0, height - pad + 2);
                     break;
                 case BorderSide.Top:
                 case BorderSide.Bottom:
+                    User32.SetWindowPos(_hwnd, _manager.hWndContent, (int)left, (int)top, (int)width, (int)height,
+                        SetWindowPosOptions.SWP_NOACTIVATE | SetWindowPosOptions.SWP_NOZORDER);
+                    BorderLength = Math.Max(0, width - pad);
+                    break;
+            }
+        }
+
+
+        internal void UpdatePosnWpf(double left, double top, double width, double height)
+        {
+            var pad = (2 * PadSize);
+            switch (Side)
+            {
+                case BorderSide.Left:
+                case BorderSide.Right:
+                    this.Left = left;
+                    this.Top = top - 1;
+                    this.Width = width;
+                    this.Height = height;
+                    BorderLength = Math.Max(0, height - pad + 2);
+                    break;
+                case BorderSide.Top:
+                case BorderSide.Bottom:
+                    this.Left = left;
+                    this.Top = top;
+                    this.Width = width;
+                    this.Height = height;
                     BorderLength = Math.Max(0, width - pad);
                     break;
             }
